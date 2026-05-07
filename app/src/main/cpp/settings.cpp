@@ -78,7 +78,7 @@ void apply_json(const std::string &json) {
     s.attack_speed_attack_timer.store(json_bool(json, "attack_speed_attack_timer", true), std::memory_order_relaxed);
     s.attack_speed_roster_stat.store(json_bool(json, "attack_speed_roster_stat", true), std::memory_order_relaxed);
     s.slow_enemies.store(json_bool(json, "slow_enemies", false), std::memory_order_relaxed);
-    s.game_speed_multiplier.store(json_float(json, "game_speed_multiplier", 2.0f, 0.25f, 10.0f),
+    s.game_speed_multiplier.store(json_float(json, "game_speed_multiplier", 2.0f, 0.25f, 32.0f),
                                   std::memory_order_relaxed);
     s.wave_speed_multiplier.store(json_float(json, "wave_speed_multiplier", 2.0f, 0.25f, 10.0f),
                                   std::memory_order_relaxed);

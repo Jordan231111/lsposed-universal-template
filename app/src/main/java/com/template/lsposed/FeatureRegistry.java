@@ -118,7 +118,7 @@ public final class FeatureRegistry {
         register(Feature.bool(KEY_SLOW_ENEMIES, "Slow enemies", false));
         register(Feature.bool(KEY_SAMPLE_ACTIVITY_HOOK, "Log Activity.onResume",
                 TemplateConfig.ENABLE_SAMPLE_ACTIVITY_LOG_HOOK));
-        register(Feature.number(KEY_MULTIPLIER, "Game speed", 2f, 0.25f, 10f));
+        register(Feature.number(KEY_MULTIPLIER, "Game speed", 2f, 0.25f, 32f));
         register(Feature.number(KEY_WAVE_SPEED_MULTIPLIER, "Wave speed", 2f, 0.25f, 10f));
         register(Feature.number(KEY_DAMAGE_MULTIPLIER, "OHK damage exponent", 1000000f, 1000f, 1000000f));
         register(Feature.number(KEY_ATTACK_SPEED_MULTIPLIER, "Attack speed", 2f, 1f, 20f));

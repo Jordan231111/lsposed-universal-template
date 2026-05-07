@@ -30,7 +30,7 @@ float game_multiplier() {
         !s.game_speed.load(std::memory_order_relaxed)) {
         return 1.0f;
     }
-    return clamp_multiplier(s.game_speed_multiplier.load(std::memory_order_relaxed), 1.0f, 0.25f, 10.0f);
+    return clamp_multiplier(s.game_speed_multiplier.load(std::memory_order_relaxed), 1.0f, 0.25f, 32.0f);
 }
 
 float wave_multiplier() {

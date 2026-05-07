@@ -17,6 +17,7 @@ constexpr uintptr_t kPremiumProductCodeOffset = 0x18;
 constexpr uintptr_t kPremiumProductCostOffset = 0x34;
 constexpr uintptr_t kInteractionProductOffset = 0x20;
 constexpr uintptr_t kInteractionCostTextOffset = 0x48;
+[[maybe_unused]] constexpr uintptr_t kInteractionQuantityToExchangeOffset = 0x98;
 constexpr uintptr_t kInteractionPremiumProductCodeOffset = 0x9C;
 
 using AnniversaryCanExchangeFn = bool (*)(void *, const void *);

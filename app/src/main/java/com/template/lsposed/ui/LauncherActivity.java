@@ -47,7 +47,7 @@ public final class LauncherActivity extends Activity {
         addToggle(root, FeatureRegistry.KEY_EVENT_EXCHANGE_LOCAL_ONLY, "Event exchange local only");
         addToggle(root, FeatureRegistry.KEY_GOD_MODE, "Hero god-mode");
         addToggle(root, FeatureRegistry.KEY_GAME_SPEED, "Game speed");
-        addSlider(root, FeatureRegistry.KEY_MULTIPLIER, "Game speed", 0.25f, 10f, 0.25f);
+        addSlider(root, FeatureRegistry.KEY_MULTIPLIER, "Game speed", 0.25f, 32f, 0.25f);
         addToggle(root, FeatureRegistry.KEY_WAVE_SPEED, "Wave transition speed");
         addSlider(root, FeatureRegistry.KEY_WAVE_SPEED_MULTIPLIER, "Wave speed", 0.25f, 10f, 0.25f);
         addToggle(root, FeatureRegistry.KEY_OHK, "One-hit kill");
