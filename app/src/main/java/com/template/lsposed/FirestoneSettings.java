@@ -32,6 +32,8 @@ public final class FirestoneSettings {
             o.put(FeatureRegistry.KEY_ENABLED, true);
             o.put(FeatureRegistry.KEY_NATIVE_HOOKS, true);
             o.put(FeatureRegistry.KEY_FREE_CURRENCY, true);
+            o.put(FeatureRegistry.KEY_EVENT_EXCHANGE_ZERO_COST, true);
+            o.put(FeatureRegistry.KEY_EVENT_EXCHANGE_LOCAL_ONLY, false);
             o.put(FeatureRegistry.KEY_GOD_MODE, true);
             o.put(FeatureRegistry.KEY_GAME_SPEED, false);
             o.put(FeatureRegistry.KEY_WAVE_SPEED, false);
@@ -68,6 +70,8 @@ public final class FirestoneSettings {
                     FeatureRegistry.KEY_ENABLED,
                     FeatureRegistry.KEY_NATIVE_HOOKS,
                     FeatureRegistry.KEY_FREE_CURRENCY,
+                    FeatureRegistry.KEY_EVENT_EXCHANGE_ZERO_COST,
+                    FeatureRegistry.KEY_EVENT_EXCHANGE_LOCAL_ONLY,
                     FeatureRegistry.KEY_GOD_MODE,
                     FeatureRegistry.KEY_GAME_SPEED,
                     FeatureRegistry.KEY_WAVE_SPEED,

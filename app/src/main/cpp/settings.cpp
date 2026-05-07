@@ -66,6 +66,8 @@ void apply_json(const std::string &json) {
     s.enabled.store(true, std::memory_order_relaxed);
     s.native_hooks.store(json_bool(json, "native_hooks", true), std::memory_order_relaxed);
     s.free_currency.store(json_bool(json, "free_currency", true), std::memory_order_relaxed);
+    s.event_exchange_zero_cost.store(json_bool(json, "event_exchange_zero_cost", true), std::memory_order_relaxed);
+    s.event_exchange_local_only.store(json_bool(json, "event_exchange_local_only", false), std::memory_order_relaxed);
     s.god_mode.store(json_bool(json, "god_mode", true), std::memory_order_relaxed);
     s.game_speed.store(json_bool(json, "game_speed", false), std::memory_order_relaxed);
     s.wave_speed.store(json_bool(json, "wave_speed", false), std::memory_order_relaxed);

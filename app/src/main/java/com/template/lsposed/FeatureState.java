@@ -53,9 +53,11 @@ public final class FeatureState {
 
     public static String summary() {
         return String.format(Locale.US,
-                "Enabled: %s\nFree currency: %s\nGod-mode: %s\nGame speed: %s \u00d7%.1f\nOHK: %s\nAttack speed: %s \u00d7%.1f\nAtk paths: stat=%s idle=%s attack=%s roster=%s\nEngine: %s\nNative install attempts: %d\nStatus: %s",
+                "Enabled: %s\nFree currency: %s\nEvent exchange zero cost: %s\nEvent exchange local only: %s\nGod-mode: %s\nGame speed: %s \u00d7%.1f\nOHK: %s\nAttack speed: %s \u00d7%.1f\nAtk paths: stat=%s idle=%s attack=%s roster=%s\nEngine: %s\nNative install attempts: %d\nStatus: %s",
                 isEnabled() ? "yes" : "no",
                 FeatureRegistry.getBool(FeatureRegistry.KEY_FREE_CURRENCY) ? "yes" : "no",
+                FeatureRegistry.getBool(FeatureRegistry.KEY_EVENT_EXCHANGE_ZERO_COST) ? "yes" : "no",
+                FeatureRegistry.getBool(FeatureRegistry.KEY_EVENT_EXCHANGE_LOCAL_ONLY) ? "yes" : "no",
                 FeatureRegistry.getBool(FeatureRegistry.KEY_GOD_MODE) ? "yes" : "no",
                 FeatureRegistry.getBool(FeatureRegistry.KEY_GAME_SPEED) ? "yes" : "no",
                 getMultiplier(),

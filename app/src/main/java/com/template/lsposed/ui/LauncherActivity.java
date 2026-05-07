@@ -43,6 +43,8 @@ public final class LauncherActivity extends Activity {
 
         addToggle(root, FeatureRegistry.KEY_NATIVE_HOOKS, "Install native hooks");
         addToggle(root, FeatureRegistry.KEY_FREE_CURRENCY, "Free currency / no spend");
+        addToggle(root, FeatureRegistry.KEY_EVENT_EXCHANGE_ZERO_COST, "Event exchange zero cost");
+        addToggle(root, FeatureRegistry.KEY_EVENT_EXCHANGE_LOCAL_ONLY, "Event exchange local only");
         addToggle(root, FeatureRegistry.KEY_GOD_MODE, "Hero god-mode");
         addToggle(root, FeatureRegistry.KEY_GAME_SPEED, "Game speed");
         addSlider(root, FeatureRegistry.KEY_MULTIPLIER, "Game speed", 0.25f, 10f, 0.25f);

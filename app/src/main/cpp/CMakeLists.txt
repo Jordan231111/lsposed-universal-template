@@ -13,6 +13,7 @@ add_library(firestonehooks SHARED
         settings.cpp
         hooks/common.cpp
         hooks/easy_wins.cpp
+        hooks/event_exchange.cpp
         hooks/god_mode.cpp
         hooks/game_speed.cpp
         hooks/one_hit_kill.cpp

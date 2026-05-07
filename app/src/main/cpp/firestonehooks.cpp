@@ -55,6 +55,7 @@ void install_worker(std::string package_name, std::string settings_path) {
 
     bool ok = true;
     ok &= firestone::install_easy_wins(base);
+    ok &= firestone::install_event_exchange(base);
     ok &= firestone::install_god_mode(base);
     ok &= firestone::install_game_speed(base);
     ok &= firestone::install_one_hit_kill(base);

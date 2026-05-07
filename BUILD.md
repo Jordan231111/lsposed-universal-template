@@ -62,6 +62,8 @@ Default schema:
   "enabled": true,
   "native_hooks": true,
   "free_currency": true,
+  "event_exchange_zero_cost": true,
+  "event_exchange_local_only": false,
   "god_mode": true,
   "game_speed": false,
   "wave_speed": false,
@@ -122,6 +124,7 @@ FirestoneHooks: EasyWin.CentralCurrencyHandler.HaveResolvedCurrency hook install
 FirestoneHooks: EasyWin.Currency.HaveCurrency hook installed ...
 FirestoneHooks: EasyWin.Currency.RemoveCur hook installed ...
 FirestoneHooks: easy-win FreeCurrency toggle active; affordability + no-spend hooks installed
+FirestoneHooks: event exchange zero-cost hooks active; localOnly=0
 FirestoneHooks: native hook install complete result=0
 ```
 
@@ -149,6 +152,34 @@ easy-win FreeCurrency BigCurrency.HaveCurrency hit #1...
 
 A single tap on an otherwise unaffordable upgrade changed the upgrade panel state, confirming the BigCurrency affordability bypass is visible in-game. That tap did not emit a `RemoveCur no-spend` line, so that particular upgrade path appears to be gated mainly by `HaveCurrency` and then completed through a higher-level purchase/upgrade state update rather than directly calling `BigCurrency.RemoveCur`.
 
+Anniversary coin-exchange costs use a separate path. `PremiumProductAnniversaryInteraction.PurchaseItem()`
+sets `PremiumProduct.cost`, runs `AnniversaryEventExchangeCallback(code, quantity)`, then sends
+`SocketFunctions.ExchangeCalendarCurrency(productCodeString, true, quantity)`. That socket call has
+no client-side cost argument. The `Event exchange zero cost` toggle therefore zeros local UI/cost
+state and affordability, while `Event exchange local only` is a disabled-by-default diagnostic that
+suppresses the outgoing socket after the local callback. If zero-cost purchases still snap back with
+the socket log present, the server is overriding the local state.
+
+Verification on 2026-05-07 produced:
+
+```text
+artifacts/logcat_event_exchange_launch.txt
+artifacts/logcat_event_exchange_after_wait.txt
+artifacts/firestone_event_exchange_launch.png
+artifacts/firestone_event_exchange_after_wait.png
+```
+
+Key lines:
+
+```text
+event exchange zero-cost UI #1 product=70 quantity=0
+event exchange CanExchange forced true #1 product=70
+event exchange PurchaseItem zero-cost entry #1 product=70 quantity=1 productCost=0
+event exchange PremiumProduct.CanPurchase forced true #1 product=70 quantity=1
+event exchange DataHandler.PayCurrency no-spend #1 product=70 quantity=1
+event exchange socket ExchangeCalendarCurrency #1 ... anniversary=1 quantity=1 localOnly=0
+```
+
 ## Troubleshooting
 
 | Symptom | Likely cause | Action |
@@ -159,6 +190,7 @@ A single tap on an otherwise unaffordable upgrade changed the upgrade panel stat
 | Launch crash after hook install | Risky combat hook ABI or same-page hook conflict | Disable in this order: `one_hit_kill`, `attack_speed`, `game_speed`, then retry. Re-enable one at a time. |
 | Game closes after turning off the old in-app `Module enabled` switch | Older builds could persist `enabled=false`, leaving Firestone to launch without module/native logs and then exit on its own PlayCore path | Install the current APK, force-stop `com.firestone.hooks` and Firestone, then relaunch. The setting is normalized back to `true`; use LSPosed Manager for global disablement. |
 | Game closes after disabling `com.firestone.hooks` in LSPosed/Vector | The module is not loaded at all; logcat shows no `FirestoneHooks` lines and Firestone exits after its own PlayCore update request | Re-enable the module and scope, then use per-feature toggles for a no-feature run. A globally disabled module cannot change Firestone startup behavior. |
+| Anniversary coin exchange buys then immediately reverts | Event purchase path sends `SocketFunctions.ExchangeCalendarCurrency(product, true, quantity)` and the server resync rejects/restores state | Test with `Event exchange zero cost` on. If it still reverts and the socket log appears, enable `Event exchange local only` to confirm the server reply is the reset source; this local-only mode is not persistent server state. |
 | Crash at `libil2cpp.so+0x2ac2dbc` | Wrong `BigCurrency.HaveCurrency` ABI or old function-entry return-skip build | Install the current build. It uses the observed ABI: `this` in `x0`, `ObscuredBigDouble*` in `x1`, `MethodInfo*` in `x2`. |
 | Free currency is on but balance number does not increase | The toggle is an affordability/no-spend feature, not a currency grant | Try an otherwise unaffordable soft-currency upgrade and check for `BigCurrency.HaveCurrency hit` or normal `HaveCurrency hit` in logcat. A visible balance increase requires a separate reward/grant hook. |
 | Crash only with OHK | `BattleController.ApplyDamage` ABI or target-side guard mismatch | Keep `one_hit_kill=false`; prefer god-mode/free-currency until dynamic register tracing confirms the call-site ABI. |

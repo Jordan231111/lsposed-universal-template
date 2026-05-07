@@ -9,6 +9,8 @@ struct Settings {
     std::atomic<bool> enabled{true};
     std::atomic<bool> native_hooks{true};
     std::atomic<bool> free_currency{true};
+    std::atomic<bool> event_exchange_zero_cost{true};
+    std::atomic<bool> event_exchange_local_only{false};
     std::atomic<bool> god_mode{true};
     std::atomic<bool> game_speed{false};
     std::atomic<bool> wave_speed{false};

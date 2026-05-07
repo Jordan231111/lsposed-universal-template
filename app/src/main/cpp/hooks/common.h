@@ -58,6 +58,7 @@ void write_obscured_float(void *address, float value, uintptr_t il2cpp_base);
 float clamp_multiplier(float value, float fallback, float min_value, float max_value);
 
 bool install_easy_wins(uintptr_t il2cpp_base);
+bool install_event_exchange(uintptr_t il2cpp_base);
 bool install_god_mode(uintptr_t il2cpp_base);
 bool install_game_speed(uintptr_t il2cpp_base);
 bool install_one_hit_kill(uintptr_t il2cpp_base);

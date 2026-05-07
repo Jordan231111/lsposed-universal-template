@@ -32,6 +32,8 @@ public final class FeatureRegistry {
     public static final String KEY_SAMPLE_ACTIVITY_HOOK = "sample_activity_hook";
     public static final String KEY_NATIVE_HOOKS = "native_hooks";
     public static final String KEY_FREE_CURRENCY = "free_currency";
+    public static final String KEY_EVENT_EXCHANGE_ZERO_COST = "event_exchange_zero_cost";
+    public static final String KEY_EVENT_EXCHANGE_LOCAL_ONLY = "event_exchange_local_only";
     public static final String KEY_GOD_MODE = "god_mode";
     public static final String KEY_GAME_SPEED = "game_speed";
     public static final String KEY_WAVE_SPEED = "wave_speed";
@@ -102,6 +104,8 @@ public final class FeatureRegistry {
         register(Feature.bool(KEY_NATIVE_HOOKS, "Native hooks",
                 TemplateConfig.ENABLE_NATIVE_SHADOWHOOK));
         register(Feature.bool(KEY_FREE_CURRENCY, "Free currency / no spend", true));
+        register(Feature.bool(KEY_EVENT_EXCHANGE_ZERO_COST, "Event exchange zero cost", true));
+        register(Feature.bool(KEY_EVENT_EXCHANGE_LOCAL_ONLY, "Event exchange local only", false));
         register(Feature.bool(KEY_GOD_MODE, "Hero god-mode", true));
         register(Feature.bool(KEY_GAME_SPEED, "Game speed", false));
         register(Feature.bool(KEY_WAVE_SPEED, "Wave speed", false));

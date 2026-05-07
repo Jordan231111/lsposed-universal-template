@@ -323,6 +323,7 @@ Pre-pass result: the IL2CPP dump exposes at least three High-confidence, cheap r
 | Currency affordability | Additional candidate, implemented | `0x2BA5ED8` | `Currency::HaveCurrency(double RequestedCost)` | Constant-return `true` while `free_currency` is enabled; tail-call original when disabled | High | Makes concrete normal-currency balance checks pass, including checks reached outside the central helper. |
 | Big-number currency affordability | Additional candidate, implemented | `0x2AC2D98` | `BigCurrency::HaveCurrency(ObscuredBigDouble RequestedCost)` | Typed proxy returns `true`; the 88-byte `ObscuredBigDouble` argument is passed by pointer in `x1` | High | Makes gold/firestone-style `ObscuredBigDouble` affordability checks pass; verified by hook hits and impossible green upgrade buttons. |
 | Big-number currency no-spend | Additional candidate, implemented | `0x2AC30F8` | `BigCurrency::RemoveCur(ObscuredBigDouble Amount)` | Return without subtracting while `free_currency` is enabled; tail-call original when disabled | Medium/High | Prevents local big-currency removal on paths that call `RemoveCur`; the tested hero upgrade path appears to be gated mainly by `HaveCurrency` and did not emit a `RemoveCur` hit during the single tap test. |
+| Anniversary/event exchange zero-cost | Additional candidate, implemented | `0x29273BC` / `0x26536FC` / `0x2653760` / `0x2927438` / `0x29277AC` / `0x2923A10` / `0x29231BC` / `0x26D3CF0` | `PremiumProductAnniversaryInteraction::CanExchange()`; `AnniversaryEventDataHandler::CanExchangeCurrency(...)` / `PayCurrency(...)`; `PremiumProductAnniversaryInteraction::SetQuantityToExchange(...)` / `PurchaseItem()`; `PremiumProduct::CanPurchase(...)` / `TryToPurchaseProduct(...)`; `SocketFunctions::ExchangeCalendarCurrency(...)` | Force anniversary exchange checks true, zero `PremiumProduct.cost`, set visible cost text to `0`, no-op local event currency payment, and log the socket request. Optional `event_exchange_local_only` suppresses the outgoing socket after the local callback. | High for local UI/cost, Low for server persistence | Makes the anniversary coin-exchange cards locally cost `0` and confirms whether a rollback is caused by server reconciliation. |
 | Reward multiplier | Additional candidate | `0x28DC220` | `BattleMainStageManager::CalculateWaveGold(int CurrentStageNumber, int CurrentWaveNumber)` | Return-value multiplier on `ObscuredBigDouble` | Medium | Multiplies per-wave gold calculation. Not implemented first because it requires `ObscuredBigDouble` return construction. |
 | Offline reward | Additional candidate | `0x29CB530` | `OfflineCalculations::CalculateOfflineRewards(double OfflineTime, ...)` | Argument rewrite on `OfflineTime` or return-flow multiplier | Medium | Increases offline progress/reward calculations. Not implemented first because it is coroutine/IEnumerator-shaped. |
 | Critical loot | Additional candidate | `0x28DDBDC` / `0x28DDCC4` | `BattleMainStageManager::CalculateCriticalLootChance()` / `CalculateCriticalLootBonus()` | Post-original field-force on `ObscuredDouble` chance/bonus fields | Medium | Raises critical loot chance/bonus. Not implemented first because the obvious fields are `ObscuredDouble`. |
@@ -353,6 +354,74 @@ Disassembly sanity check for Easy-Wins:
 ```
 
 Implementation file: `app/src/main/cpp/hooks/easy_wins.cpp` installs normal-currency checks, normal-currency no-spend, big-currency checks, and big-currency no-spend. Earlier builds crashed when `BigCurrency.HaveCurrency` was attempted with a CPU-context return-skip; the corrected build uses a typed Shadowhook proxy matching the observed ABI (`this` in `x0`, `ObscuredBigDouble*` in `x1`, `MethodInfo*` in `x2`).
+
+#### Anniversary Event Exchange Cost Path
+
+The anniversary coin-exchange screen does not use only the normal `Currency` / `BigCurrency`
+helpers. Static evidence:
+
+```csharp
+PremiumProductAnniversaryInteraction::CanExchange()                  // RVA 0x29273BC
+PremiumProductAnniversaryInteraction::SetQuantityToExchange(int)     // RVA 0x2927438
+PremiumProductAnniversaryInteraction::PurchaseItem()                 // RVA 0x29277AC
+AnniversaryEventDataHandler::CanExchangeCurrency(PremiumProductCode) // RVA 0x26536FC
+AnniversaryEventDataHandler::PayCurrency(PremiumProductCode,int)     // RVA 0x2653760
+PremiumProduct::CanPurchase(int Quantity)                            // RVA 0x2923A10
+PremiumProduct::TryToPurchaseProduct(string[] MetaData)              // RVA 0x29231BC
+SocketFunctions::ExchangeCalendarCurrency(string,bool,int)           // RVA 0x26D3CF0
+```
+
+Important fields:
+
+```text
+PremiumProductInteraction.premiumProduct                       @ this + 0x20
+PremiumProductInteraction.purchaseCostText                     @ this + 0x48
+PremiumProductAnniversaryInteraction.quantityToExchange        @ this + 0x98
+PremiumProductAnniversaryInteraction.PremiumProductCode        @ this + 0x9C
+PremiumProduct.productCode                                     @ product + 0x18
+PremiumProduct.cost                                            @ product + 0x34
+```
+
+The decisive disassembly is in `PremiumProduct::AskServerToPurchaseProduct(...)`. For anniversary
+exchange products it first calls the local callback, then sends a socket message with product id
+and quantity only:
+
+```asm
+2925570  mov w0, w21
+2925574  mov w1, w19
+292557c  bl  2930cdc     ; PremiumProductHandler.AnniversaryEventExchangeCallback(code, quantity)
+2925580  ldr w8, [x20,#24]
+2925590  bl  41f31d0     ; product code -> string
+2925594  mov w1, #1      ; IsAnniversary = true
+2925598  mov w2, w19     ; quantity
+29255a0  bl  26d3cf0     ; SocketFunctions.ExchangeCalendarCurrency(product, true, quantity)
+```
+
+Because the socket payload has no cost field, making client-side costs zero cannot change a
+server-side balance validation. If the visible purchase succeeds locally and then immediately snaps
+back while `EventExchange.SocketFunctions.ExchangeCalendarCurrency` is logged, the rollback is
+coming from the server/socket reconciliation path. The module now exposes two separate behaviors:
+
+- `event_exchange_zero_cost=true`: zero local cost, force local exchange checks, no local event
+  currency spend, and still send the original socket request.
+- `event_exchange_local_only=true`: after the game's own local callback runs, suppress the outgoing
+  anniversary exchange socket. This is useful to prove that the immediate reset is the server reply;
+  it is local-session state and should not be expected to persist after a full server resync.
+
+Runtime verification on 2026-05-07 showed the hook path active on the original APK:
+
+```text
+event exchange zero-cost UI #1 product=70 quantity=0
+event exchange CanExchange forced true #1 product=70
+event exchange PurchaseItem zero-cost entry #1 product=70 quantity=1 productCost=0
+event exchange PremiumProduct.TryToPurchaseProduct cost=0 #1 product=70
+event exchange PremiumProduct.CanPurchase forced true #1 product=70 quantity=1
+event exchange DataHandler.PayCurrency no-spend #1 product=70 quantity=1
+event exchange socket ExchangeCalendarCurrency #1 ... anniversary=1 quantity=1 localOnly=0
+```
+
+The captured screen `artifacts/firestone_event_exchange_launch.png` shows the anniversary exchange
+cost labels rendered as `0` and the reward flow opening after purchase.
 
 ### BigDouble ABI
 
@@ -914,6 +983,7 @@ Implementation exclusion: the LSPosed module intentionally does not hook or modi
 | Native loader | `app/src/main/java/com/template/lsposed/NativeBridge.java:90`, `app/src/main/cpp/firestonehooks.cpp:89`, `app/src/main/cpp/firestonehooks.cpp:56` | `native_hooks` plus legacy `enabled=true` normalization | Loads `libfirestonehooks.so`, waits for `libil2cpp.so`, installs hooks once, and starts the native settings refresh thread. The old in-app master off state is ignored; global disablement belongs in LSPosed Manager. |
 | RVA resolution / hook helper | `app/src/main/cpp/hooks/common.cpp:55`, `app/src/main/cpp/hooks/common.cpp:79` | N/A | Resolves `libil2cpp.so` base from `/proc/self/maps`, then installs Shadowhook function hooks by `base + RVA`. |
 | Easy-Win: free currency / no-spend | `app/src/main/cpp/hooks/easy_wins.cpp:48`, `app/src/main/cpp/hooks/easy_wins.cpp:68`, `app/src/main/cpp/hooks/easy_wins.cpp:78`, `app/src/main/cpp/hooks/easy_wins.cpp:88`, `app/src/main/cpp/hooks/easy_wins.cpp:98`, `app/src/main/cpp/hooks/easy_wins.cpp:108`, `app/src/main/cpp/hooks/easy_wins.cpp:120` | `free_currency` | Returns `true` from normal and big-currency affordability checks, and no-ops normal/big local pay/remove helpers while enabled. BigCurrency works through the typed `ObscuredBigDouble*` ABI rather than the old unstable return-skip. |
+| Easy-Win: anniversary/event exchange zero-cost | `app/src/main/cpp/hooks/event_exchange.cpp` | `free_currency`, `event_exchange_zero_cost`, `event_exchange_local_only` | Forces anniversary exchange checks true, writes `PremiumProduct.cost=0`, sets the visible cost text to `0`, no-ops local anniversary event currency spend, logs `SocketFunctions.ExchangeCalendarCurrency`, and can optionally suppress that socket request after the local callback for server-rollback testing. |
 | God-mode | `app/src/main/cpp/hooks/god_mode.cpp:25`, `app/src/main/cpp/hooks/god_mode.cpp:37` | `god_mode` | Returns `true` from `BattleHero.IsImmune()` when enabled; otherwise calls original. |
 | Game speed | `app/src/main/cpp/hooks/game_speed.cpp:45`, `app/src/main/cpp/hooks/game_speed.cpp:79` | `game_speed`, `game_speed_multiplier`, `wave_speed`, `wave_speed_multiplier` | Scales `Time.set_timeScale`, `Time.get_fixedDeltaTime`, wave transition duration/setter, and Spine `AnimationState.TimeScale`. |
 | One-hit kill | `app/src/main/cpp/hooks/one_hit_kill.cpp:41`, `app/src/main/cpp/hooks/one_hit_kill.cpp:50`, `app/src/main/cpp/hooks/one_hit_kill.cpp:84` | `one_hit_kill`, `damage_multiplier` | Rewrites `BigDouble AppliedDamage` to a lethal value only when `TargetCharacterBattleLogic` resolves to non-hero. |
