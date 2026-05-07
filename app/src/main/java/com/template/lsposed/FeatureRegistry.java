@@ -101,7 +101,7 @@ public final class FeatureRegistry {
         register(Feature.bool(KEY_ENABLED, "Module enabled", true));
         register(Feature.bool(KEY_NATIVE_HOOKS, "Native hooks",
                 TemplateConfig.ENABLE_NATIVE_SHADOWHOOK));
-        register(Feature.bool(KEY_FREE_CURRENCY, "Free currency checks", true));
+        register(Feature.bool(KEY_FREE_CURRENCY, "Free currency / no spend", true));
         register(Feature.bool(KEY_GOD_MODE, "Hero god-mode", true));
         register(Feature.bool(KEY_GAME_SPEED, "Game speed", false));
         register(Feature.bool(KEY_WAVE_SPEED, "Wave speed", false));

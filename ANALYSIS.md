@@ -318,9 +318,11 @@ Pre-pass result: the IL2CPP dump exposes at least three High-confidence, cheap r
 
 | Category | Status | RVA in libil2cpp.so | Managed method / field | Suggested patch strategy | Confidence | What it does in-game |
 |---|---|---:|---|---|---|---|
-| Currency affordability | Additional candidate, implemented | `0x2BA5E48` | `CentralCurrencyHandler::HaveCurrency(CurrencyCode Currency, double Quantity)` | Constant-return `true` while `free_currency` is enabled; tail-call original when disabled | High | Makes high-level normal-currency affordability checks pass. |
+| Currency affordability | Additional candidate, implemented | `0x2BA5E48` / `0x2BA5EE8` | `CentralCurrencyHandler::HaveCurrency(CurrencyCode Currency, double Quantity)` / `HaveResolvedCurrency(...)` | Constant-return `true` while `free_currency` is enabled; tail-call original when disabled | High | Makes high-level normal-currency affordability checks pass. |
+| Currency no-spend | Additional candidate, implemented | `0x2BA5DB0` / `0x2BA5E3C` | `CentralCurrencyHandler::PayCurrency(CurrencyCode Currency, double Quantity)` / `Currency::RemoveCur(double Amount)` | Return without subtracting while `free_currency` is enabled; tail-call original when disabled | High | Prevents local normal-currency removal on paths that use the central pay/remove helpers. |
 | Currency affordability | Additional candidate, implemented | `0x2BA5ED8` | `Currency::HaveCurrency(double RequestedCost)` | Constant-return `true` while `free_currency` is enabled; tail-call original when disabled | High | Makes concrete normal-currency balance checks pass, including checks reached outside the central helper. |
-| Big-number currency affordability | Additional candidate, not installed after launch bisection | `0x2AC2D98` | `BigCurrency::HaveCurrency(ObscuredBigDouble RequestedCost)` | Candidate constant-return `true`, but function-entry return-skip is disabled after static-to-device validation crashed at `libil2cpp.so+0x2ac2dbc`; use a typed proxy or call-site patch before re-enabling | High static / Low current implementation | Would make large-number currency checks pass for gold/firestone-style `ObscuredBigDouble` balances, but needs a safer ABI strategy. |
+| Big-number currency affordability | Additional candidate, implemented | `0x2AC2D98` | `BigCurrency::HaveCurrency(ObscuredBigDouble RequestedCost)` | Typed proxy returns `true`; the 88-byte `ObscuredBigDouble` argument is passed by pointer in `x1` | High | Makes gold/firestone-style `ObscuredBigDouble` affordability checks pass; verified by hook hits and impossible green upgrade buttons. |
+| Big-number currency no-spend | Additional candidate, implemented | `0x2AC30F8` | `BigCurrency::RemoveCur(ObscuredBigDouble Amount)` | Return without subtracting while `free_currency` is enabled; tail-call original when disabled | Medium/High | Prevents local big-currency removal on paths that call `RemoveCur`; the tested hero upgrade path appears to be gated mainly by `HaveCurrency` and did not emit a `RemoveCur` hit during the single tap test. |
 | Reward multiplier | Additional candidate | `0x28DC220` | `BattleMainStageManager::CalculateWaveGold(int CurrentStageNumber, int CurrentWaveNumber)` | Return-value multiplier on `ObscuredBigDouble` | Medium | Multiplies per-wave gold calculation. Not implemented first because it requires `ObscuredBigDouble` return construction. |
 | Offline reward | Additional candidate | `0x29CB530` | `OfflineCalculations::CalculateOfflineRewards(double OfflineTime, ...)` | Argument rewrite on `OfflineTime` or return-flow multiplier | Medium | Increases offline progress/reward calculations. Not implemented first because it is coroutine/IEnumerator-shaped. |
 | Critical loot | Additional candidate | `0x28DDBDC` / `0x28DDCC4` | `BattleMainStageManager::CalculateCriticalLootChance()` / `CalculateCriticalLootBonus()` | Post-original field-force on `ObscuredDouble` chance/bonus fields | Medium | Raises critical loot chance/bonus. Not implemented first because the obvious fields are `ObscuredDouble`. |
@@ -342,10 +344,15 @@ Disassembly sanity check for Easy-Wins:
 2ac2d98: d10303ff  sub sp, sp, #0xc0        ; BigCurrency.HaveCurrency
 2ac2da4: 910163e0  add x0, sp, #0x58
 2ac2da8: 52800b02  mov w2, #0x58
-2ac2dac: 948cc5c9  bl memcpy
+2ac2dac: 948cc5c9  bl memcpy                ; copies 88-byte RequestedCost from x1
+
+2ac30f8: d10603ff  sub sp, sp, #0x180       ; BigCurrency.RemoveCur
+2ac311c: 910163e0  add x0, sp, #0x58
+2ac3120: aa1303e1  mov x1, x19              ; x19 is pointer to Amount
+2ac3128: 948cc4ea  bl memcpy
 ```
 
-Implementation files: `app/src/main/cpp/hooks/easy_wins.cpp` installs the two normal Free Currency hooks. The `BigCurrency` candidate remains documented because the method is high-confidence statically, but the CPU-context return-skip version was removed after a launch crash at the method's `memcpy` block (`0x2AC2DBC`), indicating the intercept did not safely bypass the original body on-device.
+Implementation file: `app/src/main/cpp/hooks/easy_wins.cpp` installs normal-currency checks, normal-currency no-spend, big-currency checks, and big-currency no-spend. Earlier builds crashed when `BigCurrency.HaveCurrency` was attempted with a CPU-context return-skip; the corrected build uses a typed Shadowhook proxy matching the observed ABI (`this` in `x0`, `ObscuredBigDouble*` in `x1`, `MethodInfo*` in `x2`).
 
 ### BigDouble ABI
 
@@ -366,6 +373,22 @@ struct BigDouble {
 ```
 
 For `BattleController::ApplyDamage(...)`, the generated AArch64 body at `0x27C4E10` copies the `BigDouble AppliedDamage` value from the argument register pair before normal damage routing. The module constructs lethal damage directly as `{ configured_damage_multiplier, 308 }` and only applies it after resolving `TargetCharacterBattleLogic + 0x20` to its `BattleCharacter` and checking `BattleCharacter::IsHero()` at `0x29E2610`.
+
+`ObscuredBigDouble` wraps a `BigDouble` as two CodeStage obscured primitives and is much larger:
+
+```csharp
+public ObscuredDouble Mantissa; // 0x00, 48 bytes
+public ObscuredLong Exponent;   // 0x30, 40 bytes
+// total: 0x58 / 88 bytes
+```
+
+Because it is an 88-byte value type, AArch64 passes it indirectly. `BigCurrency::HaveCurrency(ObscuredBigDouble)` at `0x2AC2D98` immediately copies 88 bytes from `x1`, so the safe proxy ABI is:
+
+```cpp
+bool proxy(void *this_ptr, const void *requested_cost_ptr, const MethodInfo *method);
+```
+
+This is why the earlier raw return-skip crashed at the function's `memcpy` block, while the typed proxy installs and fires cleanly.
 
 ### ObscuredFloat ABI
 
@@ -890,7 +913,7 @@ Implementation exclusion: the LSPosed module intentionally does not hook or modi
 | Settings bridge | `app/src/main/java/com/template/lsposed/ui/LauncherActivity.java:44`, `app/src/main/java/com/template/lsposed/FirestoneSettings.java:25`, `app/src/main/java/com/template/lsposed/ModuleEntry.java:121` | JSON file `/data/data/com.HolydayStudios.Firestone/files/firestonehooks.json`; public fallback `/sdcard/Android/media/com.firestone.hooks/firestonehooks.json` | Standalone module Activity writes provider-backed JSON and a public fallback; target process syncs normalized settings to the game sandbox every 500 ms and uses safe defaults if neither source is visible. |
 | Native loader | `app/src/main/java/com/template/lsposed/NativeBridge.java:90`, `app/src/main/cpp/firestonehooks.cpp:89`, `app/src/main/cpp/firestonehooks.cpp:56` | `native_hooks` plus legacy `enabled=true` normalization | Loads `libfirestonehooks.so`, waits for `libil2cpp.so`, installs hooks once, and starts the native settings refresh thread. The old in-app master off state is ignored; global disablement belongs in LSPosed Manager. |
 | RVA resolution / hook helper | `app/src/main/cpp/hooks/common.cpp:55`, `app/src/main/cpp/hooks/common.cpp:79` | N/A | Resolves `libil2cpp.so` base from `/proc/self/maps`, then installs Shadowhook function hooks by `base + RVA`. |
-| Easy-Win: free currency | `app/src/main/cpp/hooks/easy_wins.cpp:29`, `app/src/main/cpp/hooks/easy_wins.cpp:39`, `app/src/main/cpp/hooks/easy_wins.cpp:51`, `app/src/main/cpp/hooks/easy_wins.cpp:59` | `free_currency` | Returns `true` from central and normal currency affordability checks; startup logs confirm the Free Currency toggle is active. The high-confidence `BigCurrency` candidate is documented but not installed after launch bisection. |
+| Easy-Win: free currency / no-spend | `app/src/main/cpp/hooks/easy_wins.cpp:48`, `app/src/main/cpp/hooks/easy_wins.cpp:68`, `app/src/main/cpp/hooks/easy_wins.cpp:78`, `app/src/main/cpp/hooks/easy_wins.cpp:88`, `app/src/main/cpp/hooks/easy_wins.cpp:98`, `app/src/main/cpp/hooks/easy_wins.cpp:108`, `app/src/main/cpp/hooks/easy_wins.cpp:120` | `free_currency` | Returns `true` from normal and big-currency affordability checks, and no-ops normal/big local pay/remove helpers while enabled. BigCurrency works through the typed `ObscuredBigDouble*` ABI rather than the old unstable return-skip. |
 | God-mode | `app/src/main/cpp/hooks/god_mode.cpp:25`, `app/src/main/cpp/hooks/god_mode.cpp:37` | `god_mode` | Returns `true` from `BattleHero.IsImmune()` when enabled; otherwise calls original. |
 | Game speed | `app/src/main/cpp/hooks/game_speed.cpp:45`, `app/src/main/cpp/hooks/game_speed.cpp:79` | `game_speed`, `game_speed_multiplier`, `wave_speed`, `wave_speed_multiplier` | Scales `Time.set_timeScale`, `Time.get_fixedDeltaTime`, wave transition duration/setter, and Spine `AnimationState.TimeScale`. |
 | One-hit kill | `app/src/main/cpp/hooks/one_hit_kill.cpp:41`, `app/src/main/cpp/hooks/one_hit_kill.cpp:50`, `app/src/main/cpp/hooks/one_hit_kill.cpp:84` | `one_hit_kill`, `damage_multiplier` | Rewrites `BigDouble AppliedDamage` to a lethal value only when `TargetCharacterBattleLogic` resolves to non-hero. |
@@ -946,11 +969,12 @@ attack-speed UpdateIdleState gauge #1 ... timer 0.0000->0.0783
 attack-speed UpdateAttackState timer #1 ... timer 0.0150->0.3002
 ```
 
-Runtime feature status from logcat: free-currency affordability hooks install and fire on currency
-checks; god-mode fires on `BattleHero.IsImmune`; OHK fires when enabled on enemy damage paths;
-attack speed now fires on player hero stat and timer paths at `20x`; game-speed hooks install, but
-observed gameplay impact remains mostly visual/broad timing and is intentionally left in place for
-learning.
+Runtime feature status from logcat: free-currency affordability hooks install and fire on normal
+currency checks and BigCurrency checks; the module also installs no-spend hooks for
+`CentralCurrencyHandler.PayCurrency`, `Currency.RemoveCur`, and `BigCurrency.RemoveCur`.
+God-mode fires on `BattleHero.IsImmune`; OHK fires when enabled on enemy damage paths; attack speed
+now fires on player hero stat and timer paths at `20x`; game-speed hooks install, but observed
+gameplay impact remains mostly visual/broad timing and is intentionally left in place for learning.
 
 Build verification completed locally:
 
@@ -967,8 +991,12 @@ LSPosed loaded com.firestone.hooks for com.HolydayStudios.Firestone
 JNI_OnLoad firestonehooks observed
 libil2cpp.so base resolved
 EasyWin.CentralCurrencyHandler.HaveCurrency hook installed
+EasyWin.BigCurrency.HaveCurrency hook installed
+EasyWin.BigCurrency.RemoveCur hook installed
 EasyWin.Currency.HaveCurrency hook installed
-easy-win FreeCurrency toggle active; affordability hooks installed
+EasyWin.Currency.RemoveCur hook installed
+easy-win FreeCurrency toggle active; affordability + no-spend hooks installed
+easy-win FreeCurrency BigCurrency.HaveCurrency hit #1...
 native hook install complete result=0
 BattleHero.IsImmune hit #1..#5 observed
 No CRASH/FATAL/SIGSEGV/SIGABRT markers in filtered launch log

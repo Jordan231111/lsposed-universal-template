@@ -114,9 +114,14 @@ Expected logcat markers:
 FirestoneHooks: Loaded libfirestonehooks.so
 FirestoneHooks: JNI_OnLoad firestonehooks
 FirestoneHooks: libil2cpp.so base=...
+FirestoneHooks: EasyWin.BigCurrency.HaveCurrency hook installed ...
+FirestoneHooks: EasyWin.BigCurrency.RemoveCur hook installed ...
+FirestoneHooks: EasyWin.CentralCurrencyHandler.PayCurrency hook installed ...
 FirestoneHooks: EasyWin.CentralCurrencyHandler.HaveCurrency hook installed ...
+FirestoneHooks: EasyWin.CentralCurrencyHandler.HaveResolvedCurrency hook installed ...
 FirestoneHooks: EasyWin.Currency.HaveCurrency hook installed ...
-FirestoneHooks: easy-win FreeCurrency toggle active; affordability hooks installed
+FirestoneHooks: EasyWin.Currency.RemoveCur hook installed ...
+FirestoneHooks: easy-win FreeCurrency toggle active; affordability + no-spend hooks installed
 FirestoneHooks: native hook install complete result=0
 ```
 
@@ -132,7 +137,17 @@ artifacts/logcat_launch_full.txt
 artifacts/firestone_launch.png
 ```
 
-The filtered log shows LSPosed loading `com.firestone.hooks`, `JNI_OnLoad firestonehooks`, `libil2cpp.so base=...`, the Easy-Win hooks installed, `easy-win FreeCurrency toggle active; affordability hooks installed`, and `native hook install complete result=0`. No crash markers were present in the filtered launch log.
+The filtered log shows LSPosed loading `com.firestone.hooks`, `JNI_OnLoad firestonehooks`, `libil2cpp.so base=...`, the Easy-Win hooks installed, `easy-win FreeCurrency toggle active; affordability + no-spend hooks installed`, and `native hook install complete result=0`. No crash markers were present in the filtered launch log.
+
+The current Free Currency toggle is not a balance grant. It makes affordability checks pass and prevents local pay/remove helpers from subtracting when those helpers are used. Big-number gold/firestone-style costs route through `BigCurrency.HaveCurrency(ObscuredBigDouble)`, which is now hooked with the correct pointer ABI. Verification on 2026-05-07 showed:
+
+```text
+EasyWin.BigCurrency.HaveCurrency hook installed rva=0x2ac2d98 ... OK
+EasyWin.BigCurrency.RemoveCur hook installed rva=0x2ac30f8 ... OK
+easy-win FreeCurrency BigCurrency.HaveCurrency hit #1...
+```
+
+A single tap on an otherwise unaffordable upgrade changed the upgrade panel state, confirming the BigCurrency affordability bypass is visible in-game. That tap did not emit a `RemoveCur no-spend` line, so that particular upgrade path appears to be gated mainly by `HaveCurrency` and then completed through a higher-level purchase/upgrade state update rather than directly calling `BigCurrency.RemoveCur`.
 
 ## Troubleshooting
 
@@ -144,7 +159,8 @@ The filtered log shows LSPosed loading `com.firestone.hooks`, `JNI_OnLoad firest
 | Launch crash after hook install | Risky combat hook ABI or same-page hook conflict | Disable in this order: `one_hit_kill`, `attack_speed`, `game_speed`, then retry. Re-enable one at a time. |
 | Game closes after turning off the old in-app `Module enabled` switch | Older builds could persist `enabled=false`, leaving Firestone to launch without module/native logs and then exit on its own PlayCore path | Install the current APK, force-stop `com.firestone.hooks` and Firestone, then relaunch. The setting is normalized back to `true`; use LSPosed Manager for global disablement. |
 | Game closes after disabling `com.firestone.hooks` in LSPosed/Vector | The module is not loaded at all; logcat shows no `FirestoneHooks` lines and Firestone exits after its own PlayCore update request | Re-enable the module and scope, then use per-feature toggles for a no-feature run. A globally disabled module cannot change Firestone startup behavior. |
-| Crash at `libil2cpp.so+0x2ac2dbc` | Unsafe `BigCurrency.HaveCurrency` function-entry return-skip | The installed build removes this intercept; keep the documented candidate disabled until a typed proxy or call-site patch is validated. |
+| Crash at `libil2cpp.so+0x2ac2dbc` | Wrong `BigCurrency.HaveCurrency` ABI or old function-entry return-skip build | Install the current build. It uses the observed ABI: `this` in `x0`, `ObscuredBigDouble*` in `x1`, `MethodInfo*` in `x2`. |
+| Free currency is on but balance number does not increase | The toggle is an affordability/no-spend feature, not a currency grant | Try an otherwise unaffordable soft-currency upgrade and check for `BigCurrency.HaveCurrency hit` or normal `HaveCurrency hit` in logcat. A visible balance increase requires a separate reward/grant hook. |
 | Crash only with OHK | `BattleController.ApplyDamage` ABI or target-side guard mismatch | Keep `one_hit_kill=false`; prefer god-mode/free-currency until dynamic register tracing confirms the call-site ABI. |
 | Attack speed installs but feels unchanged | Only the stat interval path is active, or the hero was already inside the live attack loop | Enable `attack_speed_idle_timer` and `attack_speed_attack_timer`; these touch the live `CharacterBattleLogic` timers. `attack_speed_roster_stat` updates all ally hero `Hero.attackSpeedBasic` values when the roster stat recalculates. |
 | `ObscuredCheatingDetected` appears | Direct `ObscuredFloat` field write detected | Keep `attack_speed=false` or route through the helper at `0x211761C`; current implementation already prefers that helper. |
