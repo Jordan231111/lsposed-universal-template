@@ -33,6 +33,7 @@ public final class ModuleEntry extends XposedModule {
     private volatile boolean activityHookInstalled;
     private volatile boolean nativeHookToggleListenerInstalled;
     private volatile boolean nativeHooksStarted;
+    private volatile boolean settingsSyncStarted;
 
     @Override
     public void onModuleLoaded(ModuleLoadedParam param) {
@@ -117,7 +118,9 @@ public final class ModuleEntry extends XposedModule {
         applicationContextReady = true;
         Context appContext = context.getApplicationContext() != null ? context.getApplicationContext() : context;
 
+        FirestoneSettings.syncProviderToTargetFile(appContext);
         FeatureRegistry.initialize(appContext);
+        startSettingsSync(appContext);
 
         try {
             EngineDetector.Engine engine = EngineDetector.detect(appContext);
@@ -148,6 +151,38 @@ public final class ModuleEntry extends XposedModule {
                 maybeStartNativeHooks(appContext);
             }
         });
+    }
+
+    private synchronized void startSettingsSync(Context appContext) {
+        if (settingsSyncStarted) return;
+        settingsSyncStarted = true;
+        Thread sync = new Thread(() -> {
+            String last = "";
+            while (true) {
+                try {
+                    String json = FirestoneSettings.syncProviderToTargetFile(appContext);
+                    if (TemplateConfig.VERBOSE_LOGS && json != null && !json.equals(last)) {
+                        last = json;
+                        log(Log.INFO, TemplateConfig.LOG_TAG,
+                                "Synced settings to " + FirestoneSettings.targetSettingsFile(appContext));
+                    }
+                    Thread.sleep(500L);
+                } catch (InterruptedException ignored) {
+                    return;
+                } catch (Throwable t) {
+                    if (TemplateConfig.VERBOSE_LOGS) {
+                        log(Log.WARN, TemplateConfig.LOG_TAG, "Settings sync failed", t);
+                    }
+                    try {
+                        Thread.sleep(1000L);
+                    } catch (InterruptedException ignored) {
+                        return;
+                    }
+                }
+            }
+        }, "FirestoneSettingsSync");
+        sync.setDaemon(true);
+        sync.start();
     }
 
     private synchronized void maybeStartNativeHooks(Context appContext) {

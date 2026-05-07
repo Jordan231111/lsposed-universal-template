@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">LSPosed Universal Template</string>
-    <string name="xposed_description">Modern libxposed API 101 template with a movable Nyx-styled overlay and optional ShadowHook native scaffold.</string>
+    <string name="app_name">Firestone Hooks</string>
+    <string name="xposed_description">LSPosed module for authorized Firestone IL2CPP hook research.</string>
 </resources>

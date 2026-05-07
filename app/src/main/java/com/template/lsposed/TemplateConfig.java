@@ -15,7 +15,7 @@ public final class TemplateConfig {
 
     /** Packages where the module is allowed to run. Keep this tight for stability. */
     public static final String[] TARGET_PACKAGES = {
-            "com.example.target"
+            "com.HolydayStudios.Firestone"
     };
 
     /**
@@ -40,9 +40,9 @@ public final class TemplateConfig {
             ":privilege", ":stub"
     };
 
-    public static final String MENU_BUBBLE_TEXT = "Nyx";
-    public static final String MENU_TITLE = "Universal Module";
-    public static final String MENU_SUBTITLE = "By Nyxane";
+    public static final String MENU_BUBBLE_TEXT = "FS";
+    public static final String MENU_TITLE = "Firestone Hooks";
+    public static final String MENU_SUBTITLE = "Static IL2CPP RVA hooks";
 
     /** Shows the floating button and movable rectangular menu inside the target Activity. */
     public static final boolean ENABLE_OVERLAY = true;
@@ -51,7 +51,7 @@ public final class TemplateConfig {
     public static final boolean ENABLE_NATIVE_SHADOWHOOK = true;
 
     /** Logs Activity.onResume events as a simple Java-hook smoke test. */
-    public static final boolean ENABLE_SAMPLE_ACTIVITY_LOG_HOOK = true;
+    public static final boolean ENABLE_SAMPLE_ACTIVITY_LOG_HOOK = false;
 
     /** Pulled from BuildConfig so release builds strip verbose logs automatically. */
     public static final boolean VERBOSE_LOGS = BuildConfig.VERBOSE_LOGS;
@@ -66,19 +66,19 @@ public final class TemplateConfig {
      * Log tag used everywhere in the module. Keep it bland; module-branded tags are trivially
      * greppable in logcat by target-app integrity sweeps.
      */
-    public static final String LOG_TAG = "AppRuntime";
+    public static final String LOG_TAG = "FirestoneHooks";
 
     /** Thread name used for deferred module initialization inside target processes. */
-    public static final String WORKER_THREAD_NAME = "AppRuntimeWorker";
+    public static final String WORKER_THREAD_NAME = "FirestoneHooksWorker";
 
     /**
      * Name of the native library loaded by {@link NativeBridge}. The tooling script can rename
      * this plus the CMake target and {@code System.loadLibrary} call with {@code --native-lib}.
      */
-    public static final String NATIVE_LIBRARY_NAME = "template_native";
+    public static final String NATIVE_LIBRARY_NAME = "firestonehooks";
 
     /** Best-effort runtime toggle state filename under the target app's files directory. */
-    public static final String FEATURE_STATE_FILE_NAME = ".rt_state";
+    public static final String FEATURE_STATE_FILE_NAME = "firestonehooks.json";
 
     public static boolean shouldHook(String packageName) {
         if (packageName == null) return false;

@@ -1,9 +1,9 @@
-id=com.template.lsposed
-name=LSPosed Universal Template
+id=com.firestone.hooks
+name=Firestone Hooks
 version=v0.1.0
 versionCode=1
-author=YourName
-description=Modern libxposed API 101 template with movable overlay and optional ShadowHook native scaffold for authorized testing.
+author=local
+description=Authorized Firestone IL2CPP hook module built from lsposed-universal-template.
 minApiVersion=101
 targetApiVersion=101
 staticScope=true

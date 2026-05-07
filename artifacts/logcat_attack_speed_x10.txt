@@ -1,0 +1,89 @@
+05-08 01:50:16.364 D/ProcessState( 9461): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-08 01:50:16.404 W/ProcessStats( 2432): Tracking association SourceState{7f66f13 system/1000 BTopFgs #3894} whose proc state 2 is better than process ProcessState{5774550 com.adguard.android/10078 pkg=com.adguard.android} proc state 3 (8 skipped)
+05-08 01:50:16.418 V/zygiskd64( 2222): zygiskd::zygiskd: New daemon action: GetProcessFlags
+05-08 01:50:16.430 D/ProcessState( 9475): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-08 01:50:16.441 V/zygiskd64( 2222): zygiskd::zygiskd: Flags for UID 10117: ProcessFlags(PROCESS_ROOT_IS_MAGISK)
+05-08 01:50:16.536 D/ProcessState( 9465): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-08 01:50:16.576 I/FirestoneHooks( 9465): com.firestone.hooks: Loaded in process=com.HolydayStudios.Firestone, framework=Vector 2.0, api=101
+05-08 01:50:16.646 I/FirestoneHooks( 9465): com.firestone.hooks: onPackageLoaded com.HolydayStudios.Firestone process=com.HolydayStudios.Firestone firstPackage=true dataDir=/data/user/0/com.HolydayStudios.Firestone
+05-08 01:50:16.647 I/FirestoneHooks( 9465): com.firestone.hooks: Hooked Application.attach
+05-08 01:50:16.647 I/FirestoneHooks( 9465): com.firestone.hooks: Hooked Activity.onResume sample
+05-08 01:50:16.648 I/FirestoneHooks( 9465): com.firestone.hooks: onPackageReady com.HolydayStudios.Firestone process=com.HolydayStudios.Firestone firstPackage=true dataDir=/data/user/0/com.HolydayStudios.Firestone
+05-08 01:50:16.687 V/zygiskd64( 2222): zygiskd::zygiskd: New daemon action: GetProcessFlags
+05-08 01:50:16.699 D/ProcessState( 9505): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-08 01:50:16.711 V/zygiskd64( 2222): zygiskd::zygiskd: Flags for UID 10066: ProcessFlags(PROCESS_ROOT_IS_MAGISK)
+05-08 01:50:16.803 D/ProcessState( 9500): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-08 01:50:17.001 I/FirestoneHooks( 9465): com.firestone.hooks: Detected engine=UNITY evidence=[libil2cpp.so, libunity.so, libmain.so]
+05-08 01:50:17.007 I/FirestoneHooks( 9465): ShadowHook ready: version=shadowhook version 2.0.0, arch=arm64
+05-08 01:50:17.008 I/FirestoneHooks( 9465): JNI_OnLoad firestonehooks
+05-08 01:50:17.008 I/FirestoneHooks( 9465): Loaded libfirestonehooks.so
+05-08 01:50:17.009 I/FirestoneHooks( 9465): install worker package=com.HolydayStudios.Firestone settings=/data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json shadowhook=shadowhook version 2.0.0
+05-08 01:50:17.010 I/FirestoneHooks( 9465): settings refresh thread path=/data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json
+05-08 01:50:17.025 I/FirestoneHooks( 9465): com.firestone.hooks: Synced settings to /data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json
+05-08 01:50:17.128 D/hw-ProcessState( 9465): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-08 01:50:17.263 I/FirestoneHooks( 9465): libil2cpp.so base=0x7c90556000
+05-08 01:50:17.263 I/shadowhook_tag( 9465): shadowhook: hook_func_addr(libil2cpp.so, EasyWin.CentralCurrencyHandler.HaveCurrency, 0x7c930fbe48, 0x7ca6182038, 9) ...
+05-08 01:50:17.265 I/FirestoneHooks( 9465): EasyWin.CentralCurrencyHandler.HaveCurrency hook installed rva=0x2ba5e48 target=0x7c930fbe48 stub=0xb400007d4fedab30 err=0 OK
+05-08 01:50:17.265 I/shadowhook_tag( 9465): shadowhook: hook_func_addr(libil2cpp.so, EasyWin.Currency.HaveCurrency, 0x7c930fbed8, 0x7ca6182160, 9) ...
+05-08 01:50:17.265 I/FirestoneHooks( 9465): EasyWin.Currency.HaveCurrency hook installed rva=0x2ba5ed8 target=0x7c930fbed8 stub=0xb400007d4fed5d90 err=0 OK
+05-08 01:50:17.265 I/FirestoneHooks( 9465): easy-win FreeCurrency toggle active; affordability hooks installed
+05-08 01:50:17.265 I/shadowhook_tag( 9465): shadowhook: hook_func_addr(libil2cpp.so, GodMode.BattleHero.IsImmune, 0x7c93016170, 0x7ca618254c, 9) ...
+05-08 01:50:17.265 I/FirestoneHooks( 9465): GodMode.BattleHero.IsImmune hook installed rva=0x2ac0170 target=0x7c93016170 stub=0xb400007d4fedbc10 err=0 OK
+05-08 01:50:17.265 I/FirestoneHooks( 9465): GameSpeed.Time.set_timeScale hook installed rva=0x4a0eaa4 target=0x7c94f64aa4 stub=0xb400007d4feda6b0 err=0 OK
+05-08 01:50:17.265 I/FirestoneHooks( 9465): GameSpeed.Time.get_fixedDeltaTime hook installed rva=0x4a0e9f4 target=0x7c94f649f4 stub=0xb400007d4fedbf70 err=0 OK
+05-08 01:50:17.265 I/FirestoneHooks( 9465): GameSpeed.TeamLogic.ApplyWaveTransitionSpeedModifierToDuration hook installed rva=0x2ac99dc target=0x7c9301f9dc stub=0xb400007d4fedc900 err=0 OK
+05-08 01:50:17.265 I/FirestoneHooks( 9465): GameSpeed.TeamLogic.set_WaveTransitionSpeedMultiplier hook installed rva=0x2ac9814 target=0x7c9301f814 stub=0xb400007d4feda500 err=0 OK
+05-08 01:50:17.265 I/FirestoneHooks( 9465): GameSpeed.Spine.AnimationState.set_TimeScale hook installed rva=0x436aac8 target=0x7c948c0ac8 stub=0xb400007d4fed9e40 err=0 OK
+05-08 01:50:17.265 I/shadowhook_tag( 9465): shadowhook: hook_func_addr(libil2cpp.so, OHK.BattleController.ApplyDamage.short, 0x7c92d1ae00, 0x7ca6182f18, 9) ...
+05-08 01:50:17.266 I/FirestoneHooks( 9465): OHK.BattleController.ApplyDamage.short hook installed rva=0x27c4e00 target=0x7c92d1ae00 stub=0xb400007d4fed8100 err=0 OK
+05-08 01:50:17.266 I/shadowhook_tag( 9465): shadowhook: hook_func_addr(libil2cpp.so, OHK.BattleController.ApplyDamage.full, 0x7c92d1ae10, 0x7ca618305c, 9) ...
+05-08 01:50:17.266 I/FirestoneHooks( 9465): OHK.BattleController.ApplyDamage.full hook installed rva=0x27c4e10 target=0x7c92d1ae10 stub=0xb400007d4fed6d50 err=0 OK
+05-08 01:50:17.266 I/shadowhook_tag( 9465): shadowhook: hook_func_addr(libil2cpp.so, OHK.BattleCharacter.ReceiveDamage, 0x7c92f37ac8, 0x7ca61831ac, 9) ...
+05-08 01:50:17.266 I/FirestoneHooks( 9465): OHK.BattleCharacter.ReceiveDamage hook installed rva=0x29e1ac8 target=0x7c92f37ac8 stub=0xb400007d4fed62a0 err=0 OK
+05-08 01:50:17.266 I/FirestoneHooks( 9465): AttackSpeed.CharacterBattleLogic.FillAttackSpeedTimer hook installed rva=0x2ac82e8 target=0x7c9301e2e8 stub=0xb400007d4fedc870 err=0 OK
+05-08 01:50:17.266 I/FirestoneHooks( 9465): AttackSpeed.BattleMainHero.CalculateAttackSpeedTotal hook installed rva=0x2ac2af8 target=0x7c93018af8 stub=0xb400007d4fedd710 err=0 OK
+05-08 01:50:17.266 I/FirestoneHooks( 9465): AttackSpeed.BattleMainEnemy.CalculateAttackSpeedTotal hook installed rva=0x29e5b94 target=0x7c92f3bb94 stub=0xb400007d4feda7d0 err=0 OK
+05-08 01:50:17.266 I/FirestoneHooks( 9465): native hook install complete result=0
+05-08 01:50:17.820 I/FirestoneHooks( 9465): Overlay attached to com.unity3d.player.UnityPlayerActivity
+05-08 01:50:24.840 I/FirestoneHooks( 9465): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #1 currency=16 qty=500.00
+05-08 01:50:24.843 I/FirestoneHooks( 9465): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #2 currency=39 qty=100.00
+05-08 01:50:24.843 I/FirestoneHooks( 9465): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #3 currency=38 qty=100.00
+05-08 01:50:24.843 I/FirestoneHooks( 9465): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #4 currency=39 qty=100.00
+05-08 01:50:24.843 I/FirestoneHooks( 9465): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #5 currency=38 qty=100.00
+05-08 01:50:25.809 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11c2f000 x10.00
+05-08 01:50:25.809 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11cb5540 x10.00
+05-08 01:50:25.809 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11cb5000 x10.00
+05-08 01:50:25.809 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11cc4540 x10.00
+05-08 01:50:25.809 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11ccfa80 x10.00
+05-08 01:50:25.810 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11ccf000 x10.00
+05-08 01:50:25.810 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11cdaa80 x10.00
+05-08 01:50:25.810 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11659a80 x10.00
+05-08 01:50:25.810 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11b2fa80 x10.00
+05-08 01:50:25.810 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11b2f540 x10.00
+05-08 01:50:25.810 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11b2f000 x10.00
+05-08 01:50:25.810 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11b43a80 x10.00
+05-08 01:50:25.810 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11b43540 x10.00
+05-08 01:50:25.810 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11b43000 x10.00
+05-08 01:50:25.810 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11b77a80 x10.00
+05-08 01:50:25.810 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11b77540 x10.00
+05-08 01:50:25.810 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11b77000 x10.00
+05-08 01:50:25.810 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11656a80 x10.00
+05-08 01:50:25.810 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11656540 x10.00
+05-08 01:50:25.810 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b11656000 x10.00
+05-08 01:50:25.810 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b120c9a80 x10.00
+05-08 01:50:25.811 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b120c9540 x10.00
+05-08 01:50:25.811 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b120c9000 x10.00
+05-08 01:50:25.811 I/FirestoneHooks( 9465): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b120e6a80 x10.00
+05-08 01:50:26.828 W/ProcessStats( 2432): Tracking association SourceState{7f66f13 system/1000 BTopFgs #4015} whose proc state 2 is better than process ProcessState{5774550 com.adguard.android/10078 pkg=com.adguard.android} proc state 3 (70 skipped)
+05-08 01:50:28.021 I/Unity   ( 9465): <ProcessSuccessfulResponse>d__18:MoveNext()
+05-08 01:50:28.021 I/Unity   ( 9465): <ProcessSuccessfulResponse>d__18:MoveNext()
+05-08 01:50:30.453 I/FirestoneHooks( 9465): attack-speed hero timer hit #1 logic=0x7caaee88c0 character=0x7b11c2f000 target=10.00x stat=10.00x runtime=1.00x
+05-08 01:50:30.453 I/FirestoneHooks( 9465): attack-speed hero timer hit #2 logic=0x7caaee8700 character=0x7b11cc4540 target=10.00x stat=10.00x runtime=1.00x
+05-08 01:50:30.453 I/FirestoneHooks( 9465): attack-speed hero timer hit #3 logic=0x7caaee8540 character=0x7b11cb5540 target=10.00x stat=10.00x runtime=1.00x
+05-08 01:50:31.494 I/FirestoneHooks( 9465): god-mode BattleHero.IsImmune hit #1 this=0x7b11c2f000
+05-08 01:50:31.543 I/FirestoneHooks( 9465): god-mode BattleHero.IsImmune hit #2 this=0x7b11c2f000
+05-08 01:50:31.544 I/FirestoneHooks( 9465): god-mode BattleHero.IsImmune hit #3 this=0x7b11c2f000
+05-08 01:50:31.552 I/FirestoneHooks( 9465): god-mode BattleHero.IsImmune hit #4 this=0x7b11c2f000
+05-08 01:50:33.894 I/FirestoneHooks( 9465): god-mode BattleHero.IsImmune hit #5 this=0x7b11c2f000
+05-08 01:50:36.850 W/ProcessStats( 2432): Tracking association SourceState{7f66f13 system/1000 BTopFgs #4026} whose proc state 2 is better than process ProcessState{5774550 com.adguard.android/10078 pkg=com.adguard.android} proc state 3 (5 skipped)
+05-08 01:50:47.197 W/ProcessStats( 2432): Tracking association SourceState{7f66f13 system/1000 BTopFgs #4039} whose proc state 2 is better than process ProcessState{5774550 com.adguard.android/10078 pkg=com.adguard.android} proc state 3 (6 skipped)

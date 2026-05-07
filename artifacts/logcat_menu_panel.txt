@@ -1,0 +1,185 @@
+05-08 01:36:05.328 I/shadowhook_tag( 8131): linker: call_ctors pre, load_bias 7ba0eda000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libFirebaseCppApp-12_10_1.so
+05-08 01:36:05.328 I/shadowhook_tag( 8131): task: call_ctors() pre callback. load_bias 7ba0eda000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libFirebaseCppApp-12_10_1.so
+05-08 01:36:05.328 I/shadowhook_tag( 8131): linker: call_ctors post, load_bias 7ba0eda000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libFirebaseCppApp-12_10_1.so
+05-08 01:36:06.112 I/FirestoneHooks( 8131): Overlay attached to com.unity3d.player.UnityPlayerActivity
+05-08 01:36:08.507 I/FirestoneHooks( 8131): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #1 currency=16 qty=500.00
+05-08 01:36:08.510 I/FirestoneHooks( 8131): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #2 currency=39 qty=100.00
+05-08 01:36:08.510 I/FirestoneHooks( 8131): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #3 currency=38 qty=100.00
+05-08 01:36:08.510 I/FirestoneHooks( 8131): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #4 currency=39 qty=100.00
+05-08 01:36:08.510 I/FirestoneHooks( 8131): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #5 currency=38 qty=100.00
+05-08 01:36:09.558 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad22f540 x2.00
+05-08 01:36:09.558 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cc210ca80 x2.00
+05-08 01:36:09.558 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cb93cb000 x2.00
+05-08 01:36:09.558 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad22f000 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b40a02a80 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bc74540 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bc74000 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bc83540 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bc8da80 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bc8d000 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bc98a80 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bbee000 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad152a80 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad152540 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad152000 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad170a80 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad170540 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad170000 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad17ea80 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad17e540 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad17e000 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1b0a80 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1b0540 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1b0000 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1cca80 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1cc540 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1cc000 x2.00
+05-08 01:36:09.559 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1d0a80 x2.00
+05-08 01:36:09.560 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1d0540 x2.00
+05-08 01:36:09.560 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1d0000 x2.00
+05-08 01:36:09.560 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1e1a80 x2.00
+05-08 01:36:09.560 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1e1540 x2.00
+05-08 01:36:09.560 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1e1000 x2.00
+05-08 01:36:09.560 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad223a80 x2.00
+05-08 01:36:09.560 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad223540 x2.00
+05-08 01:36:09.560 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad223000 x2.00
+05-08 01:36:09.560 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad2ada80 x2.00
+05-08 01:36:09.560 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad2ad540 x2.00
+05-08 01:36:09.560 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad2ad000 x2.00
+05-08 01:36:09.560 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7baa01ba80 x2.00
+05-08 01:36:09.560 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7baa01b540 x2.00
+05-08 01:36:09.560 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7baa01b000 x2.00
+05-08 01:36:09.564 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad22f540 x2.00
+05-08 01:36:09.564 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cc210ca80 x2.00
+05-08 01:36:09.564 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cb93cb000 x2.00
+05-08 01:36:09.564 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad22f000 x2.00
+05-08 01:36:09.564 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b40a02a80 x2.00
+05-08 01:36:09.564 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bc74540 x2.00
+05-08 01:36:09.564 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bc74000 x2.00
+05-08 01:36:09.564 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bc83540 x2.00
+05-08 01:36:09.564 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bc8da80 x2.00
+05-08 01:36:09.565 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bc8d000 x2.00
+05-08 01:36:09.565 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bc98a80 x2.00
+05-08 01:36:09.565 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bbee000 x2.00
+05-08 01:36:09.565 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad152a80 x2.00
+05-08 01:36:09.565 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad152540 x2.00
+05-08 01:36:09.565 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad152000 x2.00
+05-08 01:36:09.565 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad170a80 x2.00
+05-08 01:36:09.565 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad170540 x2.00
+05-08 01:36:09.565 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad170000 x2.00
+05-08 01:36:09.565 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad17ea80 x2.00
+05-08 01:36:09.565 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad17e540 x2.00
+05-08 01:36:09.565 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad17e000 x2.00
+05-08 01:36:09.565 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1b0a80 x2.00
+05-08 01:36:09.565 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1b0540 x2.00
+05-08 01:36:09.565 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1b0000 x2.00
+05-08 01:36:09.565 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1cca80 x2.00
+05-08 01:36:09.565 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1cc540 x2.00
+05-08 01:36:09.565 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1cc000 x2.00
+05-08 01:36:09.566 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1d0a80 x2.00
+05-08 01:36:09.566 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1d0540 x2.00
+05-08 01:36:09.566 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1d0000 x2.00
+05-08 01:36:09.566 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1e1a80 x2.00
+05-08 01:36:09.566 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1e1540 x2.00
+05-08 01:36:09.566 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1e1000 x2.00
+05-08 01:36:09.566 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad223a80 x2.00
+05-08 01:36:09.566 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad223540 x2.00
+05-08 01:36:09.566 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad223000 x2.00
+05-08 01:36:09.566 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad2ada80 x2.00
+05-08 01:36:09.566 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad2ad540 x2.00
+05-08 01:36:09.566 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad2ad000 x2.00
+05-08 01:36:09.566 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7baa01ba80 x2.00
+05-08 01:36:09.566 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7baa01b540 x2.00
+05-08 01:36:09.566 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7baa01b000 x2.00
+05-08 01:36:11.101 I/FirestoneHooks( 8131): com.firestone.hooks: Synced settings to /data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json
+05-08 01:36:12.845 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad22f540 x2.00
+05-08 01:36:12.846 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cc210ca80 x2.00
+05-08 01:36:12.846 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cb93cb000 x2.00
+05-08 01:36:12.846 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad22f000 x2.00
+05-08 01:36:12.846 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b40a02a80 x2.00
+05-08 01:36:12.846 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bc74540 x2.00
+05-08 01:36:12.846 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bc74000 x2.00
+05-08 01:36:12.846 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bc83540 x2.00
+05-08 01:36:12.846 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bc8da80 x2.00
+05-08 01:36:12.846 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bc8d000 x2.00
+05-08 01:36:12.847 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bc98a80 x2.00
+05-08 01:36:12.847 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7b2bbee000 x2.00
+05-08 01:36:12.847 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad152a80 x2.00
+05-08 01:36:12.847 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad152540 x2.00
+05-08 01:36:12.847 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad152000 x2.00
+05-08 01:36:12.847 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad170a80 x2.00
+05-08 01:36:12.847 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad170540 x2.00
+05-08 01:36:12.847 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad170000 x2.00
+05-08 01:36:12.847 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad17ea80 x2.00
+05-08 01:36:12.847 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad17e540 x2.00
+05-08 01:36:12.847 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad17e000 x2.00
+05-08 01:36:12.847 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1b0a80 x2.00
+05-08 01:36:12.848 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1b0540 x2.00
+05-08 01:36:12.848 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1b0000 x2.00
+05-08 01:36:12.848 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1cca80 x2.00
+05-08 01:36:12.848 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1cc540 x2.00
+05-08 01:36:12.848 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1cc000 x2.00
+05-08 01:36:12.848 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1d0a80 x2.00
+05-08 01:36:12.848 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1d0540 x2.00
+05-08 01:36:12.848 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1d0000 x2.00
+05-08 01:36:12.848 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1e1a80 x2.00
+05-08 01:36:12.848 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1e1540 x2.00
+05-08 01:36:12.848 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad1e1000 x2.00
+05-08 01:36:12.849 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad223a80 x2.00
+05-08 01:36:12.849 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad223540 x2.00
+05-08 01:36:12.849 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad223000 x2.00
+05-08 01:36:12.849 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad2ada80 x2.00
+05-08 01:36:12.849 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad2ad540 x2.00
+05-08 01:36:12.849 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7cad2ad000 x2.00
+05-08 01:36:12.849 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7baa01ba80 x2.00
+05-08 01:36:12.849 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7baa01b540 x2.00
+05-08 01:36:12.849 I/FirestoneHooks( 8131): attack-speed BattleMainHero.CalculateAttackSpeedTotal scaled this=0x7baa01b000 x2.00
+05-08 01:36:13.421 I/FirestoneHooks( 8131): attack-speed FillAttackSpeedTimer hit #1 this=0x7cb91c28c0
+05-08 01:36:13.422 I/FirestoneHooks( 8131): attack-speed FillAttackSpeedTimer hit #2 this=0x7cb91c2700
+05-08 01:36:13.422 I/FirestoneHooks( 8131): attack-speed FillAttackSpeedTimer hit #3 this=0x7cb91c2540
+05-08 01:36:13.422 I/FirestoneHooks( 8131): attack-speed FillAttackSpeedTimer hit #4 this=0x7cb91c2000
+05-08 01:36:13.422 I/FirestoneHooks( 8131): attack-speed FillAttackSpeedTimer hit #5 this=0x7ba0c9ee00
+05-08 01:36:13.422 I/FirestoneHooks( 8131): attack-speed FillAttackSpeedTimer hit #6 this=0x7ba0c9ec40
+05-08 01:36:13.422 I/FirestoneHooks( 8131): attack-speed FillAttackSpeedTimer hit #7 this=0x7ba0c9ea80
+05-08 01:36:13.517 I/FirestoneHooks( 8131): god-mode BattleHero.IsImmune hit #1 this=0x7cad22f540
+05-08 01:36:13.517 I/FirestoneHooks( 8131): god-mode BattleHero.IsImmune hit #2 this=0x7cad22f540
+05-08 01:36:13.548 I/FirestoneHooks( 8131): god-mode BattleHero.IsImmune hit #3 this=0x7cad22f540
+05-08 01:36:13.548 I/FirestoneHooks( 8131): god-mode BattleHero.IsImmune hit #4 this=0x7cad22f540
+05-08 01:36:13.821 I/FirestoneHooks( 8131): god-mode BattleHero.IsImmune hit #5 this=0x7cad22f540
+05-08 01:36:22.691 I/FirestoneHooks( 8131): com.firestone.hooks: Synced settings to /data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json
+05-08 01:36:25.320 I/FirestoneHooks( 8131): com.firestone.hooks: Synced settings to /data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json
+05-08 01:36:35.204 I/FirestoneHooks( 8131): com.firestone.hooks: Synced settings to /data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json
+05-08 01:36:42.326 I/FirestoneHooks( 8131): com.firestone.hooks: Synced settings to /data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json
+05-08 01:36:46.546 I/FirestoneHooks( 8131): com.firestone.hooks: Synced settings to /data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json
+05-08 01:36:46.788 I/FirestoneHooks( 8131): OHK ApplyDamage(short) enemy hit #1 target=0x7cb91c2000
+05-08 01:36:46.788 I/FirestoneHooks( 8131): OHK ApplyDamage(full) enemy hit #2 target=0x7cb91c2000
+05-08 01:36:46.788 I/FirestoneHooks( 8131): OHK BattleCharacter.ReceiveDamage enemy hit #3 this=0x7cac2d8a80
+05-08 01:36:46.985 I/FirestoneHooks( 8131): OHK ApplyDamage(short) enemy hit #4 target=0x7ba0c9ec40
+05-08 01:36:46.985 I/FirestoneHooks( 8131): OHK ApplyDamage(full) enemy hit #5 target=0x7ba0c9ec40
+05-08 01:36:46.985 I/FirestoneHooks( 8131): OHK BattleCharacter.ReceiveDamage enemy hit #6 this=0x7cac2d8000
+05-08 01:36:47.837 I/FirestoneHooks( 8131): attack-speed FillAttackSpeedTimer hit #8 this=0x7cb91c28c0
+05-08 01:36:48.222 I/FirestoneHooks( 8131): OHK ApplyDamage(short) enemy hit #7 target=0x7cb91c2000
+05-08 01:36:48.222 I/FirestoneHooks( 8131): OHK ApplyDamage(full) enemy hit #8 target=0x7cb91c2000
+05-08 01:37:01.858 I/FirestoneHooks( 8131): com.firestone.hooks: Synced settings to /data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json
+05-08 01:37:08.167 I/FirestoneHooks( 8131): com.firestone.hooks: Synced settings to /data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json
+05-08 01:37:15.050 I/FirestoneHooks( 8131): com.firestone.hooks: Synced settings to /data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json
+05-08 01:37:50.864 E/VectorSystem( 2348): broadcastIntent failed
+05-08 01:37:50.864 E/VectorSystem( 2348): java.lang.NoSuchMethodError: No interface method broadcastIntentWithFeature(Landroid/app/IApplicationThread;Ljava/lang/String;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I in class Landroid/app/IActivityManager; or its super classes (declaration of 'android.app.IActivityManager' appears in /system/framework/framework.jar)
+05-08 01:37:50.864 E/VectorSystem( 2348): 	at ql.b(r8-map-id-13884515219c4c58bf9731b069b668b68624b4c7a03200380c6ed51dc9e7f0da:636)
+05-08 01:37:50.864 E/VectorSystem( 2348): 	at z2.i(r8-map-id-13884515219c4c58bf9731b069b668b68624b4c7a03200380c6ed51dc9e7f0da:157)
+05-08 01:37:50.864 E/VectorSystem( 2348): 	at z2.g(r8-map-id-13884515219c4c58bf9731b069b668b68624b4c7a03200380c6ed51dc9e7f0da:6)
+05-08 01:37:50.864 E/VectorSystem( 2348): 	at ji.d(r8-map-id-13884515219c4c58bf9731b069b668b68624b4c7a03200380c6ed51dc9e7f0da:9)
+05-08 01:37:50.864 E/VectorSystem( 2348): 	at r9.run(r8-map-id-13884515219c4c58bf9731b069b668b68624b4c7a03200380c6ed51dc9e7f0da:111)
+05-08 01:37:50.864 E/VectorSystem( 2348): 	at ie.run(r8-map-id-13884515219c4c58bf9731b069b668b68624b4c7a03200380c6ed51dc9e7f0da:4)
+05-08 01:37:50.864 E/VectorSystem( 2348): 	at yi.run(r8-map-id-13884515219c4c58bf9731b069b668b68624b4c7a03200380c6ed51dc9e7f0da:3)
+05-08 01:37:50.864 E/VectorSystem( 2348): 	at m8.run(r8-map-id-13884515219c4c58bf9731b069b668b68624b4c7a03200380c6ed51dc9e7f0da:88)
+05-08 01:37:50.864 E/VectorSystem( 2348): broadcastIntent failed
+05-08 01:37:50.864 E/VectorSystem( 2348): java.lang.NoSuchMethodError: No interface method broadcastIntentWithFeature(Landroid/app/IApplicationThread;Ljava/lang/String;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I in class Landroid/app/IActivityManager; or its super classes (declaration of 'android.app.IActivityManager' appears in /system/framework/framework.jar)
+05-08 01:37:50.864 E/VectorSystem( 2348): 	at ql.b(r8-map-id-13884515219c4c58bf9731b069b668b68624b4c7a03200380c6ed51dc9e7f0da:636)
+05-08 01:37:50.864 E/VectorSystem( 2348): 	at z2.i(r8-map-id-13884515219c4c58bf9731b069b668b68624b4c7a03200380c6ed51dc9e7f0da:157)
+05-08 01:37:50.864 E/VectorSystem( 2348): 	at z2.g(r8-map-id-13884515219c4c58bf9731b069b668b68624b4c7a03200380c6ed51dc9e7f0da:6)
+05-08 01:37:50.864 E/VectorSystem( 2348): 	at ji.d(r8-map-id-13884515219c4c58bf9731b069b668b68624b4c7a03200380c6ed51dc9e7f0da:9)
+05-08 01:37:50.864 E/VectorSystem( 2348): 	at r9.run(r8-map-id-13884515219c4c58bf9731b069b668b68624b4c7a03200380c6ed51dc9e7f0da:111)
+05-08 01:37:50.864 E/VectorSystem( 2348): 	at ie.run(r8-map-id-13884515219c4c58bf9731b069b668b68624b4c7a03200380c6ed51dc9e7f0da:4)
+05-08 01:37:50.864 E/VectorSystem( 2348): 	at yi.run(r8-map-id-13884515219c4c58bf9731b069b668b68624b4c7a03200380c6ed51dc9e7f0da:3)
+05-08 01:37:50.864 E/VectorSystem( 2348): 	at m8.run(r8-map-id-13884515219c4c58bf9731b069b668b68624b4c7a03200380c6ed51dc9e7f0da:88)

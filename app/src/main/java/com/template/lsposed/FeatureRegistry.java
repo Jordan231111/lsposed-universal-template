@@ -28,9 +28,24 @@ public final class FeatureRegistry {
     private static final String FILE_NAME = TemplateConfig.FEATURE_STATE_FILE_NAME;
 
     public static final String KEY_ENABLED = "enabled";
-    public static final String KEY_MULTIPLIER = "multiplier";
+    public static final String KEY_MULTIPLIER = "game_speed_multiplier";
     public static final String KEY_SAMPLE_ACTIVITY_HOOK = "sample_activity_hook";
     public static final String KEY_NATIVE_HOOKS = "native_hooks";
+    public static final String KEY_FREE_CURRENCY = "free_currency";
+    public static final String KEY_GOD_MODE = "god_mode";
+    public static final String KEY_GAME_SPEED = "game_speed";
+    public static final String KEY_WAVE_SPEED = "wave_speed";
+    public static final String KEY_OHK = "one_hit_kill";
+    public static final String KEY_ATTACK_SPEED = "attack_speed";
+    public static final String KEY_ATTACK_SPEED_BATTLE_STAT = "attack_speed_battle_stat";
+    public static final String KEY_ATTACK_SPEED_IDLE_TIMER = "attack_speed_idle_timer";
+    public static final String KEY_ATTACK_SPEED_ATTACK_TIMER = "attack_speed_attack_timer";
+    public static final String KEY_ATTACK_SPEED_ROSTER_STAT = "attack_speed_roster_stat";
+    public static final String KEY_SLOW_ENEMIES = "slow_enemies";
+    public static final String KEY_WAVE_SPEED_MULTIPLIER = "wave_speed_multiplier";
+    public static final String KEY_DAMAGE_MULTIPLIER = "damage_multiplier";
+    public static final String KEY_ATTACK_SPEED_MULTIPLIER = "attack_speed_multiplier";
+    public static final String KEY_ENEMY_ATTACK_SPEED_MULTIPLIER = "enemy_attack_speed_multiplier";
 
     public enum Type { BOOL, FLOAT }
 
@@ -73,6 +88,7 @@ public final class FeatureRegistry {
     private static final Map<String, Float> FLOATS = new ConcurrentHashMap<>();
     private static final List<Listener> LISTENERS = new CopyOnWriteArrayList<>();
     private static volatile File storage;
+    private static volatile Context appContext;
     private static volatile boolean initialized;
 
     private FeatureRegistry() {}
@@ -83,14 +99,30 @@ public final class FeatureRegistry {
         initialized = true;
 
         register(Feature.bool(KEY_ENABLED, "Module enabled", true));
+        register(Feature.bool(KEY_NATIVE_HOOKS, "Native hooks",
+                TemplateConfig.ENABLE_NATIVE_SHADOWHOOK));
+        register(Feature.bool(KEY_FREE_CURRENCY, "Free currency checks", true));
+        register(Feature.bool(KEY_GOD_MODE, "Hero god-mode", true));
+        register(Feature.bool(KEY_GAME_SPEED, "Game speed", false));
+        register(Feature.bool(KEY_WAVE_SPEED, "Wave speed", false));
+        register(Feature.bool(KEY_OHK, "One-hit kill", false));
+        register(Feature.bool(KEY_ATTACK_SPEED, "Hero attack speed", false));
+        register(Feature.bool(KEY_ATTACK_SPEED_BATTLE_STAT, "Atk battle stat", true));
+        register(Feature.bool(KEY_ATTACK_SPEED_IDLE_TIMER, "Atk idle gauge", true));
+        register(Feature.bool(KEY_ATTACK_SPEED_ATTACK_TIMER, "Atk attack timer", true));
+        register(Feature.bool(KEY_ATTACK_SPEED_ROSTER_STAT, "Atk roster stat", true));
+        register(Feature.bool(KEY_SLOW_ENEMIES, "Slow enemies", false));
         register(Feature.bool(KEY_SAMPLE_ACTIVITY_HOOK, "Log Activity.onResume",
                 TemplateConfig.ENABLE_SAMPLE_ACTIVITY_LOG_HOOK));
-        register(Feature.bool(KEY_NATIVE_HOOKS, "Native ShadowHook scaffold",
-                TemplateConfig.ENABLE_NATIVE_SHADOWHOOK));
-        register(Feature.number(KEY_MULTIPLIER, "Multiplier", 1f, 1f, 30f));
+        register(Feature.number(KEY_MULTIPLIER, "Game speed", 2f, 0.25f, 10f));
+        register(Feature.number(KEY_WAVE_SPEED_MULTIPLIER, "Wave speed", 2f, 0.25f, 10f));
+        register(Feature.number(KEY_DAMAGE_MULTIPLIER, "Damage", 1000f, 1f, 1000000f));
+        register(Feature.number(KEY_ATTACK_SPEED_MULTIPLIER, "Attack speed", 2f, 1f, 20f));
+        register(Feature.number(KEY_ENEMY_ATTACK_SPEED_MULTIPLIER, "Enemy attack interval", 2f, 1f, 25f));
 
         if (ctx != null) {
             try {
+                appContext = ctx.getApplicationContext() != null ? ctx.getApplicationContext() : ctx;
                 storage = new File(ctx.getFilesDir(), FILE_NAME);
                 load();
             } catch (Throwable t) {
@@ -116,6 +148,7 @@ public final class FeatureRegistry {
     public static List<Feature> features() {
         List<Feature> out = new ArrayList<>(ORDER.size());
         for (String key : ORDER) {
+            if (KEY_ENABLED.equals(key)) continue;
             Feature f = FEATURES.get(key);
             if (f != null) out.add(f);
         }
@@ -132,6 +165,7 @@ public final class FeatureRegistry {
     public static void setBool(String key, boolean value) {
         Feature f = FEATURES.get(key);
         if (f == null || f.type != Type.BOOL) return;
+        if (KEY_ENABLED.equals(key)) value = true;
         Boolean prev = BOOLS.put(key, value);
         if (prev == null || prev != value) {
             save();
@@ -225,6 +259,11 @@ public final class FeatureRegistry {
             } catch (Throwable ignored) {
             }
         }
+
+        Context ctx = appContext;
+        if (ctx != null) {
+            FirestoneSettings.writeToProvider(ctx, sb.toString());
+        }
     }
 
     private static synchronized void load() {
@@ -239,6 +278,7 @@ public final class FeatureRegistry {
             return;
         }
         parseAndApply(new String(buf.toByteArray(), StandardCharsets.UTF_8));
+        BOOLS.put(KEY_ENABLED, true);
     }
 
     private static void parseAndApply(String json) {
@@ -275,7 +315,7 @@ public final class FeatureRegistry {
         if (f == null) return;
         try {
             if (f.type == Type.BOOL) {
-                BOOLS.put(key, Boolean.parseBoolean(raw));
+                BOOLS.put(key, KEY_ENABLED.equals(key) || Boolean.parseBoolean(raw));
             } else {
                 float v = Float.parseFloat(raw);
                 FLOATS.put(key, Math.max(f.min, Math.min(f.max, v)));

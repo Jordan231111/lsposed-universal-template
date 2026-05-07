@@ -1,0 +1,738 @@
+--------- beginning of main
+05-07 23:33:07.356 I/logcat  ( 9101): type=1400 audit(0.0:11112): avc: denied { write } for name="logd" dev="tmpfs" ino=3542 scontext=u:r:adbd:s0 tcontext=u:object_r:logd_socket:s0 tclass=sock_file permissive=1
+05-07 23:33:11.507 D/opengl-gc( 2307): Check pid 3171: running 1
+05-07 23:33:19.445 I/id.gms.unstabl( 6511): Explicit concurrent copying GC freed 581(99KB) AllocSpace objects, 0(0B) LOS objects, 24% free, 3199KB/4266KB, paused 53us,47us total 31.988ms
+05-07 23:33:21.508 D/opengl-gc( 2307): Check pid 3171: running 1
+05-07 23:33:21.544 I/logcat  ( 9103): type=1400 audit(0.0:11113): avc: denied { write } for name="logdr" dev="tmpfs" ino=3544 scontext=u:r:adbd:s0 tcontext=u:object_r:logdr_socket:s0 tclass=sock_file permissive=1
+05-07 23:33:23.044 I/tokio-runtime-w( 2068): type=1400 audit(0.0:11114): avc: denied { write } for name="dnsproxyd" dev="tmpfs" ino=1662 scontext=u:r:init:s0 tcontext=u:object_r:dnsproxyd_socket:s0 tclass=sock_file permissive=1
+05-07 23:33:23.052 I/Dns_100_0( 2219): type=1400 audit(0.0:11115): avc: denied { name_bind } for src=13676 scontext=u:r:init:s0 tcontext=u:object_r:port:s0 tclass=udp_socket permissive=1
+05-07 23:33:23.268 I/vold    ( 2068): type=1400 audit(0.0:11116): avc: denied { create } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=tcp_socket permissive=1
+05-07 23:33:23.268 I/vold    ( 2068): type=1400 audit(0.0:11117): avc: denied { getopt } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=tcp_socket permissive=1
+05-07 23:33:23.268 I/vold    ( 2068): type=1400 audit(0.0:11118): avc: denied { write } for name="fwmarkd" dev="tmpfs" ino=1666 scontext=u:r:init:s0 tcontext=u:object_r:fwmarkd_socket:s0 tclass=sock_file permissive=1
+05-07 23:33:24.292 I/tokio-runtime-w( 2068): type=1400 audit(0.0:11124): avc: denied { shutdown } for laddr=10.0.2.15 lport=58826 faddr=42.186.140.37 fport=443 scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=tcp_socket permissive=1
+05-07 23:33:25.562 E/android.hardware.power.stats@1.0-service-mock( 2240): Failed to getEnergyData
+05-07 23:33:31.509 D/opengl-gc( 2307): Check pid 3171: running 1
+05-07 23:33:32.578 D/ProcessState( 9112): Binder ioctl to enable oneway spam detection failed: Invalid argument
+--------- beginning of system
+05-07 23:33:32.581 I/ActivityManager( 2429): Force stopping com.HolydayStudios.Firestone appid=10077 user=0: from pid 9112
+05-07 23:33:32.835 I/ActivityTaskManager( 2429): START u0 {flg=0x10000000 cmp=com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity} from uid 2000, pid 9112
+05-07 23:33:32.836 I/ActivityTaskManager( 2429): [KeepAlive] disabled for com.HolydayStudios.Firestone
+05-07 23:33:32.837 W/ActivityTaskManager( 2429): Can't find TaskDisplayArea to determine support for multi window. Task id=45 attached=false
+05-07 23:33:32.836 I/android.anim( 2429): type=1400 audit(0.0:11125): avc: denied { read } for scontext=u:r:system_server:s0 tcontext=u:r:init:s0 tclass=unix_stream_socket permissive=1
+05-07 23:33:32.849 D/CompatibilityChangeReporter( 2429): Compat change id reported: 197654537; UID 10077; state: ENABLED
+05-07 23:33:32.850 I/RecentTaskMonitor( 2429): onTaskMovedToFront 45
+05-07 23:33:32.850 D/RecentTaskMonitor( 2429): openTabFromAms task is Task{558afbc #45 type=standard A=10077:com.HolydayStudios.Firestone U=0 visible=true visibleRequested=false mode=fullscreen translucent=true sz=1}
+05-07 23:33:32.853 D/CompatibilityChangeReporter( 2429): Compat change id reported: 168419799; UID 10077; state: DISABLED
+05-07 23:33:32.836 I/Binder:2429_11( 2429): type=1400 audit(0.0:11126): avc: denied { transfer } for scontext=u:r:system_server:s0 tcontext=u:r:init:s0 tclass=binder permissive=1
+05-07 23:33:32.855 D/RecentTaskMonitor( 2429): onRecentTaskAdded 45:Task=45
+05-07 23:33:32.864 I/ll.splashworker( 2670): type=1400 audit(0.0:11127): avc: denied { map } for path="/system/framework/framework-res.apk" dev="sda1" ino=1454 scontext=u:r:platform_app:s0:c512,c768 tcontext=u:object_r:unlabeled:s0 tclass=file permissive=1
+05-07 23:33:32.864 I/ll.splashworker( 2670): type=1400 audit(0.0:11128): avc: denied { read } for path="/system/framework/framework-res.apk" dev="sda1" ino=1454 scontext=u:r:platform_app:s0:c512,c768 tcontext=u:object_r:unlabeled:s0 tclass=file permissive=1
+05-07 23:33:32.926 W/RecentTaskMonitor( 2429): null pid retry ...
+05-07 23:33:32.926 E/RecentTaskMonitor( 2429): VAPIShellNotifier#notifyOpenTab null params
+05-07 23:33:32.930 D/gralloc_x86( 2670): gralloc_alloc: Creating ashmem region of size 14749696
+05-07 23:33:32.934 D/CompatibilityChangeReporter( 2429): Compat change id reported: 135634846; UID 10077; state: DISABLED
+05-07 23:33:32.934 D/CompatibilityChangeReporter( 2429): Compat change id reported: 177438394; UID 10077; state: DISABLED
+05-07 23:33:32.934 D/CompatibilityChangeReporter( 2429): Compat change id reported: 135772972; UID 10077; state: DISABLED
+05-07 23:33:32.934 D/CompatibilityChangeReporter( 2429): Compat change id reported: 135754954; UID 10077; state: ENABLED
+05-07 23:33:32.945 E/ndroid.systemu( 2670): vulkan version is 4202746
+05-07 23:33:32.947 D/gralloc_x86( 2670): gralloc_alloc: Creating ashmem region of size 14749696
+05-07 23:33:32.912 I/RenderThread( 8991): type=1400 audit(0.0:11129): avc: denied { ioctl } for path="/dev/vaddress" dev="tmpfs" ino=13598 ioctlcmd=0x4c19 scontext=u:r:untrusted_app:s0:c66,c256,c512,c768 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1 app=com.firestone.hooks
+05-07 23:33:32.954 D/Zygote  ( 2220): Forked child process 9116
+05-07 23:33:32.957 I/ActivityManager( 2429): Start proc 9116:com.HolydayStudios.Firestone/u0a77 for pre-top-activity {com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity}
+05-07 23:33:32.957 D/gralloc_x86( 2670): gralloc_alloc: Creating ashmem region of size 14749696
+05-07 23:33:32.963 D/gralloc_x86( 2670): gralloc_alloc: Creating ashmem region of size 14749696
+05-07 23:33:32.940 I/RenderThread( 2670): type=1400 audit(0.0:11130): avc: denied { read write } for name="vaddress" dev="tmpfs" ino=13598 scontext=u:r:platform_app:s0:c512,c768 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1
+05-07 23:33:32.975 D/RecentTaskMonitor( 2429): task null or not sub display in notifyDisplayOpened
+05-07 23:33:32.977 D/RecentTaskMonitor( 2429): VAPIShellNotifier#notifyOpenTab :{"id":"task:45","displayId":0,"userId":0,"name":"Firestone","originName":"Firestone","packageName":"com.HolydayStudios.Firestone","launcher":false,"newTask":true,"icon":"iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAACAASURBVHicrLx3lJ3Jddj5q\/rSy6FzBLrRyGkQOAlDDGc45AQmURTFoBWpFU1JFJUsadc+R7K98tljr71eWxbtlShrSUs8YpBIyhSHYpghZzjkJGAiYqMBdM7p9cvvi1X7x2vEQQOYse47dfr1++qrcO+te2\/durcEG8DWz73a7gjvXqT4GIIPaq3i19cRQqJ0hECAEAAoqdBSo7UFiEs1b9iHENf+rrW+4e9vBi61cTO4pn15k3rr49bqqjavry9BG1eeaw1KGbxxzhvMSWssHSFliFh\/P9A2UgT84ty\/ZCq+l+dbP4FhRNhSYgkwhAQBmvX5rs\/n6h6kINLIYyj95cg0n3jhI3su3niON4Ddf\/bSQXT0tIDsjUd9BUIzvOHvUl5pOoquMMP\/DHGvAbHelr49ot+wCSlQltr4eSQQ6trxKlNtSMuNQCmJ1sbG\/QCWDhBCobVFJAQDjdf5+Pwf8bmBL1Ix24gBUiikoZFX4VDIK3i1tb7h0JTSRFp\/Maqpz7zya28Lrn52DT\/3\/afn43v\/7MU\/kahnb0V8LTTKUAiaDHh9uWaCUiHEbRJJ3Eb5x2hHNqXVzUBLjZLqmvJmQANKG1xG803mEwmTEJtICAQR95e+xSv591G3csj1vkMBgRIordHrRSl1eRGEcLkEQKA1vtLUgboWn6o7vHzk9\/\/r5qvHeJkBBv7o6Vg2bnxOw29rdOJaZF8l4tY\/SA2GRkiBEFfKpVnp9bc0IEQEQq0zhr6mvevh6rY2LFJckSTrxLyGMW6HiSRgAFoh1AaEFet1ri5vZvXr9Y6ERMgbLxQhBEiBkrJZhGCzN0xHOMVzLT8HUmNI3VSrUqOk5sqnqab0Oj6VEFeYQGsCfYUZVOTT+ew39vc+\/ddPvqd35\/ZLQzQvfUn0Of9Zi+jTN54IyEA29btxFbJuIM61lqBN0O56lSaxpNRNRmBdJN5M+V7d8TVfNWJd5+l1Da0FaFNtOJ5bgyC7epFKy2Yiw34L718Rw1dDc47Xin0pwytEX6+jrlMxAsUjla9yLnME18q9AUtCCIJL6lQKbHVF7GutL9srCk0ERAjwG3S8+D1aX\/wH6nVvG4719Z9n951f56xvAuz\/\/PMPKS0+qa4T00rp5oARaEOhUdfqW70+mattKgGICCEM9OWldslgASHWdegtNIIVeeT9VeJBFSMMsBolMtV5Um4FpIGRTWLHYxStNirSxrfiLJtZ6kYM37AJDRvErZnMCar8Vtt5Pl9LspzquWX9N8AGPNdUedE1PHkJl1fXkdepla5gmq5wnMfbfuW2uo\/Etei89DfSze\/Sq9P\/o78mO3ycaj0AIhJxsbfvHeIPeYb\/Q2z93E\/aEzExpqSR0vKNCGsSXF\/+fjX9pZQbGnUa0DdaBSJAc2OjSGhFIqyTK8+xZ\/kYufoiURihfIUIg3WdChKBKT2k0MTjDqZlYkiBJx3WZJK10KLm5Cgn2iilOygl2\/GcNEoab5ASO8un+dw7DH77r04xcsdHrnl+jfV\/aYzXMfytoNncVUS\/ycuG9vnF5f9A2cjzP1o+cw0D3wjPN5I8l8astcaqFhl44ksYw8fwPZdMOk5bPkbC0WRTtSiXdbabsZT1zgiR2ngCV4yBNyNhlTK5EaaUtt7wm4GmLVrjQOkUb6ueQXk+Nd\/FlRplahoKQmHgYyERqEjhaxMVKeo1j7gj2NFj0t2eImbCQqHIyPws8\/MxNAYqGaOY6WapZZBitpt6PEtoWBh+gw+3TmEFLXTPvsL4zsfwY5mbIvhWcDWhbkbsa19q\/unzxzjgPc+\/6\/48XLUYN2rnRgx6yR4wKwW2\/sOfE557jUApOtrS9HUoWuMubSmDji6MdFI\/bGr4xduc2w1B6Y3E7K0nL2VEJ1Xe759kj3cOoRu4QlM3I4hL7MggCEJAEoQhMRSekjQijecHSCkwTYMw0igtKBVLkDDJZ5P0kWBLv4FpmJyacYkXxmgvTBAYFoGdYDXTR5RyeM8HWikWiiTLs7QvnWV20z03HKteN+iEUGykv26b4BvAfbXv8UryQZbN7jf9rr5qTObqAgPf+xLeyMvEHZuhvjjppGBTt6C3TZJN+nihxciF6Z8zNdz3Vofd1Os33t8KIa5z7FwRTQCmgIfNUX4ueoWsUcYzXEJbkRAC0zWpKkWkNIaElK3BMlA6wgsVCRNcx8T1PKoNhdbw6gWNo11yhsv+ff1syceJWRqtQxL9JlPzHkuBxDQ1QeCSmq\/x7vts6pMzJFruI2nV6Z58ZUMGaHpejPXdzMYYuyUTbPC4LxhlV3iS\/9zyf6GEeXttcRmr6\/9oYgsTbH7yS0Tjw\/S3BXS0JdjT59HVnaa93UNrwdKywfA0zK\/E7zQFIn\/LXq4Dpa927Gxc7xpxKDRSNncBGRnwTxLneYTzEFWoVKpYZoRSEPoGkWruHGwzwjA0KKu518Ugbiu0VghhEQSSlZSm4UeUSj6r1ZDRpSpzyy+zd1c\/d+7pRwpBW9ogm8gR2jaGlWNyrsirw7N0Z7vx3AYr8wVaWvIUloZJ1FdpJNuujPsSEQQ0N1VvYbnckicE76w\/zow1RMHsvmLVrxP2ZoyglIkQCkFAau4Ce7\/\/p5Rmxxgc6GD\/tjqb+2129GliMUmtlmByusDkTJXFZRBCZ80NW74pRNf9L7mZT1WI6LIjqM3w+NdtZ3i7NUXguyws1JBhiFI2gYpoRD7StMg4NpXAJwwDHNRlJAihMC2BEA6eFyDrPmtCYOXihEmHlnSclZVVnj6+yNjIHA8+cJSeXomlFL4XMXxxnOHFOoPdazjFFeLbevnT\/\/QEve0OGbHGponnOL\/7A+h\/LI\/lbUBGrbE3fJU\/z\/zBm35XCoVG03r2efa9\/BXaWObnPpZm9x6HfLITx7FQKoXnwdJclQuzmoklA6UU+bzFW2IAKa7dumgtbrqrE+tOoA7D49+1HuewnEIpyWphichyMG0bVYuQlqC1NYFpGHieD3UTFUmMdZeHNCS27QCKej0CAiwUCUIM0yIUGktKpMxQqxksLFf528df4IF7Orlj3178RhHllzH9Ve7b042uTzJxIWAm8RArs89wqEdSHf0RE1sfxHdu6QW\/bpJvEonrYOqIn69+kfPWHUyY265r8jbsqMij\/eSP2Xvy7+hylnnonZId+0xiyRJStxGFmnrdYW6+zNmRBnMLdaJIk8062LZ4awxwNahrDn2umphx9R5YkpEB\/7b1ZQ7piyAF5WKdTD6PY6ZwPY98XCFME2GYFFeKaDcgYVuAgRAgDYnjGAghCIOQMFD4foSpNTECTKkIpERLiVYSKR2kNCgVizzx7AhLRXj7\/i0QNkgbNVqNEjKT4sXX6\/Qe+WVe+corPLLPYH51mXxhnKWeg5fnorXGieqoSBE4qQ2Jo29lHAreYD90hrPc5z3Dv235v9GG9ab4SAQ+fa98ix2nf0Bfssqdd+XZsbeKYwtEZOMHDrVawNx8wNRUmfmFGq6nSSYTxOMaIfT\/PAOA4opvtekEvt7vb6D5bO4Mh9VZpG0SAfnePmqejwgE8XgcJ2ujQ8Xq8hpBGBCLx1CquRuS0sCJxbFSCYxIocKARMLFWguxzQbJRMjERQi1wjEEdcekGoWYMYGRsln1U7xwYpqZZZ9YfIWH37uJtdWzxLp28GJ9B0eG4CnzKKNLP6Yz1WBg+Hssd+5FG1e2rK2iQu
+05-07 23:33:32.987 I/Zygote  ( 9116): fakeProductInfoIfNeed callded! com.HolydayStudios.Firestone
+05-07 23:33:32.989 I/RecentTaskMonitor( 2429): broadcast tab opened in android as it's new task 45
+05-07 23:33:32.990 W/BroadcastQueue( 2429): Background execution not allowed: receiving Intent { act=nemu.intent.action.NEW_TASK dat=package:com.HolydayStudios.Firestone flg=0x10 (has extras) } to com.mumu.acc/.AccMsgReceiver
+05-07 23:33:32.990 I/Zygote  ( 9116): fake Product info com.HolydayStudios.Firestone not matched any pattern
+05-07 23:33:32.990 I/Zygote  ( 9116): fakeProductInfoFromProperties callded! com.HolydayStudios.Firestone
+05-07 23:33:32.996 E/NemuAppNameUtil( 9116): save data success
+05-07 23:33:32.997 V/zygiskd64( 2221): zygiskd::zygiskd: New daemon action: GetProcessFlags
+05-07 23:33:32.999 D/NewFileUpdater( 2669): onOpenNewTask focusPkgName set to com.HolydayStudios.Firestone
+05-07 23:33:33.002 W/System.err( 2429): org.json.JSONException: No value for errcode
+05-07 23:33:33.002 W/System.err( 2429): 	at org.json.JSONObject.get(JSONObject.java:403)
+05-07 23:33:33.002 W/System.err( 2429): 	at org.json.JSONObject.getInt(JSONObject.java:492)
+05-07 23:33:33.002 W/System.err( 2429): 	at com.android.server.vapi.VApiRequestListener.onResponse(VApiRequestListener.java:20)
+05-07 23:33:33.002 W/System.err( 2429): 	at com.android.server.vapi.VApiRequestListener.onResponse(VApiRequestListener.java:13)
+05-07 23:33:33.002 W/System.err( 2429): 	at com.android.volley.toolbox.JsonRequest.deliverResponse(JsonRequest.java:90)
+05-07 23:33:33.002 W/System.err( 2429): 	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:102)
+05-07 23:33:33.002 W/System.err( 2429): 	at android.os.Handler.handleCallback(Handler.java:938)
+05-07 23:33:33.002 W/System.err( 2429): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+05-07 23:33:33.002 W/System.err( 2429): 	at android.os.Looper.loopOnce(Looper.java:201)
+05-07 23:33:33.002 W/System.err( 2429): 	at android.os.Looper.loop(Looper.java:288)
+05-07 23:33:33.002 W/System.err( 2429): 	at com.android.server.SystemServer.run(SystemServer.java:929)
+05-07 23:33:33.002 W/System.err( 2429): 	at com.android.server.SystemServer.main(SystemServer.java:611)
+05-07 23:33:33.002 W/System.err( 2429): 	at java.lang.reflect.Method.invoke(Native Method)
+05-07 23:33:33.002 W/System.err( 2429): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:555)
+05-07 23:33:33.002 W/System.err( 2429): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1069)
+05-07 23:33:33.002 D/VApi.Res.TabManager( 2669): setFocusTaskProp 45
+05-07 23:33:32.940 I/RenderThread( 2670): type=1400 audit(0.0:11131): avc: denied { open } for path="/dev/vaddress" dev="tmpfs" ino=13598 scontext=u:r:platform_app:s0:c512,c768 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1
+05-07 23:33:33.026 D/gralloc_x86( 2254): gralloc_alloc: Creating ashmem region of size 14749696
+05-07 23:33:32.940 I/RenderThread( 2670): type=1400 audit(0.0:11132): avc: denied { map } for path="/dev/vaddress" dev="tmpfs" ino=13598 scontext=u:r:platform_app:s0:c512,c768 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1
+05-07 23:33:33.029 D/com.netease.nemu_vapi_android.thread.HttpServer( 2669): http server response data: {"errcode":0,"message":"OK"}
+05-07 23:33:33.029 W/ActivityManager( 2429): Foreground service started from background can not have location/camera/microphone access: service com.mumu.acc/.AccService
+05-07 23:33:33.029 V/ActivityManager( 2429): Attempted to start a foreground service (com.mumu.acc/.AccService) with a broken notification (no icon: Notification(channel=acc-service shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x40 color=0x00000000 vis=PRIVATE))
+05-07 23:33:33.029 D/com.netease.nemu_vapi_android.thread.HttpServer( 2669): http server response data: {"errcode":0,"message":"OK"}
+05-07 23:33:32.952 I/main    ( 2220): type=1400 audit(0.0:11133): avc: denied { sendto } for path="/dev/socket/logdw" scontext=u:r:zygote:s0 tcontext=u:r:init:s0 tclass=unix_dgram_socket permissive=1
+05-07 23:33:33.036 D/RecentTaskMonitor( 2429): task null or not sub display in notifyDisplayOpened
+05-07 23:33:33.037 D/RecentTaskMonitor( 2429): VAPIShellNotifier#notifyOpenTab :{"id":"task:45","displayId":0,"userId":0,"name":"Firestone","originName":"Firestone","packageName":"com.HolydayStudios.Firestone","launcher":false,"newTask":false,"icon":"iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAACAASURBVHicrLx3lJ3Jddj5q\/rSy6FzBLrRyGkQOAlDDGc45AQmURTFoBWpFU1JFJUsadc+R7K98tljr71eWxbtlShrSUs8YpBIyhSHYpghZzjkJGAiYqMBdM7p9cvvi1X7x2vEQQOYse47dfr1++qrcO+te2\/durcEG8DWz73a7gjvXqT4GIIPaq3i19cRQqJ0hECAEAAoqdBSo7UFiEs1b9iHENf+rrW+4e9vBi61cTO4pn15k3rr49bqqjavry9BG1eeaw1KGbxxzhvMSWssHSFliFh\/P9A2UgT84ty\/ZCq+l+dbP4FhRNhSYgkwhAQBmvX5rs\/n6h6kINLIYyj95cg0n3jhI3su3niON4Ddf\/bSQXT0tIDsjUd9BUIzvOHvUl5pOoquMMP\/DHGvAbHelr49ot+wCSlQltr4eSQQ6trxKlNtSMuNQCmJ1sbG\/QCWDhBCobVFJAQDjdf5+Pwf8bmBL1Ix24gBUiikoZFX4VDIK3i1tb7h0JTSRFp\/Maqpz7zya28Lrn52DT\/3\/afn43v\/7MU\/kahnb0V8LTTKUAiaDHh9uWaCUiHEbRJJ3Eb5x2hHNqXVzUBLjZLqmvJmQANKG1xG803mEwmTEJtICAQR95e+xSv591G3csj1vkMBgRIordHrRSl1eRGEcLkEQKA1vtLUgboWn6o7vHzk9\/\/r5qvHeJkBBv7o6Vg2bnxOw29rdOJaZF8l4tY\/SA2GRkiBEFfKpVnp9bc0IEQEQq0zhr6mvevh6rY2LFJckSTrxLyGMW6HiSRgAFoh1AaEFet1ri5vZvXr9Y6ERMgbLxQhBEiBkrJZhGCzN0xHOMVzLT8HUmNI3VSrUqOk5sqnqab0Oj6VEFeYQGsCfYUZVOTT+ew39vc+\/ddPvqd35\/ZLQzQvfUn0Of9Zi+jTN54IyEA29btxFbJuIM61lqBN0O56lSaxpNRNRmBdJN5M+V7d8TVfNWJd5+l1Da0FaFNtOJ5bgyC7epFKy2Yiw34L718Rw1dDc47Xin0pwytEX6+jrlMxAsUjla9yLnME18q9AUtCCIJL6lQKbHVF7GutL9srCk0ERAjwG3S8+D1aX\/wH6nVvG4719Z9n951f56xvAuz\/\/PMPKS0+qa4T00rp5oARaEOhUdfqW70+mattKgGICCEM9OWldslgASHWdegtNIIVeeT9VeJBFSMMsBolMtV5Um4FpIGRTWLHYxStNirSxrfiLJtZ6kYM37AJDRvErZnMCar8Vtt5Pl9LspzquWX9N8AGPNdUedE1PHkJl1fXkdepla5gmq5wnMfbfuW2uo\/Etei89DfSze\/Sq9P\/o78mO3ycaj0AIhJxsbfvHeIPeYb\/Q2z93E\/aEzExpqSR0vKNCGsSXF\/+fjX9pZQbGnUa0DdaBSJAc2OjSGhFIqyTK8+xZ\/kYufoiURihfIUIg3WdChKBKT2k0MTjDqZlYkiBJx3WZJK10KLm5Cgn2iilOygl2\/GcNEoab5ASO8un+dw7DH77r04xcsdHrnl+jfV\/aYzXMfytoNncVUS\/ycuG9vnF5f9A2cjzP1o+cw0D3wjPN5I8l8astcaqFhl44ksYw8fwPZdMOk5bPkbC0WRTtSiXdbabsZT1zgiR2ngCV4yBNyNhlTK5EaaUtt7wm4GmLVrjQOkUb6ueQXk+Nd\/FlRplahoKQmHgYyERqEjhaxMVKeo1j7gj2NFj0t2eImbCQqHIyPws8\/MxNAYqGaOY6WapZZBitpt6PEtoWBh+gw+3TmEFLXTPvsL4zsfwY5mbIvhWcDWhbkbsa19q\/unzxzjgPc+\/6\/48XLUYN2rnRgx6yR4wKwW2\/sOfE557jUApOtrS9HUoWuMubSmDji6MdFI\/bGr4xduc2w1B6Y3E7K0nL2VEJ1Xe759kj3cOoRu4QlM3I4hL7MggCEJAEoQhMRSekjQijecHSCkwTYMw0igtKBVLkDDJZ5P0kWBLv4FpmJyacYkXxmgvTBAYFoGdYDXTR5RyeM8HWikWiiTLs7QvnWV20z03HKteN+iEUGykv26b4BvAfbXv8UryQZbN7jf9rr5qTObqAgPf+xLeyMvEHZuhvjjppGBTt6C3TZJN+nihxciF6Z8zNdz3Vofd1Os33t8KIa5z7FwRTQCmgIfNUX4ueoWsUcYzXEJbkRAC0zWpKkWkNIaElK3BMlA6wgsVCRNcx8T1PKoNhdbw6gWNo11yhsv+ff1syceJWRqtQxL9JlPzHkuBxDQ1QeCSmq\/x7vts6pMzJFruI2nV6Z58ZUMGaHpejPXdzMYYuyUTbPC4LxhlV3iS\/9zyf6GEeXttcRmr6\/9oYgsTbH7yS0Tjw\/S3BXS0JdjT59HVnaa93UNrwdKywfA0zK\/E7zQFIn\/LXq4Dpa927Gxc7xpxKDRSNncBGRnwTxLneYTzEFWoVKpYZoRSEPoGkWruHGwzwjA0KKu518Ugbiu0VghhEQSSlZSm4UeUSj6r1ZDRpSpzyy+zd1c\/d+7pRwpBW9ogm8gR2jaGlWNyrsirw7N0Z7vx3AYr8wVaWvIUloZJ1FdpJNuujPsSEQQ0N1VvYbnckicE76w\/zow1RMHsvmLVrxP2ZoyglIkQCkFAau4Ce7\/\/p5Rmxxgc6GD\/tjqb+2129GliMUmtlmByusDkTJXFZRBCZ80NW74pRNf9L7mZT1WI6LIjqM3w+NdtZ3i7NUXguyws1JBhiFI2gYpoRD7StMg4NpXAJwwDHNRlJAihMC2BEA6eFyDrPmtCYOXihEmHlnSclZVVnj6+yNjIHA8+cJSeXomlFL4XMXxxnOHFOoPdazjFFeLbevnT\/\/QEve0OGbHGponnOL\/7A+h\/LI\/lbUBGrbE3fJU\/z\/zBm35XCoVG03r2efa9\/BXaWObnPpZm9x6HfLITx7FQKoXnwdJclQuzmoklA6UU+bzFW2IAKa7dumgtbrqrE+tOoA7D49+1HuewnEIpyWphichyMG0bVYuQlqC1NYFpGHieD3UTFUmMdZeHNCS27QCKej0CAiwUCUIM0yIUGktKpMxQqxksLFf528df4IF7Orlj3178RhHllzH9Ve7b042uTzJxIWAm8RArs89wqEdSHf0RE1sfxHdu6QW\/bpJvEonrYOqIn69+kfPWHUyY265r8jbsqMij\/eSP2Xvy7+hylnnonZId+0xiyRJStxGFmnrdYW6+zNmRBnMLdaJIk8062LZ4awxwNahrDn2umphx9R5YkpEB\/7b1ZQ7piyAF5WKdTD6PY6ZwPY98XCFME2GYFFeKaDcgYVuAgRAgDYnjGAghCIOQMFD4foSpNTECTKkIpERLiVYSKR2kNCgVizzx7AhLRXj7\/i0QNkgbNVqNEjKT4sXX6\/Qe+WVe+corPLLPYH51mXxhnKWeg5fnorXGieqoSBE4qQ2Jo29lHAreYD90hrPc5z3Dv235v9GG9ab4SAQ+fa98ix2nf0Bfssqdd+XZsbeKYwtEZOMHDrVawNx8wNRUmfmFGq6nSSYTxOMaIfT\/PAOA4opvtekEvt7vb6D5bO4Mh9VZpG0SAfnePmqejwgE8XgcJ2ujQ8Xq8hpBGBCLx1CquRuS0sCJxbFSCYxIocKARMLFWguxzQbJRMjERQi1wjEEdcekGoWYMYGRsln1U7xwYpqZZZ9YfIWH37uJtdWzxLp28GJ9B0eG4CnzKKNLP6Yz1WBg+Hssd+5FG1e2rK2iQ
+05-07 23:33:33.038 D/ProcessState( 9125): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-07 23:33:33.041 W/System.err( 2429): org.json.JSONException: No value for errcode
+05-07 23:33:33.041 W/System.err( 2429): 	at org.json.JSONObject.get(JSONObject.java:403)
+05-07 23:33:33.041 W/System.err( 2429): 	at org.json.JSONObject.getInt(JSONObject.java:492)
+05-07 23:33:33.041 W/System.err( 2429): 	at com.android.server.vapi.VApiRequestListener.onResponse(VApiRequestListener.java:20)
+05-07 23:33:33.041 W/System.err( 2429): 	at com.android.server.vapi.VApiRequestListener.onResponse(VApiRequestListener.java:13)
+05-07 23:33:33.041 W/System.err( 2429): 	at com.android.volley.toolbox.JsonRequest.deliverResponse(JsonRequest.java:90)
+05-07 23:33:33.041 W/System.err( 2429): 	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:102)
+05-07 23:33:33.041 W/System.err( 2429): 	at android.os.Handler.handleCallback(Handler.java:938)
+05-07 23:33:33.041 W/System.err( 2429): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+05-07 23:33:33.041 W/System.err( 2429): 	at android.os.Looper.loopOnce(Looper.java:201)
+05-07 23:33:33.041 W/System.err( 2429): 	at android.os.Looper.loop(Looper.java:288)
+05-07 23:33:33.041 W/System.err( 2429): 	at com.android.server.SystemServer.run(SystemServer.java:929)
+05-07 23:33:33.041 W/System.err( 2429): 	at com.android.server.SystemServer.main(SystemServer.java:611)
+05-07 23:33:33.041 W/System.err( 2429): 	at java.lang.reflect.Method.invoke(Native Method)
+05-07 23:33:33.041 W/System.err( 2429): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:555)
+05-07 23:33:33.041 W/System.err( 2429): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1069)
+05-07 23:33:33.043 D/CompatibilityChangeReporter( 2429): Compat change id reported: 197654537; UID 10066; state: ENABLED
+05-07 23:33:33.051 V/zygiskd64( 2221): zygiskd::zygiskd: Flags for UID 10077: ProcessFlags(PROCESS_ROOT_IS_MAGISK)
+05-07 23:33:33.052 V/zygiskd64( 2221): zygiskd::zygiskd: New daemon action: ReadModules
+05-07 23:33:33.075 W/System  ( 2670): A resource failed to call close. 
+05-07 23:33:33.075 W/System  ( 2670): A resource failed to call close. 
+05-07 23:33:33.075 W/System  ( 2670): A resource failed to call release. 
+05-07 23:33:33.092 W/Zygote  ( 9116): BindMount ,  SpecializeCommon: source /data/system/etc/mumu-configs/app/com.HolydayStudios.Firestone/currentApp, target: /system/etc/mumu-configs/currentApp , chownRet: 0
+05-07 23:33:33.093 W/Zygote  ( 9116): BindMount ,  SpecializeCommon mount currentApp , MountRet: 0
+05-07 23:33:33.115 I/Zygote  ( 9116): seccomp disabled by setenforce 0
+05-07 23:33:33.123 E/udios.Fireston( 9116): Not starting debugger since process cannot load the jdwp agent.
+05-07 23:33:33.124 D/ProcessState( 9116): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-07 23:33:33.126 D/VectorZygiskBridge( 2429): onTransact: action=GET_BINDER, callerUid=10077
+05-07 23:33:33.132 W/OomAdjuster( 2429): Fallback pre-set sched group to default: not expected top priority
+05-07 23:33:33.134 E/ashmem  ( 9116): memfd: ro.vndk.version not defined or invalid (), this is mandated since P.
+05-07 23:33:33.135 D/CompatibilityChangeReporter( 9116): Compat change id reported: 171979766; UID 10077; state: ENABLED
+05-07 23:33:33.138 D/NemuJavaHotPatchHelper( 9116): onHandleBindApplication reportedPackageName:com.HolydayStudios.Firestone isMatchJavaPatch:false
+05-07 23:33:33.184 I/Typeface( 9116): Preloading /system/fonts/Roboto-Regular.ttf
+05-07 23:33:33.184 I/Typeface( 9116): Preloading /system/fonts/RobotoStatic-Regular.ttf
+05-07 23:33:33.201 I/nemucooker( 9116): cook file1: /system/etc/mumu-configs/shared_libs/libc_llite.so, last modify time: Fri Jul 12 17:30:20 2024
+05-07 23:33:33.201 I/nemucooker( 9116): cook file2: /data/system/etc/mumu-configs/shared_libs/libc_llite.so, last modify time: Wed Apr 29 17:20:43 2026
+05-07 23:33:33.201 I/nemucooker( 9116): cook select file: /data/system/etc/mumu-configs/shared_libs/libc_llite.so
+05-07 23:33:33.201 E/linker  ( 9116): do_dlsym houdini_patch_entrance_name failed
+05-07 23:33:33.202 W/udios.Fireston( 9116): ClassLoaderContext shared library size mismatch. Expected=1, found=0 (PCL[]{PCL[/system/framework/org.apache.http.legacy.jar*2255768530]} | PCL[])
+05-07 23:33:33.205 V/GraphicsEnvironment( 9116): ANGLE Developer option for 'com.HolydayStudios.Firestone' set to: 'default'
+05-07 23:33:33.205 V/GraphicsEnvironment( 9116): ANGLE GameManagerService for com.HolydayStudios.Firestone: false
+05-07 23:33:33.205 V/GraphicsEnvironment( 9116): Neither updatable production driver nor prerelease driver is supported.
+05-07 23:33:33.206 D/NetworkSecurityConfig( 9116): No Network Security Config specified, using platform default
+05-07 23:33:33.206 D/NetworkSecurityConfig( 9116): No Network Security Config specified, using platform default
+05-07 23:33:33.210 I/FirebaseApp( 9116): Device unlocked: initializing all Firebase APIs for app [DEFAULT]
+05-07 23:33:33.212 I/FirebaseInitProvider( 9116): FirebaseApp initialization successful
+05-07 23:33:33.217 I/FacebookInitProvider( 9116): Failed to auto initialize the Facebook SDK
+05-07 23:33:33.217 I/FacebookInitProvider( 9116): A valid Facebook app client token must be set in the AndroidManifest.xml or set by calling FacebookSdk.setClientToken before initializing the sdk.
+05-07 23:33:33.217 I/FacebookInitProvider( 9116): 	at com.facebook.FacebookSdk.sdkInitialize(SourceFile:460)
+05-07 23:33:33.217 I/FacebookInitProvider( 9116): 	at com.facebook.FacebookSdk.sdkInitialize(SourceFile:412)
+05-07 23:33:33.217 I/FacebookInitProvider( 9116): 	at com.facebook.internal.FacebookInitProvider.onCreate(SourceFile:28)
+05-07 23:33:33.217 I/FacebookInitProvider( 9116): 	at android.content.ContentProvider.attachInfo(ContentProvider.java:2404)
+05-07 23:33:33.217 I/FacebookInitProvider( 9116): 	at android.content.ContentProvider.attachInfo(ContentProvider.java:2374)
+05-07 23:33:33.217 I/FacebookInitProvider( 9116): 	at android.app.ActivityThread.installProvider(ActivityThread.java:7632)
+05-07 23:33:33.217 I/FacebookInitProvider( 9116): 	at android.app.ActivityThread.installContentProviders(ActivityThread.java:7149)
+05-07 23:33:33.217 I/FacebookInitProvider( 9116): 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6920)
+05-07 23:33:33.217 I/FacebookInitProvider( 9116): 	at android.app.ActivityThread.access$1500(ActivityThread.java:259)
+05-07 23:33:33.217 I/FacebookInitProvider( 9116): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2094)
+05-07 23:33:33.217 I/FacebookInitProvider( 9116): 	at android.os.Handler.dispatchMessage(Handler.java:106)
+05-07 23:33:33.217 I/FacebookInitProvider( 9116): 	at android.os.Looper.loopOnce(Looper.java:201)
+05-07 23:33:33.217 I/FacebookInitProvider( 9116): 	at android.os.Looper.loop(Looper.java:288)
+05-07 23:33:33.217 I/FacebookInitProvider( 9116): 	at android.app.ActivityThread.main(ActivityThread.java:8043)
+05-07 23:33:33.217 I/FacebookInitProvider( 9116): 	at java.lang.reflect.Method.invoke(Native Method)
+05-07 23:33:33.217 I/FacebookInitProvider( 9116): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:555)
+05-07 23:33:33.217 I/FacebookInitProvider( 9116): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1091)
+05-07 23:33:33.218 W/ActivityManager( 2429): callingPackage:android, packageName:com.android.vending, name:com.google.android.finsky.scheduler.process.mainimpl.PhoneskyJobServiceMain, isSkip: true
+05-07 23:33:33.222 I/Finsky  ( 6486): [2] SCH: job service start with id 9811.
+05-07 23:33:33.222 W/udios.Fireston( 9116): ClassLoaderContext classpath size mismatch. expected=16, found=0 (DLC[];PCL[base.apk*545294799:base.apk!classes2.dex*352801010:base.apk!classes3.dex*3343406984:base.apk!classes4.dex*2440093784:base.apk!classes5.dex*3849908652:base.apk!classes6.dex*990115835:base.apk!classes7.dex*2111835892:base.apk!classes8.dex*3444068947:base.apk!classes9.dex*3508519706:base.apk!classes10.dex*3738386946:base.apk!classes11.dex*1150016488:base.apk!classes12.dex*2136424662:base.apk!classes13.dex*3076236650:base.apk!classes14.dex*2602640587:base.apk!classes15.dex*1985522381:base.apk!classes16.dex*3850485896]{PCL[/system/framework/org.apache.http.legacy.jar*2255768530]#PCL[/system/framework/com.android.location.provider.jar*1360179951]} | DLC[];PCL[])
+05-07 23:33:33.222 I/DynamiteModule( 9116): Considering local module com.google.android.gms.measurement.dynamite:141 and remote module com.google.android.gms.measurement.dynamite:190
+05-07 23:33:33.222 I/DynamiteModule( 9116): Selected remote version of com.google.android.gms.measurement.dynamite, version >= 190
+05-07 23:33:33.222 V/DynamiteModule( 9116): Dynamite loader version >= 2, using loadModule2NoCrashUtils
+05-07 23:33:33.225 W/System  ( 9116): ClassLoader referenced unknown path: 
+05-07 23:33:33.227 I/Finsky  ( 6486): [216] SCH: Satisfied jobs for 9811 are: 16-16161616
+05-07 23:33:33.228 I/Finsky  ( 6486): [215] SCH: Job 16-16161616 starting
+05-07 23:33:33.229 I/Finsky  ( 6486): [2] WM::SCH: Logging work start for 16-16161616
+05-07 23:33:33.232 I/Finsky  ( 6486): [217] Flushing event logs for [niDzF9XMyG3SoGAwu3jcbpFPsfgzboswX1et9794Qlw]
+05-07 23:33:33.232 I/Finsky  ( 6486): [217] playLoggingServerUrl: https://play.googleapis.com/play/log
+05-07 23:33:33.232 I/Finsky  ( 6486): [217] playLoggingServerTimestampUrl: https://play.googleapis.com/play/log/timestamp
+05-07 23:33:33.233 I/PlayCommon( 6486): [75] Preparing logs for uploading
+05-07 23:33:33.234 I/PlayCommon( 6486): [75] Connecting to server: https://play.googleapis.com/play/log?format=raw&proto_v2=true
+05-07 23:33:33.237 W/udios.Fireston( 9116): ClassLoaderContext classpath size mismatch. expected=16, found=2 (DLC[];PCL[base.apk*545294799:base.apk!classes2.dex*352801010:base.apk!classes3.dex*3343406984:base.apk!classes4.dex*2440093784:base.apk!classes5.dex*3849908652:base.apk!classes6.dex*990115835:base.apk!classes7.dex*2111835892:base.apk!classes8.dex*3444068947:base.apk!classes9.dex*3508519706:base.apk!classes10.dex*3738386946:base.apk!classes11.dex*1150016488:base.apk!classes12.dex*2136424662:base.apk!classes13.dex*3076236650:base.apk!classes14.dex*2602640587:base.apk!classes15.dex*1985522381:base.apk!classes16.dex*3850485896]{PCL[/system/framework/org.apache.http.legacy.jar*2255768530]#PCL[/system/framework/com.android.location.provider.jar*1360179951]} | DLC[];PCL[/data/app/~~eYnZX0CwG_PADosI43wKmA==/com.HolydayStudios.Firestone-KwYIEPUCRPiNe65OfXHOnQ==/base.apk*115601013:/data/app/~~eYnZX0CwG_PADosI43wKmA==/com.HolydayStudios.Firestone-KwYIEPUCRPiNe65OfXHOnQ==/base.apk!classes2.dex*3214480094])
+05-07 23:33:33.250 W/ActivityManager( 2429): callingPackage:com.HolydayStudios.Firestone, packageName:com.google.android.gms, name:com.google.android.gms.chimera.PersistentApiService, isSkip: true
+05-07 23:33:33.256 I/PhenotypeResourceReader( 2754): unable to find any Phenotype resource metadata for com.HolydayStudios.Firestone
+05-07 23:33:33.265 I/IL2CPP  ( 9116): JNI_OnLoad
+05-07 23:33:33.265 V/Unity   ( 9116): Context Type: ActivityOrService
+05-07 23:33:33.266 E/udios.Fireston( 9116): No package ID 6a found for ID 0x6a0b0013.
+05-07 23:33:33.267 I/FA      ( 9116): App measurement initialized, version: 166000
+05-07 23:33:33.267 I/FA      ( 9116): To enable debug logging run: adb shell setprop log.tag.FA VERBOSE
+05-07 23:33:33.267 I/FA      ( 9116): To enable faster debug mode event logging run:
+05-07 23:33:33.267 I/FA      ( 9116):   adb shell setprop debug.firebase.analytics.app com.HolydayStudios.Firestone
+05-07 23:33:33.274 W/WindowManager( 2429): Failed looking up window session=Session{79a79b2 9116:u0a10077} callers=com.android.server.wm.WindowManagerService.windowForClientLocked:5826 com.android.server.wm.Session.updateRequestedVisibilities:640 android.view.IWindowSession$Stub.onTransact:1175 
+05-07 23:33:33.292 I/PlayCommon( 6486): [75] Successfully uploaded logs.
+05-07 23:33:33.293 E/firestone.hook( 8991): vulkan version is 4202746
+05-07 23:33:33.295 W/ActivityManager( 2429): callingPackage:com.android.vending, packageName:com.android.vending, name:com.google.frameworks.client.data.android.server.play.BackgroundProcessEndpointService, isSkip: true
+05-07 23:33:33.302 W/ActivityManager( 2429): callingPackage:com.HolydayStudios.Firestone, packageName:com.google.android.gms, name:com.google.android.gms.measurement.service.MeasurementBrokerService, isSkip: true
+05-07 23:33:33.304 D/BoundBrokerSvc( 3171): onBind: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+05-07 23:33:33.304 D/BoundBrokerSvc( 3171): Loading bound service for intent: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+05-07 23:33:33.306 D/hw-ProcessState( 9116): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-07 23:33:33.306 I/hwservicemanager( 2057): getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+05-07 23:33:33.306 E/HidlServiceManagement( 9116): getService: Potential race detected, descriptor: android.hardware.graphics.mapper@4.0::IMapper instance: default
+05-07 23:33:33.306 I/hwservicemanager( 2057): Since android.hardware.graphics.mapper@4.0::IMapper/default is not registered, trying to start it as a lazy HAL.
+05-07 23:33:33.307 I/Gralloc4( 9116): mapper 4.x is not supported
+05-07 23:33:33.307 I/FA      ( 9116): Tag Manager is not found and thus will not be used
+05-07 23:33:33.307 I/hwservicemanager( 2057): getTransport: Cannot find entry android.hardware.graphics.mapper@3.0::IMapper/default in either framework or device VINTF manifest.
+05-07 23:33:33.307 E/HidlServiceManagement( 9116): getService: Potential race detected, descriptor: android.hardware.graphics.mapper@3.0::IMapper instance: default
+05-07 23:33:33.307 I/hwservicemanager( 2057): Since android.hardware.graphics.mapper@3.0::IMapper/default is not registered, trying to start it as a lazy HAL.
+05-07 23:33:33.308 W/Gralloc3( 9116): mapper 3.x is not supported
+05-07 23:33:33.308 E/HidlServiceManagement( 9116): getService: Potential race detected, descriptor: android.hardware.graphics.mapper@2.0::IMapper instance: default
+05-07 23:33:33.311 I/hwservicemanager( 2057): getTransport: Cannot find entry android.hardware.graphics.allocator@4.0::IAllocator/default in either framework or device VINTF manifest.
+05-07 23:33:33.312 E/HidlServiceManagement( 9116): getService: Potential race detected, descriptor: android.hardware.graphics.allocator@4.0::IAllocator instance: default
+05-07 23:33:33.312 I/hwservicemanager( 2057): Since android.hardware.graphics.allocator@4.0::IAllocator/default is not registered, trying to start it as a lazy HAL.
+05-07 23:33:33.312 W/Gralloc4( 9116): allocator 4.x is not supported
+05-07 23:33:33.313 I/hwservicemanager( 2057): getTransport: Cannot find entry android.hardware.graphics.allocator@3.0::IAllocator/default in either framework or device VINTF manifest.
+05-07 23:33:33.313 E/HidlServiceManagement( 9116): getService: Potential race detected, descriptor: android.hardware.graphics.allocator@3.0::IAllocator instance: default
+05-07 23:33:33.313 I/hwservicemanager( 2057): Since android.hardware.graphics.allocator@3.0::IAllocator/default is not registered, trying to start it as a lazy HAL.
+05-07 23:33:33.313 W/Gralloc3( 9116): allocator 3.x is not supported
+05-07 23:33:33.314 E/HidlServiceManagement( 9116): getService: Potential race detected, descriptor: android.hardware.graphics.allocator@2.0::IAllocator instance: default
+05-07 23:33:33.314 I/nemucooker( 9116): cook file1: /etc/mumu-configs/renderer.config, last modify time: Thu Aug 29 11:22:45 2024
+05-07 23:33:33.314 I/nemucooker( 9116): cook file2: /data/system/etc/mumu-configs/renderer.config, last modify time: Thu Apr 30 21:00:20 2026
+05-07 23:33:33.314 I/nemucooker( 9116): cook select file: /data/system/etc/mumu-configs/renderer.config
+05-07 23:33:33.316 I/Finsky:background( 6755): [58] playLoggingServerUrl: https://play.googleapis.com/play/log
+05-07 23:33:33.316 I/Finsky:background( 6755): [58] playLoggingServerTimestampUrl: https://play.googleapis.com/play/log/timestamp
+05-07 23:33:33.316 W/libc    ( 2057): Unable to set property "ctl.interface_start" to "android.hardware.graphics.mapper@4.0::IMapper/default": error code: 0x20
+05-07 23:33:33.316 I/hwservicemanager( 2057): Tried to start android.hardware.graphics.mapper@4.0::IMapper/default as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+05-07 23:33:33.317 E/udios.Fireston( 9116): vulkan version is 4202746
+05-07 23:33:33.318 D/gralloc_x86( 9116): gralloc_alloc: Creating ashmem region of size 14749696
+05-07 23:33:33.322 W/libc    ( 2057): Unable to set property "ctl.interface_start" to "android.hardware.graphics.mapper@3.0::IMapper/default": error code: 0x20
+05-07 23:33:33.322 I/hwservicemanager( 2057): Tried to start android.hardware.graphics.mapper@3.0::IMapper/default as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+05-07 23:33:33.324 W/ActivityManager( 2429): callingPackage:com.android.vending, packageName:com.android.vending, name:com.google.frameworks.client.data.android.server.play.QuickLaunchProcessEndpointService, isSkip: true
+05-07 23:33:33.325 I/ActivityManager( 2429): com.android.vending is exempt from freezer
+05-07 23:33:33.325 D/CompatibilityChangeReporter( 2429): Compat change id reported: 135634846; UID 10091; state: DISABLED
+05-07 23:33:33.325 D/CompatibilityChangeReporter( 2429): Compat change id reported: 177438394; UID 10091; state: DISABLED
+05-07 23:33:33.325 D/CompatibilityChangeReporter( 2429): Compat change id reported: 135772972; UID 10091; state: DISABLED
+05-07 23:33:33.325 D/CompatibilityChangeReporter( 2429): Compat change id reported: 135754954; UID 10091; state: ENABLED
+05-07 23:33:33.326 D/CompatibilityChangeReporter( 2429): Compat change id reported: 143937733; UID 10091; state: ENABLED
+05-07 23:33:33.328 W/libc    ( 2057): Unable to set property "ctl.interface_start" to "android.hardware.graphics.allocator@4.0::IAllocator/default": error code: 0x20
+05-07 23:33:33.328 I/hwservicemanager( 2057): Tried to start android.hardware.graphics.allocator@4.0::IAllocator/default as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+05-07 23:33:33.330 D/Zygote  ( 2220): Forked child process 9177
+05-07 23:33:33.330 I/ActivityManager( 2429): Start proc 9177:com.android.vending:quick_launch/u0a91 for service {com.android.vending/com.google.frameworks.client.data.android.server.play.QuickLaunchProcessEndpointService}
+05-07 23:33:33.338 W/libc    ( 2057): Unable to set property "ctl.interface_start" to "android.hardware.graphics.allocator@3.0::IAllocator/default": error code: 0x20
+05-07 23:33:33.338 I/hwservicemanager( 2057): Tried to start android.hardware.graphics.allocator@3.0::IAllocator/default as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+05-07 23:33:33.363 I/ActivityTaskManager( 2429): Displayed com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity: +526ms
+05-07 23:33:33.366 D/AdvertisingIdClient( 3171): AdvertisingIdClient already created.
+05-07 23:33:33.366 D/AdvertisingIdClient( 3171): AdvertisingIdClient is not bounded. Starting to bind it...
+05-07 23:33:33.368 W/ActivityManager( 2429): callingPackage:com.google.android.gms, packageName:com.google.android.gms, name:com.google.android.gms.ads.identifier.service.AdvertisingIdService, isSkip: true
+05-07 23:33:33.370 D/AdvertisingIdClient( 3171): AdvertisingIdClient is bounded
+05-07 23:33:33.372 I/AdvertisingIdClient( 3171): shouldSendLog 1888169
+05-07 23:33:33.372 I/AdvertisingIdClient( 3171): GetInfoInternal elapse 5ms
+05-07 23:33:33.373 I/Zygote  ( 9177): fakeProductInfoIfNeed callded! com.android.vending:quick_launch
+05-07 23:33:33.374 I/Unity   ( 9116): MemoryManager: Using 'Dynamic Heap' Allocator.
+05-07 23:33:33.374 I/Zygote  ( 9177): fake Product info com.android.vending:quick_launch not matched any pattern
+05-07 23:33:33.374 I/Zygote  ( 9177): fakeProductInfoFromProperties callded! com.android.vending:quick_launch
+05-07 23:33:33.374 I/Zygote  ( 9177): fakeProductInfoFromProperties disable for uid ! com.android.vending:quick_launch
+05-07 23:33:33.385 E/NemuAppNameUtil( 9177): save data success
+05-07 23:33:33.385 D/BoundBrokerSvc( 2754): onRebind: Intent { act=com.google.android.gms.presencemanager.service.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentApiService }
+05-07 23:33:33.386 D/BoundBrokerSvc( 2754): onRebind: Intent { act=com.google.android.gms.common.telemetry.service.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentApiService }
+05-07 23:33:33.386 I/Unity   ( 9116): SystemInfo CPU = ARM64 FP ASIMD AES, Cores = 6, Memory = 12007mb
+05-07 23:33:33.386 I/Unity   ( 9116): SystemInfo ARM big.LITTLE configuration: 6 big (mask: 0x3f), 0 little (mask: 0x0)
+05-07 23:33:33.386 I/Unity   ( 9116): ApplicationInfo 'com.HolydayStudios.Firestone', Version '3.27', Min API Level '23', Target API Level '36'
+05-07 23:33:33.386 I/Unity   ( 9116): Built from '6000.0/staging' branch, Version '6000.0.47f1 (2ad1ed33fd3b)', Build type 'Release', Scripting Backend 'il2cpp', CPU 'arm64-v8a', Stripping 'Enabled'
+05-07 23:33:33.386 I/Unity   ( 9116): Device Model 'Samsung SM-A5460', OS 'Android OS 12 (API 32)'
+05-07 23:33:33.387 D/BoundBrokerSvc( 2754): onRebind: Intent { act=com.google.android.gms.presencemanager.service.INTERNAL_IDENTITY dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentApiService }
+05-07 23:33:33.389 V/zygiskd64( 2221): zygiskd::zygiskd: New daemon action: GetProcessFlags
+05-07 23:33:33.404 D/ProcessState( 9190): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-07 23:33:33.421 V/zygiskd64( 2221): zygiskd::zygiskd: Flags for UID 10091: ProcessFlags(PROCESS_ROOT_IS_MAGISK)
+05-07 23:33:33.423 V/zygiskd64( 2221): zygiskd::zygiskd: New daemon action: ReadModules
+05-07 23:33:33.495 W/Zygote  ( 9177): BindMount ,  SpecializeCommon: source /data/system/etc/mumu-configs/app/com.android.vending:quick_launch/currentApp, target: /system/etc/mumu-configs/currentApp , chownRet: 0
+05-07 23:33:33.495 W/Zygote  ( 9177): BindMount ,  SpecializeCommon mount currentApp , MountRet: 0
+05-07 23:33:33.498 I/Zygote  ( 9177): seccomp disabled by setenforce 0
+05-07 23:33:33.501 W/InputManager-JNI( 2429): Input channel object '2df643e Splash Screen com.HolydayStudios.Firestone (client)' was disposed without first being removed with the input manager!
+05-07 23:33:33.505 E/ng:quick_launc( 9177): Not starting debugger since process cannot load the jdwp agent.
+05-07 23:33:33.506 D/ProcessState( 9177): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-07 23:33:33.508 D/VectorZygiskBridge( 2429): onTransact: action=GET_BINDER, callerUid=10091
+05-07 23:33:33.517 E/ashmem  ( 9177): memfd: ro.vndk.version not defined or invalid (), this is mandated since P.
+05-07 23:33:33.518 D/CompatibilityChangeReporter( 9177): Compat change id reported: 171979766; UID 10091; state: ENABLED
+05-07 23:33:33.520 D/NemuJavaHotPatchHelper( 9177): onHandleBindApplication reportedPackageName:com.android.vending isMatchJavaPatch:true
+05-07 23:33:33.521 D/NemuJavaHotPatchHelper( 9177): onHandleBindApplication cpu_abi:arm64-v8a api_jar_filename:/data/system/etc/mumu-configs/java_patch/javahelper/java_helper_classes.jar library_dirname:/system/etc/mumu-configs/java_patch/javahelper/libs/arm64-v8a
+05-07 23:33:33.523 D/NemuJavaHotPatchHelper( 9177): onHandleBindApplication api_loader:dalvik.system.PathClassLoader[DexPathList[[zip file "/data/system/etc/mumu-configs/java_patch/javahelper/java_helper_classes.jar"],nativeLibraryDirectories=[/system/etc/mumu-configs/java_patch/javahelper/libs/arm64-v8a, /system/lib64, /system/system_ext/lib64, /system/product/lib64, /system/vendor/lib64]]]
+05-07 23:33:33.523 W/XposedInit( 9177): init_v3 appBindData:AppBindData{appInfo=ApplicationInfo{7d5e056 com.android.vending}}
+05-07 23:33:33.528 I/ModuleManager( 9177): Loading modules from /data/system/etc/mumu-configs/java_patch/jpatchs/patch_all_in_one_arm.jar
+05-07 23:33:33.528 W/ng:quick_launc( 9177): Opening an oat file without a class loader. Are you using the deprecated DexFile APIs?
+05-07 23:33:33.531 I/ModuleManager( 9177):   Loading class com.android.javapatch.JavaPatchEntry
+05-07 23:33:33.537 I/nemucooker( 9177): cook file1: /system/etc/mumu-configs/shared_libs/libc_llite.so, last modify time: Fri Jul 12 17:30:20 2024
+05-07 23:33:33.537 I/nemucooker( 9177): cook file2: /data/system/etc/mumu-configs/shared_libs/libc_llite.so, last modify time: Wed Apr 29 17:20:43 2026
+05-07 23:33:33.537 I/nemucooker( 9177): cook select file: /data/system/etc/mumu-configs/shared_libs/libc_llite.so
+05-07 23:33:33.537 E/linker  ( 9177): do_dlsym houdini_patch_entrance_name failed
+05-07 23:33:33.543 E/ng:quick_launc( 9177): Could not write anonymous vdex /system/framework/oat/arm64/org.apache.http.legacy.vdex: Could not open /system/framework/oat/arm64/org.apache.http.legacy.vdex for writing
+05-07 23:33:33.547 W/System  ( 2429): A resource failed to call release. 
+05-07 23:33:33.547 W/MediaPlayer-JNI( 2429): MediaPlayer finalized without being released
+05-07 23:33:33.557 W/ng:quick_launc( 9177): ClassLoaderContext parent mismatch.  (PCL[]{PCL[/system/framework/org.apache.http.legacy.jar*2255768530]} | PCL[]{PCL[/system/framework/org.apache.http.legacy.jar*2255768530];PCL[/data/system/etc/mumu-configs/java_patch/javahelper/java_helper_classes.jar*1206699713]};PCL[/data/system/etc/mumu-configs/java_patch/javahelper/java_helper_classes.jar*1206699713])
+05-07 23:33:33.558 W/ng:quick_launc( 9177): Entry not found
+05-07 23:33:33.558 W/ng:quick_launc( 9177): Entry not found
+05-07 23:33:33.558 W/ng:quick_launc( 9177): Entry not found
+05-07 23:33:33.559 W/ng:quick_launc( 9177): Entry not found
+05-07 23:33:33.561 W/ng:quick_launc( 9177): JIT profile information will not be recorded: profile file does not exist.
+05-07 23:33:33.561 W/ng:quick_launc( 9177): JIT profile information will not be recorded: profile file does not exist.
+05-07 23:33:33.561 W/ng:quick_launc( 9177): JIT profile information will not be recorded: profile file does not exist.
+05-07 23:33:33.561 W/ng:quick_launc( 9177): JIT profile information will not be recorded: profile file does not exist.
+05-07 23:33:33.561 W/JavaPatchEntry( 9177): come from handleLoadPackage packageName:com.android.vending sdkVersion:32
+05-07 23:33:33.565 I/Unity   ( 9116): Company Name: HolydayStudios
+05-07 23:33:33.565 I/Unity   ( 9116): Product Name: Firestone
+05-07 23:33:33.566 D/libEGL  ( 9116): loaded /system/lib64/egl/libEGL_emulation.so
+05-07 23:33:33.567 E/udios.Fireston( 9116): vulkan version is 4202746
+05-07 23:33:33.568 I/nemucooker( 9116): cook file1: /etc/mumu-configs/renderer.config, last modify time: Thu Aug 29 11:22:45 2024
+05-07 23:33:33.568 I/nemucooker( 9116): cook file2: /data/system/etc/mumu-configs/renderer.config, last modify time: Thu Apr 30 21:00:20 2026
+05-07 23:33:33.568 I/nemucooker( 9116): cook select file: /data/system/etc/mumu-configs/renderer.config
+05-07 23:33:33.571 D/libEGL  ( 9116): loaded /system/lib64/egl/libGLESv1_CM_emulation.so
+05-07 23:33:33.571 D/libEGL  ( 9116): loaded /system/lib64/egl/libGLESv2_emulation.so
+05-07 23:33:33.574 E/JKHelper( 9177): Suspend VM API is unavailable.
+05-07 23:33:33.583 E/GraphicsEnv( 9116): Failed to get gpu service
+05-07 23:33:33.584 E/HidlServiceManagement( 9116): getService: Potential race detected, descriptor: android.hardware.configstore@1.0::ISurfaceFlingerConfigs instance: default
+05-07 23:33:33.585 E/EGL_emulation( 9116): [getAttribValue] Bad attribute idx
+05-07 23:33:33.585 D/EGL_emulation( 9116): eglGetConfigAttrib: bad attrib 0x1
+05-07 23:33:33.585 E/EGL_emulation( 9116): tid 9160: eglGetConfigAttrib(1029): error 0x3004 (EGL_BAD_ATTRIBUTE)
+05-07 23:33:33.586 D/gralloc_x86( 9116): gralloc_alloc: Creating ashmem region of size 7376896
+05-07 23:33:33.590 E/JKHelper( 9177): Suspend VM API is unavailable.
+05-07 23:33:33.601 E/udios.Fireston( 9116): vulkan version is 4202746
+05-07 23:33:33.605 I/Typeface( 9177): Preloading /system/fonts/Roboto-Regular.ttf
+05-07 23:33:33.605 I/Typeface( 9177): Preloading /system/fonts/RobotoStatic-Regular.ttf
+05-07 23:33:33.611 I/AAudio  ( 9116): AAudioStreamBuilder_openStream() called ----------------------------------------
+05-07 23:33:33.611 I/AudioStreamBuilder( 9116): rate   =  24000, channels  = 2, channelMask = 0x80000003, format   = 5, sharing = SH, dir = OUTPUT
+05-07 23:33:33.611 I/AudioStreamBuilder( 9116): device =      0, sessionId = -1, perfMode = 12, callback: ON with frames = 1024
+05-07 23:33:33.611 I/AudioStreamBuilder( 9116): usage  =      0, contentType = 0, inputPreset = 0, allowedCapturePolicy = 0
+05-07 23:33:33.611 I/AudioStreamBuilder( 9116): privacy sensitive = false
+05-07 23:33:33.611 I/AudioStreamBuilder( 9116): opPackageName = (null)
+05-07 23:33:33.611 I/AudioStreamBuilder( 9116): attributionTag = (null)
+05-07 23:33:33.611 D/udios.Fireston( 9116): PlayerBase::PlayerBase()
+05-07 23:33:33.611 D/AudioStreamTrack( 9116): open(), request notificationFrames = 0, frameCount = 8192
+05-07 23:33:33.613 W/AudioFlinger( 2249): createTrack_l(): mismatch between requested flags (00000104) and output flags (00000006)
+05-07 23:33:33.613 D/AudioFlinger( 2249): Client defaulted notificationFrames to 480 for frameCount 8192
+05-07 23:33:33.614 D/AF::TrackHandle( 2249): OpPlayAudio: track:65 usage:1 not muted
+05-07 23:33:33.615 D/AudioTrack( 9116): createTrack_l(111): AUDIO_OUTPUT_FLAG_FAST denied by server; frameCount 8192 -> 8192
+05-07 23:33:33.616 D/AAudioStream( 9116): setState(s#1) from 0 to 2
+05-07 23:33:33.617 D/AudioStreamTrack( 9116): open() flags changed from 0x00000104 to 0x00000000
+05-07 23:33:33.617 D/AudioStreamTrack( 9116): open() perfMode changed from 12 to 10
+05-07 23:33:33.618 I/AAudio  ( 9116): AAudioStreamBuilder_openStream() returns 0 = AAUDIO_OK for s#1 ----------------
+05-07 23:33:33.618 D/AAudio  ( 9116): AAudioStream_requestStart(s#1) called --------------
+05-07 23:33:33.618 D/AAudioStream( 9116): setState(s#1) from 2 to 3
+05-07 23:33:33.619 D/AudioStreamLegacy( 9116): onAudioDeviceUpdate(deviceId = 2)
+05-07 23:33:33.619 D/AAudio  ( 9116): AAudioStream_requestStart(s#1) returned 0 ---------
+05-07 23:33:33.619 D/audio_hw_primary( 2227): tunnel_pcm_open called!
+05-07 23:33:33.624 V/GraphicsEnvironment( 9177): ANGLE Developer option for 'com.android.vending' set to: 'default'
+05-07 23:33:33.625 V/GraphicsEnvironment( 9177): ANGLE GameManagerService for com.android.vending: false
+05-07 23:33:33.625 V/GraphicsEnvironment( 9177): Neither updatable production driver nor prerelease driver is supported.
+05-07 23:33:33.625 D/PackageManager( 2429): vulkan version is 0
+05-07 23:33:33.626 D/NetworkSecurityConfig( 9177): No Network Security Config specified, using platform default
+05-07 23:33:33.626 D/NetworkSecurityConfig( 9177): No Network Security Config specified, using platform default
+05-07 23:33:33.631 I/Finsky:quick_launch( 9177): [2] Process created at version: 51.2.34-31 [0] [PR] 908936081
+05-07 23:33:33.642 D/AAudioStream( 9116): setState(s#1) from 3 to 4
+05-07 23:33:33.645 I/Finsky:quick_launch( 9177): [2] Finished reading experiment flags from file [0tGUNCGIkbk4o6-fQ335kUYSKwVj4lusnHT-A5Dsy08] numFlags=2203.
+05-07 23:33:33.665 I/Finsky:quick_launch( 9177): [2] Finished reading experiment flags from file [DxtFj8k4KrVpGv9J7mnpm5cPoZycbP75687EvFvM_z8] numFlags=2002.
+05-07 23:33:33.681 I/Finsky:quick_launch( 9177): [2] This process start was not selected for Play memory metrics collection.
+05-07 23:33:33.697 D/PackageManager( 2429): vulkan version is 0
+05-07 23:33:33.697 D/PackageManager( 2429): vulkan version is 0
+05-07 23:33:33.698 D/PackageManager( 2429): vulkan version is 0
+05-07 23:33:33.698 D/PackageManager( 2429): vulkan version is 0
+05-07 23:33:33.698 D/PackageManager( 2429): vulkan version is 0
+05-07 23:33:33.698 D/PackageManager( 2429): vulkan version is 0
+05-07 23:33:33.699 D/PackageManager( 2429): vulkan version is 0
+05-07 23:33:33.699 D/PackageManager( 2429): vulkan version is 0
+05-07 23:33:33.700 D/PackageManager( 2429): vulkan version is 0
+05-07 23:33:33.700 D/PackageManager( 2429): vulkan version is 0
+05-07 23:33:33.700 D/PackageManager( 2429): vulkan version is 0
+05-07 23:33:33.700 D/PackageManager( 2429): vulkan version is 0
+05-07 23:33:33.701 I/Finsky:quick_launch( 9177): [68] Subscription detail: N/A
+05-07 23:33:33.702 I/Finsky:quick_launch( 9177): [2] onSubscriptionsChanged
+05-07 23:33:33.706 I/Finsky:quick_launch( 9177): [68] Finished reading experiment flags from file [Se-xCc4LzNyh3UrKMIU2sUf-PUKz4oQEbpKZDMuaFno] numFlags=1988.
+05-07 23:33:33.706 I/Finsky:quick_launch( 9177): [68] playLoggingServerUrl: https://play.googleapis.com/play/log
+05-07 23:33:33.706 I/Finsky:quick_launch( 9177): [68] playLoggingServerTimestampUrl: https://play.googleapis.com/play/log/timestamp
+05-07 23:33:33.715 I/Finsky:quick_launch( 9177): [68] playLoggingServerUrl: https://play.googleapis.com/play/log
+05-07 23:33:33.715 I/Finsky:quick_launch( 9177): [68] playLoggingServerTimestampUrl: https://play.googleapis.com/play/log/timestamp
+05-07 23:33:33.719 I/Finsky  ( 6486): [64] playLoggingServerUrl: https://play.googleapis.com/play/log
+05-07 23:33:33.719 I/Finsky  ( 6486): [64] playLoggingServerTimestampUrl: https://play.googleapis.com/play/log/timestamp
+05-07 23:33:33.727 I/Finsky  ( 6486): [217] SCH: jobFinished: 16-16161616. TimeElapsed: 498ms.
+05-07 23:33:33.727 I/Finsky  ( 6486): [217] WM::SCH: Logging work end for 16-16161616
+05-07 23:33:33.734 I/Finsky  ( 6486): [67] SCH: Scheduling phonesky job Id: 26-1414141414, CT: 1778153652677, Constraints: [{ L: 43200000, D: 44100000, C: CHARGING_NONE, I: IDLE_NONE, N: NET_NONE, B: BATTERY_ANY }]
+05-07 23:33:33.739 I/Finsky  ( 6486): [66] SCH: Scheduling 1 system job(s)
+05-07 23:33:33.739 I/Finsky  ( 6486): [66] SCH: Scheduling system job Id: 9824, L: 28838938, D: 29738938, C: false, I: false, N: 0
+05-07 23:33:33.742 I/Finsky  ( 6486): [215] SCH: job service finished with id 9811.
+05-07 23:33:33.750 W/NewFileUpdater( 2669): MSG_GET_PACKAGE_TAG_INFO, no available new tag for: com.HolydayStudios.Firestone, workingTag: 12.2011
+05-07 23:33:33.778 I/FontLog ( 2754): (REDACTED) Received query %s, URI %s
+05-07 23:33:33.779 I/FontLog ( 2754): (REDACTED) Query [%s] resolved to %s
+05-07 23:33:33.780 I/FontLog ( 2754): (REDACTED) Fetch %s end status %s
+05-07 23:33:33.782 I/FontLog ( 2754): (REDACTED) Pulling font file for id = %d, cache size = %d
+05-07 23:33:33.784 I/FontLog ( 2754): (REDACTED) Pulling font file for id = %d, cache size = %d
+05-07 23:33:33.929 W/ServiceManager( 2429): Permission failure: android.permission.HIGH_SAMPLING_RATE_SENSORS from uid=10077 pid=9116
+05-07 23:33:33.930 W/ServiceManager( 2429): Permission failure: android.permission.HIGH_SAMPLING_RATE_SENSORS from uid=10077 pid=9116
+05-07 23:33:33.931 W/ServiceManager( 2429): Permission failure: android.permission.HIGH_SAMPLING_RATE_SENSORS from uid=10077 pid=9116
+05-07 23:33:33.932 W/ServiceManager( 2429): Permission failure: android.permission.HIGH_SAMPLING_RATE_SENSORS from uid=10077 pid=9116
+05-07 23:33:33.928 I/UnityMain( 9116): type=1400 audit(0.0:11278): avc: denied { call } for scontext=u:r:untrusted_app:s0:c77,c256,c512,c768 tcontext=u:r:init:s0 tclass=binder permissive=1 app=com.HolydayStudios.Firestone
+05-07 23:33:33.936 D/gralloc_x86( 9116): gralloc_alloc: Creating ashmem region of size 7376896
+05-07 23:33:33.936 I/UnityMain( 9116): type=1400 audit(0.0:11279): avc: denied { sendto } for path="/dev/socket/logdw" scontext=u:r:untrusted_app:s0:c77,c256,c512,c768 tcontext=u:r:init:s0 tclass=unix_dgram_socket permissive=1 app=com.HolydayStudios.Firestone
+05-07 23:33:33.940 V/MediaRouter( 9116): Selecting route: RouteInfo{ name=Phone, description=null, status=null, category=RouteCategory{ name=System types=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO  groupable=false }, supportedTypes=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO , presentationDisplay=null }
+05-07 23:33:33.941 I/MediaRouter( 9116): Skip setBluetoothA2dpOn(): types=8388615, isPlaybackActive()=true, BT route=null
+05-07 23:33:34.052 I/UnityGfxDeviceW( 9116): type=1400 audit(0.0:11280): avc: denied { transfer } for scontext=u:r:untrusted_app:s0:c77,c256,c512,c768 tcontext=u:r:init:s0 tclass=binder permissive=1 app=com.HolydayStudios.Firestone
+05-07 23:33:34.056 D/gralloc_x86( 9116): gralloc_alloc: Creating ashmem region of size 7376896
+05-07 23:33:34.058 D/gralloc_x86( 9116): gralloc_alloc: Creating ashmem region of size 7376896
+05-07 23:33:34.060 D/gralloc_x86( 9116): gralloc_alloc: Creating ashmem region of size 7376896
+05-07 23:33:34.062 I/ActivityTaskManager( 2429): Fully drawn com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity: +1s227ms
+05-07 23:33:34.072 D/gralloc_x86( 9116): gralloc_alloc: Creating ashmem region of size 14749696
+05-07 23:33:34.146 I/IL2CPP  ( 9116): Locale en-US
+05-07 23:33:34.708 I/wifi@1.0-servic( 2248): type=1400 audit(0.0:11281): avc: denied { write } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=netlink_route_socket permissive=1
+05-07 23:33:34.712 I/wifi@1.0-servic( 2248): type=1400 audit(0.0:11282): avc: denied { nlmsg_readpriv } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=netlink_route_socket permissive=1
+05-07 23:33:35.862 E/TaskPersister( 2429): File error accessing recents directory (directory doesn't exist?).
+05-07 23:33:36.201 I/Unity   ( 9116): EpicGames
+05-07 23:33:36.201 I/Unity   ( 9116): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:33:36.201 I/Unity   ( 9116): GameAnalytics:SendAnalyticsLoadingPhasePHP(LoadingPhase, String, String, String)
+05-07 23:33:36.201 I/Unity   ( 9116): GameAnalytics:SendAnalyticsLoadingPhase(LoadingPhase, String, String, String)
+05-07 23:33:36.201 I/Unity   ( 9116): StartScript:Awake()
+05-07 23:33:36.201 I/Unity   ( 9116): 
+05-07 23:33:36.212 I/SkDestroyListen( 2219): type=1400 audit(0.0:11285): avc: denied { read } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=netlink_tcpdiag_socket permissive=1
+05-07 23:33:36.212 I/Thread-4( 9116): type=1400 audit(0.0:11286): avc: denied { connectto } for path="/dev/socket/dnsproxyd" scontext=u:r:untrusted_app:s0:c77,c256,c512,c768 tcontext=u:r:init:s0 tclass=unix_stream_socket permissive=1 app=com.HolydayStudios.Firestone
+05-07 23:33:36.212 I/Dns_100_10077( 2219): type=1400 audit(0.0:11287): avc: denied { getopt } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=udp_socket permissive=1
+05-07 23:33:36.212 I/Dns_100_10077( 2219): type=1400 audit(0.0:11288): avc: denied { setattr } for name="UDP" dev="sockfs" ino=60459 scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=udp_socket permissive=1
+05-07 23:33:36.212 I/Dns_100_10077( 2219): type=1400 audit(0.0:11289): avc: denied { setopt } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=udp_socket permissive=1
+05-07 23:33:36.223 W/ServiceManager( 2429): Permission failure: android.permission.HIGH_SAMPLING_RATE_SENSORS from uid=10077 pid=9116
+05-07 23:33:36.223 W/SensorService( 2429): sensor 00000000 already enabled in connection 0xb400006e0a03b030 (ignoring)
+05-07 23:33:36.225 W/ServiceManager( 2429): Permission failure: android.permission.HIGH_SAMPLING_RATE_SENSORS from uid=10077 pid=9116
+05-07 23:33:36.438 I/Unity   ( 9116): EpicGames
+05-07 23:33:36.438 I/Unity   ( 9116): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:33:36.438 I/Unity   ( 9116): GameAnalytics:SendAnalyticsLoadingPhasePHP(LoadingPhase, String, String, String)
+05-07 23:33:36.438 I/Unity   ( 9116): GameAnalytics:SendAnalyticsLoadingPhase(LoadingPhase, String, String, String)
+05-07 23:33:36.438 I/Unity   ( 9116): <LoadNextScene>d__24:MoveNext()
+05-07 23:33:36.438 I/Unity   ( 9116): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-07 23:33:36.438 I/Unity   ( 9116): 
+05-07 23:33:37.807 I/Unity   ( 9116): CurrentPlatform has been assigned as Android.
+05-07 23:33:37.807 I/Unity   ( 9116): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:33:37.807 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.PlatformManager:.cctor()
+05-07 23:33:37.807 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:33:37.807 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.EOSSingleton:InitializePlatformInterface()
+05-07 23:33:37.807 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.EOSSingleton:Init(IEOSCoroutineOwner, String)
+05-07 23:33:37.807 I/Unity   ( 9116): UnityEngine.GameObject:Internal_AddComponentWithType(Type)
+05-07 23:33:37.807 I/Unity   ( 9116): UnityEngine.GameObject:AddComponent()
+05-07 23:33:37.807 I/Unity   ( 9116): BuildSettings:Initialize()
+05-07 23:33:37.807 I/Unity   ( 9116): <StartGameFlow>d__22:MoveNext()
+05-07 23:33:37.807 I/Unity   ( 9116): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-07 23:33:37.807 I/Unity   ( 9116): 
+05-07 23:33:37.808 E/Unity   ( 9116): Unable to populate object of type "PlayEveryWare.EpicOnlineServices.Config" from JSON: "{
+05-07 23:33:37.808 E/Unity   ( 9116):   "GoogleLoginClientID": null,
+05-07 23:33:37.808 E/Unity   ( 9116):   "GoogleLoginNonce": null,
+05-07 23:33:37.808 E/Unity   ( 9116):   "deployment": {
+05-07 23:33:37.808 E/Unity   ( 9116):     "SandboxId": {
+05-07 23:33:37.808 E/Unity   ( 9116):       "Value": "bda8d2133655435982b9118972792328"
+05-07 23:33:37.808 E/Unity   ( 9116):     },
+05-07 23:33:37.808 E/Unity   ( 9116):     "DeploymentId": "a65c0335e67b4aec8eec651de8dca6ac"
+05-07 23:33:37.808 E/Unity   ( 9116):   },
+05-07 23:33:37.808 E/Unity   ( 9116):   "clientCredentials": {
+05-07 23:33:37.808 E/Unity   ( 9116):     "ClientId": "xyza78915T3juKOECHQEveLJcfCt98aA",
+05-07 23:33:37.808 E/Unity   ( 9116):     "ClientSecret": "PF1bwir+BL20l71IojvewwKkgPD6TgpfqcUyKjd2FO0",
+05-07 23:33:37.808 E/Unity   ( 9116):     "EncryptionKey": "D225E0C13EA6F5200170CDC21CF31848DE716F387164E6E120EEBBB7D71612F9"
+05-07 23:33:37.808 E/Unity   ( 9116):   },
+05-07 23:33:37.808 E/Unity   ( 9116):   "isServer": false,
+05-07 23:33:37.808 E/Unity   ( 9116):   "platformOptionsFlags": "None",
+05-07 23:33:37.808 E/Unity   ( 9116):   "authScopeOptionsFlags": "BasicProfile, FriendsList, Presence",
+05-07 23:33:37.808 E/Unity   ( 9116):   "integratedPlatformManagementFlags": 0,
+05-07 23:33:37.808 E/Unity   ( 9116):   "tickBudgetInMilliseconds": 0,
+05-07 23:33:37.808 E/Unity   ( 9116):   "taskNetworkTimeoutSeconds": 0.0,
+05-07 23:33:37.808 E/Unity   ( 9116):   "threadAffinity": {
+05-07 23:33:37.808 E/Unity   ( 9116):     "NetworkWork": 0,
+05-07 23:33:37.808 E/Unity   ( 9116):     "StorageIo": 0,
+05-07 23:33:37.808 E/Unity   ( 9116):     "WebSocketIo": 0,
+05-07 23:33:37.808 E/Unity   ( 9116):     "P2PIo": 0,
+05-07 23:33:37.808 E/Unity   ( 9116):     "HttpRequestIo": 0,
+05-07 23:33:37.808 E/Unity   ( 9116):     "RTCIo": 0,
+05-07 23:33:37.808 E/Unity   ( 9116):     "EmbeddedOverlayMainThread": 0,
+05-07 23:33:37.808 E/Unity   ( 9116):     "EmbeddedOverlayWorkerThreads": 0
+05-07 23:33:37.808 E/Unity   ( 9116):   },
+05-07 23:33:37.809 I/Unity   ( 9116): Platform Android has no defined deployment, so one was selected: "Deployment" : (DeploymentId: a65c0335e67b4aec8eec651de8dca6ac, SandboxId: bda8d2133655435982b9118972792328).
+05-07 23:33:37.809 I/Unity   ( 9116): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:33:37.809 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.PlatformConfig:OnReadCompleted()
+05-07 23:33:37.809 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.Config:Get()
+05-07 23:33:37.809 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.PlatformManager:GetPlatformConfig()
+05-07 23:33:37.809 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:33:37.809 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.EOSSingleton:InitializePlatformInterface()
+05-07 23:33:37.809 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.EOSSingleton:Init(IEOSCoroutineOwner, String)
+05-07 23:33:37.809 I/Unity   ( 9116): UnityEngine.GameObject:Internal_AddComponentWithType(Type)
+05-07 23:33:37.809 I/Unity   ( 9116): UnityEngine.GameObject:AddComponent()
+05-07 23:33:37.809 I/Unity   ( 9116): BuildSettings:Initialize()
+05-07 23:33:37.809 I/Unity   ( 9116): <StartGameFlow>d__22:MoveNext()
+05-07 23:33:37.809 I/Unity   ( 9116): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-07 23:33:37.809 I/Unity   ( 9116): 
+05-07 23:33:37.809 I/Unity   ( 9116): Platform Android has no defined client credentials, so one was selected: "Client" : (PlayEveryWare.EpicOnlineServices.EOSClientCredentials).
+05-07 23:33:37.809 I/Unity   ( 9116): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:33:37.809 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.PlatformConfig:OnReadCompleted()
+05-07 23:33:37.809 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.Config:Get()
+05-07 23:33:37.809 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.PlatformManager:GetPlatformConfig()
+05-07 23:33:37.809 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:33:37.809 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.EOSSingleton:InitializePlatformInterface()
+05-07 23:33:37.809 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.EOSSingleton:Init(IEOSCoroutineOwner, String)
+05-07 23:33:37.809 I/Unity   ( 9116): UnityEngine.GameObject:Internal_AddComponentWithType(Type)
+05-07 23:33:37.809 I/Unity   ( 9116): UnityEngine.GameObject:AddComponent()
+05-07 23:33:37.809 I/Unity   ( 9116): BuildSettings:Initialize()
+05-07 23:33:37.809 I/Unity   ( 9116): <StartGameFlow>d__22:MoveNext()
+05-07 23:33:37.809 I/Unity   ( 9116): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-07 23:33:37.809 I/Unity   ( 9116): 
+05-07 23:33:37.810 E/Unity   ( 9116): Unable to populate object of type "PlayEveryWare.EpicOnlineServices.Config" from JSON: "{
+05-07 23:33:37.810 E/Unity   ( 9116):   "deploymentID": "a65c0335e67b4aec8eec651de8dca6ac",
+05-07 23:33:37.810 E/Unity   ( 9116):   "clientID": "xyza78915T3juKOECHQEveLJcfCt98aA",
+05-07 23:33:37.810 E/Unity   ( 9116):   "tickBudgetInMilliseconds": 0,
+05-07 23:33:37.810 E/Unity   ( 9116):   "taskNetworkTimeoutSeconds": 0.0,
+05-07 23:33:37.810 E/Unity   ( 9116):   "platformOptionsFlags": "None",
+05-07 23:33:37.810 E/Unity   ( 9116):   "authScopeOptionsFlags": "NoFlags",
+05-07 23:33:37.810 E/Unity   ( 9116):   "integratedPlatformManagementFlags": 0,
+05-07 23:33:37.810 E/Unity   ( 9116):   "alwaysSendInputToOverlay": false,
+05-07 23:33:37.810 E/Unity   ( 9116):   "schemaVersion": "1.0"
+05-07 23:33:37.810 E/Unity   ( 9116): }". Exception: "Error creating 'PlayEveryWare.EpicOnlineServices.ListOfStringsToPlatformFlags'."
+05-07 23:33:37.810 E/Unity   ( 9116): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:33:37.810 E/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.Config:Read()
+05-07 23:33:37.810 E/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.Config:Get()
+05-07 23:33:37.810 E/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.PlatformConfig:MigrateConfig()
+05-07 23:33:37.810 E/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.Config:Get()
+05-07 23:33:37.810 E/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.PlatformManager:GetPlatformConfig()
+05-07 23:33:37.810 E/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:33:37.810 E/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.EOSSing
+05-07 23:33:37.811 I/Unity   ( 9116): The previous config did not explicitly define a deployment. There was one defined deployment, automatically selecting deployment name 'Deployment' with id 'a65c0335-e67b-4aec-8eec-651de8dca6ac'.
+05-07 23:33:37.811 I/Unity   ( 9116): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:33:37.811 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.PlatformConfig:MigrateNonOverrideableConfigValues(EOSConfig, NonOverrideableConfigValues)
+05-07 23:33:37.811 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.PlatformConfig:MigrateConfig()
+05-07 23:33:37.811 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.Config:Get()
+05-07 23:33:37.811 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.PlatformManager:GetPlatformConfig()
+05-07 23:33:37.811 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:33:37.811 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.EOSSingleton:InitializePlatformInterface()
+05-07 23:33:37.811 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.EOSSingleton:Init(IEOSCoroutineOwner, String)
+05-07 23:33:37.811 I/Unity   ( 9116): UnityEngine.GameObject:Internal_AddComponentWithType(Type)
+05-07 23:33:37.811 I/Unity   ( 9116): UnityEngine.GameObject:AddComponent()
+05-07 23:33:37.811 I/Unity   ( 9116): BuildSettings:Initialize()
+05-07 23:33:37.811 I/Unity   ( 9116): <StartGameFlow>d__22:MoveNext()
+05-07 23:33:37.811 I/Unity   ( 9116): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumera
+05-07 23:33:37.811 I/Unity   ( 9116): The previous config did not explicitly define client credentials. There was one defined client credential, automatically selecting client credential name 'Client' with id 'xyza78915T3juKOECHQEveLJcfCt98aA'.
+05-07 23:33:37.811 I/Unity   ( 9116): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:33:37.811 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.PlatformConfig:MigrateNonOverrideableConfigValues(EOSConfig, NonOverrideableConfigValues)
+05-07 23:33:37.811 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.PlatformConfig:MigrateConfig()
+05-07 23:33:37.811 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.Config:Get()
+05-07 23:33:37.811 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.PlatformManager:GetPlatformConfig()
+05-07 23:33:37.811 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:33:37.811 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.EOSSingleton:InitializePlatformInterface()
+05-07 23:33:37.811 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.EOSSingleton:Init(IEOSCoroutineOwner, String)
+05-07 23:33:37.811 I/Unity   ( 9116): UnityEngine.GameObject:Internal_AddComponentWithType(Type)
+05-07 23:33:37.811 I/Unity   ( 9116): UnityEngine.GameObject:AddComponent()
+05-07 23:33:37.811 I/Unity   ( 9116): BuildSettings:Initialize()
+05-07 23:33:37.811 I/Unity   ( 9116): <StartGameFlow>d__22:MoveNext()
+05-07 23:33:37.811 I/Unity   ( 9116): UnityEngine.SetupCoroutine:InvokeMoveN
+05-07 23:33:37.811 W/Unity   ( 9116): Configuration values for AndroidConfig have been migrated. Please double check your configuration in EOS Plugin -> EOS Configuration to make sure that the migration was successful.
+05-07 23:33:37.811 W/Unity   ( 9116): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:33:37.811 W/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.Config:Get()
+05-07 23:33:37.811 W/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.PlatformManager:GetPlatformConfig()
+05-07 23:33:37.811 W/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:33:37.811 W/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.EOSSingleton:InitializePlatformInterface()
+05-07 23:33:37.811 W/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.EOSSingleton:Init(IEOSCoroutineOwner, String)
+05-07 23:33:37.811 W/Unity   ( 9116): UnityEngine.GameObject:Internal_AddComponentWithType(Type)
+05-07 23:33:37.811 W/Unity   ( 9116): UnityEngine.GameObject:AddComponent()
+05-07 23:33:37.811 W/Unity   ( 9116): BuildSettings:Initialize()
+05-07 23:33:37.811 W/Unity   ( 9116): <StartGameFlow>d__22:MoveNext()
+05-07 23:33:37.811 W/Unity   ( 9116): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-07 23:33:37.811 W/Unity   ( 9116): 
+05-07 23:33:37.812 I/Unity   ( 9116): EOSAndroid: Getting activity context...
+05-07 23:33:37.812 I/Unity   ( 9116): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:33:37.812 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.AndroidPlatformSpecifics:ConfigureAndroidActivity()
+05-07 23:33:37.812 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.AndroidPlatformSpecifics:ConfigureSystemInitOptions(EOSInitializeOptions&)
+05-07 23:33:37.812 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:33:37.812 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.EOSSingleton:InitializePlatformInterface()
+05-07 23:33:37.812 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.EOSSingleton:Init(IEOSCoroutineOwner, String)
+05-07 23:33:37.812 I/Unity   ( 9116): UnityEngine.GameObject:Internal_AddComponentWithType(Type)
+05-07 23:33:37.812 I/Unity   ( 9116): UnityEngine.GameObject:AddComponent()
+05-07 23:33:37.812 I/Unity   ( 9116): BuildSettings:Initialize()
+05-07 23:33:37.812 I/Unity   ( 9116): <StartGameFlow>d__22:MoveNext()
+05-07 23:33:37.812 I/Unity   ( 9116): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-07 23:33:37.812 I/Unity   ( 9116): 
+05-07 23:33:37.812 I/Unity   ( 9116): EOSAndroid: activity context found!
+05-07 23:33:37.812 I/Unity   ( 9116): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:33:37.812 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.AndroidPlatformSpecifics:ConfigureAndroidActivity()
+05-07 23:33:37.812 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.AndroidPlatformSpecifics:ConfigureSystemInitOptions(EOSInitializeOptions&)
+05-07 23:33:37.812 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:33:37.812 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.EOSSingleton:InitializePlatformInterface()
+05-07 23:33:37.812 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.EOSSingleton:Init(IEOSCoroutineOwner, String)
+05-07 23:33:37.812 I/Unity   ( 9116): UnityEngine.GameObject:Internal_AddComponentWithType(Type)
+05-07 23:33:37.812 I/Unity   ( 9116): UnityEngine.GameObject:AddComponent()
+05-07 23:33:37.812 I/Unity   ( 9116): BuildSettings:Initialize()
+05-07 23:33:37.812 I/Unity   ( 9116): <StartGameFlow>d__22:MoveNext()
+05-07 23:33:37.812 I/Unity   ( 9116): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-07 23:33:37.812 I/Unity   ( 9116): 
+05-07 23:33:37.813 I/Unity   ( 9116): EOSAndroid: call EOS SDK init.
+05-07 23:33:37.813 I/Unity   ( 9116): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:33:37.813 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.AndroidPlatformSpecifics:ConfigureAndroidActivity()
+05-07 23:33:37.813 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.AndroidPlatformSpecifics:ConfigureSystemInitOptions(EOSInitializeOptions&)
+05-07 23:33:37.813 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:33:37.813 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.EOSSingleton:InitializePlatformInterface()
+05-07 23:33:37.813 I/Unity   ( 9116): PlayEveryWare.EpicOnlineServices.EOSSingleton:Init(IEOSCoroutineOwner, String)
+05-07 23:33:37.813 I/Unity   ( 9116): UnityEngine.GameObject:Internal_AddComponentWithType(Type)
+05-07 23:33:37.813 I/Unity   ( 9116): UnityEngine.GameObject:AddComponent()
+05-07 23:33:37.813 I/Unity   ( 9116): BuildSettings:Initialize()
+05-07 23:33:37.813 I/Unity   ( 9116): <StartGameFlow>d__22:MoveNext()
+05-07 23:33:37.813 I/Unity   ( 9116): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-07 23:33:37.813 I/Unity   ( 9116): 
+05-07 23:33:37.816 I/Binder:2110_7( 2110): type=1400 audit(0.0:11301): avc: denied { lock } for path="/data/misc/keystore/persistent.sqlite" dev="sdb3" ino=5505027 scontext=u:r:init:s0 tcontext=u:object_r:keystore_data_file:s0 tclass=file permissive=1
+05-07 23:33:37.831 I/EngineFactory( 9116): Provider GmsCore_OpenSSL not available
+05-07 23:33:37.834 W/ActivityManager( 2429): callingPackage:com.HolydayStudios.Firestone, packageName:com.brave.browser, name:org.chromium.chrome.browser.customtabs.CustomTabsConnectionService, isSkip: true
+05-07 23:33:37.832 I/lmkd    ( 2055): type=1400 audit(0.0:11302): avc: denied { write } for name="oom_score_adj" dev="proc" ino=38425 scontext=u:r:init:s0 tcontext=u:r:untrusted_app:s0:c55,c256,c512,c768 tclass=file permissive=1
+05-07 23:33:37.832 I/Binder:2278_4( 2278): type=1400 audit(0.0:11303): avc: denied { call } for scontext=u:r:init:s0 tcontext=u:r:untrusted_app:s0:c55,c256,c512,c768 tclass=binder permissive=1
+05-07 23:33:37.836 I/m.brave.browser( 5531): type=1400 audit(0.0:11304): avc: denied { getattr } for path="/system/framework/framework-res.apk" dev="sda1" ino=1454 scontext=u:r:untrusted_app:s0:c55,c256,c512,c768 tcontext=u:object_r:unlabeled:s0 tclass=file permissive=1
+05-07 23:33:37.839 I/udios.Fireston( 9116): oneway function results for code 9 on binder at 0xb400006d69fb2280 will be dropped but finished with status UNKNOWN_TRANSACTION
+05-07 23:33:37.853 I/Unity   ( 9116): 05/07/2026 23:33:37 LogEOS(Info): [Boot] EOSSDK Version 1.17.1.3-44532354 booting at 2026-05-07T15:33:37.852Z using CSharp
+05-07 23:33:37.853 I/Unity   ( 9116): 05/07/2026 23:33:37 LogEOS(Info): [Boot] EOSSDK Platform Properties [OS=Android/12, ClientId=xyza78915T3juKOECHQEveLJcfCt98aA, ProductId=69576a28f7154fe9a0dce97508da5163, SandboxId=bda8d2133655435982b9118972792328, DeploymentId=a65c0335e67b4aec8eec651de8dca6ac, ProductName=Firestone Online Idle RPG, ProductVersion=1.89, IsServer=false, Flags=None]
+05-07 23:33:37.853 I/Unity   ( 9116): 05/07/2026 23:33:37 LogEOSAnalytics(Info): Start Session (User: ...)
+05-07 23:33:37.855 I/Unity   ( 9116): 05/07/2026 23:33:37 LogEOSOverlay(Info): Overlay loaded and initialized
+05-07 23:33:37.856 I/Unity   ( 9116): 05/07/2026 23:33:37 LogEOSRTC(Info): [Core] Initializing LibRTC...
+05-07 23:33:37.859 I/Unity   ( 9116): PlatformID: 0
+05-07 23:33:37.859 I/Unity   ( 9116): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:33:37.859 I/Unity   ( 9116): BuildSettings:Initialize()
+05-07 23:33:37.859 I/Unity   ( 9116): <StartGameFlow>d__22:MoveNext()
+05-07 23:33:37.859 I/Unity   ( 9116): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-07 23:33:37.859 I/Unity   ( 9116): 
+05-07 23:33:37.867 I/Unity   ( 9116): 05/07/2026 23:33:37 LogEOS(Info): Updating Platform SDK Config, Time: 0.008967
+05-07 23:33:38.031 I/Unity   ( 9116): 05/07/2026 23:33:38 LogEOS(Info): SDK Config Platform Update Request Successful, Time: 0.140154
+05-07 23:33:38.032 I/Unity   ( 9116): 05/07/2026 23:33:38 LogEOSAnalytics(Info): EOS SDK Analytics disabled for route [1].
+05-07 23:33:38.033 I/Unity   ( 9116): 05/07/2026 23:33:38 LogEOS(Info): Prewarming URL successful
+05-07 23:33:38.034 I/udios.Fireston( 9116): oneway function results for code 9 on binder at 0xb400006d69fb2280 will be dropped but finished with status UNKNOWN_TRANSACTION
+05-07 23:33:38.034 I/Unity   ( 9116): 05/07/2026 23:33:38 LogEOS(Info): Updating Product SDK Config, Time: 0.172966
+05-07 23:33:38.231 I/Unity   ( 9116): 05/07/2026 23:33:38 LogEOSAnalytics(Info): Start Session (User: ...)
+05-07 23:33:38.331 I/Unity   ( 9116): 05/07/2026 23:33:38 LogEOS(Info): SDK Config Product Update Request Successful, Time: 0.438984
+05-07 23:33:38.334 I/Unity   ( 9116): 05/07/2026 23:33:38 LogEOS(Info): Prewarming URL successful
+05-07 23:33:38.334 I/Unity   ( 9116): 05/07/2026 23:33:38 LogEOS(Info): SDK Config Data - Watermark: 438070848
+05-07 23:33:38.334 I/Unity   ( 9116): 05/07/2026 23:33:38 LogEOS(Info): ScheduleNextSDKConfigDataUpdate - Time: 0.438984, Update Interval: 304.471436
+05-07 23:33:38.334 I/udios.Fireston( 9116): oneway function results for code 9 on binder at 0xb400006d69fb2280 will be dropped but finished with status UNKNOWN_TRANSACTION
+05-07 23:33:38.399 D/BoundBrokerSvc( 2754): onUnbind: Intent { act=com.google.android.gms.common.telemetry.service.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentApiService }
+05-07 23:33:39.226 D/ProfileInstaller( 9116): Skipping profile installation for com.HolydayStudios.Firestone
+05-07 23:33:39.338 I/Unity   ( 9116): EpicGames
+05-07 23:33:39.338 I/Unity   ( 9116): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:33:39.338 I/Unity   ( 9116): GameAnalytics:SendAnalyticsLoadingPhasePHP(LoadingPhase, String, String, String)
+05-07 23:33:39.338 I/Unity   ( 9116): GameAnalytics:SendAnalyticsLoadingPhase(LoadingPhase, String, String, String)
+05-07 23:33:39.338 I/Unity   ( 9116): <StartGameInitializing>d__75:MoveNext()
+05-07 23:33:39.338 I/Unity   ( 9116): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-07 23:33:39.338 I/Unity   ( 9116): 
+05-07 23:33:39.416 I/PlayCore( 9116): UID: [10077]  PID: [9116] AppUpdateListenerRegistry : registerListener
+05-07 23:33:39.418 I/PlayCore( 9116): UID: [10077]  PID: [9116] AppUpdateService : requestUpdateInfo(com.HolydayStudios.Firestone)
+05-07 23:33:39.418 I/PlayCore( 9116): UID: [10077]  PID: [9116] AppUpdateService : Initiate binding to the service.
+05-07 23:33:39.419 W/ActivityManager( 2429): callingPackage:com.HolydayStudios.Firestone, packageName:com.android.vending, name:com.google.android.finsky.installservice.DevTriggeredUpdateService, isSkip: true
+05-07 23:33:39.425 I/PlayCore( 9116): UID: [10077]  PID: [9116] AppUpdateService : ServiceConnectionImpl.onServiceConnected(ComponentInfo{com.android.vending/com.google.android.finsky.installservice.DevTriggeredUpdateService})
+05-07 23:33:39.426 I/PlayCore( 9116): UID: [10077]  PID: [9116] AppUpdateService : linkToDeath
+05-07 23:33:39.416 I/lmkd    ( 2055): type=1400 audit(0.0:11305): avc: denied { write } for name="oom_score_adj" dev="proc" ino=41898 scontext=u:r:init:s0 tcontext=u:r:priv_app:s0:c512,c768 tclass=file permissive=1
+05-07 23:33:39.432 I/PlayCore( 9116): UID: [10077]  PID: [9116] OnRequestInstallCallback : onRequestInfo
+05-07 23:33:39.432 I/PlayCore( 9116): UID: [10077]  PID: [9116] AppUpdateService : Unbind from service.
+05-07 23:33:39.458 I/PlayCore( 9116): UID: [10077]  PID: [9116] AppUpdateListenerRegistry : unregisterListener
+05-07 23:33:39.460 I/RecentTaskMonitor( 2429): onTaskMovedToFront 44
+05-07 23:33:39.460 D/RecentTaskMonitor( 2429): openTabFromAms task is Task{95c17dd #44 type=standard A=10066:com.firestone.hooks U=0 visible=true visibleRequested=false mode=fullscreen translucent=true sz=1}
+05-07 23:33:39.461 D/gralloc_x86( 2254): gralloc_alloc: Creating ashmem region of size 14749696
+05-07 23:33:39.464 I/Binder:2429_16( 2429): type=1400 audit(0.0:11306): avc: denied { ioctl } for path="/dev/vaddress" dev="tmpfs" ino=13598 ioctlcmd=0x4c19 scontext=u:r:system_server:s0 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1
+05-07 23:33:39.476 D/RecentTaskMonitor( 2429): task null or not sub display in notifyDisplayOpened
+05-07 23:33:39.476 D/RecentTaskMonitor( 2429): VAPIShellNotifier#notifyOpenTab :{"id":"task:44","displayId":0,"userId":0,"name":"Firestone Hooks","originName":"Firestone Hooks","packageName":"com.firestone.hooks","launcher":false,"newTask":false,"icon":"iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAACAASURBVHic7Z1pkCTHdd9\/WVV9393TPffM3gcWS2APLACSgmQIIAlQsiXLskhLtAnRYpi2giE7\/MHhsCPWCn9whB1h2bItOyQGGSEqRIqmTNOiIZGSSYIieIG4CGB3gb2xx+zMztkzfVelP1QfVV3Vx1TPgcXMP2JmaqoqX73MfPXey5cvswRuOHtWOX4nl\/DVxBldN35LIh4UkixI1fX+Oj783kNcvrnIuWtz3W7riolcnIcOT\/DtV6+ysFzwREMogiOTQ4yko3zzpSueeQH46Qf3sJAv8fqVOxiG9EQjFQ\/x+Il9\/OjCTa7PLHnm5cBEhsOTQ3ztexe63icFBpJFIbgmpPJFoehfzN8yZi4+++ly+71a+4m\/9y\/+KFWqKh8oRKrP1HTjCaBrp1sRCwdIxoJkk5F+iziQjoWIhv1k4iFUITzREAKSsRDxyGC8AMQjQQwJQ4kIUnoTgEQ0QCzsJx0LUSxVPfOSigWJhf391EkBMvWfk0KIfzKV8\/3eex7+\/Of\/9Oyv3bDeaBOAU5\/8H+HZSu3f+DTxK4qiZP3r7AFNVfBpKn5\/3zLjgN+noqkKfp93Ogrg1xSTzgC8APhUBb+mEPCrGB4FwO\/TUBUFv28wfvyaiqZ6apepqq7\/q0Jef\/TJ3\/zMp77xXz5xq3GhKQCP\/tM\/SK8ulj9zd3ntKSDghcGlfJG7S2vcupv3UhwARQgmV0vcWVhlfqXomUYsHERVlIF4AVjIF1nMF7l1N+9ZAIrlGstrJWYXBmubcMBHKhrySiMi4MO6wVff96nP\/Op3f+8TF6AuAL989k+i80tr\/7qgiKcNQ\/q9MmhIiWFIz7YSwDAkUkr0AehIUedDDsYL2OvkVQDMOoE+ID8bUCcVwYlgUP0Pv3z2T37jS2f\/7ozC2bOKUa39vM+n\/KoAz52\/i3sDQqKoqvgbeq32zJ6PfzaonLk8lFqr1D4pUIa2m7ldbA0ERIqV2q9n\/JU9iq75Thm6\/CmB9OZy7+KehKGzX+rGE4qO\/g9lj\/H9Lt6FEFIY8EuKRJ7Zbl52sV2QhxRgfLvZ2MX2QEBOwSUauIudASnRlO1mYhfbi10B2OHYFYAdjl0B2OHYFYAdjl0B2OHYFYAdDu2XHjtGLOJHVQTLq2U8zngCcP++HHtH0hzbO+yZRjIWZM9wing4wNoA2TMj6SiJSIBMPOyZBsChyQxrpSqHp4Y8t0046OPIVJZ0PMSCxxwHgFwyQi4dIRTweaYBZoaSRJJfq6BdvDlPKmYmT8wvFz3PeQNkU2FuzeW5OkDeWzYVIez3cfn2IitrjhS2viAEVGo6mXiIt27Me+YFIBrys1Ioc\/nWgmcBiIUDpGMhrs4scWdh1TMvxXIViRyoTkJAJhFCSlhcKaK9cmmGXDKCpircnl8dSAAmcjEzKfT6Xe80snFiIT+vX531\/LYIAeWKTj4T5ZVLM555AVMjLa4Uee3KrOe2ScVCjKSjnL8+x\/U7y555WStVAAaqkwBGMlEA7iys7foAOx27ArDDsSsAOxy7ArDDsSsAOxy7ArDDsSsAOxy7ArDDsSsAOxy7ArDDsSsAOxy7ArDDsSsAOxzbviYg6NeYGk6QiYcpV2sYhkTwblumKBFCMJyKMpyKoiiC2cU1bs6tUKnp28qZNplNkImHUFQFVVUGmg7OxMOsFavk69OW3SEJB\/w8emySx0\/sZTwbp1iucvnWIncW17h0e4Fw0Fvig4JgOB0lkwgzkYt7otHAUCKMT1WZWCt5bptsMsKxPVmePL2XiVwCVVG4NrPE11+4yMtv3qZU1elH5kfSUTLxweok6vwA+DQV7fThcWIRP0ozI8i7AOwdTRENBUjFQu43SPOXxOykyeEET5zez3g2hlLfjWY0E2N+uYhuGFy8sYBuGJiX+tcKAsFIxswI0nXDc30ADo5nWC1ViEcC62ub+r2aqnJkeojHHpgmEQs29z3KJsNkEmGG4pF6kojZLgLRsaq5ZISRTJSHit5X8wkgEQ0ikaysVdC+9cplhuIRVFVhdnGwhBCfpnB1ZqlDxoqdrqoIfi56hHDQh6q0XBGfpjKUCLFnJMkPz93gtSuz1HSrmuwtCAI4MJ4hl4ry3deueatMHZWqztJqiXPX59YhAOZ9fp\/K6UPj7BtPk4qFUJQW76oQRII+bs+v8Pxr16kZ7YLqrOfe0RQHxjJ862XvO58JIJeKApK5pQLaYr6ETzU3ZlrMe1dzYGas5NfKLOZLbVecNFVFYa1Udd3uRNNU3rN\/hNVihbmlAq9fnW1r\/O5CIATkCxUioYoLL+vDaqlCvlBmqa+2aV3XVIUTB0Z5+pFDHJ0asnU+gJSSmm6wWqqwuFqi5tBUzjpm4mXWSoPVSQABv+n6LeZL2zQKkGAYBpduzjOzkHcVgkjQx\/uOT\/EbP3+K6eEkilDsBN7B0FSF+6Zz\/KO\/dYbTR8YJ+p2+tiHhxtwK12aWOpipranjFo4CBCCb9ZJScv76HM\/+4C2mh5MkokH73UIQCfp5\/\/EpcskI\/\/y\/\/QUz86vostFYkvX5BeYGkooQiLodbm6CJ2m+3Y1Nqtbf\/GYJVVXYP5bmtz\/xOFPDCZt5s2JltcSXv\/06b88uY0jpYvu3ZiS0hQIgm04gmD7SWrHC154\/j08VfPypUyRjwaYz2GRQVTk0OcS\/\/Nhj\/Nf\/9UMuXL+LbliFANobSyDw+RRi4QCTuTihgI9MPMRwKkoyFiQc9BMJ+ogE\/SBhrVyhUKqyVqqynC8xs5hnfqVIoVQlHg6wWqg05de1XnX4VIXj+0f4zV98mKmcs\/OlNHcLu7OQ5z9+6Xm+++o1SuVqqwqNXXpEg+7mC8EWCICz1aTl9\/Jqia889wa6bvCRJ97D2FDc0XCqIjh5cIxnnjrB5559iXPX5hz2WACRkJ\/RTJSJbIJTh0Y5OJnhw48eNDs+GkRTlaYGEIKmJmh0jMTcgq2qGyzX9yqUwOVbi8QjAd6eXeb2fN6yXsHe+ffvG+aZp05wbG\/OYfPB1DIXbyzwuWd\/zHdeudrM8m119NZ0uhVbHgiydVtd1S6uFvnKd15HNwx+7QMnGM\/Gm50DZkeFAhrvu38KpOQPv\/GqmaZtGChCMJqJcfLQGEemhtg3lmJyOEEmFsbvM7c+Uto6vCePUpKMBJnMJZBS8sCBER57YJrrd5a5dGuB89fm+PGbt5lZMDds9GsqDx4Y5WMffJAzR8cJ+FTHsyRw9fYin3v2Bb754mUKDSFqCCFb3fUmticS2DQFdVsrJSurJb72\/DlyyQi\/+NgxkrGQQwgiIT8\/9cAeEIIv\/r+fkC9UOHlojJOHRjm2J0cuZa5v6LejO6GhIZR6l\/g0lXAuwWQuwZmj49yeX+WNq7P8+MItXrp4m2wywkcfP86j903g89n322poloXlAn\/2\/Hm+9eIl1ooV6l6J+QRhdv92CMH2hYIbqsCiypfyRf7qhbeYzCW4b88wI5kYqmo3B6GAOTpIx8OUKzUOTmTIJsMDd3q\/8GkqU8OmMDx4YJSLN+eJhPwcmRpydD5ATde5NrPEuaszPP+Tq6wW6qudxPapfSu2fS7AhKQhEXeX13jh3Ntcn13iyYcOMpFNOuxpOODn1KFRoH+1vtEQwlxhM5zuvHO3YRhcvrXA\/\/3eeQqFEiurncbv2ycA2xMHEFjqbPsHJCyvFfnfz73Ol7\/5Ex
+05-07 23:33:39.482 W/System.err( 2429): org.json.JSONException: No value for errcode
+05-07 23:33:39.482 W/System.err( 2429): 	at org.json.JSONObject.get(JSONObject.java:403)
+05-07 23:33:39.482 W/System.err( 2429): 	at org.json.JSONObject.getInt(JSONObject.java:492)
+05-07 23:33:39.482 W/System.err( 2429): 	at com.android.server.vapi.VApiRequestListener.onResponse(VApiRequestListener.java:20)
+05-07 23:33:39.482 W/System.err( 2429): 	at com.android.server.vapi.VApiRequestListener.onResponse(VApiRequestListener.java:13)
+05-07 23:33:39.482 W/System.err( 2429): 	at com.android.volley.toolbox.JsonRequest.deliverResponse(JsonRequest.java:90)
+05-07 23:33:39.482 W/System.err( 2429): 	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:102)
+05-07 23:33:39.482 W/System.err( 2429): 	at android.os.Handler.handleCallback(Handler.java:938)
+05-07 23:33:39.482 W/System.err( 2429): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+05-07 23:33:39.482 W/System.err( 2429): 	at android.os.Looper.loopOnce(Looper.java:201)
+05-07 23:33:39.482 W/System.err( 2429): 	at android.os.Looper.loop(Looper.java:288)
+05-07 23:33:39.482 W/System.err( 2429): 	at com.android.server.SystemServer.run(SystemServer.java:929)
+05-07 23:33:39.482 W/System.err( 2429): 	at com.android.server.SystemServer.main(SystemServer.java:611)
+05-07 23:33:39.482 W/System.err( 2429): 	at java.lang.reflect.Method.invoke(Native Method)
+05-07 23:33:39.482 W/System.err( 2429): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:555)
+05-07 23:33:39.482 W/System.err( 2429): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1069)
+05-07 23:33:39.476 I/Binder:2219_2( 2219): type=1400 audit(0.0:11307): avc: denied { read write } for path="socket:[56602]" dev="sockfs" ino=56602 scontext=u:r:init:s0 tcontext=u:r:system_server:s0 tclass=tcp_socket permissive=1
+05-07 23:33:39.476 I/Binder:2219_2( 2219): type=1400 audit(0.0:11308): avc: denied { getopt } for scontext=u:r:init:s0 tcontext=u:r:system_server:s0 tclass=tcp_socket permissive=1
+05-07 23:33:39.494 D/com.netease.nemu_vapi_android.thread.HttpServer( 2669): http server response data: {"errcode":0,"message":"OK"}
+05-07 23:33:39.476 I/Binder:2219_2( 2219): type=1400 audit(0.0:11309): avc: denied { setopt } for scontext=u:r:init:s0 tcontext=u:r:system_server:s0 tclass=tcp_socket permissive=1
+05-07 23:33:39.498 D/com.netease.nemu_vapi_android.thread.HttpServer( 2669): http server response data: {"errcode":0,"message":"OK"}
+05-07 23:33:39.484 I/Binder:2219_2( 2219): type=1400 audit(0.0:11310): avc: denied { use } for path="socket:[60473]" dev="sockfs" ino=60473 scontext=u:r:init:s0 tcontext=u:r:system_app:s0 tclass=fd permissive=1
+05-07 23:33:39.524 D/AAudio  ( 9116): AAudioStream_requestStop(s#1) called
+05-07 23:33:39.524 D/AAudioStream( 9116): setState(s#1) from 4 to 9
+05-07 23:33:39.524 D/AudioTrack( 9116): stop(18): called with 144480 frames delivered
+05-07 23:33:39.524 D/AAudioStream( 9116): setState(s#1) from 9 to 10
+05-07 23:33:39.525 D/AAudio  ( 9116): AAudioStream_requestStop(s#1) called
+05-07 23:33:39.525 D/AAudio  ( 9116): AAudioStream_close(s#1) called ---------------
+05-07 23:33:39.525 D/AAudioStream( 9116): setState(s#1) from 10 to 11
+05-07 23:33:39.526 D/AAudioStream( 9116): setState(s#1) from 11 to 12
+05-07 23:33:39.526 D/AAudioStream( 9116): ~AudioStream(s#1) mPlayerBase strongCount = 2
+05-07 23:33:39.526 D/AAudio  ( 9116): AAudioStream_close(s#1) returned 0 ---------
+05-07 23:33:39.594 D/gralloc_x86( 8991): gralloc_alloc: Creating ashmem region of size 14749696
+05-07 23:33:39.597 E/firestone.hook( 8991): vulkan version is 4202746
+05-07 23:33:39.598 D/gralloc_x86( 8991): gralloc_alloc: Creating ashmem region of size 14749696
+05-07 23:33:39.598 D/gralloc_x86( 8991): gralloc_alloc: Creating ashmem region of size 14749696
+05-07 23:33:39.599 D/gralloc_x86( 8991): gralloc_alloc: Creating ashmem region of size 14749696
+05-07 23:33:39.857 W/OpenGLRenderer( 9116): Surface doesn't have any previously queued frames, nothing to readback from
+05-07 23:33:39.861 E/BLASTBufferQueue( 9116): [ViewRootImpl[UnityPlayerActivity]#0](f:0,a:1) Applying pending transactions on dtor 1
+05-07 23:33:39.862 W/SurfaceFlinger( 2254): couldn't log to binary event log: overflow.
+05-07 23:33:39.866 I/Process ( 9116): Sending signal. PID: 9116 SIG: 9
+05-07 23:33:39.908 I/Zygote  ( 2220): Process 9116 exited due to signal 9 (Killed)
+05-07 23:33:39.908 I/WindowManager( 2429): WIN DEATH: Window{6111480 u0 com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity}
+05-07 23:33:39.909 I/ActivityManager( 2429): Process com.HolydayStudios.Firestone (pid 9116) has died: cch+30 CRE 
+05-07 23:33:39.910 I/libprocessgroup( 2429): Successfully killed process cgroup uid 10077 pid 9116 in 0ms
+05-07 23:33:39.911 W/InputManager-JNI( 2429): Input channel object '6111480 com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity (client)' was disposed without first being removed with the input manager!
+05-07 23:33:39.913 W/WindowManager( 2429): Cannot find window which accessibility connection is added to
+05-07 23:33:39.916 D/BoundBrokerSvc( 3171): onUnbind: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+05-07 23:33:39.918 D/RecentTaskMonitor( 2429): onRecentTaskRemoved 45:Task=45
+05-07 23:33:39.918 E/RecentTaskMonitor( 2429): failed to call send close intent!
+05-07 23:33:39.919 W/ActivityManager( 2429): setHasOverlayUi called on unknown pid: 9116
+05-07 23:33:39.920 W/ActivityTaskManager( 2429): Can't find TaskDisplayArea to determine support for multi window. Task id=45 attached=false
+05-07 23:33:39.920 W/ActivityTaskManager( 2429): Can't find TaskDisplayArea to determine support for multi window. Task id=45 attached=false
+05-07 23:33:39.920 E/BpTransactionCompletedListener( 2254): Failed to transact (-32)
+05-07 23:33:39.925 D/RecentTaskMonitor( 2429): VAPIShellNotifier#notifyOpenTab :{"id":"task:44","displayId":0,"userId":0,"name":"Firestone Hooks","originName":"Firestone Hooks","packageName":"com.firestone.hooks","launcher":false,"newTask":false,"icon":"iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAACAASURBVHic7Z1pkCTHdd9\/WVV9393TPffM3gcWS2APLACSgmQIIAlQsiXLskhLtAnRYpi2giE7\/MHhsCPWCn9whB1h2bItOyQGGSEqRIqmTNOiIZGSSYIieIG4CGB3gb2xx+zMztkzfVelP1QfVV3Vx1TPgcXMP2JmaqoqX73MfPXey5cvswRuOHtWOX4nl\/DVxBldN35LIh4UkixI1fX+Oj783kNcvrnIuWtz3W7riolcnIcOT\/DtV6+ysFzwREMogiOTQ4yko3zzpSueeQH46Qf3sJAv8fqVOxiG9EQjFQ\/x+Il9\/OjCTa7PLHnm5cBEhsOTQ3ztexe63icFBpJFIbgmpPJFoehfzN8yZi4+++ly+71a+4m\/9y\/+KFWqKh8oRKrP1HTjCaBrp1sRCwdIxoJkk5F+iziQjoWIhv1k4iFUITzREAKSsRDxyGC8AMQjQQwJQ4kIUnoTgEQ0QCzsJx0LUSxVPfOSigWJhf391EkBMvWfk0KIfzKV8\/3eex7+\/Of\/9Oyv3bDeaBOAU5\/8H+HZSu3f+DTxK4qiZP3r7AFNVfBpKn5\/3zLjgN+noqkKfp93Ogrg1xSTzgC8APhUBb+mEPCrGB4FwO\/TUBUFv28wfvyaiqZ6apepqq7\/q0Jef\/TJ3\/zMp77xXz5xq3GhKQCP\/tM\/SK8ulj9zd3ntKSDghcGlfJG7S2vcupv3UhwARQgmV0vcWVhlfqXomUYsHERVlIF4AVjIF1nMF7l1N+9ZAIrlGstrJWYXBmubcMBHKhrySiMi4MO6wVff96nP\/Op3f+8TF6AuAL989k+i80tr\/7qgiKcNQ\/q9MmhIiWFIz7YSwDAkUkr0AehIUedDDsYL2OvkVQDMOoE+ID8bUCcVwYlgUP0Pv3z2T37jS2f\/7ozC2bOKUa39vM+n\/KoAz52\/i3sDQqKoqvgbeq32zJ6PfzaonLk8lFqr1D4pUIa2m7ldbA0ERIqV2q9n\/JU9iq75Thm6\/CmB9OZy7+KehKGzX+rGE4qO\/g9lj\/H9Lt6FEFIY8EuKRJ7Zbl52sV2QhxRgfLvZ2MX2QEBOwSUauIudASnRlO1mYhfbi10B2OHYFYAdjl0B2OHYFYAdjl0B2OHYFYAdDu2XHjtGLOJHVQTLq2U8zngCcP++HHtH0hzbO+yZRjIWZM9wing4wNoA2TMj6SiJSIBMPOyZBsChyQxrpSqHp4Y8t0046OPIVJZ0PMSCxxwHgFwyQi4dIRTweaYBZoaSRJJfq6BdvDlPKmYmT8wvFz3PeQNkU2FuzeW5OkDeWzYVIez3cfn2IitrjhS2viAEVGo6mXiIt27Me+YFIBrys1Ioc\/nWgmcBiIUDpGMhrs4scWdh1TMvxXIViRyoTkJAJhFCSlhcKaK9cmmGXDKCpircnl8dSAAmcjEzKfT6Xe80snFiIT+vX531\/LYIAeWKTj4T5ZVLM555AVMjLa4Uee3KrOe2ScVCjKSjnL8+x\/U7y555WStVAAaqkwBGMlEA7iys7foAOx27ArDDsSsAOxy7ArDDsSsAOxy7ArDDsSsAOxy7ArDDsSsAOxy7ArDDsSsAOxy7ArDDsSsAOxzbviYg6NeYGk6QiYcpV2sYhkTwblumKBFCMJyKMpyKoiiC2cU1bs6tUKnp28qZNplNkImHUFQFVVUGmg7OxMOsFavk69OW3SEJB\/w8emySx0\/sZTwbp1iucvnWIncW17h0e4Fw0Fvig4JgOB0lkwgzkYt7otHAUCKMT1WZWCt5bptsMsKxPVmePL2XiVwCVVG4NrPE11+4yMtv3qZU1elH5kfSUTLxweok6vwA+DQV7fThcWIRP0ozI8i7AOwdTRENBUjFQu43SPOXxOykyeEET5zez3g2hlLfjWY0E2N+uYhuGFy8sYBuGJiX+tcKAsFIxswI0nXDc30ADo5nWC1ViEcC62ub+r2aqnJkeojHHpgmEQs29z3KJsNkEmGG4pF6kojZLgLRsaq5ZISRTJSHit5X8wkgEQ0ikaysVdC+9cplhuIRVFVhdnGwhBCfpnB1ZqlDxoqdrqoIfi56hHDQh6q0XBGfpjKUCLFnJMkPz93gtSuz1HSrmuwtCAI4MJ4hl4ry3deueatMHZWqztJqiXPX59YhAOZ9fp\/K6UPj7BtPk4qFUJQW76oQRII+bs+v8Pxr16kZ7YLqrOfe0RQHxjJ862XvO58JIJeKApK5pQLaYr6ETzU3ZlrMe1dzYGas5NfKLOZLbVecNFVFYa1Udd3uRNNU3rN\/hNVihbmlAq9fnW1r\/O5CIATkCxUioYoLL+vDaqlCvlBmqa+2aV3XVIUTB0Z5+pFDHJ0asnU+gJSSmm6wWqqwuFqi5tBUzjpm4mXWSoPVSQABv+n6LeZL2zQKkGAYBpduzjOzkHcVgkjQx\/uOT\/EbP3+K6eEkilDsBN7B0FSF+6Zz\/KO\/dYbTR8YJ+p2+tiHhxtwK12aWOpipranjFo4CBCCb9ZJScv76HM\/+4C2mh5MkokH73UIQCfp5\/\/EpcskI\/\/y\/\/QUz86vostFYkvX5BeYGkooQiLodbm6CJ2m+3Y1Nqtbf\/GYJVVXYP5bmtz\/xOFPDCZt5s2JltcSXv\/06b88uY0jpYvu3ZiS0hQIgm04gmD7SWrHC154\/j08VfPypUyRjwaYz2GRQVTk0OcS\/\/Nhj\/Nf\/9UMuXL+LbliFANobSyDw+RRi4QCTuTihgI9MPMRwKkoyFiQc9BMJ+ogE\/SBhrVyhUKqyVqqynC8xs5hnfqVIoVQlHg6wWqg05de1XnX4VIXj+0f4zV98mKmcs\/OlNHcLu7OQ5z9+6Xm+++o1SuVqqwqNXXpEg+7mC8EWCICz1aTl9\/Jqia889wa6bvCRJ97D2FDc0XCqIjh5cIxnnjrB5559iXPX5hz2WACRkJ\/RTJSJbIJTh0Y5OJnhw48eNDs+GkRTlaYGEIKmJmh0jMTcgq2qGyzX9yqUwOVbi8QjAd6eXeb2fN6yXsHe+ffvG+aZp05wbG\/OYfPB1DIXbyzwuWd\/zHdeudrM8m119NZ0uhVbHgiydVtd1S6uFvnKd15HNwx+7QMnGM\/Gm50DZkeFAhrvu38KpOQPv\/GqmaZtGChCMJqJcfLQGEemhtg3lmJyOEEmFsbvM7c+Uto6vCePUpKMBJnMJZBS8sCBER57YJrrd5a5dGuB89fm+PGbt5lZMDds9GsqDx4Y5WMffJAzR8cJ+FTHsyRw9fYin3v2Bb754mUKDSFqCCFb3fUmticS2DQFdVsrJSurJb72\/DlyyQi\/+NgxkrGQQwgiIT8\/9cAeEIIv\/r+fkC9UOHlojJOHRjm2J0cuZa5v6LejO6GhIZR6l\/g0lXAuwWQuwZmj49yeX+WNq7P8+MItXrp4m2wywkcfP86j903g89n322poloXlAn\/2\/Hm+9eIl1ooV6l6J+QRhdv92CMH2hYIbqsCiypfyRf7qhbeYzCW4b88wI5kYqmo3B6GAOTpIx8OUKzUOTmTIJsMDd3q\/8GkqU8OmMDx4YJSLN+eJhPwcmRpydD5ATde5NrPEuaszPP+Tq6wW6qudxPapfSu2fS7AhKQhEXeX13jh3Ntcn13iyYcOMpFNOuxpOODn1KFRoH+1vtEQwlxhM5zuvHO3YRhcvrXA\/\/3eeQqFEiurncbv2ycA2xMHEFjqbPsHJCyvFfnfz73Ol7\/5Ex
+05-07 23:33:39.926 D/RecentTaskMonitor( 2429): VAPIShellNotifier#notifyCloseTab closeTab :{"id":"task:45"}
+05-07 23:33:39.931 W/System.err( 2429): org.json.JSONException: No value for errcode
+05-07 23:33:39.931 W/System.err( 2429): 	at org.json.JSONObject.get(JSONObject.java:403)
+05-07 23:33:39.931 W/System.err( 2429): 	at org.json.JSONObject.getInt(JSONObject.java:492)
+05-07 23:33:39.931 W/System.err( 2429): 	at com.android.server.vapi.VApiRequestListener.onResponse(VApiRequestListener.java:20)
+05-07 23:33:39.931 W/System.err( 2429): 	at com.android.server.vapi.VApiRequestListener.onResponse(VApiRequestListener.java:13)
+05-07 23:33:39.931 W/System.err( 2429): 	at com.android.volley.toolbox.JsonRequest.deliverResponse(JsonRequest.java:90)
+05-07 23:33:39.931 W/System.err( 2429): 	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:102)
+05-07 23:33:39.931 W/System.err( 2429): 	at android.os.Handler.handleCallback(Handler.java:938)
+05-07 23:33:39.931 W/System.err( 2429): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+05-07 23:33:39.931 W/System.err( 2429): 	at android.os.Looper.loopOnce(Looper.java:201)
+05-07 23:33:39.931 W/System.err( 2429): 	at android.os.Looper.loop(Looper.java:288)
+05-07 23:33:39.931 W/System.err( 2429): 	at com.android.server.SystemServer.run(SystemServer.java:929)
+05-07 23:33:39.931 W/System.err( 2429): 	at com.android.server.SystemServer.main(SystemServer.java:611)
+05-07 23:33:39.931 W/System.err( 2429): 	at java.lang.reflect.Method.invoke(Native Method)
+05-07 23:33:39.931 W/System.err( 2429): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:555)
+05-07 23:33:39.931 W/System.err( 2429): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1069)
+05-07 23:33:39.934 W/System.err( 2429): org.json.JSONException: No value for errcode
+05-07 23:33:39.934 W/System.err( 2429): 	at org.json.JSONObject.get(JSONObject.java:403)
+05-07 23:33:39.934 W/System.err( 2429): 	at org.json.JSONObject.getInt(JSONObject.java:492)
+05-07 23:33:39.934 W/System.err( 2429): 	at com.android.server.vapi.VApiRequestListener.onResponse(VApiRequestListener.java:20)
+05-07 23:33:39.934 W/System.err( 2429): 	at com.android.server.vapi.VApiRequestListener.onResponse(VApiRequestListener.java:13)
+05-07 23:33:39.934 W/System.err( 2429): 	at com.android.volley.toolbox.JsonRequest.deliverResponse(JsonRequest.java:90)
+05-07 23:33:39.934 W/System.err( 2429): 	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:102)
+05-07 23:33:39.934 W/System.err( 2429): 	at android.os.Handler.handleCallback(Handler.java:938)
+05-07 23:33:39.934 W/System.err( 2429): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+05-07 23:33:39.934 W/System.err( 2429): 	at android.os.Looper.loopOnce(Looper.java:201)
+05-07 23:33:39.934 W/System.err( 2429): 	at android.os.Looper.loop(Looper.java:288)
+05-07 23:33:39.934 W/System.err( 2429): 	at com.android.server.SystemServer.run(SystemServer.java:929)
+05-07 23:33:39.934 W/System.err( 2429): 	at com.android.server.SystemServer.main(SystemServer.java:611)
+05-07 23:33:39.934 W/System.err( 2429): 	at java.lang.reflect.Method.invoke(Native Method)
+05-07 23:33:39.934 W/System.err( 2429): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:555)
+05-07 23:33:39.934 W/System.err( 2429): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1069)
+05-07 23:33:40.695 D/PackageManager( 2429): vulkan version is 0
+05-07 23:33:40.695 D/PackageManager( 2429): vulkan version is 0
+05-07 23:33:40.702 W/ActivityManager( 2429): callingPackage:com.android.vending, packageName:com.google.android.gms, name:com.google.android.gms.chimera.PersistentApiService, isSkip: true
+05-07 23:33:41.510 D/opengl-gc( 2307): Check pid 3171: running 1
+05-07 23:33:41.508 I/opengl-gc( 2307): type=1400 audit(0.0:11333): avc: denied { sys_ptrace } for capability=19 scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=capability permissive=1
+05-07 23:33:42.884 I/PackageManager( 2429): type=1400 audit(0.0:11334): avc: denied { connectto } for path="/dev/socket/property_service" scontext=u:r:system_server:s0 tcontext=u:r:kernel:s0 tclass=unix_stream_socket permissive=1
+05-07 23:33:42.884 I/init    (    1): type=1400 audit(0.0:11335): avc: denied { read } for name="udc" dev="sysfs" ino=3913 scontext=u:r:kernel:s0 tcontext=u:object_r:sysfs:s0 tclass=dir permissive=1
+05-07 23:33:42.884 I/init    (    1): type=1400 audit(0.0:11336): avc: denied { open } for path="/sys/class/udc" dev="sysfs" ino=3913 scontext=u:r:kernel:s0 tcontext=u:object_r:sysfs:s0 tclass=dir permissive=1
+05-07 23:33:43.084 E/TaskPersister( 2429): File error accessing recents directory (directory doesn't exist?).
+05-07 23:33:44.463 W/ding:backgroun( 6755): Reducing the number of considered missed Gc histogram windows from 161 to 100
+05-07 23:33:47.834 I/keystore2( 2110): keystore2::watchdog: Watchdog thread idle -> terminating. Have a great day.
+05-07 23:33:48.470 D/BoundBrokerSvc( 2754): onUnbind: Intent { act=com.google.android.gms.presencemanager.service.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentApiService }
+05-07 23:33:48.475 D/BoundBrokerSvc( 2754): onUnbind: Intent { act=com.google.android.gms.presencemanager.service.INTERNAL_IDENTITY dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentApiService }
+05-07 23:33:48.472 I/Binder:2429_1A( 2429): type=1400 audit(0.0:11337): avc: denied { map_write } for scontext=u:r:system_server:s0 tcontext=u:r:init:s0 tclass=bpf permissive=1
+05-07 23:33:51.340 I/netd    ( 2219): type=1400 audit(0.0:11338): avc: denied { create } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=netlink_tcpdiag_socket permissive=1
+05-07 23:33:51.340 I/netd    ( 2219): type=1400 audit(0.0:11339): avc: denied { connect } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=netlink_tcpdiag_socket permissive=1
+05-07 23:33:51.340 I/netd    ( 2219): type=1400 audit(0.0:11340): avc: denied { write } for path="socket:[56615]" dev="sockfs" ino=56615 scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=netlink_tcpdiag_socket permissive=1
+05-07 23:33:51.340 I/netd    ( 2219): type=1400 audit(0.0:11341): avc: denied { nlmsg_read } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=netlink_tcpdiag_socket permissive=1
+05-07 23:33:51.513 D/opengl-gc( 2307): Check pid 3171: running 1

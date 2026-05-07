@@ -1,0 +1,1582 @@
+05-08 01:34:27.139 I/ActivityTaskManager( 2432): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity bnds=[145,148][599,462]} from uid 10019, pid 2782
+05-08 01:34:27.168 I/ActivityManager( 2432): Start proc 7549:com.HolydayStudios.Firestone/u0a117 for pre-top-activity {com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity}
+05-08 01:34:27.189 V/zygiskd64( 2222): zygiskd::zygiskd: New daemon action: GetProcessFlags
+05-08 01:34:27.201 D/ProcessState( 7554): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-08 01:34:27.214 V/zygiskd64( 2222): zygiskd::zygiskd: Flags for UID 10117: ProcessFlags(PROCESS_ROOT_IS_MAGISK)
+05-08 01:34:27.304 D/ProcessState( 7549): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-08 01:34:27.305 D/VectorZygiskBridge( 2432): onTransact: action=GET_BINDER, callerUid=10117
+05-08 01:34:27.321 V/VectorDeopter( 7549): Skipping deopt for android.app.Instrumentation#newApplication: android.app.Instrumentation.newApplication [class java.lang.ClassLoader, class android.content.Context]
+05-08 01:34:27.321 V/VectorDeopter( 7549): Skipping deopt for android.app.LoadedApk#makeApplicationInner: android.app.LoadedApk.makeApplicationInner [boolean, class android.app.Instrumentation, boolean]
+05-08 01:34:27.321 V/VectorDeopter( 7549): Skipping deopt for android.app.LoadedApk#makeApplicationInner: android.app.LoadedApk.makeApplicationInner [boolean, class android.app.Instrumentation]
+05-08 01:34:27.322 V/Vector  ( 7549): Loading Vector/Xposed for com.HolydayStudios.Firestone (UID: 10117)
+05-08 01:34:27.335 D/VectorModuleManager( 7549): Loading module com.firestone.hooks
+05-08 01:34:27.341 V/VectorModuleManager( 7549): Loading class class com.template.lsposed.ModuleEntry
+05-08 01:34:27.342 I/FirestoneHooks( 7549): com.firestone.hooks: Loaded in process=com.HolydayStudios.Firestone, framework=Vector 2.0, api=101
+05-08 01:34:27.342 D/VectorModuleManager( 7549): Loaded module com.firestone.hooks successfully.
+05-08 01:34:27.443 I/FirestoneHooks( 7549): com.firestone.hooks: onPackageLoaded com.HolydayStudios.Firestone process=com.HolydayStudios.Firestone firstPackage=true dataDir=/data/user/0/com.HolydayStudios.Firestone
+05-08 01:34:27.443 I/FirestoneHooks( 7549): com.firestone.hooks: Hooked Application.attach
+05-08 01:34:27.444 I/FirestoneHooks( 7549): com.firestone.hooks: Hooked Activity.onResume sample
+05-08 01:34:27.444 D/VectorLifecycle( 7549): dispatchPackageReady h1@1fcc52e
+05-08 01:34:27.444 I/FirestoneHooks( 7549): com.firestone.hooks: onPackageReady com.HolydayStudios.Firestone process=com.HolydayStudios.Firestone firstPackage=true dataDir=/data/user/0/com.HolydayStudios.Firestone
+05-08 01:34:27.488 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:27.488 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.onApplicationContextReady(ModuleEntry.java:121)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$installApplicationAttachHook$0(ModuleEntry.java:98)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$k7l8Sx5uLWPn571rH1-O9e485pE(Unknown Source:0)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda4.intercept(D8$$SyntheticClass:0)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at j2.a(r8-map-id-656caac1f55b126a25f1b31ace47897cbcfbe4c9e48877a810a6cd8f57690890:41)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at j2.proceed(r8-map-id-656caac1f55b126a25f1b31ace47897cbcfbe4c9e48877a810a6cd8f57690890:1)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at y2.callback(r8-map-id-656caac1f55b126a25f1b31ace47897cbcfbe4c9e48877a810a6cd8f57690890:105)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at Vector_.attach(Unknown Source:11)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at android.app.Instrumentation.newApplication(Instrumentation.java:1191)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at android.app.LoadedApk.makeApplication(LoadedApk.java:1356)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6896)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at android.app.ActivityThread.access$1500(ActivityThread.java:259)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2094)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at android.os.Handler.dispatchMessage(Handler.java:106)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at android.os.Looper.loopOnce(Looper.java:201)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at android.os.Looper.loop(Looper.java:288)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at android.app.ActivityThread.main(ActivityThread.java:8043)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at java.lang.reflect.Method.invoke(Native Method)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:555)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1091)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:27.488 W/FirestoneHooks( 7549): 	... 25 more
+05-08 01:34:27.490 I/FirestoneHooks( 7549): com.firestone.hooks: Detected engine=UNITY evidence=[libil2cpp.so, libunity.so, libmain.so]
+05-08 01:34:27.498 I/shadowhook_tag( 7549): linker: hook soinfo::call_constructors
+05-08 01:34:27.498 I/shadowhook_tag( 7549): a64 rewrite: type 0, inst d10283ff
+05-08 01:34:27.498 I/shadowhook_tag( 7549): elf: find phdr gap 7f9d2cc070-7f9d2cd000(load_bias 7f9d1aa000, 122070-123000)
+05-08 01:34:27.498 I/shadowhook_tag( 7549): elf: find phdr gap 7f9d2e2e38-7f9d2e3000(load_bias 7f9d1aa000, 138e38-139000)
+05-08 01:34:27.498 I/shadowhook_tag( 7549): elf: alloc addr 7f9d2cc070(load_bias 7f9d1aa000, 122070), size 16, idx [0, 4)
+05-08 01:34:27.498 I/shadowhook_tag( 7549): island: alloc in ELF-gap, addr 7f9d2cc070, size 16, pc 7f9d1fbfd4, range [7f951fbfd4, 7fa51fbfd0]
+05-08 01:34:27.498 I/shadowhook_tag( 7549): a64: hook (with island) OK. target 7f9d1fbfd4 -> island-exit 7f9d2cc070 -> new 7ca61a1fc0 -> enter 7f8f8b8000 -> resume 7f9d1fbfd8
+05-08 01:34:27.498 I/shadowhook_tag( 7549): switch: hook invisible OK: target_addr 7f9d1fbfd4, new_addr 7ca61a1fc0
+05-08 01:34:27.498 I/shadowhook_tag( 7549): linker: hook soinfo::call_destructors
+05-08 01:34:27.498 I/shadowhook_tag( 7549): a64 rewrite: type 0, inst d10283ff
+05-08 01:34:27.498 I/shadowhook_tag( 7549): elf: alloc addr 7f9d2cc080(load_bias 7f9d1aa000, 122080), size 16, idx [4, 8)
+05-08 01:34:27.498 I/shadowhook_tag( 7549): island: alloc in ELF-gap, addr 7f9d2cc080, size 16, pc 7f9d1fc3bc, range [7f951fc3bc, 7fa51fc3b8]
+05-08 01:34:27.498 I/shadowhook_tag( 7549): a64: hook (with island) OK. target 7f9d1fc3bc -> island-exit 7f9d2cc080 -> new 7ca61a2738 -> enter 7f8f8b8040 -> resume 7f9d1fc3c0
+05-08 01:34:27.498 I/shadowhook_tag( 7549): switch: hook invisible OK: target_addr 7f9d1fc3bc, new_addr 7ca61a2738
+05-08 01:34:27.498 I/shadowhook_tag( 7549): linker: soinfo memory scan pre OK. load_bias 208, name 216, phdr 0, phnum 8, called 248
+05-08 01:34:27.498 I/shadowhook_tag( 7549): linker: soinfo memory scan post OK
+05-08 01:34:27.499 I/shadowhook_tag( 7549): linker: hook ctors and dtors OK
+05-08 01:34:27.499 I/shadowhook_tag( 7549): task: start linker DL-init/fini monitor ...
+05-08 01:34:27.499 E/shadowhook_tag( 7549): shadowhook version 2.0.0: shadowhook init(default_mode: SHARED, debuggable: true), return: 0, real-init: yes
+05-08 01:34:27.499 I/FirestoneHooks( 7549): ShadowHook ready: version=shadowhook version 2.0.0, arch=arm64
+05-08 01:34:27.500 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7ca60af000, name /data/app/~~WfkyOpLOFwrV0taetA161w==/com.firestone.hooks-jXnrBC7duW7668MvUMf8MQ==/base.apk!/lib/arm64-v8a/libfirestonehooks.so
+05-08 01:34:27.500 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7ca60af000, name /data/app/~~WfkyOpLOFwrV0taetA161w==/com.firestone.hooks-jXnrBC7duW7668MvUMf8MQ==/base.apk!/lib/arm64-v8a/libfirestonehooks.so
+05-08 01:34:27.500 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7ca60af000, name /data/app/~~WfkyOpLOFwrV0taetA161w==/com.firestone.hooks-jXnrBC7duW7668MvUMf8MQ==/base.apk!/lib/arm64-v8a/libfirestonehooks.so
+05-08 01:34:27.501 I/FirestoneHooks( 7549): JNI_OnLoad firestonehooks
+05-08 01:34:27.501 I/FirestoneHooks( 7549): Loaded libfirestonehooks.so
+05-08 01:34:27.501 I/FirestoneHooks( 7549): install worker package=com.HolydayStudios.Firestone settings=/data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json shadowhook=shadowhook version 2.0.0
+05-08 01:34:27.501 E/shadowhook_tag( 7549): shadowhook version 2.0.0: shadowhook init(default_mode: SHARED, debuggable: false), return: 0, real-init: no
+05-08 01:34:27.502 I/FirestoneHooks( 7549): settings refresh thread path=/data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json
+05-08 01:34:27.514 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:27.514 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:27.514 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:27.514 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:27.514 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:27.514 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:27.514 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:27.514 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:27.514 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:27.514 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:27.514 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:27.514 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:27.514 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:27.514 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:27.514 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:27.514 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:27.514 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:27.514 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:27.514 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:27.514 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:27.516 I/FirestoneHooks( 7549): com.firestone.hooks: Synced settings to /data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json
+05-08 01:34:27.517 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7c9f9d1000, name /data/system/etc/mumu-configs/shared_libs/libc_llite.so
+05-08 01:34:27.517 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7c9f9d1000, name /data/system/etc/mumu-configs/shared_libs/libc_llite.so
+05-08 01:34:27.518 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7c9f9d1000, name /data/system/etc/mumu-configs/shared_libs/libc_llite.so
+05-08 01:34:27.519 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7ca2cf8000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_DynamiteLoader_installtime.odex
+05-08 01:34:27.519 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7ca2cf8000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_DynamiteLoader_installtime.odex
+05-08 01:34:27.519 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7ca2cf8000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_DynamiteLoader_installtime.odex
+05-08 01:34:27.520 I/shadowhook_tag( 7549): linker: call_dtors pre, load_bias 7ca2cf8000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_DynamiteLoader_installtime.odex
+05-08 01:34:27.520 I/shadowhook_tag( 7549): linker: call_dtors post, load_bias 7ca2cf8000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_DynamiteLoader_installtime.odex
+05-08 01:34:27.520 I/shadowhook_tag( 7549): task: call_dtors() post callback. load_bias 7ca2cf8000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_DynamiteLoader_installtime.odex
+05-08 01:34:27.525 D/VectorLifecycle( 7549): dispatchPackageReady h1@4061cf8
+05-08 01:34:27.529 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7ca28c8000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_MeasurementDynamite_installtime.odex
+05-08 01:34:27.529 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7ca28c8000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_MeasurementDynamite_installtime.odex
+05-08 01:34:27.529 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7ca28c8000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_MeasurementDynamite_installtime.odex
+05-08 01:34:27.531 I/shadowhook_tag( 7549): linker: call_dtors pre, load_bias 7ca28c8000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_MeasurementDynamite_installtime.odex
+05-08 01:34:27.531 I/shadowhook_tag( 7549): linker: call_dtors post, load_bias 7ca28c8000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_MeasurementDynamite_installtime.odex
+05-08 01:34:27.531 I/shadowhook_tag( 7549): task: call_dtors() post callback. load_bias 7ca28c8000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_MeasurementDynamite_installtime.odex
+05-08 01:34:27.539 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7ca20ee000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libmain.so
+05-08 01:34:27.539 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7ca20ee000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libmain.so
+05-08 01:34:27.539 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7ca20ee000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libmain.so
+05-08 01:34:27.542 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7c9be3e000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libunity.so
+05-08 01:34:27.542 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7c9be3e000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libunity.so
+05-08 01:34:27.553 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7c9be3e000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libunity.so
+05-08 01:34:27.572 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7c9450e000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libil2cpp.so
+05-08 01:34:27.573 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7c9450e000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libil2cpp.so
+05-08 01:34:27.573 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7c9450e000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libil2cpp.so
+05-08 01:34:27.574 V/Unity   ( 7549): Context Type: ActivityOrService
+05-08 01:34:27.598 D/hw-ProcessState( 7549): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-08 01:34:27.602 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7c9fa17000, name /system/vendor/lib64/hw/android.hardware.graphics.mapper@2.0-impl.so
+05-08 01:34:27.602 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7c9fa17000, name /system/vendor/lib64/hw/android.hardware.graphics.mapper@2.0-impl.so
+05-08 01:34:27.602 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7c9fa17000, name /system/vendor/lib64/hw/android.hardware.graphics.mapper@2.0-impl.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7c7cc61000, name /system/lib64/hw/gralloc.kona.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7c7cc61000, name /system/lib64/hw/gralloc.kona.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7c99bc2000, name /system/lib64/libOpenglSystemCommon.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7c99bc2000, name /system/lib64/libOpenglSystemCommon.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7c7a064000, name /system/lib64/libvulkan_enc.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7c7a064000, name /system/lib64/libvulkan_enc.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7c7cca5000, name /system/lib64/libandroidemu.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7c7cca5000, name /system/lib64/libandroidemu.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7c7cca5000, name /system/lib64/libandroidemu.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7c7ccc9000, name /system/lib64/lib_renderControl_enc.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7c7ccc9000, name /system/lib64/lib_renderControl_enc.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7c7ccc9000, name /system/lib64/lib_renderControl_enc.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7c7cd0c000, name /system/lib64/libdrm.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7c7cd0c000, name /system/lib64/libdrm.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7c7cd0c000, name /system/lib64/libdrm.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7c7a064000, name /system/lib64/libvulkan_enc.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7c7cd48000, name /system/lib64/libGLESv2_enc.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7c7cd48000, name /system/lib64/libGLESv2_enc.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7c7cd48000, name /system/lib64/libGLESv2_enc.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7c90072000, name /system/lib64/libGLESv1_enc.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7c90072000, name /system/lib64/libGLESv1_enc.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7c90072000, name /system/lib64/libGLESv1_enc.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7c99bc2000, name /system/lib64/libOpenglSystemCommon.so
+05-08 01:34:27.605 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7c7cc61000, name /system/lib64/hw/gralloc.kona.so
+05-08 01:34:27.606 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7c9d643000, name /system/vendor/lib64/hw/android.hardware.graphics.allocator@2.0-impl.so
+05-08 01:34:27.606 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7c9d643000, name /system/vendor/lib64/hw/android.hardware.graphics.allocator@2.0-impl.so
+05-08 01:34:27.606 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7c9d643000, name /system/vendor/lib64/hw/android.hardware.graphics.allocator@2.0-impl.so
+05-08 01:34:27.656 I/ActivityTaskManager( 2432): Displayed com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity: +516ms
+05-08 01:34:27.664 I/Unity   ( 7549): MemoryManager: Using 'Dynamic Heap' Allocator.
+05-08 01:34:27.690 I/Unity   ( 7549): SystemInfo CPU = ARM64 FP ASIMD AES, Cores = 6, Memory = 12007mb
+05-08 01:34:27.690 I/Unity   ( 7549): SystemInfo ARM big.LITTLE configuration: 6 big (mask: 0x3f), 0 little (mask: 0x0)
+05-08 01:34:27.690 I/Unity   ( 7549): ApplicationInfo 'com.HolydayStudios.Firestone', Version '3.43', Min API Level '23', Target API Level '36'
+05-08 01:34:27.690 I/Unity   ( 7549): Built from '6000.0/staging' branch, Version '6000.0.47f1 (2ad1ed33fd3b)', Build type 'Release', Scripting Backend 'il2cpp', CPU 'arm64-v8a', Stripping 'Enabled'
+05-08 01:34:27.690 I/Unity   ( 7549): Device Model 'Samsung SM-A5460', OS 'Android OS 12 (API 32)'
+05-08 01:34:27.754 I/FirestoneHooks( 7549): libil2cpp.so base=0x7c9450e000
+05-08 01:34:27.754 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(libil2cpp.so, EasyWin.CentralCurrencyHandler.HaveCurrency, 0x7c970b3e48, 0x7ca60cc0cc, 9) ...
+05-08 01:34:27.754 I/shadowhook_tag( 7549): switch: create, target_addr 7c970b3e48
+05-08 01:34:27.754 I/shadowhook_tag( 7549): hub: create trampo at 7f85af6000, size 96 + 16 = 112
+05-08 01:34:27.754 I/shadowhook_tag( 7549): hub: add(new) func 7ca60cc0cc
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64 rewrite: type 0, inst fc1d0fe8
+05-08 01:34:27.755 I/shadowhook_tag( 7549): linker: get dlinfo by target addr: target_addr 0x7c970b3e48, sym_name (NULL), sym_sz 0, load_bias 7c9450e000, pathname /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libil2cpp.so
+05-08 01:34:27.755 I/shadowhook_tag( 7549): elf: find phdr gap 7c962cc000-7c962cf000(load_bias 7c9450e000, 1dbe000-1dc1000)
+05-08 01:34:27.755 I/shadowhook_tag( 7549): elf: find phdr gap 7c993048b0-7c99308000(load_bias 7c9450e000, 4df68b0-4dfa000)
+05-08 01:34:27.755 I/shadowhook_tag( 7549): elf: find phdr gap 7c99620000-7c99623000(load_bias 7c9450e000, 5112000-5115000)
+05-08 01:34:27.755 I/shadowhook_tag( 7549): elf: find phdr gap 7c99b6cde0-7c99b6d000(load_bias 7c9450e000, 565ede0-565f000)
+05-08 01:34:27.755 I/shadowhook_tag( 7549): elf: alloc addr 7c962cc000(load_bias 7c9450e000, 1dbe000), size 16, idx [0, 4)
+05-08 01:34:27.755 I/shadowhook_tag( 7549): island: alloc in ELF-gap, addr 7c962cc000, size 16, pc 7c970b3e48, range [7c8f0b3e48, 7c9f0b3e44]
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64: hook (with island) OK. target 7c970b3e48 -> island-exit 7c962cc000 -> new 7f85af6000 -> enter 7f8f8b8080 -> resume 7c970b3e4c
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: hook in SHARED mode OK: target_addr 7c970b3e48, new_addr 7ca60cc0cc
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(0x7c970b3e48, 0x7ca60cc0cc, 9) OK. return: 0xb400007d4fed5370
+05-08 01:34:27.755 I/FirestoneHooks( 7549): EasyWin.CentralCurrencyHandler.HaveCurrency hook installed rva=0x2ba5e48 target=0x7c970b3e48 stub=0xb400007d4fed5370 err=0 OK
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(libil2cpp.so, EasyWin.Currency.HaveCurrency, 0x7c970b3ed8, 0x7ca60cc1f4, 9) ...
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: create, target_addr 7c970b3ed8
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: create trampo at 7f85af6070, size 96 + 16 = 112
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: add(new) func 7ca60cc1f4
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64 rewrite: type 0, inst fd401c01
+05-08 01:34:27.755 I/shadowhook_tag( 7549): elf: alloc addr 7c962cc010(load_bias 7c9450e000, 1dbe010), size 16, idx [4, 8)
+05-08 01:34:27.755 I/shadowhook_tag( 7549): island: alloc in ELF-gap, addr 7c962cc010, size 16, pc 7c970b3ed8, range [7c8f0b3ed8, 7c9f0b3ed4]
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64: hook (with island) OK. target 7c970b3ed8 -> island-exit 7c962cc010 -> new 7f85af6070 -> enter 7f8f8b80c0 -> resume 7c970b3edc
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: hook in SHARED mode OK: target_addr 7c970b3ed8, new_addr 7ca60cc1f4
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(0x7c970b3ed8, 0x7ca60cc1f4, 9) OK. return: 0xb400007d4fed2c10
+05-08 01:34:27.755 I/FirestoneHooks( 7549): EasyWin.Currency.HaveCurrency hook installed rva=0x2ba5ed8 target=0x7c970b3ed8 stub=0xb400007d4fed2c10 err=0 OK
+05-08 01:34:27.755 I/FirestoneHooks( 7549): easy-win FreeCurrency toggle active; affordability hooks installed
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(libil2cpp.so, GodMode.BattleHero.IsImmune, 0x7c96fce170, 0x7ca60cc5e0, 9) ...
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: create, target_addr 7c96fce170
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: create trampo at 7f85af60e0, size 96 + 16 = 112
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: add(new) func 7ca60cc5e0
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64 rewrite: type 0, inst f81e0ffe
+05-08 01:34:27.755 I/shadowhook_tag( 7549): elf: alloc addr 7c962cc020(load_bias 7c9450e000, 1dbe020), size 16, idx [8, 12)
+05-08 01:34:27.755 I/shadowhook_tag( 7549): island: alloc in ELF-gap, addr 7c962cc020, size 16, pc 7c96fce170, range [7c8efce170, 7c9efce16c]
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64: hook (with island) OK. target 7c96fce170 -> island-exit 7c962cc020 -> new 7f85af60e0 -> enter 7f8f8b8100 -> resume 7c96fce174
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: hook in SHARED mode OK: target_addr 7c96fce170, new_addr 7ca60cc5e0
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(0x7c96fce170, 0x7ca60cc5e0, 9) OK. return: 0xb400007d4fed24c0
+05-08 01:34:27.755 I/FirestoneHooks( 7549): GodMode.BattleHero.IsImmune hook installed rva=0x2ac0170 target=0x7c96fce170 stub=0xb400007d4fed24c0 err=0 OK
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(libil2cpp.so, GameSpeed.Time.set_timeScale, 0x7c98f1caa4, 0x7ca60cc938, 9) ...
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: create, target_addr 7c98f1caa4
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: create trampo at 7f85af6150, size 96 + 16 = 112
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: add(new) func 7ca60cc938
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64 rewrite: type 0, inst fc1e0fe8
+05-08 01:34:27.755 I/shadowhook_tag( 7549): elf: alloc addr 7c962cc030(load_bias 7c9450e000, 1dbe030), size 16, idx [12, 16)
+05-08 01:34:27.755 I/shadowhook_tag( 7549): island: alloc in ELF-gap, addr 7c962cc030, size 16, pc 7c98f1caa4, range [7c90f1caa4, 7ca0f1caa0]
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64: hook (with island) OK. target 7c98f1caa4 -> island-exit 7c962cc030 -> new 7f85af6150 -> enter 7f8f8b8140 -> resume 7c98f1caa8
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: hook in SHARED mode OK: target_addr 7c98f1caa4, new_addr 7ca60cc938
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(0x7c98f1caa4, 0x7ca60cc938, 9) OK. return: 0xb400007d4fed4830
+05-08 01:34:27.755 I/FirestoneHooks( 7549): GameSpeed.Time.set_timeScale hook installed rva=0x4a0eaa4 target=0x7c98f1caa4 stub=0xb400007d4fed4830 err=0 OK
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(libil2cpp.so, GameSpeed.Time.get_fixedDeltaTime, 0x7c98f1c9f4, 0x7ca60cc9cc, 9) ...
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: create, target_addr 7c98f1c9f4
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: create trampo at 7f85af61c0, size 96 + 16 = 112
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: add(new) func 7ca60cc9cc
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64 rewrite: type 0, inst a9bf4ffe
+05-08 01:34:27.755 I/shadowhook_tag( 7549): elf: alloc addr 7c962cc040(load_bias 7c9450e000, 1dbe040), size 16, idx [16, 20)
+05-08 01:34:27.755 I/shadowhook_tag( 7549): island: alloc in ELF-gap, addr 7c962cc040, size 16, pc 7c98f1c9f4, range [7c90f1c9f4, 7ca0f1c9f0]
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64: hook (with island) OK. target 7c98f1c9f4 -> island-exit 7c962cc040 -> new 7f85af61c0 -> enter 7f8f8b8180 -> resume 7c98f1c9f8
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: hook in SHARED mode OK: target_addr 7c98f1c9f4, new_addr 7ca60cc9cc
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(0x7c98f1c9f4, 0x7ca60cc9cc, 9) OK. return: 0xb400007d4fed69f0
+05-08 01:34:27.755 I/FirestoneHooks( 7549): GameSpeed.Time.get_fixedDeltaTime hook installed rva=0x4a0e9f4 target=0x7c98f1c9f4 stub=0xb400007d4fed69f0 err=0 OK
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(libil2cpp.so, GameSpeed.TeamLogic.ApplyWaveTransitionSpeedModifierToDuration, 0x7c96fd79dc, 0x7ca60cca8c, 9) ...
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: create, target_addr 7c96fd79dc
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: create trampo at 7f85af6230, size 96 + 16 = 112
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: add(new) func 7ca60cca8c
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64 rewrite: type 0, inst fc1e0fe8
+05-08 01:34:27.755 I/shadowhook_tag( 7549): elf: alloc addr 7c962cc050(load_bias 7c9450e000, 1dbe050), size 16, idx [20, 24)
+05-08 01:34:27.755 I/shadowhook_tag( 7549): island: alloc in ELF-gap, addr 7c962cc050, size 16, pc 7c96fd79dc, range [7c8efd79dc, 7c9efd79d8]
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64: hook (with island) OK. target 7c96fd79dc -> island-exit 7c962cc050 -> new 7f85af6230 -> enter 7f8f8b81c0 -> resume 7c96fd79e0
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: hook in SHARED mode OK: target_addr 7c96fd79dc, new_addr 7ca60cca8c
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(0x7c96fd79dc, 0x7ca60cca8c, 9) OK. return: 0xb400007d4fed2ee0
+05-08 01:34:27.755 I/FirestoneHooks( 7549): GameSpeed.TeamLogic.ApplyWaveTransitionSpeedModifierToDuration hook installed rva=0x2ac99dc target=0x7c96fd79dc stub=0xb400007d4fed2ee0 err=0 OK
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(libil2cpp.so, GameSpeed.TeamLogic.set_WaveTransitionSpeedMultiplier, 0x7c96fd7814, 0x7ca60ccb5c, 9) ...
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: create, target_addr 7c96fd7814
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: create trampo at 7f85af62a0, size 96 + 16 = 112
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: add(new) func 7ca60ccb5c
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64 rewrite: type 0, inst fc1e0fe8
+05-08 01:34:27.755 I/shadowhook_tag( 7549): elf: alloc addr 7c962cc060(load_bias 7c9450e000, 1dbe060), size 16, idx [24, 28)
+05-08 01:34:27.755 I/shadowhook_tag( 7549): island: alloc in ELF-gap, addr 7c962cc060, size 16, pc 7c96fd7814, range [7c8efd7814, 7c9efd7810]
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64: hook (with island) OK. target 7c96fd7814 -> island-exit 7c962cc060 -> new 7f85af62a0 -> enter 7f8f8b8200 -> resume 7c96fd7818
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: hook in SHARED mode OK: target_addr 7c96fd7814, new_addr 7ca60ccb5c
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(0x7c96fd7814, 0x7ca60ccb5c, 9) OK. return: 0xb400007d4fed4f80
+05-08 01:34:27.755 I/FirestoneHooks( 7549): GameSpeed.TeamLogic.set_WaveTransitionSpeedMultiplier hook installed rva=0x2ac9814 target=0x7c96fd7814 stub=0xb400007d4fed4f80 err=0 OK
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(libil2cpp.so, GameSpeed.Spine.AnimationState.set_TimeScale, 0x7c98878ac8, 0x7ca60ccbf0, 9) ...
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: create, target_addr 7c98878ac8
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: create trampo at 7f85af6310, size 96 + 16 = 112
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: add(new) func 7ca60ccbf0
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64 rewrite: type 0, inst bd006c00
+05-08 01:34:27.755 I/shadowhook_tag( 7549): elf: alloc addr 7c962cc070(load_bias 7c9450e000, 1dbe070), size 16, idx [28, 32)
+05-08 01:34:27.755 I/shadowhook_tag( 7549): island: alloc in ELF-gap, addr 7c962cc070, size 16, pc 7c98878ac8, range [7c90878ac8, 7ca0878ac4]
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64: hook (with island) OK. target 7c98878ac8 -> island-exit 7c962cc070 -> new 7f85af6310 -> enter 7f8f8b8240 -> resume 7c98878acc
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: hook in SHARED mode OK: target_addr 7c98878ac8, new_addr 7ca60ccbf0
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(0x7c98878ac8, 0x7ca60ccbf0, 9) OK. return: 0xb400007d4fed62a0
+05-08 01:34:27.755 I/FirestoneHooks( 7549): GameSpeed.Spine.AnimationState.set_TimeScale hook installed rva=0x436aac8 target=0x7c98878ac8 stub=0xb400007d4fed62a0 err=0 OK
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(libil2cpp.so, OHK.BattleController.ApplyDamage.short, 0x7c96cd2e00, 0x7ca60ccfac, 9) ...
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: create, target_addr 7c96cd2e00
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: create trampo at 7f85af6380, size 96 + 16 = 112
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: add(new) func 7ca60ccfac
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64 rewrite: type 0, inst 2a0503e6
+05-08 01:34:27.755 I/shadowhook_tag( 7549): elf: alloc addr 7c962cc080(load_bias 7c9450e000, 1dbe080), size 16, idx [32, 36)
+05-08 01:34:27.755 I/shadowhook_tag( 7549): island: alloc in ELF-gap, addr 7c962cc080, size 16, pc 7c96cd2e00, range [7c8ecd2e00, 7c9ecd2dfc]
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64: hook (with island) OK. target 7c96cd2e00 -> island-exit 7c962cc080 -> new 7f85af6380 -> enter 7f8f8b8280 -> resume 7c96cd2e04
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: hook in SHARED mode OK: target_addr 7c96cd2e00, new_addr 7ca60ccfac
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(0x7c96cd2e00, 0x7ca60ccfac, 9) OK. return: 0xb400007d4fed5a30
+05-08 01:34:27.755 I/FirestoneHooks( 7549): OHK.BattleController.ApplyDamage.short hook installed rva=0x27c4e00 target=0x7c96cd2e00 stub=0xb400007d4fed5a30 err=0 OK
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(libil2cpp.so, OHK.BattleController.ApplyDamage.full, 0x7c96cd2e10, 0x7ca60cd0f0, 9) ...
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: create, target_addr 7c96cd2e10
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: create trampo at 7f85af63f0, size 96 + 16 = 112
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: add(new) func 7ca60cd0f0
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64 rewrite: type 0, inst fc190fea
+05-08 01:34:27.755 I/shadowhook_tag( 7549): elf: alloc addr 7c962cc090(load_bias 7c9450e000, 1dbe090), size 16, idx [36, 40)
+05-08 01:34:27.755 I/shadowhook_tag( 7549): island: alloc in ELF-gap, addr 7c962cc090, size 16, pc 7c96cd2e10, range [7c8ecd2e10, 7c9ecd2e0c]
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64: hook (with island) OK. target 7c96cd2e10 -> island-exit 7c962cc090 -> new 7f85af63f0 -> enter 7f8f8b82c0 -> resume 7c96cd2e14
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: hook in SHARED mode OK: target_addr 7c96cd2e10, new_addr 7ca60cd0f0
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(0x7c96cd2e10, 0x7ca60cd0f0, 9) OK. return: 0xb400007d4fed6600
+05-08 01:34:27.755 I/FirestoneHooks( 7549): OHK.BattleController.ApplyDamage.full hook installed rva=0x27c4e10 target=0x7c96cd2e10 stub=0xb400007d4fed6600 err=0 OK
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(libil2cpp.so, OHK.BattleCharacter.ReceiveDamage, 0x7c96eefac8, 0x7ca60cd240, 9) ...
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: create, target_addr 7c96eefac8
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: create trampo at 7f85af6460, size 96 + 16 = 112
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: add(new) func 7ca60cd240
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64 rewrite: type 0, inst a9bc7bfd
+05-08 01:34:27.755 I/shadowhook_tag( 7549): elf: alloc addr 7c962cc0a0(load_bias 7c9450e000, 1dbe0a0), size 16, idx [40, 44)
+05-08 01:34:27.755 I/shadowhook_tag( 7549): island: alloc in ELF-gap, addr 7c962cc0a0, size 16, pc 7c96eefac8, range [7c8eeefac8, 7c9eeefac4]
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64: hook (with island) OK. target 7c96eefac8 -> island-exit 7c962cc0a0 -> new 7f85af6460 -> enter 7f8f8b8300 -> resume 7c96eefacc
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: hook in SHARED mode OK: target_addr 7c96eefac8, new_addr 7ca60cd240
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(0x7c96eefac8, 0x7ca60cd240, 9) OK. return: 0xb400007d4fed72f0
+05-08 01:34:27.755 I/FirestoneHooks( 7549): OHK.BattleCharacter.ReceiveDamage hook installed rva=0x29e1ac8 target=0x7c96eefac8 stub=0xb400007d4fed72f0 err=0 OK
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(libil2cpp.so, AttackSpeed.CharacterBattleLogic.FillAttackSpeedTimer, 0x7c96fd62e8, 0x7ca60cd6c4, 9) ...
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: create, target_addr 7c96fd62e8
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: create trampo at 7f85af64d0, size 96 + 16 = 112
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: add(new) func 7ca60cd6c4
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64 rewrite: type 0, inst d10203ff
+05-08 01:34:27.755 I/shadowhook_tag( 7549): elf: alloc addr 7c962cc0b0(load_bias 7c9450e000, 1dbe0b0), size 16, idx [44, 48)
+05-08 01:34:27.755 I/shadowhook_tag( 7549): island: alloc in ELF-gap, addr 7c962cc0b0, size 16, pc 7c96fd62e8, range [7c8efd62e8, 7c9efd62e4]
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64: hook (with island) OK. target 7c96fd62e8 -> island-exit 7c962cc0b0 -> new 7f85af64d0 -> enter 7f8f8b8340 -> resume 7c96fd62ec
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: hook in SHARED mode OK: target_addr 7c96fd62e8, new_addr 7ca60cd6c4
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(0x7c96fd62e8, 0x7ca60cd6c4, 9) OK. return: 0xb400007d4fed6ba0
+05-08 01:34:27.755 I/FirestoneHooks( 7549): AttackSpeed.CharacterBattleLogic.FillAttackSpeedTimer hook installed rva=0x2ac82e8 target=0x7c96fd62e8 stub=0xb400007d4fed6ba0 err=0 OK
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(libil2cpp.so, AttackSpeed.BattleMainHero.CalculateAttackSpeedTotal, 0x7c96fd0af8, 0x7ca60cd804, 9) ...
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: create, target_addr 7c96fd0af8
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: create trampo at 7f85af6540, size 96 + 16 = 112
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: add(new) func 7ca60cd804
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64 rewrite: type 0, inst d101c3ff
+05-08 01:34:27.755 I/shadowhook_tag( 7549): elf: alloc addr 7c962cc0c0(load_bias 7c9450e000, 1dbe0c0), size 16, idx [48, 52)
+05-08 01:34:27.755 I/shadowhook_tag( 7549): island: alloc in ELF-gap, addr 7c962cc0c0, size 16, pc 7c96fd0af8, range [7c8efd0af8, 7c9efd0af4]
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64: hook (with island) OK. target 7c96fd0af8 -> island-exit 7c962cc0c0 -> new 7f85af6540 -> enter 7f8f8b8380 -> resume 7c96fd0afc
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: hook in SHARED mode OK: target_addr 7c96fd0af8, new_addr 7ca60cd804
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(0x7c96fd0af8, 0x7ca60cd804, 9) OK. return: 0xb400007d4fed5d00
+05-08 01:34:27.755 I/FirestoneHooks( 7549): AttackSpeed.BattleMainHero.CalculateAttackSpeedTotal hook installed rva=0x2ac2af8 target=0x7c96fd0af8 stub=0xb400007d4fed5d00 err=0 OK
+05-08 01:34:27.755 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(libil2cpp.so, AttackSpeed.BattleMainEnemy.CalculateAttackSpeedTotal, 0x7c96ef3b94, 0x7ca60cd908, 9) ...
+05-08 01:34:27.755 I/shadowhook_tag( 7549): switch: create, target_addr 7c96ef3b94
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: create trampo at 7f85af65b0, size 96 + 16 = 112
+05-08 01:34:27.755 I/shadowhook_tag( 7549): hub: add(new) func 7ca60cd908
+05-08 01:34:27.755 I/shadowhook_tag( 7549): a64 rewrite: type 0, inst d10183ff
+05-08 01:34:27.756 I/shadowhook_tag( 7549): elf: alloc addr 7c962cc0d0(load_bias 7c9450e000, 1dbe0d0), size 16, idx [52, 56)
+05-08 01:34:27.756 I/shadowhook_tag( 7549): island: alloc in ELF-gap, addr 7c962cc0d0, size 16, pc 7c96ef3b94, range [7c8eef3b94, 7c9eef3b90]
+05-08 01:34:27.756 I/shadowhook_tag( 7549): a64: hook (with island) OK. target 7c96ef3b94 -> island-exit 7c962cc0d0 -> new 7f85af65b0 -> enter 7f8f8b83c0 -> resume 7c96ef3b98
+05-08 01:34:27.756 I/shadowhook_tag( 7549): switch: hook in SHARED mode OK: target_addr 7c96ef3b94, new_addr 7ca60cd908
+05-08 01:34:27.756 I/shadowhook_tag( 7549): shadowhook: hook_func_addr(0x7c96ef3b94, 0x7ca60cd908, 9) OK. return: 0xb400007d4fed6210
+05-08 01:34:27.756 I/FirestoneHooks( 7549): AttackSpeed.BattleMainEnemy.CalculateAttackSpeedTotal hook installed rva=0x29e5b94 target=0x7c96ef3b94 stub=0xb400007d4fed6210 err=0 OK
+05-08 01:34:27.756 I/FirestoneHooks( 7549): native hook install complete result=0
+05-08 01:34:27.855 I/Unity   ( 7549): Company Name: HolydayStudios
+05-08 01:34:27.855 I/Unity   ( 7549): Product Name: Firestone
+05-08 01:34:27.857 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7c7024d000, name /system/lib64/egl/libEGL_emulation.so
+05-08 01:34:27.857 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7c7024d000, name /system/lib64/egl/libEGL_emulation.so
+05-08 01:34:27.857 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7c7024d000, name /system/lib64/egl/libEGL_emulation.so
+05-08 01:34:27.857 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7c70208000, name /system/lib64/egl/libGLESv1_CM_emulation.so
+05-08 01:34:27.857 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7c70208000, name /system/lib64/egl/libGLESv1_CM_emulation.so
+05-08 01:34:27.857 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7c70208000, name /system/lib64/egl/libGLESv1_CM_emulation.so
+05-08 01:34:27.857 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7c701c5000, name /system/lib64/egl/libGLESv2_emulation.so
+05-08 01:34:27.857 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7c701c5000, name /system/lib64/egl/libGLESv2_emulation.so
+05-08 01:34:27.857 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7c701c5000, name /system/lib64/egl/libGLESv2_emulation.so
+05-08 01:34:28.039 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:28.039 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:28.039 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:28.039 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:28.039 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:28.039 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:28.039 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:28.039 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:28.039 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:28.039 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:28.039 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:28.039 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:28.039 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:28.039 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:28.039 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:28.039 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:28.039 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:28.039 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:28.039 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:28.039 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:28.288 I/FirestoneHooks( 7549): Overlay attached to com.unity3d.player.UnityPlayerActivity
+05-08 01:34:28.572 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:28.572 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:28.572 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:28.572 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:28.572 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:28.572 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:28.572 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:28.572 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:28.572 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:28.572 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:28.572 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:28.572 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:28.572 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:28.572 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:28.572 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:28.572 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:28.572 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:28.572 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:28.572 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:28.572 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:28.694 I/ActivityTaskManager( 2432): Fully drawn com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity: +1s555ms
+05-08 01:34:29.110 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:29.110 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:29.110 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:29.110 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:29.110 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:29.110 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:29.110 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:29.110 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:29.110 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:29.110 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:29.110 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:29.110 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:29.110 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:29.110 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:29.110 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:29.110 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:29.110 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:29.110 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:29.110 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:29.110 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:29.648 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:29.648 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:29.648 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:29.648 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:29.648 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:29.648 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:29.648 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:29.648 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:29.648 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:29.648 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:29.648 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:29.648 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:29.648 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:29.648 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:29.648 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:29.648 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:29.648 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:29.648 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:29.648 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:29.648 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:30.181 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:30.181 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:30.181 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:30.181 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:30.181 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:30.181 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:30.181 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:30.181 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:30.181 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:30.181 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:30.181 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:30.181 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:30.181 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:30.181 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:30.181 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:30.181 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:30.181 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:30.181 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:30.181 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:30.181 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:30.711 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:30.711 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:30.711 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:30.711 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:30.711 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:30.711 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:30.711 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:30.711 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:30.711 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:30.711 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:30.711 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:30.711 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:30.711 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:30.711 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:30.711 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:30.711 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:30.711 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:30.711 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:30.711 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:30.711 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:31.245 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:31.245 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:31.245 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:31.245 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:31.245 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:31.245 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:31.245 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:31.245 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:31.245 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:31.245 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:31.245 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:31.245 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:31.245 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:31.245 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:31.245 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:31.245 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:31.245 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:31.245 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:31.245 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:31.245 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:31.268 I/Unity   ( 7549): <color=red>DISCONNECTED</color>
+05-08 01:34:31.268 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:31.268 I/Unity   ( 7549): LoadingGameProgress:OpenUnofficialVersionPopup()
+05-08 01:34:31.268 I/Unity   ( 7549): <>c:<Initialize>b__11_0(License)
+05-08 01:34:31.268 I/Unity   ( 7549): GooglePlay.<run>d__23:MoveNext()
+05-08 01:34:31.268 I/Unity   ( 7549): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-08 01:34:31.268 I/Unity   ( 7549): GooglePlayAPI:Initialize()
+05-08 01:34:31.268 I/Unity   ( 7549): BuildSettings:Initialize()
+05-08 01:34:31.268 I/Unity   ( 7549): <StartGameFlow>d__22:MoveNext()
+05-08 01:34:31.268 I/Unity   ( 7549): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-08 01:34:31.268 I/Unity   ( 7549): 
+05-08 01:34:31.272 I/shadowhook_tag( 7549): linker: call_ctors pre, load_bias 7b73a4b000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libFirebaseCppApp-12_10_1.so
+05-08 01:34:31.272 I/shadowhook_tag( 7549): task: call_ctors() pre callback. load_bias 7b73a4b000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libFirebaseCppApp-12_10_1.so
+05-08 01:34:31.272 I/shadowhook_tag( 7549): linker: call_ctors post, load_bias 7b73a4b000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libFirebaseCppApp-12_10_1.so
+05-08 01:34:31.281 I/Unity   ( 7549): [UNITY DEBUG] Initializing facebook.
+05-08 01:34:31.281 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:31.281 I/Unity   ( 7549): FacebookController:Initialize()
+05-08 01:34:31.281 I/Unity   ( 7549): GooglePlayAPI:InitializeDependencies()
+05-08 01:34:31.281 I/Unity   ( 7549): GooglePlayAPI:Initialize()
+05-08 01:34:31.281 I/Unity   ( 7549): BuildSettings:Initialize()
+05-08 01:34:31.281 I/Unity   ( 7549): <StartGameFlow>d__22:MoveNext()
+05-08 01:34:31.281 I/Unity   ( 7549): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-08 01:34:31.281 I/Unity   ( 7549): 
+05-08 01:34:31.290 W/UnityNotifications( 7549): No custom_notification_android_activity found, attempting to find app activity class
+05-08 01:34:31.303 I/Unity   ( 7549): SIGN IN GOOGLE IS AUTHENTICATED: False
+05-08 01:34:31.303 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:31.303 I/Unity   ( 7549): GooglePlayAPI:SignInGoogleService()
+05-08 01:34:31.303 I/Unity   ( 7549): GooglePlayAPI:InitializeLogin()
+05-08 01:34:31.303 I/Unity   ( 7549): BuildSettings:Initialize()
+05-08 01:34:31.303 I/Unity   ( 7549): <StartGameFlow>d__22:MoveNext()
+05-08 01:34:31.303 I/Unity   ( 7549): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-08 01:34:31.303 I/Unity   ( 7549): 
+05-08 01:34:31.304 I/Unity   ( 7549): PlatformID: 0
+05-08 01:34:31.304 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:31.304 I/Unity   ( 7549): BuildSettings:Initialize()
+05-08 01:34:31.304 I/Unity   ( 7549): <StartGameFlow>d__22:MoveNext()
+05-08 01:34:31.304 I/Unity   ( 7549): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-08 01:34:31.304 I/Unity   ( 7549): 
+05-08 01:34:31.332 W/ProcessStats( 2432): Tracking association SourceState{7f66f13 system/1000 BTopFgs #2885} whose proc state 2 is better than process ProcessState{5774550 com.adguard.android/10078 pkg=com.adguard.android} proc state 3 (57 skipped)
+05-08 01:34:31.352 V/com.facebook.unity.FB( 7549): SetUserAgentSuffix(Unity.18.0.0)
+05-08 01:34:31.353 W/com.facebook.unity.FB( 7549): Missing AppID or ClientToken in AndroidManifest.xml - Please update FacebookSettings in the Unity Editor and then hit "Regenerate Android Manifest"
+05-08 01:34:31.368 I/Unity   ( 7549): Using Facebook Unity SDK v18.0.0 with FBAndroidSDK/18.2.3
+05-08 01:34:31.368 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:31.368 I/Unity   ( 7549): Facebook.Unity.CompiledFacebookLoader:Start()
+05-08 01:34:31.368 I/Unity   ( 7549): 
+05-08 01:34:31.377 V/com.facebook.unity.FB( 7549): sending to Unity OnInitComplete({"key_hash":"pvwahdwO1ic\/2dv+IVj9q2p1Fk8=\n"})
+05-08 01:34:31.380 I/Unity   ( 7549):  [Play Games Plugin 2.0.0] 05/08/26 1:34:31 +08:00 DEBUG: Initializing the PlayGamesPlatform instance.
+05-08 01:34:31.380 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:31.380 I/Unity   ( 7549): GooglePlayGames.OurUtils.PlayGamesHelperObject:Update()
+05-08 01:34:31.380 I/Unity   ( 7549): 
+05-08 01:34:31.386 I/Unity   ( 7549):  [Play Games Plugin 2.0.0] 05/08/26 1:34:31 +08:00 DEBUG: Creating Android IPlayGamesClient Client
+05-08 01:34:31.386 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:31.386 I/Unity   ( 7549): GooglePlayGames.OurUtils.PlayGamesHelperObject:Update()
+05-08 01:34:31.386 I/Unity   ( 7549): 
+05-08 01:34:31.387 I/Unity   ( 7549):  [Play Games Plugin 2.0.0] 05/08/26 1:34:31 +08:00 DEBUG: Activating PlayGamesPlatform.
+05-08 01:34:31.387 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:31.387 I/Unity   ( 7549): GooglePlayGames.OurUtils.PlayGamesHelperObject:Update()
+05-08 01:34:31.387 I/Unity   ( 7549): 
+05-08 01:34:31.387 I/Unity   ( 7549):  [Play Games Plugin 2.0.0] 05/08/26 1:34:31 +08:00 DEBUG: PlayGamesPlatform activated: GooglePlayGames.PlayGamesPlatform
+05-08 01:34:31.387 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:31.387 I/Unity   ( 7549): GooglePlayGames.OurUtils.PlayGamesHelperObject:Update()
+05-08 01:34:31.387 I/Unity   ( 7549): 
+05-08 01:34:31.389 I/Unity   ( 7549):  [Play Games Plugin 2.0.0] 05/08/26 1:34:31 +08:00 DEBUG: Starting Auth using the method isAuthenticated
+05-08 01:34:31.389 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:31.389 I/Unity   ( 7549): GooglePlayGames.OurUtils.PlayGamesHelperObject:Update()
+05-08 01:34:31.389 I/Unity   ( 7549): 
+05-08 01:34:31.389 I/Unity   ( 7549):  [Play Games Plugin 2.0.0] 05/08/26 1:34:31 +08:00 DEBUG: Authentication succeeded
+05-08 01:34:31.389 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:31.389 I/Unity   ( 7549): GooglePlayGames.OurUtils.PlayGamesHelperObject:Update()
+05-08 01:34:31.389 I/Unity   ( 7549): 
+05-08 01:34:31.403 V/com.facebook.unity.FB( 7549): sending to Unity OnGetAppLinkComplete({"callback_id":"3","did_complete":true})
+05-08 01:34:31.435 I/Unity   ( 7549): Direct App Link not found.
+05-08 01:34:31.435 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:31.435 I/Unity   ( 7549): Facebook.Unity.CallbackManager:TryCallCallback(Object, IResult)
+05-08 01:34:31.435 I/Unity   ( 7549): Facebook.Unity.CallbackManager:CallCallback(Object, IResult)
+05-08 01:34:31.435 I/Unity   ( 7549): Facebook.Unity.CallbackManager:OnFacebookResponse(IInternalResult)
+05-08 01:34:31.435 I/Unity   ( 7549): 
+05-08 01:34:31.436 I/Unity   ( 7549): SIGN IN GOOGLE service 2
+05-08 01:34:31.436 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:31.436 I/Unity   ( 7549): GooglePlayAPI:<SignInGoogleService>b__17_0(Boolean)
+05-08 01:34:31.436 I/Unity   ( 7549): GooglePlayGames.OurUtils.PlayGamesHelperObject:Update()
+05-08 01:34:31.436 I/Unity   ( 7549): 
+05-08 01:34:31.436 I/Unity   ( 7549): SIGN IN GOOGLE service 3
+05-08 01:34:31.436 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:31.436 I/Unity   ( 7549): GooglePlayAPI:<SignInGoogleService>b__17_0(Boolean)
+05-08 01:34:31.436 I/Unity   ( 7549): GooglePlayGames.OurUtils.PlayGamesHelperObject:Update()
+05-08 01:34:31.436 I/Unity   ( 7549): 
+05-08 01:34:31.438 I/Unity   ( 7549): RequestServerAuthCode [UNITY DEBUG] Credentials: g13524479070760792590|c8d48ab3162961f4632de427db8fa77b|
+05-08 01:34:31.438 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:31.438 I/Unity   ( 7549): GooglePlayAPI:AuthenticateCallback(Boolean)
+05-08 01:34:31.438 I/Unity   ( 7549): GooglePlayGames.OurUtils.PlayGamesHelperObject:Update()
+05-08 01:34:31.438 I/Unity   ( 7549): 
+05-08 01:34:31.780 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:31.780 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:31.780 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:31.780 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:31.780 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:31.780 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:31.780 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:31.780 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:31.780 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:31.780 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:31.780 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:31.780 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:31.780 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:31.780 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:31.780 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:31.780 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:31.780 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:31.780 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:31.780 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:31.780 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:31.859 V/com.facebook.unity.FB( 7549): sending to Unity OnFetchDeferredAppLinkComplete({"callback_id":"2","did_complete":true})
+05-08 01:34:32.268 I/Unity   ( 7549): INITIALIZING STORE CONTROLLER WITH PRODUCTS 1
+05-08 01:34:32.268 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:32.268 I/Unity   ( 7549): <InitializePurchasing>d__21:MoveNext()
+05-08 01:34:32.268 I/Unity   ( 7549): System.Threading.ExecutionContext:RunInternal(ExecutionContext, ContextCallback, Object, Boolean)
+05-08 01:34:32.268 I/Unity   ( 7549): System.Runtime.CompilerServices.MoveNextRunner:Run()
+05-08 01:34:32.268 I/Unity   ( 7549): System.Threading.Tasks.AwaitTaskContinuation:RunCallback(ContextCallback, Object, Task&)
+05-08 01:34:32.268 I/Unity   ( 7549): System.Threading.Tasks.Task:FinishContinuations()
+05-08 01:34:32.268 I/Unity   ( 7549): System.Threading.Tasks.Task`1:TrySetResult(TResult)
+05-08 01:34:32.268 I/Unity   ( 7549): System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1:SetResult(TResult)
+05-08 01:34:32.268 I/Unity   ( 7549): Unity.Services.Core.<InitializeAsync>d__26:MoveNext()
+05-08 01:34:32.268 I/Unity   ( 7549): System.Threading.ExecutionContext:RunInternal(ExecutionContext, ContextCallback, Object, Boolean)
+05-08 01:34:32.268 I/Unity   ( 7549): System.Runtime.CompilerServices.MoveNextRunner:Run()
+05-08 01:34:32.268 I/Unity   ( 7549): System.Threading.Tasks.AwaitTaskContinuation:RunCallback(ContextCallback, Object, Task&)
+05-08 01:34:32.268 I/Unity   ( 7549): System.Threading.Tasks.Task:FinishContinuations()
+05-08 01:34:32.268 I/Unity   ( 7549): System.Threading.Tasks.Task`1:TrySetResult(TResult)
+05-08 01:34:32.268 I/Unity   ( 7549): System.Runtime.CompilerServices.AsyncTaskMethod
+05-08 01:34:32.308 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:32.308 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:32.308 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:32.308 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:32.308 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:32.308 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:32.308 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:32.308 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:32.308 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:32.308 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:32.308 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:32.308 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:32.308 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:32.308 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:32.308 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:32.308 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:32.308 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:32.308 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:32.308 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:32.308 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:32.312 I/Unity   ( 7549): GooglePlayStore connection failed
+05-08 01:34:32.312 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:32.312 I/Unity   ( 7549): UnityEngine.Purchasing.StoreConnectUseCase:SendDisconnectionEvent(StoreConnectionFailureDescription)
+05-08 01:34:32.312 I/Unity   ( 7549): UnityEngine.Purchasing.<OnStoreConnectionFailed>d__12:MoveNext()
+05-08 01:34:32.312 I/Unity   ( 7549): System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start(TStateMachine&)
+05-08 01:34:32.312 I/Unity   ( 7549): UnityEngine.Purchasing.StoreConnectUseCase:OnStoreConnectionFailed(StoreConnectionFailureDescription)
+05-08 01:34:32.312 I/Unity   ( 7549): UnityEngine.Purchasing.BillingClientStateListener:HandleBillingSetupFinished(AndroidJavaObject)
+05-08 01:34:32.312 I/Unity   ( 7549): System.Reflection.RuntimeMethodInfo:Invoke(Object, BindingFlags, Binder, Object[], CultureInfo)
+05-08 01:34:32.312 I/Unity   ( 7549): UnityEngine.AndroidJavaProxy:Invoke(String, Object[])
+05-08 01:34:32.312 I/Unity   ( 7549): UnityEngine.AndroidJavaProxy:Invoke(String, IntPtr)
+05-08 01:34:32.312 I/Unity   ( 7549): UnityEngine._AndroidJNIHelper:InvokeJavaProxyMethod(AndroidJavaProxy, IntPtr, IntPtr)
+05-08 01:34:32.312 I/Unity   ( 7549): 
+05-08 01:34:32.313 I/Unity   ( 7549): Deferred App Link not found.
+05-08 01:34:32.313 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:32.313 I/Unity   ( 7549): Facebook.Unity.CallbackManager:TryCallCallback(Object, IResult)
+05-08 01:34:32.313 I/Unity   ( 7549): Facebook.Unity.CallbackManager:CallCallback(Object, IResult)
+05-08 01:34:32.313 I/Unity   ( 7549): Facebook.Unity.CallbackManager:OnFacebookResponse(IInternalResult)
+05-08 01:34:32.313 I/Unity   ( 7549): 
+05-08 01:34:32.313 I/Unity   ( 7549):  [Play Games Plugin 2.0.0] 05/08/26 1:34:32 +08:00 DEBUG: Already authenticated.
+05-08 01:34:32.313 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:32.313 I/Unity   ( 7549): GooglePlayGames.OurUtils.PlayGamesHelperObject:Update()
+05-08 01:34:32.313 I/Unity   ( 7549): 
+05-08 01:34:32.326 I/Unity   ( 7549): [FirebaseController] Firebase ready.
+05-08 01:34:32.326 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:32.326 I/Unity   ( 7549): System.Threading.Tasks.Task:Execute()
+05-08 01:34:32.326 I/Unity   ( 7549): System.Threading.ExecutionContext:RunInternal(ExecutionContext, ContextCallback, Object, Boolean)
+05-08 01:34:32.326 I/Unity   ( 7549): System.Threading.Tasks.Task:ExecuteWithThreadLocal(Task&)
+05-08 01:34:32.326 I/Unity   ( 7549): System.Threading.Tasks.Task:ExecuteEntry(Boolean)
+05-08 01:34:32.326 I/Unity   ( 7549): System.Threading.ThreadPoolWorkQueue:Dispatch()
+05-08 01:34:32.326 I/Unity   ( 7549): 
+05-08 01:34:32.327 I/Unity   ( 7549): Firebase Analytics API Initializing
+05-08 01:34:32.327 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:32.327 I/Unity   ( 7549): Firebase.AppUtilPINVOKE:PollCallbacks()
+05-08 01:34:32.327 I/Unity   ( 7549): Firebase.AppUtil:PollCallbacks()
+05-08 01:34:32.327 I/Unity   ( 7549): Firebase.Platform.FirebaseHandler:Update()
+05-08 01:34:32.327 I/Unity   ( 7549): 
+05-08 01:34:32.327 I/Unity   ( 7549): analytics API Initialized
+05-08 01:34:32.327 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:32.327 I/Unity   ( 7549): Firebase.AppUtilPINVOKE:PollCallbacks()
+05-08 01:34:32.327 I/Unity   ( 7549): Firebase.AppUtil:PollCallbacks()
+05-08 01:34:32.327 I/Unity   ( 7549): Firebase.Platform.FirebaseHandler:Update()
+05-08 01:34:32.327 I/Unity   ( 7549): 
+05-08 01:34:32.327 I/Unity   ( 7549): Sign in status: Success
+05-08 01:34:32.327 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:32.327 I/Unity   ( 7549): GooglePlayAPI:<SignInGoogleService>b__17_1(SignInStatus)
+05-08 01:34:32.327 I/Unity   ( 7549): GooglePlayGames.OurUtils.PlayGamesHelperObject:Update()
+05-08 01:34:32.327 I/Unity   ( 7549): 
+05-08 01:34:32.327 I/Unity   ( 7549): PLAY GAMES USER ID: g13524479070760792590
+05-08 01:34:32.327 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:32.327 I/Unity   ( 7549): GooglePlayAPI:<SignInGoogleService>b__17_1(SignInStatus)
+05-08 01:34:32.327 I/Unity   ( 7549): GooglePlayGames.OurUtils.PlayGamesHelperObject:Update()
+05-08 01:34:32.327 I/Unity   ( 7549): 
+05-08 01:34:32.327 I/Unity   ( 7549): PLAY GAMES USER IS AUTHENTICATED: True
+05-08 01:34:32.327 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:32.327 I/Unity   ( 7549): GooglePlayAPI:<SignInGoogleService>b__17_1(SignInStatus)
+05-08 01:34:32.327 I/Unity   ( 7549): GooglePlayGames.OurUtils.PlayGamesHelperObject:Update()
+05-08 01:34:32.327 I/Unity   ( 7549): 
+05-08 01:34:32.342 W/Unity   ( 7549): AndroidJNIHelper.GetSignature: using Byte parameters is obsolete, use SByte parameters instead
+05-08 01:34:32.342 W/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:32.342 W/Unity   ( 7549): UnityEngine._AndroidJNIHelper:GetSignature(Object)
+05-08 01:34:32.342 W/Unity   ( 7549): UnityEngine._AndroidJNIHelper:GetSignature(Object)
+05-08 01:34:32.342 W/Unity   ( 7549): UnityEngine._AndroidJNIHelper:GetSignature(Object[])
+05-08 01:34:32.342 W/Unity   ( 7549): UnityEngine._AndroidJNIHelper:GetMethodID(IntPtr, String, Object[], Boolean)
+05-08 01:34:32.342 W/Unity   ( 7549): UnityEngine.AndroidJavaObject:_Call(String, Object[])
+05-08 01:34:32.342 W/Unity   ( 7549): SignatureExperiment:get_SignMD5()
+05-08 01:34:32.342 W/Unity   ( 7549): <LoadFromServer>d__47:MoveNext()
+05-08 01:34:32.342 W/Unity   ( 7549): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-08 01:34:32.342 W/Unity   ( 7549): 
+05-08 01:34:32.342 W/Unity   ( 7549): AndroidJNIHelper: converting from Byte array is obsolete, use SByte array instead
+05-08 01:34:32.342 W/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:32.342 W/Unity   ( 7549): UnityEngine._AndroidJNIHelper:ConvertFromJNIArray(IntPtr)
+05-08 01:34:32.342 W/Unity   ( 7549): UnityEngine.AndroidJavaObject:_Call(IntPtr, Object[])
+05-08 01:34:32.342 W/Unity   ( 7549): SignatureExperiment:get_SignMD5()
+05-08 01:34:32.342 W/Unity   ( 7549): <LoadFromServer>d__47:MoveNext()
+05-08 01:34:32.342 W/Unity   ( 7549): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-08 01:34:32.342 W/Unity   ( 7549): 
+05-08 01:34:32.389 D/ProcessState( 7731): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-08 01:34:32.392 I/ActivityTaskManager( 2432): START u0 {flg=0x10000000 cmp=com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity} from uid 2000, pid 7731
+05-08 01:34:32.589 I/FirestoneHooks( 7549): Overlay attached to com.unity3d.player.UnityPlayerActivity
+05-08 01:34:32.842 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:32.842 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:32.842 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:32.842 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:32.842 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:32.842 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:32.842 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:32.842 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:32.842 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:32.842 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:32.842 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:32.842 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:32.842 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:32.842 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:32.842 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:32.842 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:32.842 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:32.842 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:32.842 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:32.842 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:33.379 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:33.379 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:33.379 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:33.379 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:33.379 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:33.379 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:33.379 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:33.379 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:33.379 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:33.379 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:33.379 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:33.379 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:33.379 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:33.379 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:33.379 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:33.379 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:33.379 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:33.379 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:33.379 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:33.379 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:33.914 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:33.914 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:33.914 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:33.914 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:33.914 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:33.914 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:33.914 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:33.914 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:33.914 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:33.914 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:33.914 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:33.914 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:33.914 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:33.914 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:33.914 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:33.914 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:33.914 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:33.914 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:33.914 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:33.914 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:34.442 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:34.442 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:34.442 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:34.442 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:34.442 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:34.442 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:34.442 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:34.442 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:34.442 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:34.442 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:34.442 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:34.442 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:34.442 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:34.442 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:34.442 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:34.442 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:34.442 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:34.442 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:34.442 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:34.442 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:34.971 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:34.971 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:34.971 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:34.971 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:34.971 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:34.971 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:34.971 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:34.971 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:34.971 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:34.971 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:34.971 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:34.971 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:34.971 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:34.971 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:34.971 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:34.971 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:34.971 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:34.971 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:34.971 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:34.971 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:35.506 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:35.506 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:35.506 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:35.506 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:35.506 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:35.506 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:35.506 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:35.506 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:35.506 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:35.506 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:35.506 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:35.506 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:35.506 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:35.506 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:35.506 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:35.506 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:35.506 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:35.506 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:35.506 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:35.506 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:36.007 I/FirestoneHooks( 7549): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #1 currency=16 qty=500.00
+05-08 01:34:36.011 I/FirestoneHooks( 7549): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #2 currency=39 qty=100.00
+05-08 01:34:36.011 I/FirestoneHooks( 7549): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #3 currency=38 qty=100.00
+05-08 01:34:36.011 I/FirestoneHooks( 7549): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #4 currency=39 qty=100.00
+05-08 01:34:36.011 I/FirestoneHooks( 7549): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #5 currency=38 qty=100.00
+05-08 01:34:36.036 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:36.036 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:36.036 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:36.036 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:36.036 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:36.036 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:36.036 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:36.036 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:36.036 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:36.036 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:36.036 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:36.036 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:36.036 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:36.036 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:36.036 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:36.036 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:36.036 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:36.036 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:36.036 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:36.036 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:36.569 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:36.569 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:36.569 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:36.569 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:36.569 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:36.569 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:36.569 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:36.569 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:36.569 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:36.569 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:36.569 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:36.569 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:36.569 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:36.569 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:36.569 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:36.569 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:36.569 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:36.569 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:36.569 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:36.569 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:36.995 I/Unity   ( 7549): [I2Handler] Starting localization update process
+05-08 01:34:36.995 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:36.995 I/Unity   ( 7549): <UpdateAsync>d__13:MoveNext()
+05-08 01:34:36.995 I/Unity   ( 7549): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-08 01:34:36.995 I/Unity   ( 7549): <LoadPart7>d__127:MoveNext()
+05-08 01:34:36.995 I/Unity   ( 7549): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-08 01:34:36.995 I/Unity   ( 7549): 
+05-08 01:34:36.995 I/Unity   ( 7549): [I2Handler] Loading I2 addressable asset
+05-08 01:34:36.995 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:36.995 I/Unity   ( 7549): <LoadI2AssetAsync>d__12:MoveNext()
+05-08 01:34:36.995 I/Unity   ( 7549): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-08 01:34:36.995 I/Unity   ( 7549): <LoadPart7>d__127:MoveNext()
+05-08 01:34:36.995 I/Unity   ( 7549): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-08 01:34:36.995 I/Unity   ( 7549): 
+05-08 01:34:37.105 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:37.105 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:37.105 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:37.105 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:37.105 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:37.105 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:37.105 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:37.105 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:37.105 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:37.105 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:37.105 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:37.105 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:37.105 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:37.105 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:37.105 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:37.105 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:37.105 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:37.105 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:37.105 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:37.105 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:37.294 I/Unity   ( 7549): [I2Handler] I2 addressable asset loaded successfully
+05-08 01:34:37.294 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:37.294 I/Unity   ( 7549): <LoadI2AssetAsync>d__12:MoveNext()
+05-08 01:34:37.294 I/Unity   ( 7549): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-08 01:34:37.294 I/Unity   ( 7549): 
+05-08 01:34:37.294 I/Unity   ( 7549): [I2Handler] Start load I2 source from cache
+05-08 01:34:37.294 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:37.294 I/Unity   ( 7549): <UpdateFromCacheAsync>d__15:MoveNext()
+05-08 01:34:37.294 I/Unity   ( 7549): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-08 01:34:37.294 I/Unity   ( 7549): 
+05-08 01:34:37.294 I/Unity   ( 7549): [I2Handler] Cache version check failed - skipping cache load
+05-08 01:34:37.294 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:37.294 I/Unity   ( 7549): <UpdateFromCacheAsync>d__15:MoveNext()
+05-08 01:34:37.294 I/Unity   ( 7549): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-08 01:34:37.294 I/Unity   ( 7549): 
+05-08 01:34:37.312 I/Unity   ( 7549): [I2Handler] Starting Google data update
+05-08 01:34:37.312 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:37.312 I/Unity   ( 7549): <UpdateFromGoogleAsync>d__16:MoveNext()
+05-08 01:34:37.312 I/Unity   ( 7549): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-08 01:34:37.312 I/Unity   ( 7549): 
+05-08 01:34:37.636 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:37.636 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:37.636 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:37.636 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:37.636 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:37.636 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:37.636 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:37.636 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:37.636 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:37.636 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:37.636 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:37.636 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:37.636 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:37.636 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:37.636 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:37.636 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:37.636 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:37.636 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:37.636 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:37.636 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:38.169 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:38.169 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:38.169 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:38.169 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:38.169 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:38.169 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:38.169 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:38.169 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:38.169 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:38.169 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:38.169 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:38.169 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:38.169 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:38.169 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:38.169 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:38.169 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:38.169 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:38.169 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:38.169 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:38.169 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:38.703 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:38.703 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:38.703 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:38.703 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:38.703 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:38.703 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:38.703 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:38.703 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:38.703 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:38.703 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:38.703 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:38.703 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:38.703 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:38.703 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:38.703 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:38.703 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:38.703 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:38.703 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:38.703 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:38.703 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:39.234 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:39.234 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:39.234 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:39.234 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:39.234 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:39.234 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:39.234 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:39.234 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:39.234 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:39.234 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:39.234 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:39.234 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:39.234 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:39.234 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:39.234 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:39.234 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:39.234 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:39.234 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:39.234 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:39.234 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:39.768 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:39.768 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:39.768 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:39.768 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:39.768 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:39.768 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:39.768 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:39.768 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:39.768 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:39.768 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:39.768 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:39.768 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:39.768 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:39.768 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:39.768 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:39.768 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:39.768 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:39.768 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:39.768 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:39.768 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:40.178 I/Unity   ( 7549): [I2Handler] Source current Data version is 3, and the remote data version is 3
+05-08 01:34:40.178 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:40.178 I/Unity   ( 7549): <ProcessSuccessfulResponse>d__18:MoveNext()
+05-08 01:34:40.178 I/Unity   ( 7549): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-08 01:34:40.178 I/Unity   ( 7549): 
+05-08 01:34:40.178 I/Unity   ( 7549): [I2Handler] Data is up to date
+05-08 01:34:40.178 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:40.178 I/Unity   ( 7549): <ProcessSuccessfulResponse>d__18:MoveNext()
+05-08 01:34:40.178 I/Unity   ( 7549): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-08 01:34:40.178 I/Unity   ( 7549): 
+05-08 01:34:40.201 I/Unity   ( 7549): [I2Handler] Google data update completed
+05-08 01:34:40.201 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:40.201 I/Unity   ( 7549): <UpdateFromGoogleAsync>d__16:MoveNext()
+05-08 01:34:40.201 I/Unity   ( 7549): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-08 01:34:40.201 I/Unity   ( 7549): 
+05-08 01:34:40.296 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:40.296 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:40.296 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:40.296 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:40.296 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:40.296 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:40.296 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:40.296 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:40.296 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:40.296 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:40.296 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:40.296 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:40.296 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:40.296 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:40.296 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:40.296 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:40.296 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:40.296 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:40.296 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:40.296 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:40.830 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:40.830 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:40.830 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:40.830 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:40.830 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:40.830 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:40.830 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:40.830 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:40.830 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:40.830 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:40.830 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:40.830 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:40.830 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:40.830 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:40.830 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:40.830 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:40.830 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:40.830 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:40.830 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:40.830 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:40.973 D/UnityNotifications( 7549): Checking for invalid notification IDs still hanging around
+05-08 01:34:41.365 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:41.365 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:41.365 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:41.365 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:41.365 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:41.365 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:41.365 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:41.365 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:41.365 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:41.365 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:41.365 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:41.365 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:41.365 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:41.365 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:41.365 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:41.365 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:41.365 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:41.365 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:41.365 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:41.365 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:41.897 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:41.897 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:41.897 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:41.897 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:41.897 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:41.897 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:41.897 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:41.897 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:41.897 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:41.897 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:41.897 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:41.897 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:41.897 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:41.897 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:41.897 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:41.897 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:41.897 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:41.897 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:41.897 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:41.897 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:42.427 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:42.427 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:42.427 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:42.427 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:42.427 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:42.427 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:42.427 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:42.427 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:42.427 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:42.427 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:42.427 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:42.427 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:42.427 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:42.427 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:42.427 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:42.427 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:42.427 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:42.427 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:42.427 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:42.427 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:42.477 I/FirestoneHooks( 7549): god-mode BattleHero.IsImmune hit #1 this=0x7b1c126540
+05-08 01:34:42.595 I/FirestoneHooks( 7549): god-mode BattleHero.IsImmune hit #2 this=0x7b1c126540
+05-08 01:34:42.664 W/ProcessStats( 2432): Tracking association SourceState{7f66f13 system/1000 BTopFgs #2927} whose proc state 2 is better than process ProcessState{5774550 com.adguard.android/10078 pkg=com.adguard.android} proc state 3 (30 skipped)
+05-08 01:34:42.956 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:42.956 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:42.956 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:42.956 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:42.956 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:42.956 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:42.956 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:42.956 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:42.956 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:42.956 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:42.956 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:42.956 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:42.956 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:42.956 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:42.956 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:42.956 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:42.956 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:42.956 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:42.956 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:42.956 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:43.144 I/FirestoneHooks( 7549): god-mode BattleHero.IsImmune hit #3 this=0x7b1c126540
+05-08 01:34:43.204 I/FirestoneHooks( 7549): god-mode BattleHero.IsImmune hit #4 this=0x7b1c126540
+05-08 01:34:43.485 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:43.485 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:43.485 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:43.485 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:43.485 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:43.485 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:43.485 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:43.485 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:43.485 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:43.485 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:43.485 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:43.485 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:43.485 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:43.485 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:43.485 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:43.485 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:43.485 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:43.485 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:43.485 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:43.485 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:44.016 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:44.016 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:44.016 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:44.016 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:44.016 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:44.016 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:44.016 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:44.016 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:44.016 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:44.016 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:44.016 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:44.016 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:44.016 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:44.016 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:44.016 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:44.016 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:44.016 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:44.016 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:44.016 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:44.016 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:44.546 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:44.546 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:44.546 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:44.546 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:44.546 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:44.546 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:44.546 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:44.546 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:44.546 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:44.546 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:44.546 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:44.546 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:44.546 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:44.546 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:44.546 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:44.546 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:44.546 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:44.546 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:44.546 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:44.546 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:45.075 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:45.075 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:45.075 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:45.075 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:45.075 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:45.075 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:45.075 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:45.075 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:45.075 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:45.075 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:45.075 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:45.075 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:45.075 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:45.075 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:45.075 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:45.075 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:45.075 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:45.075 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:45.075 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:45.075 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:45.494 I/FirestoneHooks( 7549): god-mode BattleHero.IsImmune hit #5 this=0x7b1c126540
+05-08 01:34:45.604 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:45.604 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:45.604 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:45.604 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:45.604 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:45.604 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:45.604 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:45.604 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:45.604 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:45.604 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:45.604 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:45.604 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:45.604 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:45.604 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:45.604 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:45.604 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:45.604 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:45.604 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:45.604 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:45.604 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:46.132 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:46.132 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:46.132 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:46.132 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:46.132 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:46.132 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:46.132 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:46.132 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:46.132 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:46.132 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:46.132 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:46.132 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:46.132 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:46.132 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:46.132 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:46.132 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:46.132 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:46.132 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:46.132 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:46.132 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:46.661 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:46.661 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:46.661 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:46.661 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:46.661 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:46.661 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:46.661 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:46.661 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:46.661 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:46.661 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:46.661 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:46.661 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:46.661 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:46.661 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:46.661 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:46.661 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:46.661 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:46.661 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:46.661 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:46.661 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:47.189 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:47.189 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:47.189 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:47.189 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:47.189 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:47.189 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:47.189 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:47.189 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:47.189 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:47.189 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:47.189 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:47.189 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:47.189 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:47.189 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:47.189 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:47.189 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:47.189 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:47.189 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:47.189 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:47.189 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:47.717 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:47.717 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:47.717 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:47.717 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:47.717 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:47.717 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:47.717 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:47.717 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:47.717 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:47.717 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:47.717 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:47.717 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:47.717 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:47.717 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:47.717 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:47.717 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:47.717 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:47.717 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:47.717 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:47.717 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:48.246 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:48.246 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:48.246 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:48.246 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:48.246 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:48.246 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:48.246 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:48.246 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:48.246 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:48.246 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:48.246 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:48.246 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:48.246 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:48.246 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:48.246 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:48.246 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:48.246 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:48.246 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:48.246 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:48.246 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:48.772 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:48.772 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:48.772 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:48.772 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:48.772 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:48.772 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:48.772 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:48.772 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:48.772 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:48.772 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:48.772 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:48.772 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:48.772 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:48.772 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:48.772 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:48.772 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:48.772 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:48.772 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:48.772 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:48.772 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:49.300 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:49.300 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:49.300 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:49.300 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:49.300 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:49.300 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:49.300 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:49.300 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:49.300 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:49.300 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:49.300 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:49.300 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:49.300 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:49.300 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:49.300 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:49.300 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:49.300 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:49.300 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:49.300 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:49.300 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:49.827 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:49.827 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:49.827 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:49.827 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:49.827 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:49.827 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:49.827 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:49.827 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:49.827 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:49.827 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:49.827 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:49.827 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:49.827 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:49.827 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:49.827 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:49.827 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:49.827 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:49.827 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:49.827 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:49.827 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:50.357 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:50.357 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:50.357 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:50.357 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:50.357 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:50.357 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:50.357 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:50.357 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:50.357 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:50.357 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:50.357 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:50.357 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:50.357 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:50.357 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:50.357 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:50.357 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:50.357 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:50.357 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:50.357 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:50.357 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:50.887 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:50.887 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:50.887 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:50.887 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:50.887 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:50.887 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:50.887 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:50.887 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:50.887 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:50.887 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:50.887 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:50.887 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:50.887 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:50.887 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:50.887 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:50.887 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:50.887 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:50.887 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:50.887 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:50.887 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:51.025 I/Unity   ( 7549):  [Play Games Plugin 2.0.0] 05/08/26 1:34:51 +08:00 DEBUG: ReportProgress, CgkIzoLE7KgIEAIQAg, 100
+05-08 01:34:51.025 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:51.025 I/Unity   ( 7549): GooglePlayGames.OurUtils.PlayGamesHelperObject:Update()
+05-08 01:34:51.025 I/Unity   ( 7549): 
+05-08 01:34:51.119 I/Unity   ( 7549):  [Play Games Plugin 2.0.0] 05/08/26 1:34:51 +08:00 DEBUG: Progress 100 interpreted as UNLOCK.
+05-08 01:34:51.119 I/Unity   ( 7549): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-08 01:34:51.119 I/Unity   ( 7549): GooglePlayGames.OurUtils.PlayGamesHelperObject:Update()
+05-08 01:34:51.119 I/Unity   ( 7549): 
+05-08 01:34:51.413 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:51.413 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:51.413 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:51.413 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:51.413 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:51.413 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:51.413 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:51.413 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:51.413 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:51.413 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:51.413 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:51.413 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:51.413 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:51.413 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:51.413 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:51.413 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:51.413 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:51.413 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:51.413 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:51.413 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:51.941 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:51.941 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:51.941 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:51.941 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:51.941 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:51.941 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:51.941 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:51.941 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:51.941 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:51.941 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:51.941 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:51.941 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:51.941 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:51.941 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:51.941 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:51.941 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:51.941 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:51.941 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:51.941 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:51.941 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:52.466 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:52.466 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:52.466 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:52.466 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:52.466 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:52.466 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:52.466 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:52.466 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:52.466 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:52.466 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:52.466 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:52.466 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:52.466 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:52.466 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:52.466 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:52.466 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:52.466 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:52.466 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:52.466 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:52.466 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:52.992 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:52.992 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:52.992 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:52.992 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:52.992 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:52.992 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:52.992 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:52.992 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:52.992 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:52.992 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:52.992 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:52.992 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:52.992 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:52.992 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:52.992 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:52.992 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:52.992 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:52.992 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:52.992 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:52.992 W/FirestoneHooks( 7549): 	... 9 more
+05-08 01:34:53.516 W/FirestoneHooks( 7549): Public settings write failed
+05-08 01:34:53.516 W/FirestoneHooks( 7549): java.io.FileNotFoundException: /storage/emulated/0/Android/media/com.firestone.hooks/firestonehooks.json.tmp: open failed: EPERM (Operation not permitted)
+05-08 01:34:53.516 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:575)
+05-08 01:34:53.516 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:236)
+05-08 01:34:53.516 W/FirestoneHooks( 7549): 	at java.io.FileOutputStream.<init>(FileOutputStream.java:186)
+05-08 01:34:53.516 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.writePublicSettingsFile(FirestoneSettings.java:165)
+05-08 01:34:53.516 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.readFromProvider(FirestoneSettings.java:94)
+05-08 01:34:53.516 W/FirestoneHooks( 7549): 	at com.template.lsposed.FirestoneSettings.syncProviderToTargetFile(FirestoneSettings.java:129)
+05-08 01:34:53.516 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.lambda$startSettingsSync$3(ModuleEntry.java:163)
+05-08 01:34:53.516 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry.$r8$lambda$53MZ5_DMRWAF7qSxzT9rHtSMkIQ(Unknown Source:0)
+05-08 01:34:53.516 W/FirestoneHooks( 7549): 	at com.template.lsposed.ModuleEntry$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+05-08 01:34:53.516 W/FirestoneHooks( 7549): 	at java.lang.Thread.run(Thread.java:920)
+05-08 01:34:53.516 W/FirestoneHooks( 7549): Caused by: android.system.ErrnoException: open failed: EPERM (Operation not permitted)
+05-08 01:34:53.516 W/FirestoneHooks( 7549): 	at libcore.io.Linux.open(Native Method)
+05-08 01:34:53.516 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:53.516 W/FirestoneHooks( 7549): 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:273)
+05-08 01:34:53.516 W/FirestoneHooks( 7549): 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+05-08 01:34:53.516 W/FirestoneHooks( 7549): 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7929)
+05-08 01:34:53.516 W/FirestoneHooks( 7549): 	at libcore.io.IoBridge.open(IoBridge.java:561)
+05-08 01:34:53.516 W/FirestoneHooks( 7549): 	... 9 more

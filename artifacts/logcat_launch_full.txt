@@ -1,0 +1,992 @@
+--------- beginning of main
+05-07 23:06:57.272 I/sh      ( 7508): type=1400 audit(0.0:8845): avc: denied { map } for path="/system/bin/sh" dev="sda1" ino=719 scontext=u:r:adbd:s0 tcontext=u:object_r:unlabeled:s0 tclass=file permissive=1
+05-07 23:06:57.272 I/sh      ( 7508): type=1400 audit(0.0:8846): avc: denied { getattr } for path="/system/bin/sh" dev="sda1" ino=719 scontext=u:r:adbd:s0 tcontext=u:object_r:unlabeled:s0 tclass=file permissive=1
+05-07 23:06:57.284 I/logcat  ( 7508): type=1400 audit(0.0:8847): avc: denied { write } for name="logd" dev="tmpfs" ino=3542 scontext=u:r:adbd:s0 tcontext=u:object_r:logd_socket:s0 tclass=sock_file permissive=1
+05-07 23:06:57.800 I/wifi@1.0-servic( 2248): type=1400 audit(0.0:8848): avc: denied { write } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=netlink_route_socket permissive=1
+05-07 23:06:57.876 D/BufferPoolAccessor2.0( 2284): evictor expired: 1, evicted: 0
+05-07 23:06:59.880 D/BufferPoolAccessor2.0( 2300): bufferpool2 0xb40000712bfce4d8 : 0(0 size) total buffers - 0(0 size) used buffers - 94/97 (recycle/alloc) - 3/96 (fetch/transfer)
+05-07 23:06:59.880 D/BufferPoolAccessor2.0( 2300): evictor expired: 1, evicted: 1
+05-07 23:06:59.880 D/BufferPoolAccessor2.0( 2284): bufferpool2 0xb4000076f5758a98 : 0(0 size) total buffers - 0(0 size) used buffers - 95/103 (recycle/alloc) - 8/198 (fetch/transfer)
+05-07 23:06:59.880 D/BufferPoolAccessor2.0( 2284): evictor expired: 1, evicted: 1
+--------- beginning of system
+05-07 23:07:01.262 W/ActivityManager( 2429): callingPackage:com.google.android.gms, packageName:com.google.android.gms, name:com.google.android.gms.chimera.PersistentIntentOperationService, isSkip: true
+05-07 23:07:01.264 I/.gms.persistent( 2754): type=1400 audit(0.0:8851): avc: denied { call } for scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:r:init:s0 tclass=binder permissive=1
+05-07 23:07:01.303 D/opengl-gc( 2307): Check pid 3171: running 1
+05-07 23:07:01.317 W/ActivityManager( 2429): callingPackage:com.google.android.gms, packageName:com.google.android.gms, name:com.google.android.gms.games.chimera.GamesSyncServiceMainProxy, isSkip: true
+05-07 23:07:01.326 I/NetworkScheduler.Stats( 2754): (REDACTED) Task %s/%s started execution. cause:%s exec_start_elapsed_seconds: %s
+05-07 23:07:01.333 I/PlayGamesServices[GamesSyncAdapter]( 3171): Starting sync for 5296d6a1
+05-07 23:07:01.337 I/PlayGamesServices[GamesSyncAdapter]( 3171): Sync duration for 5296d6a1: 2
+05-07 23:07:01.353 W/ActivityManager( 2429): callingPackage:com.google.android.gms, packageName:com.google.android.gms, name:com.google.android.gms.games.chimera.GamesAndroidServiceProxy, isSkip: true
+05-07 23:07:01.357 I/NetworkScheduler.Stats( 2754): (REDACTED) Task %s/%s finished executing. cause:%s result: %s elapsed_millis: %s uptime_millis: %s exec_start_elapsed_seconds: %s
+05-07 23:07:01.367 I/GetServiceValidatorImpl( 3171): (REDACTED) onGetService() from Client SDK version [%s], Module version [%s], PGA version [%s], Account [%s], Calling package [%s], Game package [%s]
+05-07 23:07:01.369 W/GetGamesServiceReqFacto( 3171): Parsing request with ignored arguments. signInOptionsBundle [Bundle[{com.google.android.gms.signin.internal.serverClientId=null, com.google.android.gms.signin.internal.usePromptModeForAuthCode=true, com.google.android.gms.signin.internal.logSessionId=null, com.google.android.gms.signin.internal.hostedDomain=null, com.google.android.gms.signin.internal.offlineAccessRequested=false, com.google.android.gms.signin.internal.waitForAccessTokenRefresh=false, com.google.android.gms.signin.internal.clientRequestedAccount=Account {name=<<default account>>, type=com.google}, com.google.android.gms.signin.internal.idTokenRequested=false, com.google.android.gms.signin.internal.forceCodeForRefreshToken=false}]], isRetryingSignIn [false], skipWelcomePopup [false], requireGooglePlus [false]
+05-07 23:07:01.369 I/GetGamesServiceReqFacto( 3171): Replacing request for `games` scope with `games_lite`
+05-07 23:07:01.370 W/ActivityManager( 2429): callingPackage:com.google.android.gms, packageName:com.google.android.gms, name:com.google.android.gms.games.chimera.GamesAsyncServiceProxy, isSkip: true
+05-07 23:07:01.379 I/SignInPerformer-4( 3171): (REDACTED) Handling request [%s], isFirstPartyCaller [%s]
+05-07 23:07:01.380 I/SignInPerformer-4( 3171): Successfully brokered first-party unauthenticated GamesService [CONTEXT service_id=1 ]
+05-07 23:07:01.383 I/GetGamesServiceV2Op( 3171): (REDACTED) Successfully brokered GamesService for request %s
+05-07 23:07:01.405 W/ActivityManager( 2429): callingPackage:com.google.android.gms, packageName:com.google.android.gms, name:com.google.android.gms.auth.account.be.legacy.AuthCronService, isSkip: true
+05-07 23:07:01.409 I/NetworkScheduler.Stats( 2754): (REDACTED) Task %s/%s started execution. cause:%s exec_start_elapsed_seconds: %s
+05-07 23:07:01.412 W/ActivityManager( 2429): callingPackage:com.google.android.gms, packageName:com.google.android.gms, name:com.google.android.gms.auth.be.appcert.AppCertService, isSkip: true
+05-07 23:07:01.418 W/ActivityManager( 2429): callingPackage:com.google.android.gms, packageName:com.google.android.gms, name:com.google.android.gms.droidguard.DroidGuardService, isSkip: true
+05-07 23:07:01.488 I/Binder:6511_1( 6511): type=1400 audit(0.0:8852): avc: denied { execute } for path="/apex/com.android.runtime/lib64/bionic/libdl.so" dev="sda1" ino=383 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:unlabeled:s0 tclass=file permissive=1 app=com.google.android.syncadapters.contacts
+05-07 23:07:01.496 I/Binder:3826_7( 3826): type=1400 audit(0.0:8853): avc: denied { getattr } for path="/system/priv-app/TeleService/TeleService.apk" dev="sda1" ino=2065 scontext=u:r:radio:s0 tcontext=u:object_r:unlabeled:s0 tclass=file permissive=1
+05-07 23:07:01.520 I/Binder:6511_1( 6511): type=1400 audit(0.0:8854): avc: denied { connectto } for path="/dev/socket/dnsproxyd" scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:r:init:s0 tclass=unix_stream_socket permissive=1 app=com.google.android.syncadapters.contacts
+05-07 23:07:01.524 I/Binder:2219_2( 2219): type=1400 audit(0.0:8855): avc: denied { use } for path="socket:[45876]" dev="sockfs" ino=45876 scontext=u:r:init:s0 tcontext=u:r:gmscore_app:s0:c512,c768 tclass=fd permissive=1
+05-07 23:07:01.588 W/GmsUrlRequestImpl( 2754): [https://android.googleapis.com/auth/devicekey] Content-Type header is overwritten.
+05-07 23:07:01.657 W/GLSUser ( 2754): [AppCertManager] Exception while requesting key: 
+05-07 23:07:01.657 W/GLSUser ( 2754): java.util.concurrent.ExecutionException: cxgt: Parsing Exception
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at hirt.j(:com.google.android.gms@261731029@26.17.31 (190400-906420463):21)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at hisc.t(:com.google.android.gms@261731029@26.17.31 (190400-906420463):73)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at alvg.b(:com.google.android.gms@261731029@26.17.31 (190400-906420463):435)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at alve.b(:com.google.android.gms@261731029@26.17.31 (190400-906420463):29)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at aluz.a(:com.google.android.gms@261731029@26.17.31 (190400-906420463):1)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at alvc.a(:com.google.android.gms@261731029@26.17.31 (190400-906420463):58)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at agsu.call(:com.google.android.gms@261731029@26.17.31 (190400-906420463):56)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at bjbn.c(:com.google.android.gms@261731029@26.17.31 (190400-906420463):50)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at bjbn.run(:com.google.android.gms@261731029@26.17.31 (190400-906420463):66)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at bjhe.run(:com.google.android.gms@261731029@26.17.31 (190400-906420463):8)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at java.lang.Thread.run(Thread.java:920)
+05-07 23:07:01.657 W/GLSUser ( 2754): Caused by: cxgt: Parsing Exception
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at cxhy.a(:com.google.android.gms@261731029@26.17.31 (190400-906420463):15)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at hium.run(:com.google.android.gms@261731029@26.17.31 (190400-906420463):56)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at bjbn.c(:com.google.android.gms@261731029@26.17.31 (190400-906420463):50)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at bjbn.run(:com.google.android.gms@261731029@26.17.31 (190400-906420463):85)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	... 4 more
+05-07 23:07:01.657 W/GLSUser ( 2754): Caused by: itlt: Protocol message end-group tag did not match expected tag.
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at itnq.a(:com.google.android.gms@261731029@26.17.31 (190400-906420463):57)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at itmn.l(:com.google.android.gms@261731029@26.17.31 (190400-906420463):60)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at itkp.s(:com.google.android.gms@261731029@26.17.31 (190400-906420463):26)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at itik.f(:com.google.android.gms@261731029@26.17.31 (190400-906420463):7)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at itik.c(:com.google.android.gms@261731029@26.17.31 (190400-906420463):1)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at itik.o(:com.google.android.gms@261731029@26.17.31 (190400-906420463):1)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at cxhx.a(:com.google.android.gms@261731029@26.17.31 (190400-906420463):15)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at cxic.call(:com.google.android.gms@261731029@26.17.31 (190400-906420463):8)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at bjbn.c(:com.google.android.gms@261731029@26.17.31 (190400-906420463):50)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	at bjbn.run(:com.google.android.gms@261731029@26.17.31 (190400-906420463):66)
+05-07 23:07:01.657 W/GLSUser ( 2754): 	... 4 more
+05-07 23:07:01.663 I/NetworkScheduler.Stats( 2754): (REDACTED) Task %s/%s finished executing. cause:%s result: %s elapsed_millis: %s uptime_millis: %s exec_start_elapsed_seconds: %s
+05-07 23:07:06.008 I/logcat  ( 7519): type=1400 audit(0.0:8862): avc: denied { write } for name="logdr" dev="tmpfs" ino=3544 scontext=u:r:adbd:s0 tcontext=u:object_r:logdr_socket:s0 tclass=sock_file permissive=1
+05-07 23:07:07.160 D/BoundBrokerSvc( 3171): onUnbind: Intent { act=com.google.android.gms.feedback.internal.IFeedbackService dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+05-07 23:07:11.306 D/opengl-gc( 2307): Check pid 3171: running 1
+05-07 23:07:16.407 W/ActivityManager( 2429): callingPackage:android, packageName:com.android.vending, name:com.google.android.finsky.scheduler.process.mainimpl.PhoneskyJobServiceMain, isSkip: true
+05-07 23:07:16.408 I/lmkd    ( 2055): type=1400 audit(0.0:8863): avc: denied { write } for name="oom_score_adj" dev="proc" ino=41898 scontext=u:r:init:s0 tcontext=u:r:priv_app:s0:c512,c768 tclass=file permissive=1
+05-07 23:07:16.418 I/Finsky  ( 6486): [2] SCH: job service start with id 9808.
+05-07 23:07:16.426 I/Finsky  ( 6486): [125] SCH: Satisfied jobs for 9808 are: 12-1
+05-07 23:07:16.427 I/Finsky  ( 6486): [133] SCH: Job 12-1 starting
+05-07 23:07:16.428 I/Finsky  ( 6486): [2] WM::SCH: Logging work start for 12-1
+05-07 23:07:16.428 I/Finsky  ( 6486): [2] [ContentSync] job started
+05-07 23:07:16.429 I/Finsky  ( 6486): [134] PSR: Package cache is empty, setup cache.
+05-07 23:07:16.460 I/Finsky  ( 6486): [135] Wrote 1 rows to frosting DB
+05-07 23:07:16.463 I/Finsky  ( 6486): [135] Frosting DB delete succeeded: true
+05-07 23:07:16.596 I/Thread-2( 3381): type=1400 audit(0.0:8864): avc: denied { use } for path="/dev/null" dev="tmpfs" ino=1057 scontext=u:r:mediaprovider_app:s0:c34,c256,c512,c768 tcontext=u:r:kernel:s0 tclass=fd permissive=1 app=com.android.providers.media.module
+05-07 23:07:16.600 I/Binder:2281_1( 2281): type=1400 audit(0.0:8865): avc: denied { read } for name="com.sunborn.neuralcloud.en" dev="sdb3" ino=786687 scontext=u:r:init:s0 tcontext=u:object_r:app_data_file:s0:c41,c256,c512,c768 tclass=dir permissive=1
+05-07 23:07:16.600 I/Binder:2281_1( 2281): type=1400 audit(0.0:8866): avc: denied { open } for path="/data/data/com.sunborn.neuralcloud.en" dev="sdb3" ino=786687 scontext=u:r:init:s0 tcontext=u:object_r:app_data_file:s0:c41,c256,c512,c768 tclass=dir permissive=1
+05-07 23:07:16.600 I/Binder:2281_1( 2281): type=1400 audit(0.0:8867): avc: denied { search } for name="com.sunborn.neuralcloud.en" dev="sdb3" ino=786687 scontext=u:r:init:s0 tcontext=u:object_r:app_data_file:s0:c41,c256,c512,c768 tclass=dir permissive=1
+05-07 23:07:16.600 I/Binder:2281_1( 2281): type=1400 audit(0.0:8868): avc: denied { getattr } for path="/data/data/com.sunborn.neuralcloud.en/databases" dev="sdb3" ino=786843 scontext=u:r:init:s0 tcontext=u:object_r:app_data_file:s0:c41,c256,c512,c768 tclass=dir permissive=1
+05-07 23:07:16.600 I/Binder:2281_1( 2281): type=1400 audit(0.0:8869): avc: denied { getattr } for path="/data/data/com.sunborn.neuralcloud.en/databases/bugly_db_-journal" dev="sdb3" ino=786893 scontext=u:r:init:s0 tcontext=u:object_r:app_data_file:s0:c41,c256,c512,c768 tclass=file permissive=1 bug=b/77873135
+05-07 23:07:16.964 I/Binder:2281_1( 2281): type=1400 audit(0.0:8870): avc: denied { read } for name="com.example.tryit" dev="sdb3" ino=7078394 scontext=u:r:init:s0 tcontext=u:object_r:app_data_file:s0:c57,c256,c512,c768 tclass=dir permissive=1
+05-07 23:07:16.964 I/Binder:2281_1( 2281): type=1400 audit(0.0:8871): avc: denied { open } for path="/data/data/com.example.tryit" dev="sdb3" ino=7078394 scontext=u:r:init:s0 tcontext=u:object_r:app_data_file:s0:c57,c256,c512,c768 tclass=dir permissive=1
+05-07 23:07:17.684 I/Binder:2281_1( 2281): type=1400 audit(0.0:8955): avc: denied { read } for name="com.android.providers.contacts" dev="sdb3" ino=7078070 scontext=u:r:init:s0 tcontext=u:object_r:privapp_data_file:s0:c512,c768 tclass=dir permissive=1
+05-07 23:07:17.684 I/Binder:2281_1( 2281): type=1400 audit(0.0:8956): avc: denied { open } for path="/data/data/com.android.providers.contacts" dev="sdb3" ino=7078070 scontext=u:r:init:s0 tcontext=u:object_r:privapp_data_file:s0:c512,c768 tclass=dir permissive=1
+05-07 23:07:17.684 I/Binder:2281_1( 2281): type=1400 audit(0.0:8957): avc: denied { search } for name="com.android.providers.contacts" dev="sdb3" ino=7078070 scontext=u:r:init:s0 tcontext=u:object_r:privapp_data_file:s0:c512,c768 tclass=dir permissive=1
+05-07 23:07:17.684 I/Binder:2281_1( 2281): type=1400 audit(0.0:8958): avc: denied { getattr } for path="/data/data/com.android.providers.contacts/databases" dev="sdb3" ino=7078113 scontext=u:r:init:s0 tcontext=u:object_r:privapp_data_file:s0:c512,c768 tclass=dir permissive=1
+05-07 23:07:17.684 I/Binder:2281_1( 2281): type=1400 audit(0.0:8959): avc: denied { getattr } for path="/data/data/com.android.providers.contacts/databases/contacts2.db-shm" dev="sdb3" ino=7080109 scontext=u:r:init:s0 tcontext=u:object_r:privapp_data_file:s0:c512,c768 tclass=file permissive=1
+05-07 23:07:19.216 I/Binder:2281_1( 2281): type=1400 audit(0.0:9093): avc: denied { read } for name="com.com2us.starseedgl.android.google.global.normal" dev="sdb3" ino=7995487 scontext=u:r:init:s0 tcontext=u:object_r:app_data_file:s0:c90,c256,c512,c768 tclass=dir permissive=1
+05-07 23:07:19.216 I/Binder:2281_1( 2281): type=1400 audit(0.0:9094): avc: denied { open } for path="/data/data/com.com2us.starseedgl.android.google.global.normal" dev="sdb3" ino=7995487 scontext=u:r:init:s0 tcontext=u:object_r:app_data_file:s0:c90,c256,c512,c768 tclass=dir permissive=1
+05-07 23:07:19.216 I/Binder:2281_1( 2281): type=1400 audit(0.0:9095): avc: denied { search } for name="com.com2us.starseedgl.android.google.global.normal" dev="sdb3" ino=7995487 scontext=u:r:init:s0 tcontext=u:object_r:app_data_file:s0:c90,c256,c512,c768 tclass=dir permissive=1
+05-07 23:07:19.216 I/Binder:2281_1( 2281): type=1400 audit(0.0:9096): avc: denied { getattr } for path="/data/data/com.com2us.starseedgl.android.google.global.normal/no_backup" dev="sdb3" ino=2230103 scontext=u:r:init:s0 tcontext=u:object_r:app_data_file:s0:c90,c256,c512,c768 tclass=dir permissive=1
+05-07 23:07:19.220 I/Binder:2281_1( 2281): type=1400 audit(0.0:9097): avc: denied { getattr } for path="/data/data/com.com2us.starseedgl.android.google.global.normal/no_backup/com.google.android.gms.appid-no-backup" dev="sdb3" ino=2230104 scontext=u:r:init:s0 tcontext=u:object_r:app_data_file:s0:c90,c256,c512,c768 tclass=file permissive=1 bug=b/77873135
+05-07 23:07:20.796 I/Binder:2281_1( 2281): type=1400 audit(0.0:9156): avc: denied { read } for name="com.mumu.display.cutout.huawei_z70" dev="sdb3" ino=7341977 scontext=u:r:init:s0 tcontext=u:object_r:app_data_file:s0:c65,c256,c512,c768 tclass=dir permissive=1
+05-07 23:07:20.796 I/Binder:2281_1( 2281): type=1400 audit(0.0:9157): avc: denied { open } for path="/data/data/com.mumu.display.cutout.huawei_z70" dev="sdb3" ino=7341977 scontext=u:r:init:s0 tcontext=u:object_r:app_data_file:s0:c65,c256,c512,c768 tclass=dir permissive=1
+05-07 23:07:20.796 I/Binder:2281_1( 2281): type=1400 audit(0.0:9158): avc: denied { search } for name="com.mumu.display.cutout.huawei_z70" dev="sdb3" ino=7341977 scontext=u:r:init:s0 tcontext=u:object_r:app_data_file:s0:c65,c256,c512,c768 tclass=dir permissive=1
+05-07 23:07:20.796 I/Binder:2281_1( 2281): type=1400 audit(0.0:9159): avc: denied { getattr } for path="/data/data/com.mumu.display.cutout.huawei_z70/cache" dev="sdb3" ino=7341978 scontext=u:r:init:s0 tcontext=u:object_r:app_data_file:s0:c65,c256,c512,c768 tclass=dir permissive=1
+05-07 23:07:20.800 I/Binder:2281_1( 2281): type=1400 audit(0.0:9160): avc: denied { read } for name="bin.mt.plus.canary" dev="sdb3" ino=7733776 scontext=u:r:init:s0 tcontext=u:object_r:app_data_file:s0:c97,c256,c512,c768 tclass=dir permissive=1
+05-07 23:07:21.207 I/Finsky  ( 6486): [2] App states replicator found 36 unowned apps
+05-07 23:07:21.227 W/ActivityManager( 2429): callingPackage:com.android.vending, packageName:com.google.android.gms, name:com.google.android.gms.chimera.PersistentDirectBootAwareApiService, isSkip: true
+05-07 23:07:21.307 D/opengl-gc( 2307): Check pid 3171: running 1
+05-07 23:07:21.723 I/Finsky  ( 6486): [134] Completed 1 account content syncs with 1 successful.
+05-07 23:07:21.724 I/Finsky  ( 6486): [2] [ContentSync] Installation state replication succeeded.
+05-07 23:07:21.724 I/Finsky  ( 6486): [2] SCH: jobFinished: 12-1. TimeElapsed: 5296ms.
+05-07 23:07:21.724 I/Finsky  ( 6486): [2] WM::SCH: Logging work end for 12-1
+05-07 23:07:21.734 I/Finsky  ( 6486): [64] SCH: Scheduling phonesky job Id: 1-1337, CT: 1778153652638, Constraints: [{ L: 41050750, D: 84250750, C: CHARGING_NONE, I: IDLE_NONE, N: NET_ANY, B: BATTERY_ANY }]
+05-07 23:07:21.734 I/Finsky  ( 6486): [64] SCH: Scheduling phonesky job Id: 34-807, CT: 1778153653740, Constraints: [{ L: 604800000, D: 2535781405, C: CHARGING_NONE, I: IDLE_NONE, N: NET_ANY, B: BATTERY_ANY }]
+05-07 23:07:21.734 I/Finsky  ( 6486): [64] SCH: Scheduling phonesky job Id: 34-810, CT: 1778153653741, Constraints: [{ L: 22981359, D: 1318981359, C: CHARGING_NONE, I: IDLE_NONE, N: NET_ANY, B: BATTERY_ANY }]
+05-07 23:07:21.737 I/Finsky  ( 6486): [63] SCH: Scheduling 1 system job(s)
+05-07 23:07:21.737 I/Finsky  ( 6486): [63] SCH: Scheduling system job Id: 9820, L: 10193363, D: 71461651, C: false, I: false, N: 1
+05-07 23:07:21.740 I/Finsky  ( 6486): [133] SCH: job service finished with id 9808.
+05-07 23:07:21.920 I/adbd    ( 7529): type=1400 audit(0.0:9255): avc: denied { search } for name="/" dev="sda1" ino=2 scontext=u:r:adbd:s0 tcontext=u:object_r:unlabeled:s0 tclass=dir permissive=1
+05-07 23:07:21.924 I/adbd    ( 7529): type=1400 audit(0.0:9256): avc: denied { read } for name="linker64" dev="sda1" ino=616 scontext=u:r:adbd:s0 tcontext=u:object_r:unlabeled:s0 tclass=lnk_file permissive=1
+05-07 23:07:21.924 I/adbd    ( 7529): type=1400 audit(0.0:9257): avc: denied { search } for name="bin" dev="tmpfs" ino=16050 scontext=u:r:adbd:s0 tcontext=u:object_r:unlabeled:s0 tclass=dir permissive=1
+05-07 23:07:21.924 I/sh      ( 7529): type=1400 audit(0.0:9258): avc: denied { read } for name="/" dev="sda1" ino=2 scontext=u:r:adbd:s0 tcontext=u:object_r:unlabeled:s0 tclass=dir permissive=1
+05-07 23:07:21.924 I/sh      ( 7529): type=1400 audit(0.0:9259): avc: denied { getattr } for path="/system" dev="sda1" ino=2 scontext=u:r:adbd:s0 tcontext=u:object_r:unlabeled:s0 tclass=dir permissive=1
+05-07 23:07:21.940 D/ProcessState( 7531): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-07 23:07:21.943 I/ActivityManager( 2429): Force stopping com.HolydayStudios.Firestone appid=10077 user=0: from pid 7531
+05-07 23:07:21.951 D/CarrierSvcBindHelper( 3826): No carrier app for: 0
+05-07 23:07:22.197 I/ActivityTaskManager( 2429): START u0 {flg=0x10000000 cmp=com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity} from uid 2000, pid 7531
+05-07 23:07:22.201 I/ActivityTaskManager( 2429): [KeepAlive] disabled for com.HolydayStudios.Firestone
+05-07 23:07:22.202 W/ActivityTaskManager( 2429): Can't find TaskDisplayArea to determine support for multi window. Task id=34 attached=false
+05-07 23:07:22.204 D/CompatibilityChangeReporter( 2429): Compat change id reported: 174042980; UID 10077; state: DISABLED
+05-07 23:07:22.204 D/CompatibilityChangeReporter( 2429): Compat change id reported: 184838306; UID 10077; state: DISABLED
+05-07 23:07:22.205 D/CompatibilityChangeReporter( 2429): Compat change id reported: 185004937; UID 10077; state: DISABLED
+05-07 23:07:22.206 D/CompatibilityChangeReporter( 2429): Compat change id reported: 181136395; UID 10077; state: DISABLED
+05-07 23:07:22.206 D/CompatibilityChangeReporter( 2429): Compat change id reported: 174042936; UID 10077; state: DISABLED
+05-07 23:07:22.207 D/CompatibilityChangeReporter( 2429): Compat change id reported: 197654537; UID 10077; state: ENABLED
+05-07 23:07:22.208 I/RecentTaskMonitor( 2429): onTaskMovedToFront 34
+05-07 23:07:22.208 D/RecentTaskMonitor( 2429): openTabFromAms task is Task{86af22d #34 type=standard A=10077:com.HolydayStudios.Firestone U=0 visible=true visibleRequested=false mode=fullscreen translucent=true sz=1}
+05-07 23:07:22.209 D/CompatibilityChangeReporter( 2429): Compat change id reported: 168419799; UID 10077; state: DISABLED
+05-07 23:07:22.212 D/RecentTaskMonitor( 2429): onRecentTaskAdded 34:Task=34
+05-07 23:07:22.234 W/RecentTaskMonitor( 2429): null pid retry ...
+05-07 23:07:22.234 E/RecentTaskMonitor( 2429): VAPIShellNotifier#notifyOpenTab null params
+05-07 23:07:22.236 D/gralloc_x86( 2670): gralloc_alloc: Creating ashmem region of size 14749696
+05-07 23:07:22.236 D/CompatibilityChangeReporter( 2429): Compat change id reported: 135634846; UID 10077; state: DISABLED
+05-07 23:07:22.236 D/CompatibilityChangeReporter( 2429): Compat change id reported: 177438394; UID 10077; state: DISABLED
+05-07 23:07:22.236 D/CompatibilityChangeReporter( 2429): Compat change id reported: 135772972; UID 10077; state: DISABLED
+05-07 23:07:22.236 D/CompatibilityChangeReporter( 2429): Compat change id reported: 135754954; UID 10077; state: ENABLED
+05-07 23:07:22.240 D/Zygote  ( 2220): Forked child process 7534
+05-07 23:07:22.242 I/ActivityManager( 2429): Start proc 7534:com.HolydayStudios.Firestone/u0a77 for pre-top-activity {com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity}
+05-07 23:07:22.246 D/RecentTaskMonitor( 2429): task null or not sub display in notifyDisplayOpened
+05-07 23:07:22.247 D/RecentTaskMonitor( 2429): VAPIShellNotifier#notifyOpenTab :{"id":"task:34","displayId":0,"userId":0,"name":"Firestone","originName":"Firestone","packageName":"com.HolydayStudios.Firestone","launcher":false,"newTask":true,"icon":"iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAACAASURBVHicrLx3lJ3Jddj5q\/rSy6FzBLrRyGkQOAlDDGc45AQmURTFoBWpFU1JFJUsadc+R7K98tljr71eWxbtlShrSUs8YpBIyhSHYpghZzjkJGAiYqMBdM7p9cvvi1X7x2vEQQOYse47dfr1++qrcO+te2\/durcEG8DWz73a7gjvXqT4GIIPaq3i19cRQqJ0hECAEAAoqdBSo7UFiEs1b9iHENf+rrW+4e9vBi61cTO4pn15k3rr49bqqjavry9BG1eeaw1KGbxxzhvMSWssHSFliFh\/P9A2UgT84ty\/ZCq+l+dbP4FhRNhSYgkwhAQBmvX5rs\/n6h6kINLIYyj95cg0n3jhI3su3niON4Ddf\/bSQXT0tIDsjUd9BUIzvOHvUl5pOoquMMP\/DHGvAbHelr49ot+wCSlQltr4eSQQ6trxKlNtSMuNQCmJ1sbG\/QCWDhBCobVFJAQDjdf5+Pwf8bmBL1Ix24gBUiikoZFX4VDIK3i1tb7h0JTSRFp\/Maqpz7zya28Lrn52DT\/3\/afn43v\/7MU\/kahnb0V8LTTKUAiaDHh9uWaCUiHEbRJJ3Eb5x2hHNqXVzUBLjZLqmvJmQANKG1xG803mEwmTEJtICAQR95e+xSv591G3csj1vkMBgRIordHrRSl1eRGEcLkEQKA1vtLUgboWn6o7vHzk9\/\/r5qvHeJkBBv7o6Vg2bnxOw29rdOJaZF8l4tY\/SA2GRkiBEFfKpVnp9bc0IEQEQq0zhr6mvevh6rY2LFJckSTrxLyGMW6HiSRgAFoh1AaEFet1ri5vZvXr9Y6ERMgbLxQhBEiBkrJZhGCzN0xHOMVzLT8HUmNI3VSrUqOk5sqnqab0Oj6VEFeYQGsCfYUZVOTT+ew39vc+\/ddPvqd35\/ZLQzQvfUn0Of9Zi+jTN54IyEA29btxFbJuIM61lqBN0O56lSaxpNRNRmBdJN5M+V7d8TVfNWJd5+l1Da0FaFNtOJ5bgyC7epFKy2Yiw34L718Rw1dDc47Xin0pwytEX6+jrlMxAsUjla9yLnME18q9AUtCCIJL6lQKbHVF7GutL9srCk0ERAjwG3S8+D1aX\/wH6nVvG4719Z9n951f56xvAuz\/\/PMPKS0+qa4T00rp5oARaEOhUdfqW70+mattKgGICCEM9OWldslgASHWdegtNIIVeeT9VeJBFSMMsBolMtV5Um4FpIGRTWLHYxStNirSxrfiLJtZ6kYM37AJDRvErZnMCar8Vtt5Pl9LspzquWX9N8AGPNdUedE1PHkJl1fXkdepla5gmq5wnMfbfuW2uo\/Etei89DfSze\/Sq9P\/o78mO3ycaj0AIhJxsbfvHeIPeYb\/Q2z93E\/aEzExpqSR0vKNCGsSXF\/+fjX9pZQbGnUa0DdaBSJAc2OjSGhFIqyTK8+xZ\/kYufoiURihfIUIg3WdChKBKT2k0MTjDqZlYkiBJx3WZJK10KLm5Cgn2iilOygl2\/GcNEoab5ASO8un+dw7DH77r04xcsdHrnl+jfV\/aYzXMfytoNncVUS\/ycuG9vnF5f9A2cjzP1o+cw0D3wjPN5I8l8astcaqFhl44ksYw8fwPZdMOk5bPkbC0WRTtSiXdbabsZT1zgiR2ngCV4yBNyNhlTK5EaaUtt7wm4GmLVrjQOkUb6ueQXk+Nd\/FlRplahoKQmHgYyERqEjhaxMVKeo1j7gj2NFj0t2eImbCQqHIyPws8\/MxNAYqGaOY6WapZZBitpt6PEtoWBh+gw+3TmEFLXTPvsL4zsfwY5mbIvhWcDWhbkbsa19q\/unzxzjgPc+\/6\/48XLUYN2rnRgx6yR4wKwW2\/sOfE557jUApOtrS9HUoWuMubSmDji6MdFI\/bGr4xduc2w1B6Y3E7K0nL2VEJ1Xe759kj3cOoRu4QlM3I4hL7MggCEJAEoQhMRSekjQijecHSCkwTYMw0igtKBVLkDDJZ5P0kWBLv4FpmJyacYkXxmgvTBAYFoGdYDXTR5RyeM8HWikWiiTLs7QvnWV20z03HKteN+iEUGykv26b4BvAfbXv8UryQZbN7jf9rr5qTObqAgPf+xLeyMvEHZuhvjjppGBTt6C3TZJN+nihxciF6Z8zNdz3Vofd1Os33t8KIa5z7FwRTQCmgIfNUX4ueoWsUcYzXEJbkRAC0zWpKkWkNIaElK3BMlA6wgsVCRNcx8T1PKoNhdbw6gWNo11yhsv+ff1syceJWRqtQxL9JlPzHkuBxDQ1QeCSmq\/x7vts6pMzJFruI2nV6Z58ZUMGaHpejPXdzMYYuyUTbPC4LxhlV3iS\/9zyf6GEeXttcRmr6\/9oYgsTbH7yS0Tjw\/S3BXS0JdjT59HVnaa93UNrwdKywfA0zK\/E7zQFIn\/LXq4Dpa927Gxc7xpxKDRSNncBGRnwTxLneYTzEFWoVKpYZoRSEPoGkWruHGwzwjA0KKu518Ugbiu0VghhEQSSlZSm4UeUSj6r1ZDRpSpzyy+zd1c\/d+7pRwpBW9ogm8gR2jaGlWNyrsirw7N0Z7vx3AYr8wVaWvIUloZJ1FdpJNuujPsSEQQ0N1VvYbnckicE76w\/zow1RMHsvmLVrxP2ZoyglIkQCkFAau4Ce7\/\/p5Rmxxgc6GD\/tjqb+2129GliMUmtlmByusDkTJXFZRBCZ80NW74pRNf9L7mZT1WI6LIjqM3w+NdtZ3i7NUXguyws1JBhiFI2gYpoRD7StMg4NpXAJwwDHNRlJAihMC2BEA6eFyDrPmtCYOXihEmHlnSclZVVnj6+yNjIHA8+cJSeXomlFL4XMXxxnOHFOoPdazjFFeLbevnT\/\/QEve0OGbHGponnOL\/7A+h\/LI\/lbUBGrbE3fJU\/z\/zBm35XCoVG03r2efa9\/BXaWObnPpZm9x6HfLITx7FQKoXnwdJclQuzmoklA6UU+bzFW2IAKa7dumgtbrqrE+tOoA7D49+1HuewnEIpyWphichyMG0bVYuQlqC1NYFpGHieD3UTFUmMdZeHNCS27QCKej0CAiwUCUIM0yIUGktKpMxQqxksLFf528df4IF7Orlj3178RhHllzH9Ve7b042uTzJxIWAm8RArs89wqEdSHf0RE1sfxHdu6QW\/bpJvEonrYOqIn69+kfPWHUyY265r8jbsqMij\/eSP2Xvy7+hylnnonZId+0xiyRJStxGFmnrdYW6+zNmRBnMLdaJIk8062LZ4awxwNahrDn2umphx9R5YkpEB\/7b1ZQ7piyAF5WKdTD6PY6ZwPY98XCFME2GYFFeKaDcgYVuAgRAgDYnjGAghCIOQMFD4foSpNTECTKkIpERLiVYSKR2kNCgVizzx7AhLRXj7\/i0QNkgbNVqNEjKT4sXX6\/Qe+WVe+corPLLPYH51mXxhnKWeg5fnorXGieqoSBE4qQ2Jo29lHAreYD90hrPc5z3Dv235v9GG9ab4SAQ+fa98ix2nf0Bfssqdd+XZsbeKYwtEZOMHDrVawNx8wNRUmfmFGq6nSSYTxOMaIfT\/PAOA4opvtekEvt7vb6D5bO4Mh9VZpG0SAfnePmqejwgE8XgcJ2ujQ8Xq8hpBGBCLx1CquRuS0sCJxbFSCYxIocKARMLFWguxzQbJRMjERQi1wjEEdcekGoWYMYGRsln1U7xwYpqZZZ9YfIWH37uJtdWzxLp28GJ9B0eG4CnzKKNLP6Yz1WBg+Hssd+5FG1e2rK2iQu
+05-07 23:07:22.252 I/RecentTaskMonitor( 2429): broadcast tab opened in android as it's new task 34
+05-07 23:07:22.252 W/BroadcastQueue( 2429): Background execution not allowed: receiving Intent { act=nemu.intent.action.NEW_TASK dat=package:com.HolydayStudios.Firestone flg=0x10 (has extras) } to com.mumu.acc/.AccMsgReceiver
+05-07 23:07:22.253 D/NewFileUpdater( 2669): onOpenNewTask focusPkgName set to com.HolydayStudios.Firestone
+05-07 23:07:22.254 D/VApi.Res.TabManager( 2669): setFocusTaskProp 34
+05-07 23:07:22.255 W/System.err( 2429): org.json.JSONException: No value for errcode
+05-07 23:07:22.256 W/System.err( 2429): 	at org.json.JSONObject.get(JSONObject.java:403)
+05-07 23:07:22.256 W/System.err( 2429): 	at org.json.JSONObject.getInt(JSONObject.java:492)
+05-07 23:07:22.256 W/System.err( 2429): 	at com.android.server.vapi.VApiRequestListener.onResponse(VApiRequestListener.java:20)
+05-07 23:07:22.256 W/System.err( 2429): 	at com.android.server.vapi.VApiRequestListener.onResponse(VApiRequestListener.java:13)
+05-07 23:07:22.256 W/System.err( 2429): 	at com.android.volley.toolbox.JsonRequest.deliverResponse(JsonRequest.java:90)
+05-07 23:07:22.256 W/System.err( 2429): 	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:102)
+05-07 23:07:22.256 W/System.err( 2429): 	at android.os.Handler.handleCallback(Handler.java:938)
+05-07 23:07:22.256 W/System.err( 2429): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+05-07 23:07:22.257 W/System.err( 2429): 	at android.os.Looper.loopOnce(Looper.java:201)
+05-07 23:07:22.257 W/System.err( 2429): 	at android.os.Looper.loop(Looper.java:288)
+05-07 23:07:22.257 W/System.err( 2429): 	at com.android.server.SystemServer.run(SystemServer.java:929)
+05-07 23:07:22.257 W/System.err( 2429): 	at com.android.server.SystemServer.main(SystemServer.java:611)
+05-07 23:07:22.257 W/System.err( 2429): 	at java.lang.reflect.Method.invoke(Native Method)
+05-07 23:07:22.257 W/System.err( 2429): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:555)
+05-07 23:07:22.257 W/System.err( 2429): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1069)
+05-07 23:07:22.257 I/Zygote  ( 7534): fakeProductInfoIfNeed callded! com.HolydayStudios.Firestone
+05-07 23:07:22.261 I/Zygote  ( 7534): fake Product info com.HolydayStudios.Firestone not matched any pattern
+05-07 23:07:22.263 W/ActivityManager( 2429): Foreground service started from background can not have location/camera/microphone access: service com.mumu.acc/.AccService
+05-07 23:07:22.263 I/Zygote  ( 7534): fakeProductInfoFromProperties callded! com.HolydayStudios.Firestone
+05-07 23:07:22.263 V/ActivityManager( 2429): Attempted to start a foreground service (com.mumu.acc/.AccService) with a broken notification (no icon: Notification(channel=acc-service shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x40 color=0x00000000 vis=PRIVATE))
+05-07 23:07:22.265 D/com.netease.nemu_vapi_android.thread.HttpServer( 2669): http server response data: {"errcode":0,"message":"OK"}
+05-07 23:07:22.266 D/com.netease.nemu_vapi_android.thread.HttpServer( 2669): http server response data: {"errcode":0,"message":"OK"}
+05-07 23:07:22.271 E/NemuAppNameUtil( 7534): save data success
+05-07 23:07:22.274 V/zygiskd64( 2221): zygiskd::zygiskd: New daemon action: GetProcessFlags
+05-07 23:07:22.288 D/ProcessState( 7543): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-07 23:07:22.295 D/gralloc_x86( 2670): gralloc_alloc: Creating ashmem region of size 14749696
+05-07 23:07:22.298 E/ndroid.systemu( 2670): vulkan version is 4202746
+05-07 23:07:22.298 D/gralloc_x86( 2670): gralloc_alloc: Creating ashmem region of size 14749696
+05-07 23:07:22.299 D/gralloc_x86( 2670): gralloc_alloc: Creating ashmem region of size 14749696
+05-07 23:07:22.301 V/zygiskd64( 2221): zygiskd::zygiskd: Flags for UID 10077: ProcessFlags(PROCESS_ROOT_IS_MAGISK)
+05-07 23:07:22.302 V/zygiskd64( 2221): zygiskd::zygiskd: New daemon action: ReadModules
+05-07 23:07:22.332 D/CompatibilityChangeReporter( 2429): Compat change id reported: 197654537; UID 10043; state: ENABLED
+05-07 23:07:22.345 D/RecentTaskMonitor( 2429): task null or not sub display in notifyDisplayOpened
+05-07 23:07:22.346 D/RecentTaskMonitor( 2429): VAPIShellNotifier#notifyOpenTab :{"id":"task:34","displayId":0,"userId":0,"name":"Firestone","originName":"Firestone","packageName":"com.HolydayStudios.Firestone","launcher":false,"newTask":false,"icon":"iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAACAASURBVHicrLx3lJ3Jddj5q\/rSy6FzBLrRyGkQOAlDDGc45AQmURTFoBWpFU1JFJUsadc+R7K98tljr71eWxbtlShrSUs8YpBIyhSHYpghZzjkJGAiYqMBdM7p9cvvi1X7x2vEQQOYse47dfr1++qrcO+te2\/durcEG8DWz73a7gjvXqT4GIIPaq3i19cRQqJ0hECAEAAoqdBSo7UFiEs1b9iHENf+rrW+4e9vBi61cTO4pn15k3rr49bqqjavry9BG1eeaw1KGbxxzhvMSWssHSFliFh\/P9A2UgT84ty\/ZCq+l+dbP4FhRNhSYgkwhAQBmvX5rs\/n6h6kINLIYyj95cg0n3jhI3su3niON4Ddf\/bSQXT0tIDsjUd9BUIzvOHvUl5pOoquMMP\/DHGvAbHelr49ot+wCSlQltr4eSQQ6trxKlNtSMuNQCmJ1sbG\/QCWDhBCobVFJAQDjdf5+Pwf8bmBL1Ix24gBUiikoZFX4VDIK3i1tb7h0JTSRFp\/Maqpz7zya28Lrn52DT\/3\/afn43v\/7MU\/kahnb0V8LTTKUAiaDHh9uWaCUiHEbRJJ3Eb5x2hHNqXVzUBLjZLqmvJmQANKG1xG803mEwmTEJtICAQR95e+xSv591G3csj1vkMBgRIordHrRSl1eRGEcLkEQKA1vtLUgboWn6o7vHzk9\/\/r5qvHeJkBBv7o6Vg2bnxOw29rdOJaZF8l4tY\/SA2GRkiBEFfKpVnp9bc0IEQEQq0zhr6mvevh6rY2LFJckSTrxLyGMW6HiSRgAFoh1AaEFet1ri5vZvXr9Y6ERMgbLxQhBEiBkrJZhGCzN0xHOMVzLT8HUmNI3VSrUqOk5sqnqab0Oj6VEFeYQGsCfYUZVOTT+ew39vc+\/ddPvqd35\/ZLQzQvfUn0Of9Zi+jTN54IyEA29btxFbJuIM61lqBN0O56lSaxpNRNRmBdJN5M+V7d8TVfNWJd5+l1Da0FaFNtOJ5bgyC7epFKy2Yiw34L718Rw1dDc47Xin0pwytEX6+jrlMxAsUjla9yLnME18q9AUtCCIJL6lQKbHVF7GutL9srCk0ERAjwG3S8+D1aX\/wH6nVvG4719Z9n951f56xvAuz\/\/PMPKS0+qa4T00rp5oARaEOhUdfqW70+mattKgGICCEM9OWldslgASHWdegtNIIVeeT9VeJBFSMMsBolMtV5Um4FpIGRTWLHYxStNirSxrfiLJtZ6kYM37AJDRvErZnMCar8Vtt5Pl9LspzquWX9N8AGPNdUedE1PHkJl1fXkdepla5gmq5wnMfbfuW2uo\/Etei89DfSze\/Sq9P\/o78mO3ycaj0AIhJxsbfvHeIPeYb\/Q2z93E\/aEzExpqSR0vKNCGsSXF\/+fjX9pZQbGnUa0DdaBSJAc2OjSGhFIqyTK8+xZ\/kYufoiURihfIUIg3WdChKBKT2k0MTjDqZlYkiBJx3WZJK10KLm5Cgn2iilOygl2\/GcNEoab5ASO8un+dw7DH77r04xcsdHrnl+jfV\/aYzXMfytoNncVUS\/ycuG9vnF5f9A2cjzP1o+cw0D3wjPN5I8l8astcaqFhl44ksYw8fwPZdMOk5bPkbC0WRTtSiXdbabsZT1zgiR2ngCV4yBNyNhlTK5EaaUtt7wm4GmLVrjQOkUb6ueQXk+Nd\/FlRplahoKQmHgYyERqEjhaxMVKeo1j7gj2NFj0t2eImbCQqHIyPws8\/MxNAYqGaOY6WapZZBitpt6PEtoWBh+gw+3TmEFLXTPvsL4zsfwY5mbIvhWcDWhbkbsa19q\/unzxzjgPc+\/6\/48XLUYN2rnRgx6yR4wKwW2\/sOfE557jUApOtrS9HUoWuMubSmDji6MdFI\/bGr4xduc2w1B6Y3E7K0nL2VEJ1Xe759kj3cOoRu4QlM3I4hL7MggCEJAEoQhMRSekjQijecHSCkwTYMw0igtKBVLkDDJZ5P0kWBLv4FpmJyacYkXxmgvTBAYFoGdYDXTR5RyeM8HWikWiiTLs7QvnWV20z03HKteN+iEUGykv26b4BvAfbXv8UryQZbN7jf9rr5qTObqAgPf+xLeyMvEHZuhvjjppGBTt6C3TZJN+nihxciF6Z8zNdz3Vofd1Os33t8KIa5z7FwRTQCmgIfNUX4ueoWsUcYzXEJbkRAC0zWpKkWkNIaElK3BMlA6wgsVCRNcx8T1PKoNhdbw6gWNo11yhsv+ff1syceJWRqtQxL9JlPzHkuBxDQ1QeCSmq\/x7vts6pMzJFruI2nV6Z58ZUMGaHpejPXdzMYYuyUTbPC4LxhlV3iS\/9zyf6GEeXttcRmr6\/9oYgsTbH7yS0Tjw\/S3BXS0JdjT59HVnaa93UNrwdKywfA0zK\/E7zQFIn\/LXq4Dpa927Gxc7xpxKDRSNncBGRnwTxLneYTzEFWoVKpYZoRSEPoGkWruHGwzwjA0KKu518Ugbiu0VghhEQSSlZSm4UeUSj6r1ZDRpSpzyy+zd1c\/d+7pRwpBW9ogm8gR2jaGlWNyrsirw7N0Z7vx3AYr8wVaWvIUloZJ1FdpJNuujPsSEQQ0N1VvYbnckicE76w\/zow1RMHsvmLVrxP2ZoyglIkQCkFAau4Ce7\/\/p5Rmxxgc6GD\/tjqb+2129GliMUmtlmByusDkTJXFZRBCZ80NW74pRNf9L7mZT1WI6LIjqM3w+NdtZ3i7NUXguyws1JBhiFI2gYpoRD7StMg4NpXAJwwDHNRlJAihMC2BEA6eFyDrPmtCYOXihEmHlnSclZVVnj6+yNjIHA8+cJSeXomlFL4XMXxxnOHFOoPdazjFFeLbevnT\/\/QEve0OGbHGponnOL\/7A+h\/LI\/lbUBGrbE3fJU\/z\/zBm35XCoVG03r2efa9\/BXaWObnPpZm9x6HfLITx7FQKoXnwdJclQuzmoklA6UU+bzFW2IAKa7dumgtbrqrE+tOoA7D49+1HuewnEIpyWphichyMG0bVYuQlqC1NYFpGHieD3UTFUmMdZeHNCS27QCKej0CAiwUCUIM0yIUGktKpMxQqxksLFf528df4IF7Orlj3178RhHllzH9Ve7b042uTzJxIWAm8RArs89wqEdSHf0RE1sfxHdu6QW\/bpJvEonrYOqIn69+kfPWHUyY265r8jbsqMij\/eSP2Xvy7+hylnnonZId+0xiyRJStxGFmnrdYW6+zNmRBnMLdaJIk8062LZ4awxwNahrDn2umphx9R5YkpEB\/7b1ZQ7piyAF5WKdTD6PY6ZwPY98XCFME2GYFFeKaDcgYVuAgRAgDYnjGAghCIOQMFD4foSpNTECTKkIpERLiVYSKR2kNCgVizzx7AhLRXj7\/i0QNkgbNVqNEjKT4sXX6\/Qe+WVe+corPLLPYH51mXxhnKWeg5fnorXGieqoSBE4qQ2Jo29lHAreYD90hrPc5z3Dv235v9GG9ab4SAQ+fa98ix2nf0Bfssqdd+XZsbeKYwtEZOMHDrVawNx8wNRUmfmFGq6nSSYTxOMaIfT\/PAOA4opvtekEvt7vb6D5bO4Mh9VZpG0SAfnePmqejwgE8XgcJ2ujQ8Xq8hpBGBCLx1CquRuS0sCJxbFSCYxIocKARMLFWguxzQbJRMjERQi1wjEEdcekGoWYMYGRsln1U7xwYpqZZZ9YfIWH37uJtdWzxLp28GJ9B0eG4CnzKKNLP6Yz1WBg+Hssd+5FG1e2rK2iQ
+05-07 23:07:22.351 W/System.err( 2429): org.json.JSONException: No value for errcode
+05-07 23:07:22.351 W/System.err( 2429): 	at org.json.JSONObject.get(JSONObject.java:403)
+05-07 23:07:22.351 W/System.err( 2429): 	at org.json.JSONObject.getInt(JSONObject.java:492)
+05-07 23:07:22.351 W/System.err( 2429): 	at com.android.server.vapi.VApiRequestListener.onResponse(VApiRequestListener.java:20)
+05-07 23:07:22.351 W/System.err( 2429): 	at com.android.server.vapi.VApiRequestListener.onResponse(VApiRequestListener.java:13)
+05-07 23:07:22.351 W/System.err( 2429): 	at com.android.volley.toolbox.JsonRequest.deliverResponse(JsonRequest.java:90)
+05-07 23:07:22.351 W/System.err( 2429): 	at com.android.volley.ExecutorDelivery$ResponseDeliveryRunnable.run(ExecutorDelivery.java:102)
+05-07 23:07:22.351 W/System.err( 2429): 	at android.os.Handler.handleCallback(Handler.java:938)
+05-07 23:07:22.351 W/System.err( 2429): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+05-07 23:07:22.351 W/System.err( 2429): 	at android.os.Looper.loopOnce(Looper.java:201)
+05-07 23:07:22.351 W/System.err( 2429): 	at android.os.Looper.loop(Looper.java:288)
+05-07 23:07:22.351 W/System.err( 2429): 	at com.android.server.SystemServer.run(SystemServer.java:929)
+05-07 23:07:22.351 W/System.err( 2429): 	at com.android.server.SystemServer.main(SystemServer.java:611)
+05-07 23:07:22.351 W/System.err( 2429): 	at java.lang.reflect.Method.invoke(Native Method)
+05-07 23:07:22.351 W/System.err( 2429): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:555)
+05-07 23:07:22.351 W/System.err( 2429): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1069)
+05-07 23:07:22.363 W/Zygote  ( 7534): BindMount ,  SpecializeCommon: source /data/system/etc/mumu-configs/app/com.HolydayStudios.Firestone/currentApp, target: /system/etc/mumu-configs/currentApp , chownRet: 0
+05-07 23:07:22.363 W/Zygote  ( 7534): BindMount ,  SpecializeCommon mount currentApp , MountRet: 0
+05-07 23:07:22.397 I/Zygote  ( 7534): seccomp disabled by setenforce 0
+05-07 23:07:22.409 E/udios.Fireston( 7534): Not starting debugger since process cannot load the jdwp agent.
+05-07 23:07:22.410 D/ProcessState( 7534): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-07 23:07:22.416 D/VectorZygiskBridge( 2429): onTransact: action=GET_BINDER, callerUid=10077
+05-07 23:07:22.454 V/VectorDeopter( 7534): Skipping deopt for android.app.Instrumentation#newApplication: android.app.Instrumentation.newApplication [class java.lang.ClassLoader, class android.content.Context]
+05-07 23:07:22.455 V/VectorDeopter( 7534): Skipping deopt for android.app.LoadedApk#makeApplicationInner: android.app.LoadedApk.makeApplicationInner [boolean, class android.app.Instrumentation, boolean]
+05-07 23:07:22.455 V/VectorDeopter( 7534): Skipping deopt for android.app.LoadedApk#makeApplicationInner: android.app.LoadedApk.makeApplicationInner [boolean, class android.app.Instrumentation]
+05-07 23:07:22.457 V/Vector  ( 7534): Loading Vector/Xposed for com.HolydayStudios.Firestone (UID: 10077)
+05-07 23:07:22.469 W/OomAdjuster( 2429): Fallback pre-set sched group to default: not expected top priority
+05-07 23:07:22.471 E/ashmem  ( 7534): memfd: ro.vndk.version not defined or invalid (), this is mandated since P.
+05-07 23:07:22.475 D/VectorModuleManager( 7534): Loading module com.firestone.hooks
+05-07 23:07:22.478 W/udios.Fireston( 7534): Could not get odex filename for Anonymous-DexFile@1523058360: Dex location Anonymous-DexFile@1523058360 has no directory.
+05-07 23:07:22.480 V/VectorModuleManager( 7534): Loading class class com.template.lsposed.ModuleEntry
+05-07 23:07:22.482 I/FirestoneHooks( 7534): com.firestone.hooks: Loaded in process=com.HolydayStudios.Firestone, framework=Vector 2.0, api=101
+05-07 23:07:22.482 D/VectorModuleManager( 7534): Loaded module com.firestone.hooks successfully.
+05-07 23:07:22.482 D/CompatibilityChangeReporter( 7534): Compat change id reported: 171979766; UID 10077; state: ENABLED
+05-07 23:07:22.485 D/NemuJavaHotPatchHelper( 7534): onHandleBindApplication reportedPackageName:com.HolydayStudios.Firestone isMatchJavaPatch:false
+05-07 23:07:22.543 I/Typeface( 7534): Preloading /system/fonts/Roboto-Regular.ttf
+05-07 23:07:22.544 I/Typeface( 7534): Preloading /system/fonts/RobotoStatic-Regular.ttf
+05-07 23:07:22.564 I/nemucooker( 7534): cook file1: /system/etc/mumu-configs/shared_libs/libc_llite.so, last modify time: Fri Jul 12 17:30:20 2024
+05-07 23:07:22.564 I/nemucooker( 7534): cook file2: /data/system/etc/mumu-configs/shared_libs/libc_llite.so, last modify time: Wed Apr 29 17:20:43 2026
+05-07 23:07:22.564 I/nemucooker( 7534): cook select file: /data/system/etc/mumu-configs/shared_libs/libc_llite.so
+05-07 23:07:22.565 E/linker  ( 7534): do_dlsym houdini_patch_entrance_name failed
+05-07 23:07:22.570 W/udios.Fireston( 7534): ClassLoaderContext shared library size mismatch. Expected=1, found=0 (PCL[]{PCL[/system/framework/org.apache.http.legacy.jar*2255768530]} | PCL[])
+05-07 23:07:22.573 I/FirestoneHooks( 7534): com.firestone.hooks: onPackageLoaded com.HolydayStudios.Firestone process=com.HolydayStudios.Firestone firstPackage=true dataDir=/data/user/0/com.HolydayStudios.Firestone
+05-07 23:07:22.573 I/FirestoneHooks( 7534): com.firestone.hooks: Hooked Application.attach
+05-07 23:07:22.574 I/FirestoneHooks( 7534): com.firestone.hooks: Hooked Activity.onResume sample
+05-07 23:07:22.575 D/VectorLifecycle( 7534): dispatchPackageReady h1@ea8c73c
+05-07 23:07:22.575 I/FirestoneHooks( 7534): com.firestone.hooks: onPackageReady com.HolydayStudios.Firestone process=com.HolydayStudios.Firestone firstPackage=true dataDir=/data/user/0/com.HolydayStudios.Firestone
+05-07 23:07:22.578 V/GraphicsEnvironment( 7534): ANGLE Developer option for 'com.HolydayStudios.Firestone' set to: 'default'
+05-07 23:07:22.578 V/GraphicsEnvironment( 7534): ANGLE GameManagerService for com.HolydayStudios.Firestone: false
+05-07 23:07:22.579 V/GraphicsEnvironment( 7534): Neither updatable production driver nor prerelease driver is supported.
+05-07 23:07:22.580 D/NetworkSecurityConfig( 7534): No Network Security Config specified, using platform default
+05-07 23:07:22.580 D/NetworkSecurityConfig( 7534): No Network Security Config specified, using platform default
+05-07 23:07:22.582 D/CompatibilityChangeReporter( 2429): Compat change id reported: 135634846; UID 10066; state: DISABLED
+05-07 23:07:22.582 D/CompatibilityChangeReporter( 2429): Compat change id reported: 177438394; UID 10066; state: DISABLED
+05-07 23:07:22.582 D/CompatibilityChangeReporter( 2429): Compat change id reported: 135772972; UID 10066; state: DISABLED
+05-07 23:07:22.582 D/CompatibilityChangeReporter( 2429): Compat change id reported: 135754954; UID 10066; state: ENABLED
+05-07 23:07:22.582 D/CompatibilityChangeReporter( 2429): Compat change id reported: 143937733; UID 10066; state: ENABLED
+05-07 23:07:22.586 D/Zygote  ( 2220): Forked child process 7568
+05-07 23:07:22.587 I/ActivityManager( 2429): Start proc 7568:com.firestone.hooks/u0a66 for content provider {com.firestone.hooks/com.template.lsposed.SettingsProvider}
+05-07 23:07:22.610 I/Zygote  ( 7568): fakeProductInfoIfNeed callded! com.firestone.hooks
+05-07 23:07:22.612 I/Zygote  ( 7568): fake Product info com.firestone.hooks not matched any pattern
+05-07 23:07:22.612 I/Zygote  ( 7568): fakeProductInfoFromProperties callded! com.firestone.hooks
+05-07 23:07:22.617 E/NemuAppNameUtil( 7568): save data success
+05-07 23:07:22.620 V/zygiskd64( 2221): zygiskd::zygiskd: New daemon action: GetProcessFlags
+05-07 23:07:22.631 D/ProcessState( 7573): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-07 23:07:22.644 V/zygiskd64( 2221): zygiskd::zygiskd: Flags for UID 10066: ProcessFlags(PROCESS_ROOT_IS_MAGISK)
+05-07 23:07:22.645 V/zygiskd64( 2221): zygiskd::zygiskd: New daemon action: ReadModules
+05-07 23:07:22.697 W/Zygote  ( 7568): BindMount ,  SpecializeCommon: source /data/system/etc/mumu-configs/app/com.firestone.hooks/currentApp, target: /system/etc/mumu-configs/currentApp , chownRet: 0
+05-07 23:07:22.697 W/Zygote  ( 7568): BindMount ,  SpecializeCommon mount currentApp , MountRet: 0
+05-07 23:07:22.724 I/Zygote  ( 7568): seccomp disabled by setenforce 0
+05-07 23:07:22.728 I/firestone.hook( 7568): Late-enabling -Xcheck:jni
+05-07 23:07:22.742 D/ProcessState( 7568): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-07 23:07:22.744 I/adbd    ( 2256): jdwp connection from 7568
+05-07 23:07:22.745 D/VectorZygiskBridge( 2429): onTransact: action=GET_BINDER, callerUid=10066
+05-07 23:07:22.757 E/ashmem  ( 7568): memfd: ro.vndk.version not defined or invalid (), this is mandated since P.
+05-07 23:07:22.761 D/CompatibilityChangeReporter( 7568): Compat change id reported: 171979766; UID 10066; state: ENABLED
+05-07 23:07:22.769 D/NemuJavaHotPatchHelper( 7568): onHandleBindApplication reportedPackageName:com.firestone.hooks isMatchJavaPatch:false
+05-07 23:07:22.841 I/Typeface( 7568): Preloading /system/fonts/Roboto-Regular.ttf
+05-07 23:07:22.841 I/Typeface( 7568): Preloading /system/fonts/RobotoStatic-Regular.ttf
+05-07 23:07:22.910 V/GraphicsEnvironment( 7568): ANGLE Developer option for 'com.firestone.hooks' set to: 'default'
+05-07 23:07:22.910 V/GraphicsEnvironment( 7568): ANGLE GameManagerService for com.firestone.hooks: false
+05-07 23:07:22.910 V/GraphicsEnvironment( 7568): Neither updatable production driver nor prerelease driver is supported.
+05-07 23:07:22.911 D/NetworkSecurityConfig( 7568): No Network Security Config specified, using platform default
+05-07 23:07:22.912 D/NetworkSecurityConfig( 7568): No Network Security Config specified, using platform default
+05-07 23:07:22.920 I/FirestoneHooks( 7534): com.firestone.hooks: Detected engine=UNITY evidence=[libil2cpp.so, libunity.so, libmain.so]
+05-07 23:07:22.923 I/FirestoneHooks( 7534): com.firestone.hooks: Synced settings to /data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json
+05-07 23:07:22.927 I/shadowhook_tag( 7534): linker: hook soinfo::call_constructors
+05-07 23:07:22.927 I/shadowhook_tag( 7534): a64 rewrite: type 0, inst d10283ff
+05-07 23:07:22.927 I/shadowhook_tag( 7534): elf: find phdr gap 6ffa3b9070-6ffa3ba000(load_bias 6ffa297000, 122070-123000)
+05-07 23:07:22.927 I/shadowhook_tag( 7534): elf: find phdr gap 6ffa3cfe38-6ffa3d0000(load_bias 6ffa297000, 138e38-139000)
+05-07 23:07:22.927 I/shadowhook_tag( 7534): elf: alloc addr 6ffa3b9070(load_bias 6ffa297000, 122070), size 16, idx [0, 4)
+05-07 23:07:22.927 I/shadowhook_tag( 7534): island: alloc in ELF-gap, addr 6ffa3b9070, size 16, pc 6ffa2e8fd4, range [6ff22e8fd4, 70022e8fd0]
+05-07 23:07:22.927 I/shadowhook_tag( 7534): a64: hook (with island) OK. target 6ffa2e8fd4 -> island-exit 6ffa3b9070 -> new 6d1accffc0 -> enter 6ff03e8000 -> resume 6ffa2e8fd8
+05-07 23:07:22.927 I/shadowhook_tag( 7534): switch: hook invisible OK: target_addr 6ffa2e8fd4, new_addr 6d1accffc0
+05-07 23:07:22.927 I/shadowhook_tag( 7534): linker: hook soinfo::call_destructors
+05-07 23:07:22.927 I/shadowhook_tag( 7534): a64 rewrite: type 0, inst d10283ff
+05-07 23:07:22.927 I/shadowhook_tag( 7534): elf: alloc addr 6ffa3b9080(load_bias 6ffa297000, 122080), size 16, idx [4, 8)
+05-07 23:07:22.927 I/shadowhook_tag( 7534): island: alloc in ELF-gap, addr 6ffa3b9080, size 16, pc 6ffa2e93bc, range [6ff22e93bc, 70022e93b8]
+05-07 23:07:22.927 I/shadowhook_tag( 7534): a64: hook (with island) OK. target 6ffa2e93bc -> island-exit 6ffa3b9080 -> new 6d1acd0738 -> enter 6ff03e8040 -> resume 6ffa2e93c0
+05-07 23:07:22.927 I/shadowhook_tag( 7534): switch: hook invisible OK: target_addr 6ffa2e93bc, new_addr 6d1acd0738
+05-07 23:07:22.927 I/shadowhook_tag( 7534): linker: soinfo memory scan pre OK. load_bias 208, name 216, phdr 0, phnum 8, called 248
+05-07 23:07:22.927 I/shadowhook_tag( 7534): linker: soinfo memory scan post OK
+05-07 23:07:22.927 I/shadowhook_tag( 7534): linker: hook ctors and dtors OK
+05-07 23:07:22.927 I/shadowhook_tag( 7534): task: start linker DL-init/fini monitor ...
+05-07 23:07:22.927 E/shadowhook_tag( 7534): shadowhook version 2.0.0: shadowhook init(default_mode: SHARED, debuggable: true), return: 0, real-init: yes
+05-07 23:07:22.927 I/FirestoneHooks( 7534): ShadowHook ready: version=shadowhook version 2.0.0, arch=arm64
+05-07 23:07:22.924 I/FirestoneHooksW( 7534): type=1400 audit(0.0:9357): avc: denied { open } for path="/data/system/etc/mumu-configs/renderer.config" dev="sdb3" ino=5375163 scontext=u:r:untrusted_app:s0:c77,c256,c512,c768 tcontext=u:object_r:system_data_file:s0 tclass=file permissive=1 app=com.HolydayStudios.Firestone
+05-07 23:07:22.928 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6d154ec000, name /data/app/~~WZ-ohksZTfczqQSJUPLv8Q==/com.firestone.hooks-daX5pz2NSYBDeXfD8TK_MQ==/base.apk!/lib/arm64-v8a/libfirestonehooks.so
+05-07 23:07:22.928 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6d154ec000, name /data/app/~~WZ-ohksZTfczqQSJUPLv8Q==/com.firestone.hooks-daX5pz2NSYBDeXfD8TK_MQ==/base.apk!/lib/arm64-v8a/libfirestonehooks.so
+05-07 23:07:22.928 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6d154ec000, name /data/app/~~WZ-ohksZTfczqQSJUPLv8Q==/com.firestone.hooks-daX5pz2NSYBDeXfD8TK_MQ==/base.apk!/lib/arm64-v8a/libfirestonehooks.so
+05-07 23:07:22.929 I/FirestoneHooks( 7534): JNI_OnLoad firestonehooks
+05-07 23:07:22.929 I/FirestoneHooks( 7534): Loaded libfirestonehooks.so
+05-07 23:07:22.929 I/FirestoneHooks( 7534): install worker package=com.HolydayStudios.Firestone settings=/data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json shadowhook=shadowhook version 2.0.0
+05-07 23:07:22.929 E/shadowhook_tag( 7534): shadowhook version 2.0.0: shadowhook init(default_mode: SHARED, debuggable: false), return: 0, real-init: no
+05-07 23:07:22.931 I/FirestoneHooks( 7534): settings refresh thread path=/data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json
+05-07 23:07:22.931 I/FirebaseApp( 7534): Device unlocked: initializing all Firebase APIs for app [DEFAULT]
+05-07 23:07:22.924 I/FirestoneHooksW( 7534): type=1400 audit(0.0:9358): avc: denied { read } for name="linker64" dev="sda1" ino=616 scontext=u:r:untrusted_app:s0:c77,c256,c512,c768 tcontext=u:object_r:unlabeled:s0 tclass=lnk_file permissive=1 app=com.HolydayStudios.Firestone
+05-07 23:07:22.936 I/FirebaseInitProvider( 7534): FirebaseApp initialization successful
+05-07 23:07:22.924 I/FirestoneHooksW( 7534): type=1400 audit(0.0:9359): avc: denied { use } for path="/apex/com.android.runtime/bin/linker64" dev="sda1" ino=375 scontext=u:r:untrusted_app:s0:c77,c256,c512,c768 tcontext=u:r:kernel:s0 tclass=fd permissive=1 app=com.HolydayStudios.Firestone
+05-07 23:07:22.936 I/Binder:2254_1( 2254): type=1400 audit(0.0:9360): avc: denied { read write } for path="socket:[44866]" dev="sockfs" ino=44866 scontext=u:r:untrusted_app:s0:c77,c256,c512,c768 tcontext=u:r:init:s0 tclass=unix_stream_socket permissive=1
+05-07 23:07:22.945 I/FacebookInitProvider( 7534): Failed to auto initialize the Facebook SDK
+05-07 23:07:22.945 I/FacebookInitProvider( 7534): A valid Facebook app client token must be set in the AndroidManifest.xml or set by calling FacebookSdk.setClientToken before initializing the sdk.
+05-07 23:07:22.945 I/FacebookInitProvider( 7534): 	at com.facebook.FacebookSdk.sdkInitialize(SourceFile:460)
+05-07 23:07:22.945 I/FacebookInitProvider( 7534): 	at com.facebook.FacebookSdk.sdkInitialize(SourceFile:412)
+05-07 23:07:22.945 I/FacebookInitProvider( 7534): 	at com.facebook.internal.FacebookInitProvider.onCreate(SourceFile:28)
+05-07 23:07:22.945 I/FacebookInitProvider( 7534): 	at android.content.ContentProvider.attachInfo(ContentProvider.java:2404)
+05-07 23:07:22.945 I/FacebookInitProvider( 7534): 	at android.content.ContentProvider.attachInfo(ContentProvider.java:2374)
+05-07 23:07:22.945 I/FacebookInitProvider( 7534): 	at android.app.ActivityThread.installProvider(ActivityThread.java:7632)
+05-07 23:07:22.945 I/FacebookInitProvider( 7534): 	at android.app.ActivityThread.installContentProviders(ActivityThread.java:7149)
+05-07 23:07:22.945 I/FacebookInitProvider( 7534): 	at android.app.ActivityThread.handleBindApplication(ActivityThread.java:6920)
+05-07 23:07:22.945 I/FacebookInitProvider( 7534): 	at android.app.ActivityThread.access$1500(ActivityThread.java:259)
+05-07 23:07:22.945 I/FacebookInitProvider( 7534): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2094)
+05-07 23:07:22.945 I/FacebookInitProvider( 7534): 	at android.os.Handler.dispatchMessage(Handler.java:106)
+05-07 23:07:22.945 I/FacebookInitProvider( 7534): 	at android.os.Looper.loopOnce(Looper.java:201)
+05-07 23:07:22.945 I/FacebookInitProvider( 7534): 	at android.os.Looper.loop(Looper.java:288)
+05-07 23:07:22.945 I/FacebookInitProvider( 7534): 	at android.app.ActivityThread.main(ActivityThread.java:8043)
+05-07 23:07:22.945 I/FacebookInitProvider( 7534): 	at java.lang.reflect.Method.invoke(Native Method)
+05-07 23:07:22.945 I/FacebookInitProvider( 7534): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:555)
+05-07 23:07:22.945 I/FacebookInitProvider( 7534): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1091)
+05-07 23:07:22.940 I/lmkd    ( 2055): type=1400 audit(0.0:9361): avc: denied { write } for name="oom_score_adj" dev="proc" ino=18037 scontext=u:r:init:s0 tcontext=u:r:gmscore_app:s0:c512,c768 tclass=file permissive=1
+05-07 23:07:22.950 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6d1a924000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_DynamiteLoader_installtime.odex
+05-07 23:07:22.950 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6d1a924000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_DynamiteLoader_installtime.odex
+05-07 23:07:22.950 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6d1a924000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_DynamiteLoader_installtime.odex
+05-07 23:07:22.952 W/udios.Fireston( 7534): ClassLoaderContext classpath size mismatch. expected=16, found=0 (DLC[];PCL[base.apk*545294799:base.apk!classes2.dex*352801010:base.apk!classes3.dex*3343406984:base.apk!classes4.dex*2440093784:base.apk!classes5.dex*3849908652:base.apk!classes6.dex*990115835:base.apk!classes7.dex*2111835892:base.apk!classes8.dex*3444068947:base.apk!classes9.dex*3508519706:base.apk!classes10.dex*3738386946:base.apk!classes11.dex*1150016488:base.apk!classes12.dex*2136424662:base.apk!classes13.dex*3076236650:base.apk!classes14.dex*2602640587:base.apk!classes15.dex*1985522381:base.apk!classes16.dex*3850485896]{PCL[/system/framework/org.apache.http.legacy.jar*2255768530]#PCL[/system/framework/com.android.location.provider.jar*1360179951]} | DLC[];PCL[])
+05-07 23:07:22.952 I/shadowhook_tag( 7534): linker: call_dtors pre, load_bias 6d1a924000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_DynamiteLoader_installtime.odex
+05-07 23:07:22.952 I/shadowhook_tag( 7534): linker: call_dtors post, load_bias 6d1a924000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_DynamiteLoader_installtime.odex
+05-07 23:07:22.952 I/shadowhook_tag( 7534): task: call_dtors() post callback. load_bias 6d1a924000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_DynamiteLoader_installtime.odex
+05-07 23:07:22.954 I/DynamiteModule( 7534): Considering local module com.google.android.gms.measurement.dynamite:141 and remote module com.google.android.gms.measurement.dynamite:190
+05-07 23:07:22.954 I/DynamiteModule( 7534): Selected remote version of com.google.android.gms.measurement.dynamite, version >= 190
+05-07 23:07:22.954 V/DynamiteModule( 7534): Dynamite loader version >= 2, using loadModule2NoCrashUtils
+05-07 23:07:22.958 W/System  ( 7534): ClassLoader referenced unknown path: 
+05-07 23:07:22.959 D/VectorLifecycle( 7534): dispatchPackageReady h1@cb328ec
+05-07 23:07:22.968 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6d1a571000, name /data/app/~~eYnZX0CwG_PADosI43wKmA==/com.HolydayStudios.Firestone-KwYIEPUCRPiNe65OfXHOnQ==/lib/arm64/libmain.so
+05-07 23:07:22.968 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6d1a571000, name /data/app/~~eYnZX0CwG_PADosI43wKmA==/com.HolydayStudios.Firestone-KwYIEPUCRPiNe65OfXHOnQ==/lib/arm64/libmain.so
+05-07 23:07:22.968 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6d1a571000, name /data/app/~~eYnZX0CwG_PADosI43wKmA==/com.HolydayStudios.Firestone-KwYIEPUCRPiNe65OfXHOnQ==/lib/arm64/libmain.so
+05-07 23:07:22.972 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6d0b036000, name /data/app/~~eYnZX0CwG_PADosI43wKmA==/com.HolydayStudios.Firestone-KwYIEPUCRPiNe65OfXHOnQ==/lib/arm64/libunity.so
+05-07 23:07:22.973 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6d0b036000, name /data/app/~~eYnZX0CwG_PADosI43wKmA==/com.HolydayStudios.Firestone-KwYIEPUCRPiNe65OfXHOnQ==/lib/arm64/libunity.so
+05-07 23:07:23.002 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6d0b036000, name /data/app/~~eYnZX0CwG_PADosI43wKmA==/com.HolydayStudios.Firestone-KwYIEPUCRPiNe65OfXHOnQ==/lib/arm64/libunity.so
+05-07 23:07:23.003 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6d1a390000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_MeasurementDynamite_installtime.odex
+05-07 23:07:23.003 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6d1a390000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_MeasurementDynamite_installtime.odex
+05-07 23:07:23.003 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6d1a390000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_MeasurementDynamite_installtime.odex
+05-07 23:07:23.004 W/udios.Fireston( 7534): ClassLoaderContext classpath size mismatch. expected=16, found=2 (DLC[];PCL[base.apk*545294799:base.apk!classes2.dex*352801010:base.apk!classes3.dex*3343406984:base.apk!classes4.dex*2440093784:base.apk!classes5.dex*3849908652:base.apk!classes6.dex*990115835:base.apk!classes7.dex*2111835892:base.apk!classes8.dex*3444068947:base.apk!classes9.dex*3508519706:base.apk!classes10.dex*3738386946:base.apk!classes11.dex*1150016488:base.apk!classes12.dex*2136424662:base.apk!classes13.dex*3076236650:base.apk!classes14.dex*2602640587:base.apk!classes15.dex*1985522381:base.apk!classes16.dex*3850485896]{PCL[/system/framework/org.apache.http.legacy.jar*2255768530]#PCL[/system/framework/com.android.location.provider.jar*1360179951]} | DLC[];PCL[/data/app/~~eYnZX0CwG_PADosI43wKmA==/com.HolydayStudios.Firestone-KwYIEPUCRPiNe65OfXHOnQ==/base.apk*115601013:/data/app/~~eYnZX0CwG_PADosI43wKmA==/com.HolydayStudios.Firestone-KwYIEPUCRPiNe65OfXHOnQ==/base.apk!classes2.dex*3214480094])
+05-07 23:07:23.005 W/NewFileUpdater( 2669): MSG_GET_PACKAGE_TAG_INFO, no available new tag for: com.HolydayStudios.Firestone, workingTag: 12.2011
+05-07 23:07:23.035 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6d04cbb000, name /data/app/~~eYnZX0CwG_PADosI43wKmA==/com.HolydayStudios.Firestone-KwYIEPUCRPiNe65OfXHOnQ==/lib/arm64/libil2cpp.so
+05-07 23:07:23.035 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6d04cbb000, name /data/app/~~eYnZX0CwG_PADosI43wKmA==/com.HolydayStudios.Firestone-KwYIEPUCRPiNe65OfXHOnQ==/lib/arm64/libil2cpp.so
+05-07 23:07:23.036 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6d04cbb000, name /data/app/~~eYnZX0CwG_PADosI43wKmA==/com.HolydayStudios.Firestone-KwYIEPUCRPiNe65OfXHOnQ==/lib/arm64/libil2cpp.so
+05-07 23:07:23.036 I/IL2CPP  ( 7534): JNI_OnLoad
+05-07 23:07:23.036 I/shadowhook_tag( 7534): linker: call_dtors pre, load_bias 6d1a390000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_MeasurementDynamite_installtime.odex
+05-07 23:07:23.036 I/shadowhook_tag( 7534): linker: call_dtors post, load_bias 6d1a390000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_MeasurementDynamite_installtime.odex
+05-07 23:07:23.036 I/shadowhook_tag( 7534): task: call_dtors() post callback. load_bias 6d1a390000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_MeasurementDynamite_installtime.odex
+05-07 23:07:23.036 V/Unity   ( 7534): Context Type: ActivityOrService
+05-07 23:07:23.051 W/WindowManager( 2429): Failed looking up window session=Session{58fd9de 7534:u0a10077} callers=com.android.server.wm.WindowManagerService.windowForClientLocked:5826 com.android.server.wm.Session.updateRequestedVisibilities:640 android.view.IWindowSession$Stub.onTransact:1175 
+05-07 23:07:23.051 W/ActivityManager( 2429): callingPackage:com.HolydayStudios.Firestone, packageName:com.google.android.gms, name:com.google.android.gms.chimera.PersistentApiService, isSkip: true
+05-07 23:07:23.062 I/PhenotypeResourceReader( 2754): unable to find any Phenotype resource metadata for com.HolydayStudios.Firestone
+05-07 23:07:23.069 E/udios.Fireston( 7534): No package ID 6a found for ID 0x6a0b0013.
+05-07 23:07:23.071 I/FA      ( 7534): App measurement initialized, version: 166000
+05-07 23:07:23.071 I/FA      ( 7534): To enable debug logging run: adb shell setprop log.tag.FA VERBOSE
+05-07 23:07:23.071 D/hw-ProcessState( 7534): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-07 23:07:23.071 I/FA      ( 7534): To enable faster debug mode event logging run:
+05-07 23:07:23.071 I/FA      ( 7534):   adb shell setprop debug.firebase.analytics.app com.HolydayStudios.Firestone
+05-07 23:07:23.071 I/hwservicemanager( 2057): getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+05-07 23:07:23.071 E/HidlServiceManagement( 7534): getService: Potential race detected, descriptor: android.hardware.graphics.mapper@4.0::IMapper instance: default
+05-07 23:07:23.071 I/hwservicemanager( 2057): Since android.hardware.graphics.mapper@4.0::IMapper/default is not registered, trying to start it as a lazy HAL.
+05-07 23:07:23.071 I/Gralloc4( 7534): mapper 4.x is not supported
+05-07 23:07:23.071 I/hwservicemanager( 2057): getTransport: Cannot find entry android.hardware.graphics.mapper@3.0::IMapper/default in either framework or device VINTF manifest.
+05-07 23:07:23.071 E/HidlServiceManagement( 7534): getService: Potential race detected, descriptor: android.hardware.graphics.mapper@3.0::IMapper instance: default
+05-07 23:07:23.071 I/hwservicemanager( 2057): Since android.hardware.graphics.mapper@3.0::IMapper/default is not registered, trying to start it as a lazy HAL.
+05-07 23:07:23.072 W/Gralloc3( 7534): mapper 3.x is not supported
+05-07 23:07:23.072 E/HidlServiceManagement( 7534): getService: Potential race detected, descriptor: android.hardware.graphics.mapper@2.0::IMapper instance: default
+05-07 23:07:23.076 W/libc    ( 2057): Unable to set property "ctl.interface_start" to "android.hardware.graphics.mapper@4.0::IMapper/default": error code: 0x20
+05-07 23:07:23.076 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6d00338000, name /system/vendor/lib64/hw/android.hardware.graphics.mapper@2.0-impl.so
+05-07 23:07:23.076 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6d00338000, name /system/vendor/lib64/hw/android.hardware.graphics.mapper@2.0-impl.so
+05-07 23:07:23.076 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6d00338000, name /system/vendor/lib64/hw/android.hardware.graphics.mapper@2.0-impl.so
+05-07 23:07:23.076 I/hwservicemanager( 2057): Tried to start android.hardware.graphics.mapper@4.0::IMapper/default as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+05-07 23:07:23.078 W/libc    ( 2057): Unable to set property "ctl.interface_start" to "android.hardware.graphics.mapper@3.0::IMapper/default": error code: 0x20
+05-07 23:07:23.078 I/hwservicemanager( 2057): Tried to start android.hardware.graphics.mapper@3.0::IMapper/default as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+05-07 23:07:23.100 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6ce9c90000, name /system/lib64/hw/gralloc.kona.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6ce9c90000, name /system/lib64/hw/gralloc.kona.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6ce9b4a000, name /system/lib64/libOpenglSystemCommon.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6ce9b4a000, name /system/lib64/libOpenglSystemCommon.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6ce7cc6000, name /system/lib64/libvulkan_enc.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6ce7cc6000, name /system/lib64/libvulkan_enc.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6ce9b1f000, name /system/lib64/libandroidemu.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6ce9b1f000, name /system/lib64/libandroidemu.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6ce9b1f000, name /system/lib64/libandroidemu.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6ce9ac0000, name /system/lib64/lib_renderControl_enc.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6ce9ac0000, name /system/lib64/lib_renderControl_enc.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6ce9ac0000, name /system/lib64/lib_renderControl_enc.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6ce9aa4000, name /system/lib64/libdrm.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6ce9aa4000, name /system/lib64/libdrm.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6ce9aa4000, name /system/lib64/libdrm.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6ce7cc6000, name /system/lib64/libvulkan_enc.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6ce9b85000, name /system/lib64/libGLESv2_enc.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6ce9b85000, name /system/lib64/libGLESv2_enc.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6ce9b85000, name /system/lib64/libGLESv2_enc.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6ce9c23000, name /system/lib64/libGLESv1_enc.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6ce9c23000, name /system/lib64/libGLESv1_enc.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6ce9c23000, name /system/lib64/libGLESv1_enc.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6ce9b4a000, name /system/lib64/libOpenglSystemCommon.so
+05-07 23:07:23.100 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6ce9c90000, name /system/lib64/hw/gralloc.kona.so
+05-07 23:07:23.101 I/hwservicemanager( 2057): getTransport: Cannot find entry android.hardware.graphics.allocator@4.0::IAllocator/default in either framework or device VINTF manifest.
+05-07 23:07:23.101 E/HidlServiceManagement( 7534): getService: Potential race detected, descriptor: android.hardware.graphics.allocator@4.0::IAllocator instance: default
+05-07 23:07:23.102 I/hwservicemanager( 2057): Since android.hardware.graphics.allocator@4.0::IAllocator/default is not registered, trying to start it as a lazy HAL.
+05-07 23:07:23.102 W/Gralloc4( 7534): allocator 4.x is not supported
+05-07 23:07:23.103 I/hwservicemanager( 2057): getTransport: Cannot find entry android.hardware.graphics.allocator@3.0::IAllocator/default in either framework or device VINTF manifest.
+05-07 23:07:23.103 E/HidlServiceManagement( 7534): getService: Potential race detected, descriptor: android.hardware.graphics.allocator@3.0::IAllocator instance: default
+05-07 23:07:23.103 I/hwservicemanager( 2057): Since android.hardware.graphics.allocator@3.0::IAllocator/default is not registered, trying to start it as a lazy HAL.
+05-07 23:07:23.104 W/Gralloc3( 7534): allocator 3.x is not supported
+05-07 23:07:23.105 E/HidlServiceManagement( 7534): getService: Potential race detected, descriptor: android.hardware.graphics.allocator@2.0::IAllocator instance: default
+05-07 23:07:23.107 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6d002d5000, name /system/vendor/lib64/hw/android.hardware.graphics.allocator@2.0-impl.so
+05-07 23:07:23.107 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6d002d5000, name /system/vendor/lib64/hw/android.hardware.graphics.allocator@2.0-impl.so
+05-07 23:07:23.107 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6d002d5000, name /system/vendor/lib64/hw/android.hardware.graphics.allocator@2.0-impl.so
+05-07 23:07:23.107 I/nemucooker( 7534): cook file1: /etc/mumu-configs/renderer.config, last modify time: Thu Aug 29 11:22:45 2024
+05-07 23:07:23.107 I/nemucooker( 7534): cook file2: /data/system/etc/mumu-configs/renderer.config, last modify time: Thu Apr 30 21:00:20 2026
+05-07 23:07:23.107 I/nemucooker( 7534): cook select file: /data/system/etc/mumu-configs/renderer.config
+05-07 23:07:23.109 W/libc    ( 2057): Unable to set property "ctl.interface_start" to "android.hardware.graphics.allocator@4.0::IAllocator/default": error code: 0x20
+05-07 23:07:23.109 I/hwservicemanager( 2057): Tried to start android.hardware.graphics.allocator@4.0::IAllocator/default as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+05-07 23:07:23.110 E/udios.Fireston( 7534): vulkan version is 4202746
+05-07 23:07:23.110 W/ActivityManager( 2429): callingPackage:com.HolydayStudios.Firestone, packageName:com.google.android.gms, name:com.google.android.gms.measurement.service.MeasurementBrokerService, isSkip: true
+05-07 23:07:23.111 D/gralloc_x86( 7534): gralloc_alloc: Creating ashmem region of size 14749696
+05-07 23:07:23.114 W/libc    ( 2057): Unable to set property "ctl.interface_start" to "android.hardware.graphics.allocator@3.0::IAllocator/default": error code: 0x20
+05-07 23:07:23.114 I/hwservicemanager( 2057): Tried to start android.hardware.graphics.allocator@3.0::IAllocator/default as a lazy service, but was unable to. Usually this happens when a service is not installed, but if the service is intended to be used as a lazy service, then it may be configured incorrectly.
+05-07 23:07:23.114 D/BoundBrokerSvc( 3171): onBind: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+05-07 23:07:23.114 D/BoundBrokerSvc( 3171): Loading bound service for intent: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+05-07 23:07:23.115 I/FA      ( 7534): Tag Manager is not found and thus will not be used
+05-07 23:07:23.157 I/ActivityTaskManager( 2429): Displayed com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity: +957ms
+05-07 23:07:23.165 D/AdvertisingIdClient( 3171): AdvertisingIdClient already created.
+05-07 23:07:23.165 D/AdvertisingIdClient( 3171): AdvertisingIdClient is not bounded. Starting to bind it...
+05-07 23:07:23.167 W/ActivityManager( 2429): callingPackage:com.google.android.gms, packageName:com.google.android.gms, name:com.google.android.gms.ads.identifier.service.AdvertisingIdService, isSkip: true
+05-07 23:07:23.167 I/Unity   ( 7534): MemoryManager: Using 'Dynamic Heap' Allocator.
+05-07 23:07:23.169 D/AdvertisingIdClient( 3171): AdvertisingIdClient is bounded
+05-07 23:07:23.175 I/AdvertisingIdClient( 3171): shouldSendLog 10952
+05-07 23:07:23.175 I/AdvertisingIdClient( 3171): GetInfoInternal elapse 9ms
+05-07 23:07:23.179 D/BoundBrokerSvc( 2754): onRebind: Intent { act=com.google.android.gms.common.telemetry.service.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentApiService }
+05-07 23:07:23.186 I/FirestoneHooks( 7534): libil2cpp.so base=0x6d04cbb000
+05-07 23:07:23.186 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(libil2cpp.so, EasyWin.CentralCurrencyHandler.HaveCurrency, 0x6d07860e48, 0x6d155090fc, 9) ...
+05-07 23:07:23.186 I/shadowhook_tag( 7534): switch: create, target_addr 6d07860e48
+05-07 23:07:23.186 I/shadowhook_tag( 7534): hub: create trampo at 6ff02bc000, size 96 + 16 = 112
+05-07 23:07:23.186 I/shadowhook_tag( 7534): hub: add(new) func 6d155090fc
+05-07 23:07:23.186 I/shadowhook_tag( 7534): a64 rewrite: type 0, inst f94002a0
+05-07 23:07:23.190 I/shadowhook_tag( 7534): linker: get dlinfo by target addr: target_addr 0x6d07860e48, sym_name (NULL), sym_sz 0, load_bias 6d04cbb000, pathname /data/app/~~eYnZX0CwG_PADosI43wKmA==/com.HolydayStudios.Firestone-KwYIEPUCRPiNe65OfXHOnQ==/lib/arm64/libil2cpp.so
+05-07 23:07:23.190 I/shadowhook_tag( 7534): elf: find phdr gap 6d06b06000-6d06b09000(load_bias 6d04cbb000, 1e4b000-1e4e000)
+05-07 23:07:23.190 I/shadowhook_tag( 7534): elf: find phdr gap 6d09c637f0-6d09c67000(load_bias 6d04cbb000, 4fa87f0-4fac000)
+05-07 23:07:23.190 I/shadowhook_tag( 7534): elf: find phdr gap 6d09f9c000-6d09f9f000(load_bias 6d04cbb000, 52e1000-52e4000)
+05-07 23:07:23.190 I/shadowhook_tag( 7534): elf: find phdr gap 6d0a4c9370-6d0a4ca000(load_bias 6d04cbb000, 580e370-580f000)
+05-07 23:07:23.190 I/shadowhook_tag( 7534): elf: alloc addr 6d06b06000(load_bias 6d04cbb000, 1e4b000), size 16, idx [0, 4)
+05-07 23:07:23.190 I/shadowhook_tag( 7534): island: alloc in ELF-gap, addr 6d06b06000, size 16, pc 6d07860e48, range [6cff860e48, 6d0f860e44]
+05-07 23:07:23.190 I/shadowhook_tag( 7534): a64: hook (with island) OK. target 6d07860e48 -> island-exit 6d06b06000 -> new 6ff02bc000 -> enter 6ff03e8080 -> resume 6d07860e4c
+05-07 23:07:23.190 I/shadowhook_tag( 7534): switch: hook in SHARED mode OK: target_addr 6d07860e48, new_addr 6d155090fc
+05-07 23:07:23.190 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(0x6d07860e48, 0x6d155090fc, 9) OK. return: 0xb400006db9ffa640
+05-07 23:07:23.190 I/FirestoneHooks( 7534): EasyWin.CentralCurrencyHandler.HaveCurrency hook installed rva=0x2ba5e48 target=0x6d07860e48 stub=0xb400006db9ffa640 err=0 OK
+05-07 23:07:23.190 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(libil2cpp.so, EasyWin.Currency.HaveCurrency, 0x6d07860ed8, 0x6d15509224, 9) ...
+05-07 23:07:23.190 I/shadowhook_tag( 7534): switch: create, target_addr 6d07860ed8
+05-07 23:07:23.190 I/shadowhook_tag( 7534): hub: create trampo at 6ff02bc070, size 96 + 16 = 112
+05-07 23:07:23.190 I/shadowhook_tag( 7534): hub: add(new) func 6d15509224
+05-07 23:07:23.190 I/shadowhook_tag( 7534): a64 rewrite: type 0, inst aa1f03e0
+05-07 23:07:23.190 I/shadowhook_tag( 7534): elf: alloc addr 6d06b06010(load_bias 6d04cbb000, 1e4b010), size 16, idx [4, 8)
+05-07 23:07:23.190 I/shadowhook_tag( 7534): island: alloc in ELF-gap, addr 6d06b06010, size 16, pc 6d07860ed8, range [6cff860ed8, 6d0f860ed4]
+05-07 23:07:23.190 I/shadowhook_tag( 7534): a64: hook (with island) OK. target 6d07860ed8 -> island-exit 6d06b06010 -> new 6ff02bc070 -> enter 6ff03e80c0 -> resume 6d07860edc
+05-07 23:07:23.190 I/shadowhook_tag( 7534): switch: hook in SHARED mode OK: target_addr 6d07860ed8, new_addr 6d15509224
+05-07 23:07:23.190 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(0x6d07860ed8, 0x6d15509224, 9) OK. return: 0xb400006db9ff9170
+05-07 23:07:23.190 I/FirestoneHooks( 7534): EasyWin.Currency.HaveCurrency hook installed rva=0x2ba5ed8 target=0x6d07860ed8 stub=0xb400006db9ff9170 err=0 OK
+05-07 23:07:23.190 I/FirestoneHooks( 7534): easy-win FreeCurrency toggle active; affordability hooks installed
+05-07 23:07:23.190 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(libil2cpp.so, GodMode.BattleHero.IsImmune, 0x6d0777b170, 0x6d15509610, 9) ...
+05-07 23:07:23.190 I/shadowhook_tag( 7534): switch: create, target_addr 6d0777b170
+05-07 23:07:23.190 I/shadowhook_tag( 7534): hub: create trampo at 6ff02bc0e0, size 96 + 16 = 112
+05-07 23:07:23.190 I/shadowhook_tag( 7534): hub: add(new) func 6d15509610
+05-07 23:07:23.191 I/shadowhook_tag( 7534): a64 rewrite: type 0, inst b9004be8
+05-07 23:07:23.191 I/shadowhook_tag( 7534): elf: alloc addr 6d06b06020(load_bias 6d04cbb000, 1e4b020), size 16, idx [8, 12)
+05-07 23:07:23.191 I/shadowhook_tag( 7534): island: alloc in ELF-gap, addr 6d06b06020, size 16, pc 6d0777b170, range [6cff77b170, 6d0f77b16c]
+05-07 23:07:23.191 I/shadowhook_tag( 7534): a64: hook (with island) OK. target 6d0777b170 -> island-exit 6d06b06020 -> new 6ff02bc0e0 -> enter 6ff03e8100 -> resume 6d0777b174
+05-07 23:07:23.191 I/shadowhook_tag( 7534): switch: hook in SHARED mode OK: target_addr 6d0777b170, new_addr 6d15509610
+05-07 23:07:23.191 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(0x6d0777b170, 0x6d15509610, 9) OK. return: 0xb400006db9ff8e10
+05-07 23:07:23.191 I/FirestoneHooks( 7534): GodMode.BattleHero.IsImmune hook installed rva=0x2ac0170 target=0x6d0777b170 stub=0xb400006db9ff8e10 err=0 OK
+05-07 23:07:23.191 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(libil2cpp.so, GameSpeed.Time.set_timeScale, 0x6d096c9aa4, 0x6d15509968, 9) ...
+05-07 23:07:23.191 I/shadowhook_tag( 7534): switch: create, target_addr 6d096c9aa4
+05-07 23:07:23.191 I/shadowhook_tag( 7534): hub: create trampo at 6ff02bc150, size 96 + 16 = 112
+05-07 23:07:23.191 I/shadowhook_tag( 7534): hub: add(new) func 6d15509968
+05-07 23:07:23.192 I/shadowhook_tag( 7534): a64 rewrite: type 0, inst 7100977f
+05-07 23:07:23.192 I/shadowhook_tag( 7534): elf: alloc addr 6d06b06030(load_bias 6d04cbb000, 1e4b030), size 16, idx [12, 16)
+05-07 23:07:23.192 I/shadowhook_tag( 7534): island: alloc in ELF-gap, addr 6d06b06030, size 16, pc 6d096c9aa4, range [6d016c9aa4, 6d116c9aa0]
+05-07 23:07:23.192 I/shadowhook_tag( 7534): a64: hook (with island) OK. target 6d096c9aa4 -> island-exit 6d06b06030 -> new 6ff02bc150 -> enter 6ff03e8140 -> resume 6d096c9aa8
+05-07 23:07:23.192 I/shadowhook_tag( 7534): switch: hook in SHARED mode OK: target_addr 6d096c9aa4, new_addr 6d15509968
+05-07 23:07:23.192 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(0x6d096c9aa4, 0x6d15509968, 9) OK. return: 0xb400006db9ff9f80
+05-07 23:07:23.192 I/FirestoneHooks( 7534): GameSpeed.Time.set_timeScale hook installed rva=0x4a0eaa4 target=0x6d096c9aa4 stub=0xb400006db9ff9f80 err=0 OK
+05-07 23:07:23.192 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(libil2cpp.so, GameSpeed.Time.get_fixedDeltaTime, 0x6d096c99f4, 0x6d155099fc, 9) ...
+05-07 23:07:23.192 I/shadowhook_tag( 7534): switch: create, target_addr 6d096c99f4
+05-07 23:07:23.192 I/shadowhook_tag( 7534): hub: create trampo at 6ff02bc1c0, size 96 + 16 = 112
+05-07 23:07:23.192 I/shadowhook_tag( 7534): hub: add(new) func 6d155099fc
+05-07 23:07:23.192 I/shadowhook_tag( 7534): a64 rewrite: type 3, inst 975ac675
+05-07 23:07:23.192 I/shadowhook_tag( 7534): elf: alloc addr 6d06b06040(load_bias 6d04cbb000, 1e4b040), size 16, idx [16, 20)
+05-07 23:07:23.192 I/shadowhook_tag( 7534): island: alloc in ELF-gap, addr 6d06b06040, size 16, pc 6d096c99f4, range [6d016c99f4, 6d116c99f0]
+05-07 23:07:23.192 I/shadowhook_tag( 7534): a64: hook (with island) OK. target 6d096c99f4 -> island-exit 6d06b06040 -> new 6ff02bc1c0 -> enter 6ff03e8180 -> resume 6d096c99f8
+05-07 23:07:23.192 I/shadowhook_tag( 7534): switch: hook in SHARED mode OK: target_addr 6d096c99f4, new_addr 6d155099fc
+05-07 23:07:23.192 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(0x6d096c99f4, 0x6d155099fc, 9) OK. return: 0xb400006db9ff9cb0
+05-07 23:07:23.192 I/FirestoneHooks( 7534): GameSpeed.Time.get_fixedDeltaTime hook installed rva=0x4a0e9f4 target=0x6d096c99f4 stub=0xb400006db9ff9cb0 err=0 OK
+05-07 23:07:23.192 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(libil2cpp.so, GameSpeed.TeamLogic.ApplyWaveTransitionSpeedModifierToDuration, 0x6d077849dc, 0x6d15509abc, 9) ...
+05-07 23:07:23.192 I/shadowhook_tag( 7534): switch: create, target_addr 6d077849dc
+05-07 23:07:23.192 I/shadowhook_tag( 7534): hub: create trampo at 6ff02bc230, size 96 + 16 = 112
+05-07 23:07:23.192 I/shadowhook_tag( 7534): hub: add(new) func 6d15509abc
+05-07 23:07:23.192 I/shadowhook_tag( 7534): a64 rewrite: type 3, inst 97d7da7b
+05-07 23:07:23.192 I/shadowhook_tag( 7534): elf: alloc addr 6d06b06050(load_bias 6d04cbb000, 1e4b050), size 16, idx [20, 24)
+05-07 23:07:23.192 I/shadowhook_tag( 7534): island: alloc in ELF-gap, addr 6d06b06050, size 16, pc 6d077849dc, range [6cff7849dc, 6d0f7849d8]
+05-07 23:07:23.192 I/shadowhook_tag( 7534): a64: hook (with island) OK. target 6d077849dc -> island-exit 6d06b06050 -> new 6ff02bc230 -> enter 6ff03e81c0 -> resume 6d077849e0
+05-07 23:07:23.192 I/shadowhook_tag( 7534): switch: hook in SHARED mode OK: target_addr 6d077849dc, new_addr 6d15509abc
+05-07 23:07:23.192 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(0x6d077849dc, 0x6d15509abc, 9) OK. return: 0xb400006db9ff8f30
+05-07 23:07:23.192 I/FirestoneHooks( 7534): GameSpeed.TeamLogic.ApplyWaveTransitionSpeedModifierToDuration hook installed rva=0x2ac99dc target=0x6d077849dc stub=0xb400006db9ff8f30 err=0 OK
+05-07 23:07:23.192 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(libil2cpp.so, GameSpeed.TeamLogic.set_WaveTransitionSpeedMultiplier, 0x6d07784814, 0x6d15509b8c, 9) ...
+05-07 23:07:23.192 I/shadowhook_tag( 7534): switch: create, target_addr 6d07784814
+05-07 23:07:23.192 I/shadowhook_tag( 7534): hub: create trampo at 6ff02bc2a0, size 96 + 16 = 112
+05-07 23:07:23.192 I/shadowhook_tag( 7534): hub: add(new) func 6d15509b8c
+05-07 23:07:23.192 I/shadowhook_tag( 7534): a64 rewrite: type 5, inst 90013b68
+05-07 23:07:23.192 I/shadowhook_tag( 7534): elf: alloc addr 6d06b06060(load_bias 6d04cbb000, 1e4b060), size 16, idx [24, 28)
+05-07 23:07:23.192 I/shadowhook_tag( 7534): island: alloc in ELF-gap, addr 6d06b06060, size 16, pc 6d07784814, range [6cff784814, 6d0f784810]
+05-07 23:07:23.192 I/shadowhook_tag( 7534): a64: hook (with island) OK. target 6d07784814 -> island-exit 6d06b06060 -> new 6ff02bc2a0 -> enter 6ff03e8200 -> resume 6d07784818
+05-07 23:07:23.192 I/shadowhook_tag( 7534): switch: hook in SHARED mode OK: target_addr 6d07784814, new_addr 6d15509b8c
+05-07 23:07:23.192 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(0x6d07784814, 0x6d15509b8c, 9) OK. return: 0xb400006db9ff94d0
+05-07 23:07:23.192 I/FirestoneHooks( 7534): GameSpeed.TeamLogic.set_WaveTransitionSpeedMultiplier hook installed rva=0x2ac9814 target=0x6d07784814 stub=0xb400006db9ff94d0 err=0 OK
+05-07 23:07:23.192 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(libil2cpp.so, GameSpeed.Spine.AnimationState.set_TimeScale, 0x6d09025ac8, 0x6d15509c20, 9) ...
+05-07 23:07:23.192 I/shadowhook_tag( 7534): switch: create, target_addr 6d09025ac8
+05-07 23:07:23.192 I/shadowhook_tag( 7534): hub: create trampo at 6ff02bc310, size 96 + 16 = 112
+05-07 23:07:23.192 I/shadowhook_tag( 7534): hub: add(new) func 6d15509c20
+05-07 23:07:23.194 I/shadowhook_tag( 7534): a64 rewrite: type 0, inst f9424af7
+05-07 23:07:23.194 I/shadowhook_tag( 7534): elf: alloc addr 6d06b06070(load_bias 6d04cbb000, 1e4b070), size 16, idx [28, 32)
+05-07 23:07:23.194 I/shadowhook_tag( 7534): island: alloc in ELF-gap, addr 6d06b06070, size 16, pc 6d09025ac8, range [6d01025ac8, 6d11025ac4]
+05-07 23:07:23.194 I/shadowhook_tag( 7534): a64: hook (with island) OK. target 6d09025ac8 -> island-exit 6d06b06070 -> new 6ff02bc310 -> enter 6ff03e8240 -> resume 6d09025acc
+05-07 23:07:23.194 I/shadowhook_tag( 7534): switch: hook in SHARED mode OK: target_addr 6d09025ac8, new_addr 6d15509c20
+05-07 23:07:23.194 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(0x6d09025ac8, 0x6d15509c20, 9) OK. return: 0xb400006db9ff9200
+05-07 23:07:23.195 I/FirestoneHooks( 7534): GameSpeed.Spine.AnimationState.set_TimeScale hook installed rva=0x436aac8 target=0x6d09025ac8 stub=0xb400006db9ff9200 err=0 OK
+05-07 23:07:23.195 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(libil2cpp.so, OHK.BattleController.ApplyDamage.short, 0x6d0747fe00, 0x6d15509fdc, 9) ...
+05-07 23:07:23.195 I/shadowhook_tag( 7534): switch: create, target_addr 6d0747fe00
+05-07 23:07:23.195 I/shadowhook_tag( 7534): hub: create trampo at 6ff02bc380, size 96 + 16 = 112
+05-07 23:07:23.195 I/shadowhook_tag( 7534): hub: add(new) func 6d15509fdc
+05-07 23:07:23.195 D/BoundBrokerSvc( 2754): onRebind: Intent { act=com.google.android.gms.presencemanager.service.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentApiService }
+05-07 23:07:23.195 I/shadowhook_tag( 7534): a64 rewrite: type 5, inst b00154f4
+05-07 23:07:23.195 I/shadowhook_tag( 7534): elf: alloc addr 6d06b06080(load_bias 6d04cbb000, 1e4b080), size 16, idx [32, 36)
+05-07 23:07:23.195 I/shadowhook_tag( 7534): island: alloc in ELF-gap, addr 6d06b06080, size 16, pc 6d0747fe00, range [6cff47fe00, 6d0f47fdfc]
+05-07 23:07:23.195 I/shadowhook_tag( 7534): a64: hook (with island) OK. target 6d0747fe00 -> island-exit 6d06b06080 -> new 6ff02bc380 -> enter 6ff03e8280 -> resume 6d0747fe04
+05-07 23:07:23.195 I/shadowhook_tag( 7534): switch: hook in SHARED mode OK: target_addr 6d0747fe00, new_addr 6d15509fdc
+05-07 23:07:23.195 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(0x6d0747fe00, 0x6d15509fdc, 9) OK. return: 0xb400006db9ff8c60
+05-07 23:07:23.195 I/FirestoneHooks( 7534): OHK.BattleController.ApplyDamage.short hook installed rva=0x27c4e00 target=0x6d0747fe00 stub=0xb400006db9ff8c60 err=0 OK
+05-07 23:07:23.195 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(libil2cpp.so, OHK.BattleController.ApplyDamage.full, 0x6d0747fe10, 0x6d1550a120, 9) ...
+05-07 23:07:23.195 I/shadowhook_tag( 7534): switch: create, target_addr 6d0747fe10
+05-07 23:07:23.195 I/shadowhook_tag( 7534): hub: create trampo at 6ff02bc3f0, size 96 + 16 = 112
+05-07 23:07:23.195 I/shadowhook_tag( 7534): hub: add(new) func 6d1550a120
+05-07 23:07:23.195 I/shadowhook_tag( 7534): a64 rewrite: type 5, inst b00154e0
+05-07 23:07:23.195 I/shadowhook_tag( 7534): elf: alloc addr 6d06b06090(load_bias 6d04cbb000, 1e4b090), size 16, idx [36, 40)
+05-07 23:07:23.195 I/shadowhook_tag( 7534): island: alloc in ELF-gap, addr 6d06b06090, size 16, pc 6d0747fe10, range [6cff47fe10, 6d0f47fe0c]
+05-07 23:07:23.195 I/shadowhook_tag( 7534): a64: hook (with island) OK. target 6d0747fe10 -> island-exit 6d06b06090 -> new 6ff02bc3f0 -> enter 6ff03e82c0 -> resume 6d0747fe14
+05-07 23:07:23.195 I/shadowhook_tag( 7534): switch: hook in SHARED mode OK: target_addr 6d0747fe10, new_addr 6d1550a120
+05-07 23:07:23.195 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(0x6d0747fe10, 0x6d1550a120, 9) OK. return: 0xb400006db9ffa760
+05-07 23:07:23.195 I/FirestoneHooks( 7534): OHK.BattleController.ApplyDamage.full hook installed rva=0x27c4e10 target=0x6d0747fe10 stub=0xb400006db9ffa760 err=0 OK
+05-07 23:07:23.195 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(libil2cpp.so, OHK.BattleCharacter.ReceiveDamage, 0x6d0769cac8, 0x6d1550a270, 9) ...
+05-07 23:07:23.195 I/shadowhook_tag( 7534): switch: create, target_addr 6d0769cac8
+05-07 23:07:23.195 I/shadowhook_tag( 7534): hub: create trampo at 6ff02bc460, size 96 + 16 = 112
+05-07 23:07:23.195 I/shadowhook_tag( 7534): hub: add(new) func 6d1550a270
+05-07 23:07:23.196 I/shadowhook_tag( 7534): a64 rewrite: type 0, inst b1503a8
+05-07 23:07:23.196 I/shadowhook_tag( 7534): elf: alloc addr 6d06b060a0(load_bias 6d04cbb000, 1e4b0a0), size 16, idx [40, 44)
+05-07 23:07:23.196 I/shadowhook_tag( 7534): island: alloc in ELF-gap, addr 6d06b060a0, size 16, pc 6d0769cac8, range [6cff69cac8, 6d0f69cac4]
+05-07 23:07:23.196 I/shadowhook_tag( 7534): a64: hook (with island) OK. target 6d0769cac8 -> island-exit 6d06b060a0 -> new 6ff02bc460 -> enter 6ff03e8300 -> resume 6d0769cacc
+05-07 23:07:23.196 I/shadowhook_tag( 7534): switch: hook in SHARED mode OK: target_addr 6d0769cac8, new_addr 6d1550a270
+05-07 23:07:23.196 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(0x6d0769cac8, 0x6d1550a270, 9) OK. return: 0xb400006db9ffb2a0
+05-07 23:07:23.196 I/FirestoneHooks( 7534): OHK.BattleCharacter.ReceiveDamage hook installed rva=0x29e1ac8 target=0x6d0769cac8 stub=0xb400006db9ffb2a0 err=0 OK
+05-07 23:07:23.196 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(libil2cpp.so, AttackSpeed.CharacterBattleLogic.FillAttackSpeedTimer, 0x6d077832e8, 0x6d1550a6f4, 9) ...
+05-07 23:07:23.196 I/shadowhook_tag( 7534): switch: create, target_addr 6d077832e8
+05-07 23:07:23.196 I/shadowhook_tag( 7534): hub: create trampo at 6ff02bc4d0, size 96 + 16 = 112
+05-07 23:07:23.196 I/shadowhook_tag( 7534): hub: add(new) func 6d1550a6f4
+05-07 23:07:23.197 I/shadowhook_tag( 7534): a64 rewrite: type 0, inst f9400c00
+05-07 23:07:23.197 I/shadowhook_tag( 7534): elf: alloc addr 6d06b060b0(load_bias 6d04cbb000, 1e4b0b0), size 16, idx [44, 48)
+05-07 23:07:23.197 I/shadowhook_tag( 7534): island: alloc in ELF-gap, addr 6d06b060b0, size 16, pc 6d077832e8, range [6cff7832e8, 6d0f7832e4]
+05-07 23:07:23.197 I/shadowhook_tag( 7534): a64: hook (with island) OK. target 6d077832e8 -> island-exit 6d06b060b0 -> new 6ff02bc4d0 -> enter 6ff03e8340 -> resume 6d077832ec
+05-07 23:07:23.197 I/shadowhook_tag( 7534): switch: hook in SHARED mode OK: target_addr 6d077832e8, new_addr 6d1550a6f4
+05-07 23:07:23.197 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(0x6d077832e8, 0x6d1550a6f4, 9) OK. return: 0xb400006db9ffaa30
+05-07 23:07:23.197 I/FirestoneHooks( 7534): AttackSpeed.CharacterBattleLogic.FillAttackSpeedTimer hook installed rva=0x2ac82e8 target=0x6d077832e8 stub=0xb400006db9ffaa30 err=0 OK
+05-07 23:07:23.197 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(libil2cpp.so, AttackSpeed.BattleMainHero.CalculateAttackSpeedTotal, 0x6d0777daf8, 0x6d1550a834, 9) ...
+05-07 23:07:23.197 I/shadowhook_tag( 7534): switch: create, target_addr 6d0777daf8
+05-07 23:07:23.197 I/shadowhook_tag( 7534): hub: create trampo at 6ff02bc540, size 96 + 16 = 112
+05-07 23:07:23.197 I/shadowhook_tag( 7534): hub: add(new) func 6d1550a834
+05-07 23:07:23.197 I/shadowhook_tag( 7534): a64 rewrite: type 0, inst f9409268
+05-07 23:07:23.197 I/shadowhook_tag( 7534): elf: alloc addr 6d06b060c0(load_bias 6d04cbb000, 1e4b0c0), size 16, idx [48, 52)
+05-07 23:07:23.197 I/shadowhook_tag( 7534): island: alloc in ELF-gap, addr 6d06b060c0, size 16, pc 6d0777daf8, range [6cff77daf8, 6d0f77daf4]
+05-07 23:07:23.197 I/shadowhook_tag( 7534): a64: hook (with island) OK. target 6d0777daf8 -> island-exit 6d06b060c0 -> new 6ff02bc540 -> enter 6ff03e8380 -> resume 6d0777dafc
+05-07 23:07:23.197 I/shadowhook_tag( 7534): switch: hook in SHARED mode OK: target_addr 6d0777daf8, new_addr 6d1550a834
+05-07 23:07:23.197 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(0x6d0777daf8, 0x6d1550a834, 9) OK. return: 0xb400006db9ffbba0
+05-07 23:07:23.197 I/FirestoneHooks( 7534): AttackSpeed.BattleMainHero.CalculateAttackSpeedTotal hook installed rva=0x2ac2af8 target=0x6d0777daf8 stub=0xb400006db9ffbba0 err=0 OK
+05-07 23:07:23.197 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(libil2cpp.so, AttackSpeed.BattleMainEnemy.CalculateAttackSpeedTotal, 0x6d076a0b94, 0x6d1550a938, 9) ...
+05-07 23:07:23.197 I/shadowhook_tag( 7534): switch: create, target_addr 6d076a0b94
+05-07 23:07:23.197 I/shadowhook_tag( 7534): hub: create trampo at 6ff02bc5b0, size 96 + 16 = 112
+05-07 23:07:23.197 I/shadowhook_tag( 7534): hub: add(new) func 6d1550a938
+05-07 23:07:23.197 I/shadowhook_tag( 7534): a64 rewrite: type 3, inst 97db6a0d
+05-07 23:07:23.197 I/shadowhook_tag( 7534): elf: alloc addr 6d06b060d0(load_bias 6d04cbb000, 1e4b0d0), size 16, idx [52, 56)
+05-07 23:07:23.197 I/shadowhook_tag( 7534): island: alloc in ELF-gap, addr 6d06b060d0, size 16, pc 6d076a0b94, range [6cff6a0b94, 6d0f6a0b90]
+05-07 23:07:23.197 I/shadowhook_tag( 7534): a64: hook (with island) OK. target 6d076a0b94 -> island-exit 6d06b060d0 -> new 6ff02bc5b0 -> enter 6ff03e83c0 -> resume 6d076a0b98
+05-07 23:07:23.197 I/shadowhook_tag( 7534): switch: hook in SHARED mode OK: target_addr 6d076a0b94, new_addr 6d1550a938
+05-07 23:07:23.197 I/shadowhook_tag( 7534): shadowhook: hook_func_addr(0x6d076a0b94, 0x6d1550a938, 9) OK. return: 0xb400006db9ffa910
+05-07 23:07:23.197 I/FirestoneHooks( 7534): AttackSpeed.BattleMainEnemy.CalculateAttackSpeedTotal hook installed rva=0x29e5b94 target=0x6d076a0b94 stub=0xb400006db9ffa910 err=0 OK
+05-07 23:07:23.197 I/FirestoneHooks( 7534): native hook install complete result=0
+05-07 23:07:23.199 D/BoundBrokerSvc( 2754): onRebind: Intent { act=com.google.android.gms.presencemanager.service.INTERNAL_IDENTITY dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentApiService }
+05-07 23:07:23.288 I/Unity   ( 7534): SystemInfo CPU = ARM64 FP ASIMD AES, Cores = 6, Memory = 12007mb
+05-07 23:07:23.288 I/Unity   ( 7534): SystemInfo ARM big.LITTLE configuration: 6 big (mask: 0x3f), 0 little (mask: 0x0)
+05-07 23:07:23.288 I/Unity   ( 7534): ApplicationInfo 'com.HolydayStudios.Firestone', Version '3.27', Min API Level '23', Target API Level '36'
+05-07 23:07:23.288 I/Unity   ( 7534): Built from '6000.0/staging' branch, Version '6000.0.47f1 (2ad1ed33fd3b)', Build type 'Release', Scripting Backend 'il2cpp', CPU 'arm64-v8a', Stripping 'Enabled'
+05-07 23:07:23.288 I/Unity   ( 7534): Device Model 'Samsung SM-A5460', OS 'Android OS 12 (API 32)'
+05-07 23:07:23.381 W/InputManager-JNI( 2429): Input channel object '20dcf2a Splash Screen com.HolydayStudios.Firestone (client)' was disposed without first being removed with the input manager!
+05-07 23:07:23.483 I/Unity   ( 7534): Company Name: HolydayStudios
+05-07 23:07:23.483 I/Unity   ( 7534): Product Name: Firestone
+05-07 23:07:23.487 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6d14509000, name /system/lib64/egl/libEGL_emulation.so
+05-07 23:07:23.487 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6d14509000, name /system/lib64/egl/libEGL_emulation.so
+05-07 23:07:23.487 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6d14509000, name /system/lib64/egl/libEGL_emulation.so
+05-07 23:07:23.487 D/libEGL  ( 7534): loaded /system/lib64/egl/libEGL_emulation.so
+05-07 23:07:23.492 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6ce6f49000, name /system/lib64/egl/libGLESv1_CM_emulation.so
+05-07 23:07:23.492 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6ce6f49000, name /system/lib64/egl/libGLESv1_CM_emulation.so
+05-07 23:07:23.492 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6ce6f49000, name /system/lib64/egl/libGLESv1_CM_emulation.so
+05-07 23:07:23.492 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6ce6f09000, name /system/lib64/egl/libGLESv2_emulation.so
+05-07 23:07:23.492 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6ce6f09000, name /system/lib64/egl/libGLESv2_emulation.so
+05-07 23:07:23.492 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6ce6f09000, name /system/lib64/egl/libGLESv2_emulation.so
+05-07 23:07:23.494 E/udios.Fireston( 7534): vulkan version is 4202746
+05-07 23:07:23.495 I/nemucooker( 7534): cook file1: /etc/mumu-configs/renderer.config, last modify time: Thu Aug 29 11:22:45 2024
+05-07 23:07:23.495 I/nemucooker( 7534): cook file2: /data/system/etc/mumu-configs/renderer.config, last modify time: Thu Apr 30 21:00:20 2026
+05-07 23:07:23.495 I/nemucooker( 7534): cook select file: /data/system/etc/mumu-configs/renderer.config
+05-07 23:07:23.497 D/libEGL  ( 7534): loaded /system/lib64/egl/libGLESv1_CM_emulation.so
+05-07 23:07:23.498 D/libEGL  ( 7534): loaded /system/lib64/egl/libGLESv2_emulation.so
+05-07 23:07:23.510 E/GraphicsEnv( 7534): Failed to get gpu service
+05-07 23:07:23.511 E/HidlServiceManagement( 7534): getService: Potential race detected, descriptor: android.hardware.configstore@1.0::ISurfaceFlingerConfigs instance: default
+05-07 23:07:23.544 E/EGL_emulation( 7534): [getAttribValue] Bad attribute idx
+05-07 23:07:23.544 D/EGL_emulation( 7534): eglGetConfigAttrib: bad attrib 0x1
+05-07 23:07:23.544 E/EGL_emulation( 7534): tid 7609: eglGetConfigAttrib(1029): error 0x3004 (EGL_BAD_ATTRIBUTE)
+05-07 23:07:23.546 D/gralloc_x86( 7534): gralloc_alloc: Creating ashmem region of size 7376896
+05-07 23:07:23.556 I/FontLog ( 2754): (REDACTED) Received query %s, URI %s
+05-07 23:07:23.558 I/FontLog ( 2754): (REDACTED) Query [%s] resolved to %s
+05-07 23:07:23.564 I/FontLog ( 2754): (REDACTED) Fetch %s end status %s
+05-07 23:07:23.567 E/udios.Fireston( 7534): vulkan version is 4202746
+05-07 23:07:23.567 I/FontLog ( 2754): (REDACTED) Pulling font file for id = %d, cache size = %d
+05-07 23:07:23.573 I/FontLog ( 2754): (REDACTED) Pulling font file for id = %d, cache size = %d
+05-07 23:07:23.581 I/AAudio  ( 7534): AAudioStreamBuilder_openStream() called ----------------------------------------
+05-07 23:07:23.581 I/AudioStreamBuilder( 7534): rate   =  24000, channels  = 2, channelMask = 0x80000003, format   = 5, sharing = SH, dir = OUTPUT
+05-07 23:07:23.581 I/AudioStreamBuilder( 7534): device =      0, sessionId = -1, perfMode = 12, callback: ON with frames = 1024
+05-07 23:07:23.581 I/AudioStreamBuilder( 7534): usage  =      0, contentType = 0, inputPreset = 0, allowedCapturePolicy = 0
+05-07 23:07:23.581 I/AudioStreamBuilder( 7534): privacy sensitive = false
+05-07 23:07:23.581 I/AudioStreamBuilder( 7534): opPackageName = (null)
+05-07 23:07:23.581 I/AudioStreamBuilder( 7534): attributionTag = (null)
+05-07 23:07:23.581 D/udios.Fireston( 7534): PlayerBase::PlayerBase()
+05-07 23:07:23.583 D/AudioStreamTrack( 7534): open(), request notificationFrames = 0, frameCount = 8192
+05-07 23:07:23.586 W/AudioFlinger( 2249): createTrack_l(): mismatch between requested flags (00000104) and output flags (00000006)
+05-07 23:07:23.586 D/AudioFlinger( 2249): Client defaulted notificationFrames to 480 for frameCount 8192
+05-07 23:07:23.587 D/AF::TrackHandle( 2249): OpPlayAudio: track:60 usage:1 not muted
+05-07 23:07:23.588 D/AudioTrack( 7534): createTrack_l(111): AUDIO_OUTPUT_FLAG_FAST denied by server; frameCount 8192 -> 8192
+05-07 23:07:23.589 D/AAudioStream( 7534): setState(s#1) from 0 to 2
+05-07 23:07:23.590 D/AudioStreamTrack( 7534): open() flags changed from 0x00000104 to 0x00000000
+05-07 23:07:23.590 D/AudioStreamTrack( 7534): open() perfMode changed from 12 to 10
+05-07 23:07:23.592 I/AAudio  ( 7534): AAudioStreamBuilder_openStream() returns 0 = AAUDIO_OK for s#1 ----------------
+05-07 23:07:23.593 D/AAudio  ( 7534): AAudioStream_requestStart(s#1) called --------------
+05-07 23:07:23.593 D/AAudioStream( 7534): setState(s#1) from 2 to 3
+05-07 23:07:23.594 D/AAudio  ( 7534): AAudioStream_requestStart(s#1) returned 0 ---------
+05-07 23:07:23.594 D/AudioStreamLegacy( 7534): onAudioDeviceUpdate(deviceId = 2)
+05-07 23:07:23.595 D/audio_hw_primary( 2227): tunnel_pcm_open called!
+05-07 23:07:23.622 D/AAudioStream( 7534): setState(s#1) from 3 to 4
+05-07 23:07:23.646 D/AudioFlinger( 2249): mixer(0xb40000777b658a30) throttle end: throttle time(3)
+05-07 23:07:23.970 W/ServiceManager( 2429): Permission failure: android.permission.HIGH_SAMPLING_RATE_SENSORS from uid=10077 pid=7534
+05-07 23:07:23.971 W/ServiceManager( 2429): Permission failure: android.permission.HIGH_SAMPLING_RATE_SENSORS from uid=10077 pid=7534
+05-07 23:07:23.972 W/ServiceManager( 2429): Permission failure: android.permission.HIGH_SAMPLING_RATE_SENSORS from uid=10077 pid=7534
+05-07 23:07:23.973 W/ServiceManager( 2429): Permission failure: android.permission.HIGH_SAMPLING_RATE_SENSORS from uid=10077 pid=7534
+05-07 23:07:23.977 D/gralloc_x86( 7534): gralloc_alloc: Creating ashmem region of size 7376896
+05-07 23:07:23.982 V/MediaRouter( 7534): Selecting route: RouteInfo{ name=Phone, description=null, status=null, category=RouteCategory{ name=System types=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO  groupable=false }, supportedTypes=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO , presentationDisplay=null }
+05-07 23:07:23.982 I/MediaRouter( 7534): Skip setBluetoothA2dpOn(): types=8388615, isPlaybackActive()=true, BT route=null
+05-07 23:07:24.095 D/gralloc_x86( 7534): gralloc_alloc: Creating ashmem region of size 7376896
+05-07 23:07:24.098 D/gralloc_x86( 7534): gralloc_alloc: Creating ashmem region of size 7376896
+05-07 23:07:24.101 D/gralloc_x86( 7534): gralloc_alloc: Creating ashmem region of size 7376896
+05-07 23:07:24.102 I/ActivityTaskManager( 2429): Fully drawn com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity: +1s905ms
+05-07 23:07:24.105 D/gralloc_x86( 7534): gralloc_alloc: Creating ashmem region of size 14749696
+05-07 23:07:24.185 I/IL2CPP  ( 7534): Locale en-US
+05-07 23:07:24.896 I/wifi@1.0-servic( 2248): type=1400 audit(0.0:9402): avc: denied { write } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=netlink_route_socket permissive=1
+05-07 23:07:24.896 I/wifi@1.0-servic( 2248): type=1400 audit(0.0:9403): avc: denied { nlmsg_readpriv } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=netlink_route_socket permissive=1
+05-07 23:07:24.896 I/wifi@1.0-servic( 2248): type=1400 audit(0.0:9404): avc: denied { read } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=netlink_route_socket permissive=1
+05-07 23:07:24.896 I/WifiHandlerThre( 2429): type=1400 audit(0.0:9405): avc: denied { map_read } for scontext=u:r:system_server:s0 tcontext=u:r:init:s0 tclass=bpf permissive=1
+05-07 23:07:25.223 E/TaskPersister( 2429): File error accessing recents directory (directory doesn't exist?).
+05-07 23:07:25.468 I/surfaceflinger( 2254): type=1400 audit(0.0:9406): avc: denied { call } for scontext=u:r:init:s0 tcontext=u:r:untrusted_app:s0:c77,c256,c512,c768 tclass=binder permissive=1
+05-07 23:07:25.549 E/android.hardware.power.stats@1.0-service-mock( 2240): Failed to getEnergyData
+05-07 23:07:26.259 I/Unity   ( 7534): EpicGames
+05-07 23:07:26.259 I/Unity   ( 7534): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:07:26.259 I/Unity   ( 7534): GameAnalytics:SendAnalyticsLoadingPhasePHP(LoadingPhase, String, String, String)
+05-07 23:07:26.259 I/Unity   ( 7534): GameAnalytics:SendAnalyticsLoadingPhase(LoadingPhase, String, String, String)
+05-07 23:07:26.259 I/Unity   ( 7534): StartScript:Awake()
+05-07 23:07:26.259 I/Unity   ( 7534): 
+05-07 23:07:26.264 I/SkDestroyListen( 2219): type=1400 audit(0.0:9408): avc: denied { read } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=netlink_tcpdiag_socket permissive=1
+05-07 23:07:26.268 I/Thread-4( 7534): type=1400 audit(0.0:9409): avc: denied { connectto } for path="/dev/socket/dnsproxyd" scontext=u:r:untrusted_app:s0:c77,c256,c512,c768 tcontext=u:r:init:s0 tclass=unix_stream_socket permissive=1 app=com.HolydayStudios.Firestone
+05-07 23:07:26.272 I/Dns_100_10077( 2219): type=1400 audit(0.0:9410): avc: denied { getopt } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=udp_socket permissive=1
+05-07 23:07:26.272 I/Dns_100_10077( 2219): type=1400 audit(0.0:9411): avc: denied { setattr } for name="UDP" dev="sockfs" ino=47036 scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=udp_socket permissive=1
+05-07 23:07:26.272 I/Dns_100_10077( 2219): type=1400 audit(0.0:9412): avc: denied { setopt } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=udp_socket permissive=1
+05-07 23:07:26.279 W/ServiceManager( 2429): Permission failure: android.permission.HIGH_SAMPLING_RATE_SENSORS from uid=10077 pid=7534
+05-07 23:07:26.279 W/SensorService( 2429): sensor 00000000 already enabled in connection 0xb400006e0a0210f0 (ignoring)
+05-07 23:07:26.280 W/ServiceManager( 2429): Permission failure: android.permission.HIGH_SAMPLING_RATE_SENSORS from uid=10077 pid=7534
+05-07 23:07:26.513 I/Unity   ( 7534): EpicGames
+05-07 23:07:26.513 I/Unity   ( 7534): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:07:26.513 I/Unity   ( 7534): GameAnalytics:SendAnalyticsLoadingPhasePHP(LoadingPhase, String, String, String)
+05-07 23:07:26.513 I/Unity   ( 7534): GameAnalytics:SendAnalyticsLoadingPhase(LoadingPhase, String, String, String)
+05-07 23:07:26.513 I/Unity   ( 7534): <LoadNextScene>d__24:MoveNext()
+05-07 23:07:26.513 I/Unity   ( 7534): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-07 23:07:26.513 I/Unity   ( 7534): 
+05-07 23:07:26.967 D/ControlsListingControllerImpl( 2670): Subscribing callback, service count: 0
+05-07 23:07:26.975 D/ControlsListingControllerImpl( 2670): Unsubscribing callback
+05-07 23:07:27.823 I/shadowhook_tag( 7534): linker: call_ctors pre, load_bias 6baaa1a000, name /data/app/~~eYnZX0CwG_PADosI43wKmA==/com.HolydayStudios.Firestone-KwYIEPUCRPiNe65OfXHOnQ==/lib/arm64/libEOSSDK.so
+05-07 23:07:27.823 I/shadowhook_tag( 7534): task: call_ctors() pre callback. load_bias 6baaa1a000, name /data/app/~~eYnZX0CwG_PADosI43wKmA==/com.HolydayStudios.Firestone-KwYIEPUCRPiNe65OfXHOnQ==/lib/arm64/libEOSSDK.so
+05-07 23:07:27.837 I/shadowhook_tag( 7534): linker: call_ctors post, load_bias 6baaa1a000, name /data/app/~~eYnZX0CwG_PADosI43wKmA==/com.HolydayStudios.Firestone-KwYIEPUCRPiNe65OfXHOnQ==/lib/arm64/libEOSSDK.so
+05-07 23:07:27.887 I/Unity   ( 7534): CurrentPlatform has been assigned as Android.
+05-07 23:07:27.887 I/Unity   ( 7534): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:07:27.887 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.PlatformManager:.cctor()
+05-07 23:07:27.887 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:07:27.887 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.EOSSingleton:InitializePlatformInterface()
+05-07 23:07:27.887 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.EOSSingleton:Init(IEOSCoroutineOwner, String)
+05-07 23:07:27.887 I/Unity   ( 7534): UnityEngine.GameObject:Internal_AddComponentWithType(Type)
+05-07 23:07:27.887 I/Unity   ( 7534): UnityEngine.GameObject:AddComponent()
+05-07 23:07:27.887 I/Unity   ( 7534): BuildSettings:Initialize()
+05-07 23:07:27.887 I/Unity   ( 7534): <StartGameFlow>d__22:MoveNext()
+05-07 23:07:27.887 I/Unity   ( 7534): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-07 23:07:27.887 I/Unity   ( 7534): 
+05-07 23:07:27.892 E/Unity   ( 7534): Unable to populate object of type "PlayEveryWare.EpicOnlineServices.Config" from JSON: "{
+05-07 23:07:27.892 E/Unity   ( 7534):   "GoogleLoginClientID": null,
+05-07 23:07:27.892 E/Unity   ( 7534):   "GoogleLoginNonce": null,
+05-07 23:07:27.892 E/Unity   ( 7534):   "deployment": {
+05-07 23:07:27.892 E/Unity   ( 7534):     "SandboxId": {
+05-07 23:07:27.892 E/Unity   ( 7534):       "Value": "bda8d2133655435982b9118972792328"
+05-07 23:07:27.892 E/Unity   ( 7534):     },
+05-07 23:07:27.892 E/Unity   ( 7534):     "DeploymentId": "a65c0335e67b4aec8eec651de8dca6ac"
+05-07 23:07:27.892 E/Unity   ( 7534):   },
+05-07 23:07:27.892 E/Unity   ( 7534):   "clientCredentials": {
+05-07 23:07:27.892 E/Unity   ( 7534):     "ClientId": "xyza78915T3juKOECHQEveLJcfCt98aA",
+05-07 23:07:27.892 E/Unity   ( 7534):     "ClientSecret": "PF1bwir+BL20l71IojvewwKkgPD6TgpfqcUyKjd2FO0",
+05-07 23:07:27.892 E/Unity   ( 7534):     "EncryptionKey": "D225E0C13EA6F5200170CDC21CF31848DE716F387164E6E120EEBBB7D71612F9"
+05-07 23:07:27.892 E/Unity   ( 7534):   },
+05-07 23:07:27.892 E/Unity   ( 7534):   "isServer": false,
+05-07 23:07:27.892 E/Unity   ( 7534):   "platformOptionsFlags": "None",
+05-07 23:07:27.892 E/Unity   ( 7534):   "authScopeOptionsFlags": "BasicProfile, FriendsList, Presence",
+05-07 23:07:27.892 E/Unity   ( 7534):   "integratedPlatformManagementFlags": 0,
+05-07 23:07:27.892 E/Unity   ( 7534):   "tickBudgetInMilliseconds": 0,
+05-07 23:07:27.892 E/Unity   ( 7534):   "taskNetworkTimeoutSeconds": 0.0,
+05-07 23:07:27.892 E/Unity   ( 7534):   "threadAffinity": {
+05-07 23:07:27.892 E/Unity   ( 7534):     "NetworkWork": 0,
+05-07 23:07:27.892 E/Unity   ( 7534):     "StorageIo": 0,
+05-07 23:07:27.892 E/Unity   ( 7534):     "WebSocketIo": 0,
+05-07 23:07:27.892 E/Unity   ( 7534):     "P2PIo": 0,
+05-07 23:07:27.892 E/Unity   ( 7534):     "HttpRequestIo": 0,
+05-07 23:07:27.892 E/Unity   ( 7534):     "RTCIo": 0,
+05-07 23:07:27.892 E/Unity   ( 7534):     "EmbeddedOverlayMainThread": 0,
+05-07 23:07:27.892 E/Unity   ( 7534):     "EmbeddedOverlayWorkerThreads": 0
+05-07 23:07:27.892 E/Unity   ( 7534):   },
+05-07 23:07:27.892 I/Unity   ( 7534): Platform Android has no defined deployment, so one was selected: "Deployment" : (DeploymentId: a65c0335e67b4aec8eec651de8dca6ac, SandboxId: bda8d2133655435982b9118972792328).
+05-07 23:07:27.892 I/Unity   ( 7534): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:07:27.892 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.PlatformConfig:OnReadCompleted()
+05-07 23:07:27.892 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.Config:Get()
+05-07 23:07:27.892 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.PlatformManager:GetPlatformConfig()
+05-07 23:07:27.892 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:07:27.892 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.EOSSingleton:InitializePlatformInterface()
+05-07 23:07:27.892 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.EOSSingleton:Init(IEOSCoroutineOwner, String)
+05-07 23:07:27.892 I/Unity   ( 7534): UnityEngine.GameObject:Internal_AddComponentWithType(Type)
+05-07 23:07:27.892 I/Unity   ( 7534): UnityEngine.GameObject:AddComponent()
+05-07 23:07:27.892 I/Unity   ( 7534): BuildSettings:Initialize()
+05-07 23:07:27.892 I/Unity   ( 7534): <StartGameFlow>d__22:MoveNext()
+05-07 23:07:27.892 I/Unity   ( 7534): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-07 23:07:27.892 I/Unity   ( 7534): 
+05-07 23:07:27.893 I/Unity   ( 7534): Platform Android has no defined client credentials, so one was selected: "Client" : (PlayEveryWare.EpicOnlineServices.EOSClientCredentials).
+05-07 23:07:27.893 I/Unity   ( 7534): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:07:27.893 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.PlatformConfig:OnReadCompleted()
+05-07 23:07:27.893 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.Config:Get()
+05-07 23:07:27.893 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.PlatformManager:GetPlatformConfig()
+05-07 23:07:27.893 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:07:27.893 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.EOSSingleton:InitializePlatformInterface()
+05-07 23:07:27.893 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.EOSSingleton:Init(IEOSCoroutineOwner, String)
+05-07 23:07:27.893 I/Unity   ( 7534): UnityEngine.GameObject:Internal_AddComponentWithType(Type)
+05-07 23:07:27.893 I/Unity   ( 7534): UnityEngine.GameObject:AddComponent()
+05-07 23:07:27.893 I/Unity   ( 7534): BuildSettings:Initialize()
+05-07 23:07:27.893 I/Unity   ( 7534): <StartGameFlow>d__22:MoveNext()
+05-07 23:07:27.893 I/Unity   ( 7534): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-07 23:07:27.893 I/Unity   ( 7534): 
+05-07 23:07:27.894 E/Unity   ( 7534): Unable to populate object of type "PlayEveryWare.EpicOnlineServices.Config" from JSON: "{
+05-07 23:07:27.894 E/Unity   ( 7534):   "deploymentID": "a65c0335e67b4aec8eec651de8dca6ac",
+05-07 23:07:27.894 E/Unity   ( 7534):   "clientID": "xyza78915T3juKOECHQEveLJcfCt98aA",
+05-07 23:07:27.894 E/Unity   ( 7534):   "tickBudgetInMilliseconds": 0,
+05-07 23:07:27.894 E/Unity   ( 7534):   "taskNetworkTimeoutSeconds": 0.0,
+05-07 23:07:27.894 E/Unity   ( 7534):   "platformOptionsFlags": "None",
+05-07 23:07:27.894 E/Unity   ( 7534):   "authScopeOptionsFlags": "NoFlags",
+05-07 23:07:27.894 E/Unity   ( 7534):   "integratedPlatformManagementFlags": 0,
+05-07 23:07:27.894 E/Unity   ( 7534):   "alwaysSendInputToOverlay": false,
+05-07 23:07:27.894 E/Unity   ( 7534):   "schemaVersion": "1.0"
+05-07 23:07:27.894 E/Unity   ( 7534): }". Exception: "Error creating 'PlayEveryWare.EpicOnlineServices.ListOfStringsToPlatformFlags'."
+05-07 23:07:27.894 E/Unity   ( 7534): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:07:27.894 E/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.Config:Read()
+05-07 23:07:27.894 E/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.Config:Get()
+05-07 23:07:27.894 E/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.PlatformConfig:MigrateConfig()
+05-07 23:07:27.894 E/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.Config:Get()
+05-07 23:07:27.894 E/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.PlatformManager:GetPlatformConfig()
+05-07 23:07:27.894 E/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:07:27.894 E/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.EOSSing
+05-07 23:07:27.895 I/Unity   ( 7534): The previous config did not explicitly define a deployment. There was one defined deployment, automatically selecting deployment name 'Deployment' with id 'a65c0335-e67b-4aec-8eec-651de8dca6ac'.
+05-07 23:07:27.895 I/Unity   ( 7534): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:07:27.895 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.PlatformConfig:MigrateNonOverrideableConfigValues(EOSConfig, NonOverrideableConfigValues)
+05-07 23:07:27.895 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.PlatformConfig:MigrateConfig()
+05-07 23:07:27.895 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.Config:Get()
+05-07 23:07:27.895 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.PlatformManager:GetPlatformConfig()
+05-07 23:07:27.895 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:07:27.895 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.EOSSingleton:InitializePlatformInterface()
+05-07 23:07:27.895 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.EOSSingleton:Init(IEOSCoroutineOwner, String)
+05-07 23:07:27.895 I/Unity   ( 7534): UnityEngine.GameObject:Internal_AddComponentWithType(Type)
+05-07 23:07:27.895 I/Unity   ( 7534): UnityEngine.GameObject:AddComponent()
+05-07 23:07:27.895 I/Unity   ( 7534): BuildSettings:Initialize()
+05-07 23:07:27.895 I/Unity   ( 7534): <StartGameFlow>d__22:MoveNext()
+05-07 23:07:27.895 I/Unity   ( 7534): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumera
+05-07 23:07:27.895 I/Unity   ( 7534): The previous config did not explicitly define client credentials. There was one defined client credential, automatically selecting client credential name 'Client' with id 'xyza78915T3juKOECHQEveLJcfCt98aA'.
+05-07 23:07:27.895 I/Unity   ( 7534): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:07:27.895 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.PlatformConfig:MigrateNonOverrideableConfigValues(EOSConfig, NonOverrideableConfigValues)
+05-07 23:07:27.895 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.PlatformConfig:MigrateConfig()
+05-07 23:07:27.895 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.Config:Get()
+05-07 23:07:27.895 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.PlatformManager:GetPlatformConfig()
+05-07 23:07:27.895 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:07:27.895 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.EOSSingleton:InitializePlatformInterface()
+05-07 23:07:27.895 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.EOSSingleton:Init(IEOSCoroutineOwner, String)
+05-07 23:07:27.895 I/Unity   ( 7534): UnityEngine.GameObject:Internal_AddComponentWithType(Type)
+05-07 23:07:27.895 I/Unity   ( 7534): UnityEngine.GameObject:AddComponent()
+05-07 23:07:27.895 I/Unity   ( 7534): BuildSettings:Initialize()
+05-07 23:07:27.895 I/Unity   ( 7534): <StartGameFlow>d__22:MoveNext()
+05-07 23:07:27.895 I/Unity   ( 7534): UnityEngine.SetupCoroutine:InvokeMoveN
+05-07 23:07:27.895 W/Unity   ( 7534): Configuration values for AndroidConfig have been migrated. Please double check your configuration in EOS Plugin -> EOS Configuration to make sure that the migration was successful.
+05-07 23:07:27.895 W/Unity   ( 7534): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:07:27.895 W/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.Config:Get()
+05-07 23:07:27.895 W/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.PlatformManager:GetPlatformConfig()
+05-07 23:07:27.895 W/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:07:27.895 W/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.EOSSingleton:InitializePlatformInterface()
+05-07 23:07:27.895 W/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.EOSSingleton:Init(IEOSCoroutineOwner, String)
+05-07 23:07:27.895 W/Unity   ( 7534): UnityEngine.GameObject:Internal_AddComponentWithType(Type)
+05-07 23:07:27.895 W/Unity   ( 7534): UnityEngine.GameObject:AddComponent()
+05-07 23:07:27.895 W/Unity   ( 7534): BuildSettings:Initialize()
+05-07 23:07:27.895 W/Unity   ( 7534): <StartGameFlow>d__22:MoveNext()
+05-07 23:07:27.895 W/Unity   ( 7534): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-07 23:07:27.895 W/Unity   ( 7534): 
+05-07 23:07:27.896 I/Unity   ( 7534): EOSAndroid: Getting activity context...
+05-07 23:07:27.896 I/Unity   ( 7534): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:07:27.896 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.AndroidPlatformSpecifics:ConfigureAndroidActivity()
+05-07 23:07:27.896 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.AndroidPlatformSpecifics:ConfigureSystemInitOptions(EOSInitializeOptions&)
+05-07 23:07:27.896 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:07:27.896 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.EOSSingleton:InitializePlatformInterface()
+05-07 23:07:27.896 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.EOSSingleton:Init(IEOSCoroutineOwner, String)
+05-07 23:07:27.896 I/Unity   ( 7534): UnityEngine.GameObject:Internal_AddComponentWithType(Type)
+05-07 23:07:27.896 I/Unity   ( 7534): UnityEngine.GameObject:AddComponent()
+05-07 23:07:27.896 I/Unity   ( 7534): BuildSettings:Initialize()
+05-07 23:07:27.896 I/Unity   ( 7534): <StartGameFlow>d__22:MoveNext()
+05-07 23:07:27.896 I/Unity   ( 7534): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-07 23:07:27.896 I/Unity   ( 7534): 
+05-07 23:07:27.897 I/Unity   ( 7534): EOSAndroid: activity context found!
+05-07 23:07:27.897 I/Unity   ( 7534): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:07:27.897 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.AndroidPlatformSpecifics:ConfigureAndroidActivity()
+05-07 23:07:27.897 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.AndroidPlatformSpecifics:ConfigureSystemInitOptions(EOSInitializeOptions&)
+05-07 23:07:27.897 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:07:27.897 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.EOSSingleton:InitializePlatformInterface()
+05-07 23:07:27.897 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.EOSSingleton:Init(IEOSCoroutineOwner, String)
+05-07 23:07:27.897 I/Unity   ( 7534): UnityEngine.GameObject:Internal_AddComponentWithType(Type)
+05-07 23:07:27.897 I/Unity   ( 7534): UnityEngine.GameObject:AddComponent()
+05-07 23:07:27.897 I/Unity   ( 7534): BuildSettings:Initialize()
+05-07 23:07:27.897 I/Unity   ( 7534): <StartGameFlow>d__22:MoveNext()
+05-07 23:07:27.897 I/Unity   ( 7534): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-07 23:07:27.897 I/Unity   ( 7534): 
+05-07 23:07:27.897 I/Unity   ( 7534): EOSAndroid: call EOS SDK init.
+05-07 23:07:27.897 I/Unity   ( 7534): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:07:27.897 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.AndroidPlatformSpecifics:ConfigureAndroidActivity()
+05-07 23:07:27.897 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.AndroidPlatformSpecifics:ConfigureSystemInitOptions(EOSInitializeOptions&)
+05-07 23:07:27.897 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.Utility.ConfigurationUtility:GetEOSInitializeOptions()
+05-07 23:07:27.897 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.EOSSingleton:InitializePlatformInterface()
+05-07 23:07:27.897 I/Unity   ( 7534): PlayEveryWare.EpicOnlineServices.EOSSingleton:Init(IEOSCoroutineOwner, String)
+05-07 23:07:27.897 I/Unity   ( 7534): UnityEngine.GameObject:Internal_AddComponentWithType(Type)
+05-07 23:07:27.897 I/Unity   ( 7534): UnityEngine.GameObject:AddComponent()
+05-07 23:07:27.897 I/Unity   ( 7534): BuildSettings:Initialize()
+05-07 23:07:27.897 I/Unity   ( 7534): <StartGameFlow>d__22:MoveNext()
+05-07 23:07:27.897 I/Unity   ( 7534): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-07 23:07:27.897 I/Unity   ( 7534): 
+05-07 23:07:27.908 I/Binder:2110_2( 2110): type=1400 audit(0.0:9425): avc: denied { lock } for path="/data/misc/keystore/persistent.sqlite" dev="sdb3" ino=5505027 scontext=u:r:init:s0 tcontext=u:object_r:keystore_data_file:s0 tclass=file permissive=1
+05-07 23:07:27.908 I/Binder:2110_2( 2110): type=1400 audit(0.0:9426): avc: denied { read } for path="/data/misc/keystore/persistent.sqlite" dev="sdb3" ino=5505027 scontext=u:r:init:s0 tcontext=u:object_r:keystore_data_file:s0 tclass=file permissive=1
+05-07 23:07:27.928 I/Binder:2110_2( 2110): type=1400 audit(0.0:9427): avc: denied { call } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=binder permissive=1
+05-07 23:07:27.944 I/EngineFactory( 7534): Provider GmsCore_OpenSSL not available
+05-07 23:07:27.952 W/ActivityManager( 2429): callingPackage:com.HolydayStudios.Firestone, packageName:com.brave.browser, name:org.chromium.chrome.browser.customtabs.CustomTabsConnectionService, isSkip: true
+05-07 23:07:27.956 I/lmkd    ( 2055): type=1400 audit(0.0:9428): avc: denied { write } for name="oom_score_adj" dev="proc" ino=38425 scontext=u:r:init:s0 tcontext=u:r:untrusted_app:s0:c55,c256,c512,c768 tclass=file permissive=1
+05-07 23:07:27.961 D/CompatibilityChangeReporter( 2429): Compat change id reported: 168419799; UID 10055; state: DISABLED
+05-07 23:07:27.960 I/m.brave.browser( 5531): type=1400 audit(0.0:9429): avc: denied { getattr } for path="/system/framework/framework-res.apk" dev="sda1" ino=1454 scontext=u:r:untrusted_app:s0:c55,c256,c512,c768 tcontext=u:object_r:unlabeled:s0 tclass=file permissive=1
+05-07 23:07:27.978 I/Unity   ( 7534): 05/07/2026 23:07:27 LogEOS(Info): [Boot] EOSSDK Version 1.17.1.3-44532354 booting at 2026-05-07T15:07:27.977Z using CSharp
+05-07 23:07:27.979 I/Unity   ( 7534): 05/07/2026 23:07:27 LogEOS(Info): [Boot] EOSSDK Platform Properties [OS=Android/12, ClientId=xyza78915T3juKOECHQEveLJcfCt98aA, ProductId=69576a28f7154fe9a0dce97508da5163, SandboxId=bda8d2133655435982b9118972792328, DeploymentId=a65c0335e67b4aec8eec651de8dca6ac, ProductName=Firestone Online Idle RPG, ProductVersion=1.89, IsServer=false, Flags=None]
+05-07 23:07:27.979 I/Unity   ( 7534): 05/07/2026 23:07:27 LogEOSAnalytics(Info): Start Session (User: ...)
+05-07 23:07:27.981 I/Unity   ( 7534): 05/07/2026 23:07:27 LogEOSOverlay(Info): Overlay loaded and initialized
+05-07 23:07:27.985 I/Unity   ( 7534): 05/07/2026 23:07:27 LogEOSRTC(Info): [Core] Initializing LibRTC...
+05-07 23:07:27.991 I/Unity   ( 7534): PlatformID: 0
+05-07 23:07:27.991 I/Unity   ( 7534): UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+05-07 23:07:27.991 I/Unity   ( 7534): BuildSettings:Initialize()
+05-07 23:07:27.991 I/Unity   ( 7534): <StartGameFlow>d__22:MoveNext()
+05-07 23:07:27.991 I/Unity   ( 7534): UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+05-07 23:07:27.991 I/Unity   ( 7534): 
+05-07 23:07:27.998 W/ActivityManager( 2429): callingPackage:com.brave.browser, packageName:com.brave.browser, name:org.chromium.content.app.SandboxedProcessService0, isSkip: true
+05-07 23:07:28.001 I/Unity   ( 7534): 05/07/2026 23:07:28 LogEOS(Info): Updating Platform SDK Config, Time: 0.012897
+05-07 23:07:28.002 D/CompatibilityChangeReporter( 2429): Compat change id reported: 135634846; UID 10055; state: DISABLED
+05-07 23:07:28.002 D/CompatibilityChangeReporter( 2429): Compat change id reported: 143937733; UID 10055; state: ENABLED
+05-07 23:07:28.004 D/CompatibilityChangeReporter( 2429): Compat change id reported: 207557677; UID 10055; state: ENABLED
+05-07 23:07:28.005 W/Zygote  ( 2220): forkRepeatedly terminated due to non-simple command
+05-07 23:07:28.005 D/Zygote  ( 2220): mbuffer starts with 15, nice name is com.brave.browser_zygote, mEnd = 415, mNext = 196, mLinesLeft = 6, mFd = 5
+05-07 23:07:28.012 V/zygiskd64( 2221): zygiskd::zygiskd: New daemon action: GetProcessFlags
+05-07 23:07:28.029 I/cr_CompositorSurfaceMgr( 5531): Transitioning to surface with format: -1
+05-07 23:07:28.031 D/ProcessState( 7703): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-07 23:07:28.046 I/udios.Fireston( 7534): oneway function results for code 9 on binder at 0xb400006d6a05ee70 will be dropped but finished with status UNKNOWN_TRANSACTION
+05-07 23:07:28.049 V/zygiskd64( 2221): zygiskd::zygiskd: Flags for UID 10055: ProcessFlags(PROCESS_ROOT_IS_MAGISK)
+05-07 23:07:28.053 D/Zygote  ( 2220): Forked child process 7711
+05-07 23:07:28.055 V/zygiskd64( 2221): zygiskd::zygiskd: New daemon action: ReadModules
+05-07 23:07:28.057 W/ZygoteProcess( 2429): Got error connecting to zygote, retrying. msg= Connection refused
+05-07 23:07:28.107 W/ZygoteProcess( 2429): Got error connecting to zygote, retrying. msg= Connection refused
+05-07 23:07:28.134 W/Zygote  ( 7711): BindMount ,  SpecializeCommon: source /data/system/etc/mumu-configs/app/com.brave.browser_zygote/currentApp, target: /system/etc/mumu-configs/currentApp , chownRet: -1
+05-07 23:07:28.135 W/Zygote  ( 7711): BindMount ,  SpecializeCommon mount currentApp , MountRet: -1
+05-07 23:07:28.154 I/Zygote  ( 7711): seccomp disabled by setenforce 0
+05-07 23:07:28.158 W/ZygoteProcess( 2429): Got error connecting to zygote, retrying. msg= Connection refused
+05-07 23:07:28.163 I/Unity   ( 7534): 05/07/2026 23:07:28 LogEOS(Info): SDK Config Platform Update Request Successful, Time: 0.141587
+05-07 23:07:28.165 I/Unity   ( 7534): 05/07/2026 23:07:28 LogEOSAnalytics(Info): EOS SDK Analytics disabled for route [1].
+05-07 23:07:28.166 I/Zygote  ( 7711): seccomp disabled by setenforce 0
+05-07 23:07:28.167 I/Unity   ( 7534): 05/07/2026 23:07:28 LogEOS(Info): Prewarming URL successful
+05-07 23:07:28.167 I/udios.Fireston( 7534): oneway function results for code 9 on binder at 0xb400006d6a05ee70 will be dropped but finished with status UNKNOWN_TRANSACTION
+05-07 23:07:28.169 I/Unity   ( 7534): 05/07/2026 23:07:28 LogEOS(Info): Updating Product SDK Config, Time: 0.174835
+05-07 23:07:28.198 D/BoundBrokerSvc( 2754): onUnbind: Intent { act=com.google.android.gms.common.telemetry.service.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentApiService }
+05-07 23:07:28.210 I/AppZygote( 2429): Starting application preload.
+05-07 23:07:28.211 I/AppZygoteInit( 7711): Beginning application preload for com.brave.browser
+05-07 23:07:28.217 I/nemucooker( 7711): cook file1: /system/etc/mumu-configs/shared_libs/libc_llite.so, last modify time: Fri Jul 12 17:30:20 2024
+05-07 23:07:28.217 I/nemucooker( 7711): cook file2: /data/system/etc/mumu-configs/shared_libs/libc_llite.so, last modify time: Wed Apr 29 17:20:43 2026
+05-07 23:07:28.217 I/nemucooker( 7711): cook select file: /data/system/etc/mumu-configs/shared_libs/libc_llite.so
+05-07 23:07:28.222 E/linker  ( 7711): do_dlsym houdini_patch_entrance_name failed
+05-07 23:07:28.226 I/cr_ZygotePreload( 7711): version=147.1.89.145 (428914504) minSdkVersion=29 isBundle=true
+05-07 23:07:28.239 I/AppZygoteInit( 7711): Application preload done
+05-07 23:07:28.240 I/AppZygote( 2429): Application preload done.
+05-07 23:07:28.261 D/Zygote  ( 7711): Forked child process 7722
+05-07 23:07:28.261 W/ActivityManager( 2429): Slow operation: 260ms so far, now at startProcess: returned from zygote!
+05-07 23:07:28.262 W/ActivityManager( 2429): Slow operation: 261ms so far, now at startProcess: done updating battery stats
+05-07 23:07:28.263 I/Zygote  ( 7722): fakeProductInfoIfNeed callded! com.brave.browser:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7
+05-07 23:07:28.263 W/ActivityManager( 2429): Slow operation: 262ms so far, now at startProcess: building log message
+05-07 23:07:28.263 I/ActivityManager( 2429): Start proc 7722:com.brave.browser:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7/u0ai0 for  {com.brave.browser/org.chromium.content.app.SandboxedProcessService0:7}
+05-07 23:07:28.263 W/ActivityManager( 2429): Slow operation: 262ms so far, now at startProcess: starting to update pids map
+05-07 23:07:28.264 W/ActivityManager( 2429): Slow operation: 262ms so far, now at startProcess: done updating pids map
+05-07 23:07:28.264 I/Zygote  ( 7722): fake Product info com.brave.browser:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7 not matched any pattern
+05-07 23:07:28.264 I/Zygote  ( 7722): fakeProductInfoFromProperties callded! com.brave.browser:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7
+05-07 23:07:28.267 E/NemuAppNameUtil( 7722): save data to file error
+05-07 23:07:28.267 E/NemuAppNameUtil( 7722): save data fail, try save again!!
+05-07 23:07:28.267 W/Zygote  ( 7722): BindMount ,  SpecializeCommon: source /data/system/etc/mumu-configs/app/com.brave.browser:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7/currentApp, target: /system/etc/mumu-configs/currentApp , chownRet: -1
+05-07 23:07:28.267 W/Zygote  ( 7722): BindMount ,  SpecializeCommon mount currentApp , MountRet: -1
+05-07 23:07:28.267 I/Zygote  ( 7722): seccomp disabled by setenforce 0
+05-07 23:07:28.272 E/ocessService0:( 7722): Not starting debugger since process cannot load the jdwp agent.
+05-07 23:07:28.276 D/ProcessState( 7722): Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-07 23:07:28.286 E/ashmem  ( 7722): memfd: ro.vndk.version not defined or invalid (), this is mandated since P.
+05-07 23:07:28.289 D/CompatibilityChangeReporter( 7722): Compat change id reported: 171979766; UID 90000; state: ENABLED
+05-07 23:07:28.292 D/NemuJavaHotPatchHelper( 7722): onHandleBindApplication reportedPackageName:com.brave.browser isMatchJavaPatch:false
+05-07 23:07:28.355 I/Typeface( 7722): Preloading /system/fonts/Roboto-Regular.ttf
+05-07 23:07:28.355 I/Typeface( 7722): Preloading /system/fonts/RobotoStatic-Regular.ttf
+05-07 23:07:28.364 I/Unity   ( 7534): 05/07/2026 23:07:28 LogEOSAnalytics(Info): Start Session (User: ...)
+05-07 23:07:28.380 D/NetworkSecurityConfig( 7722): Using Network Security Config from resource 0_resource_name_obfuscated debugBuild: false
+05-07 23:07:28.381 D/NetworkSecurityConfig( 7722): Using Network Security Config from resource 0_resource_name_obfuscated debugBuild: false
+05-07 23:07:28.382 I/cr_SplitCompatApp( 7722): version=147.1.89.145 (428914504) minSdkVersion=29 processName=com.brave.browser:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7 isIsolatedProcess=true splits=chrome,config.en,on_demand
+05-07 23:07:28.384 I/cr_ChildProcessService( 7722): Creating new ChildProcessService pid=7722
+05-07 23:07:28.401 I/cr_LibraryLoader( 7722): Successfully loaded native library
+05-07 23:07:28.401 I/cr_CachingUmaRecorder( 7722): Flushed 2 samples from 2 histograms, 0 samples were dropped.
+05-07 23:07:28.402 W/chromium( 7722): [WARNING:content/app/android/content_main_android.cc:82] android_setCpu already initialized
+05-07 23:07:28.463 I/Unity   ( 7534): 05/07/2026 23:07:28 LogEOS(Info): SDK Config Product Update Request Successful, Time: 0.441617
+05-07 23:07:28.466 I/Unity   ( 7534): 05/07/2026 23:07:28 LogEOS(Info): Prewarming URL successful
+05-07 23:07:28.466 I/Unity   ( 7534): 05/07/2026 23:07:28 LogEOS(Info): SDK Config Data - Watermark: 438070848
+05-07 23:07:28.466 I/Unity   ( 7534): 05/07/2026 23:07:28 LogEOS(Info): ScheduleNextSDKConfigDataUpdate - Time: 0.441617, Update Interval: 352.358826
+05-07 23:07:28.466 I/udios.Fireston( 7534): oneway function results for code 9 on binder at 0xb400006d6a05ee70 will be dropped but finished with status UNKNOWN_TRANSACTION
+05-07 23:07:28.512 D/ProfileInstaller( 7534): Skipping profile installation for com.HolydayStudios.Firestone
+05-07 23:07:28.514 D/MtpDeviceJNI( 7253): register_android_mtp_MtpDevice
+05-07 23:07:29.498 I/FirestoneHooks( 7534): god-mode BattleHero.IsImmune hit #1 this=0x6cc0245330
+05-07 23:07:29.498 I/FirestoneHooks( 7534): god-mode BattleHero.IsImmune hit #2 this=0x6cc0245330
+05-07 23:07:29.498 I/FirestoneHooks( 7534): god-mode BattleHero.IsImmune hit #3 this=0x6cc0245330
+05-07 23:07:29.498 I/FirestoneHooks( 7534): god-mode BattleHero.IsImmune hit #4 this=0x6cc0245330
+05-07 23:07:29.498 I/FirestoneHooks( 7534): god-mode BattleHero.IsImmune hit #5 this=0x6cc0245330
+05-07 23:07:29.580 I/lmkd    ( 2055): type=1400 audit(0.0:9498): avc: denied { write } for name="oom_score_adj" dev="proc" ino=18037 scontext=u:r:init:s0 tcontext=u:r:gmscore_app:s0:c512,c768 tclass=file permissive=1
+05-07 23:07:30.408 I/m.android.phone( 3826): type=1400 audit(0.0:9499): avc: denied { sendto } for path="/dev/socket/logdw" scontext=u:r:radio:s0 tcontext=u:r:init:s0 tclass=unix_dgram_socket permissive=1
+05-07 23:07:30.408 I/m.android.phone( 3826): type=1400 audit(0.0:9500): avc: denied { call } for scontext=u:r:radio:s0 tcontext=u:r:init:s0 tclass=binder permissive=1
+05-07 23:07:30.408 I/rild    ( 2294): type=1400 audit(0.0:9501): avc: denied { call } for scontext=u:r:init:s0 tcontext=u:r:radio:s0 tclass=binder permissive=1
+05-07 23:07:30.408 I/m.android.phone( 3826): type=1400 audit(0.0:9502): avc: denied { sendto } for path="/dev/socket/logdw" scontext=u:r:radio:s0 tcontext=u:r:init:s0 tclass=unix_dgram_socket permissive=1
+05-07 23:07:30.688 I/SkDestroyListen( 2219): type=1400 audit(0.0:9504): avc: denied { read } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=netlink_tcpdiag_socket permissive=1
+05-07 23:07:30.916 I/wifi@1.0-servic( 2248): type=1400 audit(0.0:9505): avc: denied { write } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=netlink_route_socket permissive=1
+05-07 23:07:30.916 I/wifi@1.0-servic( 2248): type=1400 audit(0.0:9506): avc: denied { nlmsg_readpriv } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=netlink_route_socket permissive=1
+05-07 23:07:30.916 I/wifi@1.0-servic( 2248): type=1400 audit(0.0:9507): avc: denied { read } for scontext=u:r:init:s0 tcontext=u:r:init:s0 tclass=netlink_route_socket permissive=1
+05-07 23:07:30.916 I/WifiHandlerThre( 2429): type=1400 audit(0.0:9508): avc: denied { map_read } for scontext=u:r:system_server:s0 tcontext=u:r:init:s0 tclass=bpf permissive=1

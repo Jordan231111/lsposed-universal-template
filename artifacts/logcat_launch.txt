@@ -1,0 +1,48 @@
+05-07 23:07:22.457 V/Vector  ( 7534): Loading Vector/Xposed for com.HolydayStudios.Firestone (UID: 10077)
+05-07 23:07:22.475 D/VectorModuleManager( 7534): Loading module com.firestone.hooks
+05-07 23:07:22.480 V/VectorModuleManager( 7534): Loading class class com.template.lsposed.ModuleEntry
+05-07 23:07:22.482 I/FirestoneHooks( 7534): com.firestone.hooks: Loaded in process=com.HolydayStudios.Firestone, framework=Vector 2.0, api=101
+05-07 23:07:22.482 D/VectorModuleManager( 7534): Loaded module com.firestone.hooks successfully.
+05-07 23:07:22.573 I/FirestoneHooks( 7534): com.firestone.hooks: onPackageLoaded com.HolydayStudios.Firestone process=com.HolydayStudios.Firestone firstPackage=true dataDir=/data/user/0/com.HolydayStudios.Firestone
+05-07 23:07:22.573 I/FirestoneHooks( 7534): com.firestone.hooks: Hooked Application.attach
+05-07 23:07:22.574 I/FirestoneHooks( 7534): com.firestone.hooks: Hooked Activity.onResume sample
+05-07 23:07:22.575 I/FirestoneHooks( 7534): com.firestone.hooks: onPackageReady com.HolydayStudios.Firestone process=com.HolydayStudios.Firestone firstPackage=true dataDir=/data/user/0/com.HolydayStudios.Firestone
+05-07 23:07:22.920 I/FirestoneHooks( 7534): com.firestone.hooks: Detected engine=UNITY evidence=[libil2cpp.so, libunity.so, libmain.so]
+05-07 23:07:22.923 I/FirestoneHooks( 7534): com.firestone.hooks: Synced settings to /data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json
+05-07 23:07:22.927 I/FirestoneHooks( 7534): ShadowHook ready: version=shadowhook version 2.0.0, arch=arm64
+05-07 23:07:22.924 I/FirestoneHooksW( 7534): type=1400 audit(0.0:9357): avc: denied { open } for path="/data/system/etc/mumu-configs/renderer.config" dev="sdb3" ino=5375163 scontext=u:r:untrusted_app:s0:c77,c256,c512,c768 tcontext=u:object_r:system_data_file:s0 tclass=file permissive=1 app=com.HolydayStudios.Firestone
+05-07 23:07:22.929 I/FirestoneHooks( 7534): JNI_OnLoad firestonehooks
+05-07 23:07:22.929 I/FirestoneHooks( 7534): Loaded libfirestonehooks.so
+05-07 23:07:22.929 I/FirestoneHooks( 7534): install worker package=com.HolydayStudios.Firestone settings=/data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json shadowhook=shadowhook version 2.0.0
+05-07 23:07:22.931 I/FirestoneHooks( 7534): settings refresh thread path=/data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json
+05-07 23:07:22.924 I/FirestoneHooksW( 7534): type=1400 audit(0.0:9358): avc: denied { read } for name="linker64" dev="sda1" ino=616 scontext=u:r:untrusted_app:s0:c77,c256,c512,c768 tcontext=u:object_r:unlabeled:s0 tclass=lnk_file permissive=1 app=com.HolydayStudios.Firestone
+05-07 23:07:22.924 I/FirestoneHooksW( 7534): type=1400 audit(0.0:9359): avc: denied { use } for path="/apex/com.android.runtime/bin/linker64" dev="sda1" ino=375 scontext=u:r:untrusted_app:s0:c77,c256,c512,c768 tcontext=u:r:kernel:s0 tclass=fd permissive=1 app=com.HolydayStudios.Firestone
+05-07 23:07:23.036 I/IL2CPP  ( 7534): JNI_OnLoad
+05-07 23:07:23.157 I/ActivityTaskManager( 2429): Displayed com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity: +957ms
+05-07 23:07:23.186 I/FirestoneHooks( 7534): libil2cpp.so base=0x6d04cbb000
+05-07 23:07:23.190 I/FirestoneHooks( 7534): EasyWin.CentralCurrencyHandler.HaveCurrency hook installed rva=0x2ba5e48 target=0x6d07860e48 stub=0xb400006db9ffa640 err=0 OK
+05-07 23:07:23.190 I/FirestoneHooks( 7534): EasyWin.Currency.HaveCurrency hook installed rva=0x2ba5ed8 target=0x6d07860ed8 stub=0xb400006db9ff9170 err=0 OK
+05-07 23:07:23.190 I/FirestoneHooks( 7534): easy-win FreeCurrency toggle active; affordability hooks installed
+05-07 23:07:23.191 I/FirestoneHooks( 7534): GodMode.BattleHero.IsImmune hook installed rva=0x2ac0170 target=0x6d0777b170 stub=0xb400006db9ff8e10 err=0 OK
+05-07 23:07:23.192 I/FirestoneHooks( 7534): GameSpeed.Time.set_timeScale hook installed rva=0x4a0eaa4 target=0x6d096c9aa4 stub=0xb400006db9ff9f80 err=0 OK
+05-07 23:07:23.192 I/FirestoneHooks( 7534): GameSpeed.Time.get_fixedDeltaTime hook installed rva=0x4a0e9f4 target=0x6d096c99f4 stub=0xb400006db9ff9cb0 err=0 OK
+05-07 23:07:23.192 I/FirestoneHooks( 7534): GameSpeed.TeamLogic.ApplyWaveTransitionSpeedModifierToDuration hook installed rva=0x2ac99dc target=0x6d077849dc stub=0xb400006db9ff8f30 err=0 OK
+05-07 23:07:23.192 I/FirestoneHooks( 7534): GameSpeed.TeamLogic.set_WaveTransitionSpeedMultiplier hook installed rva=0x2ac9814 target=0x6d07784814 stub=0xb400006db9ff94d0 err=0 OK
+05-07 23:07:23.195 I/FirestoneHooks( 7534): GameSpeed.Spine.AnimationState.set_TimeScale hook installed rva=0x436aac8 target=0x6d09025ac8 stub=0xb400006db9ff9200 err=0 OK
+05-07 23:07:23.195 I/FirestoneHooks( 7534): OHK.BattleController.ApplyDamage.short hook installed rva=0x27c4e00 target=0x6d0747fe00 stub=0xb400006db9ff8c60 err=0 OK
+05-07 23:07:23.195 I/FirestoneHooks( 7534): OHK.BattleController.ApplyDamage.full hook installed rva=0x27c4e10 target=0x6d0747fe10 stub=0xb400006db9ffa760 err=0 OK
+05-07 23:07:23.196 I/FirestoneHooks( 7534): OHK.BattleCharacter.ReceiveDamage hook installed rva=0x29e1ac8 target=0x6d0769cac8 stub=0xb400006db9ffb2a0 err=0 OK
+05-07 23:07:23.197 I/FirestoneHooks( 7534): AttackSpeed.CharacterBattleLogic.FillAttackSpeedTimer hook installed rva=0x2ac82e8 target=0x6d077832e8 stub=0xb400006db9ffaa30 err=0 OK
+05-07 23:07:23.197 I/FirestoneHooks( 7534): AttackSpeed.BattleMainHero.CalculateAttackSpeedTotal hook installed rva=0x2ac2af8 target=0x6d0777daf8 stub=0xb400006db9ffbba0 err=0 OK
+05-07 23:07:23.197 I/FirestoneHooks( 7534): AttackSpeed.BattleMainEnemy.CalculateAttackSpeedTotal hook installed rva=0x29e5b94 target=0x6d076a0b94 stub=0xb400006db9ffa910 err=0 OK
+05-07 23:07:23.197 I/FirestoneHooks( 7534): native hook install complete result=0
+05-07 23:07:23.288 I/Unity   ( 7534): ApplicationInfo 'com.HolydayStudios.Firestone', Version '3.27', Min API Level '23', Target API Level '36'
+05-07 23:07:23.288 I/Unity   ( 7534): Built from '6000.0/staging' branch, Version '6000.0.47f1 (2ad1ed33fd3b)', Build type 'Release', Scripting Backend 'il2cpp', CPU 'arm64-v8a', Stripping 'Enabled'
+05-07 23:07:23.483 I/Unity   ( 7534): Company Name: HolydayStudios
+05-07 23:07:23.483 I/Unity   ( 7534): Product Name: Firestone
+05-07 23:07:24.185 I/IL2CPP  ( 7534): Locale en-US
+05-07 23:07:29.498 I/FirestoneHooks( 7534): god-mode BattleHero.IsImmune hit #1 this=0x6cc0245330
+05-07 23:07:29.498 I/FirestoneHooks( 7534): god-mode BattleHero.IsImmune hit #2 this=0x6cc0245330
+05-07 23:07:29.498 I/FirestoneHooks( 7534): god-mode BattleHero.IsImmune hit #3 this=0x6cc0245330
+05-07 23:07:29.498 I/FirestoneHooks( 7534): god-mode BattleHero.IsImmune hit #4 this=0x6cc0245330
+05-07 23:07:29.498 I/FirestoneHooks( 7534): god-mode BattleHero.IsImmune hit #5 this=0x6cc0245330

@@ -21,8 +21,8 @@ public final class FeatureState {
     }
 
     public static void setEnabled(boolean value) {
-        FeatureRegistry.setBool(FeatureRegistry.KEY_ENABLED, value);
-        lastMessage = value ? "Enabled" : "Disabled";
+        FeatureRegistry.setBool(FeatureRegistry.KEY_ENABLED, true);
+        lastMessage = "Enabled";
     }
 
     public static float getMultiplier() {
@@ -53,11 +53,20 @@ public final class FeatureState {
 
     public static String summary() {
         return String.format(Locale.US,
-                "Enabled: %s\nMultiplier: \u00d7%.1f\nEngine: %s\nJava hook hits: %d\nNative install attempts: %d\nStatus: %s",
+                "Enabled: %s\nFree currency: %s\nGod-mode: %s\nGame speed: %s \u00d7%.1f\nOHK: %s\nAttack speed: %s \u00d7%.1f\nAtk paths: stat=%s idle=%s attack=%s roster=%s\nEngine: %s\nNative install attempts: %d\nStatus: %s",
                 isEnabled() ? "yes" : "no",
+                FeatureRegistry.getBool(FeatureRegistry.KEY_FREE_CURRENCY) ? "yes" : "no",
+                FeatureRegistry.getBool(FeatureRegistry.KEY_GOD_MODE) ? "yes" : "no",
+                FeatureRegistry.getBool(FeatureRegistry.KEY_GAME_SPEED) ? "yes" : "no",
                 getMultiplier(),
+                FeatureRegistry.getBool(FeatureRegistry.KEY_OHK) ? "yes" : "no",
+                FeatureRegistry.getBool(FeatureRegistry.KEY_ATTACK_SPEED) ? "yes" : "no",
+                FeatureRegistry.getFloat(FeatureRegistry.KEY_ATTACK_SPEED_MULTIPLIER),
+                FeatureRegistry.getBool(FeatureRegistry.KEY_ATTACK_SPEED_BATTLE_STAT) ? "on" : "off",
+                FeatureRegistry.getBool(FeatureRegistry.KEY_ATTACK_SPEED_IDLE_TIMER) ? "on" : "off",
+                FeatureRegistry.getBool(FeatureRegistry.KEY_ATTACK_SPEED_ATTACK_TIMER) ? "on" : "off",
+                FeatureRegistry.getBool(FeatureRegistry.KEY_ATTACK_SPEED_ROSTER_STAT) ? "on" : "off",
                 engineLabel,
-                javaHookHits.get(),
                 nativeInstallAttempts.get(),
                 lastMessage);
     }

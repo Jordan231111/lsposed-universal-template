@@ -258,6 +258,31 @@ public final class OverlayController {
         multBar.setThumbTintList(lavender);
         root.addView(multBar);
 
+        final FeatureRegistry.Feature attackMultiplier =
+                findFloatFeature(FeatureRegistry.KEY_ATTACK_SPEED_MULTIPLIER);
+        final float minAttackMult = attackMultiplier != null ? attackMultiplier.min : 1f;
+        final float maxAttackMult = attackMultiplier != null ? attackMultiplier.max : 10f;
+        final String attackMultLabelText = attackMultiplier != null ? attackMultiplier.label : "Attack speed";
+
+        final TextView attackMultLabel = new TextView(appCtx);
+        attackMultLabel.setTextColor(Color.WHITE);
+        attackMultLabel.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        attackMultLabel.setPadding(0, dp(8), 0, 0);
+        attackMultLabel.setText(formatMultiplier(attackMultLabelText,
+                FeatureRegistry.getFloat(FeatureRegistry.KEY_ATTACK_SPEED_MULTIPLIER)));
+        root.addView(attackMultLabel);
+
+        final SeekBar attackMultBar = new SeekBar(appCtx);
+        int attackRange = (int) Math.round((maxAttackMult - minAttackMult) * 2f);
+        attackMultBar.setMax(Math.max(1, attackRange));
+        attackMultBar.setProgress(clamp(Math.round(
+                (FeatureRegistry.getFloat(FeatureRegistry.KEY_ATTACK_SPEED_MULTIPLIER) - minAttackMult) * 2f),
+                0, attackMultBar.getMax()));
+        attackMultBar.setProgressTintList(lavender);
+        attackMultBar.setProgressBackgroundTintList(trackBg);
+        attackMultBar.setThumbTintList(lavender);
+        root.addView(attackMultBar);
+
         for (FeatureRegistry.Feature f : FeatureRegistry.features()) {
             if (f.type == FeatureRegistry.Type.BOOL) addToggleRow(root, f);
         }
@@ -281,6 +306,18 @@ public final class OverlayController {
             @Override public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
+        attackMultBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                float value = minAttackMult + progress / 2f;
+                FeatureRegistry.setFloat(FeatureRegistry.KEY_ATTACK_SPEED_MULTIPLIER, value);
+                attackMultLabel.setText(formatMultiplier(attackMultLabelText,
+                        FeatureRegistry.getFloat(FeatureRegistry.KEY_ATTACK_SPEED_MULTIPLIER)));
+                stats.setText(FeatureState.summary());
+            }
+            @Override public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+
         LinearLayout row = new LinearLayout(appCtx);
         row.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams rowLp = new LinearLayout.LayoutParams(
@@ -294,6 +331,11 @@ public final class OverlayController {
             multBar.setProgress(clamp(Math.round((FeatureState.getMultiplier() - minMult) * 10f),
                     0, multBar.getMax()));
             multLabel.setText(formatMultiplier(multLabelText, FeatureState.getMultiplier()));
+            attackMultBar.setProgress(clamp(Math.round(
+                    (FeatureRegistry.getFloat(FeatureRegistry.KEY_ATTACK_SPEED_MULTIPLIER) - minAttackMult) * 2f),
+                    0, attackMultBar.getMax()));
+            attackMultLabel.setText(formatMultiplier(attackMultLabelText,
+                    FeatureRegistry.getFloat(FeatureRegistry.KEY_ATTACK_SPEED_MULTIPLIER)));
             Toast.makeText(appCtx, "Defaults restored", Toast.LENGTH_SHORT).show();
         });
 

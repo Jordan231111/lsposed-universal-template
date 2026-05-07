@@ -1,0 +1,445 @@
+05-08 02:22:38.798 I/ActivityTaskManager( 2432): START u0 {flg=0x10000000 cmp=com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity} from uid 2000, pid 11271
+05-08 02:22:38.800 I/ActivityTaskManager( 2432): [KeepAlive] disabled for com.HolydayStudios.Firestone
+05-08 02:22:38.805 D/RecentTaskMonitor( 2432): openTabFromAms task is Task{23fb2bd #75 type=standard A=10117:com.HolydayStudios.Firestone U=0 visible=true visibleRequested=false mode=fullscreen translucent=true sz=1}
+05-08 02:22:38.834 I/ActivityManager( 2432): Start proc 11274:com.HolydayStudios.Firestone/u0a117 for pre-top-activity {com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity}
+05-08 02:22:38.842 D/RecentTaskMonitor( 2432): VAPIShellNotifier#notifyOpenTab :{"id":"task:75","displayId":0,"userId":0,"name":"Firestone","originName":"Firestone","packageName":"com.HolydayStudios.Firestone","launcher":false,"newTask":true,"icon":"iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAACAASURBVHicrLx3lJ3Jddj5q\/rSy6FzBLrRyGkQOAlDDGc45AQmURTFoBWpFU1JFJUsadc+R7K98tljr71eWxbtlShrSUs8YpBIyhSHYpghZzjkJGAiYqMBdM7p9cvvi1X7x2vEQQOYse47dfr1++qrcO+te2\/durcEG8DWz73a7gjvXqT4GIIPaq3i19cRQqJ0hECAEAAoqdBSo7UFiEs1b9iHENf+rrW+4e9vBi61cTO4pn15k3rr49bqqjavry9BG1eeaw1KGbxxzhvMSWssHSFliFh\/P9A2UgT84ty\/ZCq+l+dbP4FhRNhSYgkwhAQBmvX5rs\/n6h6kINLIYyj95cg0n3jhI3su3niON4Ddf\/bSQXT0tIDsjUd9BUIzvOHvUl5pOoquMMP\/DHGvAbHelr49ot+wCSlQltr4eSQQ6trxKlNtSMuNQCmJ1sbG\/QCWDhBCobVFJAQDjdf5+Pwf8bmBL1Ix24gBUiikoZFX4VDIK3i1tb7h0JTSRFp\/Maqpz7zya28Lrn52DT\/3\/afn43v\/7MU\/kahnb0V8LTTKUAiaDHh9uWaCUiHEbRJJ3Eb5x2hHNqXVzUBLjZLqmvJmQANKG1xG803mEwmTEJtICAQR95e+xSv591G3csj1vkMBgRIordHrRSl1eRGEcLkEQKA1vtLUgboWn6o7vHzk9\/\/r5qvHeJkBBv7o6Vg2bnxOw29rdOJaZF8l4tY\/SA2GRkiBEFfKpVnp9bc0IEQEQq0zhr6mvevh6rY2LFJckSTrxLyGMW6HiSRgAFoh1AaEFet1ri5vZvXr9Y6ERMgbLxQhBEiBkrJZhGCzN0xHOMVzLT8HUmNI3VSrUqOk5sqnqab0Oj6VEFeYQGsCfYUZVOTT+ew39vc+\/ddPvqd35\/ZLQzQvfUn0Of9Zi+jTN54IyEA29btxFbJuIM61lqBN0O56lSaxpNRNRmBdJN5M+V7d8TVfNWJd5+l1Da0FaFNtOJ5bgyC7epFKy2Yiw34L718Rw1dDc47Xin0pwytEX6+jrlMxAsUjla9yLnME18q9AUtCCIJL6lQKbHVF7GutL9srCk0ERAjwG3S8+D1aX\/wH6nVvG4719Z9n951f56xvAuz\/\/PMPKS0+qa4T00rp5oARaEOhUdfqW70+mattKgGICCEM9OWldslgASHWdegtNIIVeeT9VeJBFSMMsBolMtV5Um4FpIGRTWLHYxStNirSxrfiLJtZ6kYM37AJDRvErZnMCar8Vtt5Pl9LspzquWX9N8AGPNdUedE1PHkJl1fXkdepla5gmq5wnMfbfuW2uo\/Etei89DfSze\/Sq9P\/o78mO3ycaj0AIhJxsbfvHeIPeYb\/Q2z93E\/aEzExpqSR0vKNCGsSXF\/+fjX9pZQbGnUa0DdaBSJAc2OjSGhFIqyTK8+xZ\/kYufoiURihfIUIg3WdChKBKT2k0MTjDqZlYkiBJx3WZJK10KLm5Cgn2iilOygl2\/GcNEoab5ASO8un+dw7DH77r04xcsdHrnl+jfV\/aYzXMfytoNncVUS\/ycuG9vnF5f9A2cjzP1o+cw0D3wjPN5I8l8astcaqFhl44ksYw8fwPZdMOk5bPkbC0WRTtSiXdbabsZT1zgiR2ngCV4yBNyNhlTK5EaaUtt7wm4GmLVrjQOkUb6ueQXk+Nd\/FlRplahoKQmHgYyERqEjhaxMVKeo1j7gj2NFj0t2eImbCQqHIyPws8\/MxNAYqGaOY6WapZZBitpt6PEtoWBh+gw+3TmEFLXTPvsL4zsfwY5mbIvhWcDWhbkbsa19q\/unzxzjgPc+\/6\/48XLUYN2rnRgx6yR4wKwW2\/sOfE557jUApOtrS9HUoWuMubSmDji6MdFI\/bGr4xduc2w1B6Y3E7K0nL2VEJ1Xe759kj3cOoRu4QlM3I4hL7MggCEJAEoQhMRSekjQijecHSCkwTYMw0igtKBVLkDDJZ5P0kWBLv4FpmJyacYkXxmgvTBAYFoGdYDXTR5RyeM8HWikWiiTLs7QvnWV20z03HKteN+iEUGykv26b4BvAfbXv8UryQZbN7jf9rr5qTObqAgPf+xLeyMvEHZuhvjjppGBTt6C3TZJN+nihxciF6Z8zNdz3Vofd1Os33t8KIa5z7FwRTQCmgIfNUX4ueoWsUcYzXEJbkRAC0zWpKkWkNIaElK3BMlA6wgsVCRNcx8T1PKoNhdbw6gWNo11yhsv+ff1syceJWRqtQxL9JlPzHkuBxDQ1QeCSmq\/x7vts6pMzJFruI2nV6Z58ZUMGaHpejPXdzMYYuyUTbPC4LxhlV3iS\/9zyf6GEeXttcRmr6\/9oYgsTbH7yS0Tjw\/S3BXS0JdjT59HVnaa93UNrwdKywfA0zK\/E7zQFIn\/LXq4Dpa927Gxc7xpxKDRSNncBGRnwTxLneYTzEFWoVKpYZoRSEPoGkWruHGwzwjA0KKu518Ugbiu0VghhEQSSlZSm4UeUSj6r1ZDRpSpzyy+zd1c\/d+7pRwpBW9ogm8gR2jaGlWNyrsirw7N0Z7vx3AYr8wVaWvIUloZJ1FdpJNuujPsSEQQ0N1VvYbnckicE76w\/zow1RMHsvmLVrxP2ZoyglIkQCkFAau4Ce7\/\/p5Rmxxgc6GD\/tjqb+2129GliMUmtlmByusDkTJXFZRBCZ80NW74pRNf9L7mZT1WI6LIjqM3w+NdtZ3i7NUXguyws1JBhiFI2gYpoRD7StMg4NpXAJwwDHNRlJAihMC2BEA6eFyDrPmtCYOXihEmHlnSclZVVnj6+yNjIHA8+cJSeXomlFL4XMXxxnOHFOoPdazjFFeLbevnT\/\/QEve0OGbHGponnOL\/7A+h\/LI\/lbUBGrbE3fJU\/z\/zBm35XCoVG03r2efa9\/BXaWObnPpZm9x6HfLITx7FQKoXnwdJclQuzmoklA6UU+bzFW2IAKa7dumgtbrqrE+tOoA7D49+1HuewnEIpyWphichyMG0bVYuQlqC1NYFpGHieD3UTFUmMdZeHNCS27QCKej0CAiwUCUIM0yIUGktKpMxQqxksLFf528df4IF7Orlj3178RhHllzH9Ve7b042uTzJxIWAm8RArs89wqEdSHf0RE1sfxHdu6QW\/bpJvEonrYOqIn69+kfPWHUyY265r8jbsqMij\/eSP2Xvy7+hylnnonZId+0xiyRJStxGFmnrdYW6+zNmRBnMLdaJIk8062LZ4awxwNahrDn2umphx9R5YkpEB\/7b1ZQ7piyAF5WKdTD6PY6ZwPY98XCFME2GYFFeKaDcgYVuAgRAgDYnjGAghCIOQMFD4foSpNTECTKkIpERLiVYSKR2kNCgVizzx7AhLRXj7\/i0QNkgbNVqNEjKT4sXX6\/Qe+WVe+corPLLPYH51mXxhnKWeg5fnorXGieqoSBE4qQ2Jo29lHAreYD90hrPc5z3Dv235v9GG9ab4SAQ+fa98ix2nf0Bfssqdd+XZsbeKYwtEZOMHDrVawNx8wNRUmfmFGq6nSSYTxOMaIfT\/PAOA4opvtekEvt7vb6D5bO4Mh9VZpG0SAfnePmqejwgE8XgcJ2ujQ8Xq8hpBGBCLx1CquRuS0sCJxbFSCYxIocKARMLFWguxzQbJRMjERQi1wjEEdcekGoWYMYGRsln1U7xwYpqZZZ9YfIWH37uJtdWzxLp28GJ9B0eG4CnzKKNLP6Yz1WBg+Hssd+5FG1e2rK2iQu
+05-08 02:22:38.845 W/BroadcastQueue( 2432): Background execution not allowed: receiving Intent { act=nemu.intent.action.NEW_TASK dat=package:com.HolydayStudios.Firestone flg=0x10 (has extras) } to com.mumu.acc/.AccMsgReceiver
+05-08 02:22:38.846 D/NewFileUpdater( 2657): onOpenNewTask focusPkgName set to com.HolydayStudios.Firestone
+05-08 02:22:38.859 I/Zygote  (11274): fakeProductInfoIfNeed callded! com.HolydayStudios.Firestone
+05-08 02:22:38.862 I/Zygote  (11274): fake Product info com.HolydayStudios.Firestone not matched any pattern
+05-08 02:22:38.862 I/Zygote  (11274): fakeProductInfoFromProperties callded! com.HolydayStudios.Firestone
+05-08 02:22:38.936 D/RecentTaskMonitor( 2432): VAPIShellNotifier#notifyOpenTab :{"id":"task:75","displayId":0,"userId":0,"name":"Firestone","originName":"Firestone","packageName":"com.HolydayStudios.Firestone","launcher":false,"newTask":false,"icon":"iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAACAASURBVHicrLx3lJ3Jddj5q\/rSy6FzBLrRyGkQOAlDDGc45AQmURTFoBWpFU1JFJUsadc+R7K98tljr71eWxbtlShrSUs8YpBIyhSHYpghZzjkJGAiYqMBdM7p9cvvi1X7x2vEQQOYse47dfr1++qrcO+te2\/durcEG8DWz73a7gjvXqT4GIIPaq3i19cRQqJ0hECAEAAoqdBSo7UFiEs1b9iHENf+rrW+4e9vBi61cTO4pn15k3rr49bqqjavry9BG1eeaw1KGbxxzhvMSWssHSFliFh\/P9A2UgT84ty\/ZCq+l+dbP4FhRNhSYgkwhAQBmvX5rs\/n6h6kINLIYyj95cg0n3jhI3su3niON4Ddf\/bSQXT0tIDsjUd9BUIzvOHvUl5pOoquMMP\/DHGvAbHelr49ot+wCSlQltr4eSQQ6trxKlNtSMuNQCmJ1sbG\/QCWDhBCobVFJAQDjdf5+Pwf8bmBL1Ix24gBUiikoZFX4VDIK3i1tb7h0JTSRFp\/Maqpz7zya28Lrn52DT\/3\/afn43v\/7MU\/kahnb0V8LTTKUAiaDHh9uWaCUiHEbRJJ3Eb5x2hHNqXVzUBLjZLqmvJmQANKG1xG803mEwmTEJtICAQR95e+xSv591G3csj1vkMBgRIordHrRSl1eRGEcLkEQKA1vtLUgboWn6o7vHzk9\/\/r5qvHeJkBBv7o6Vg2bnxOw29rdOJaZF8l4tY\/SA2GRkiBEFfKpVnp9bc0IEQEQq0zhr6mvevh6rY2LFJckSTrxLyGMW6HiSRgAFoh1AaEFet1ri5vZvXr9Y6ERMgbLxQhBEiBkrJZhGCzN0xHOMVzLT8HUmNI3VSrUqOk5sqnqab0Oj6VEFeYQGsCfYUZVOTT+ew39vc+\/ddPvqd35\/ZLQzQvfUn0Of9Zi+jTN54IyEA29btxFbJuIM61lqBN0O56lSaxpNRNRmBdJN5M+V7d8TVfNWJd5+l1Da0FaFNtOJ5bgyC7epFKy2Yiw34L718Rw1dDc47Xin0pwytEX6+jrlMxAsUjla9yLnME18q9AUtCCIJL6lQKbHVF7GutL9srCk0ERAjwG3S8+D1aX\/wH6nVvG4719Z9n951f56xvAuz\/\/PMPKS0+qa4T00rp5oARaEOhUdfqW70+mattKgGICCEM9OWldslgASHWdegtNIIVeeT9VeJBFSMMsBolMtV5Um4FpIGRTWLHYxStNirSxrfiLJtZ6kYM37AJDRvErZnMCar8Vtt5Pl9LspzquWX9N8AGPNdUedE1PHkJl1fXkdepla5gmq5wnMfbfuW2uo\/Etei89DfSze\/Sq9P\/o78mO3ycaj0AIhJxsbfvHeIPeYb\/Q2z93E\/aEzExpqSR0vKNCGsSXF\/+fjX9pZQbGnUa0DdaBSJAc2OjSGhFIqyTK8+xZ\/kYufoiURihfIUIg3WdChKBKT2k0MTjDqZlYkiBJx3WZJK10KLm5Cgn2iilOygl2\/GcNEoab5ASO8un+dw7DH77r04xcsdHrnl+jfV\/aYzXMfytoNncVUS\/ycuG9vnF5f9A2cjzP1o+cw0D3wjPN5I8l8astcaqFhl44ksYw8fwPZdMOk5bPkbC0WRTtSiXdbabsZT1zgiR2ngCV4yBNyNhlTK5EaaUtt7wm4GmLVrjQOkUb6ueQXk+Nd\/FlRplahoKQmHgYyERqEjhaxMVKeo1j7gj2NFj0t2eImbCQqHIyPws8\/MxNAYqGaOY6WapZZBitpt6PEtoWBh+gw+3TmEFLXTPvsL4zsfwY5mbIvhWcDWhbkbsa19q\/unzxzjgPc+\/6\/48XLUYN2rnRgx6yR4wKwW2\/sOfE557jUApOtrS9HUoWuMubSmDji6MdFI\/bGr4xduc2w1B6Y3E7K0nL2VEJ1Xe759kj3cOoRu4QlM3I4hL7MggCEJAEoQhMRSekjQijecHSCkwTYMw0igtKBVLkDDJZ5P0kWBLv4FpmJyacYkXxmgvTBAYFoGdYDXTR5RyeM8HWikWiiTLs7QvnWV20z03HKteN+iEUGykv26b4BvAfbXv8UryQZbN7jf9rr5qTObqAgPf+xLeyMvEHZuhvjjppGBTt6C3TZJN+nihxciF6Z8zNdz3Vofd1Os33t8KIa5z7FwRTQCmgIfNUX4ueoWsUcYzXEJbkRAC0zWpKkWkNIaElK3BMlA6wgsVCRNcx8T1PKoNhdbw6gWNo11yhsv+ff1syceJWRqtQxL9JlPzHkuBxDQ1QeCSmq\/x7vts6pMzJFruI2nV6Z58ZUMGaHpejPXdzMYYuyUTbPC4LxhlV3iS\/9zyf6GEeXttcRmr6\/9oYgsTbH7yS0Tjw\/S3BXS0JdjT59HVnaa93UNrwdKywfA0zK\/E7zQFIn\/LXq4Dpa927Gxc7xpxKDRSNncBGRnwTxLneYTzEFWoVKpYZoRSEPoGkWruHGwzwjA0KKu518Ugbiu0VghhEQSSlZSm4UeUSj6r1ZDRpSpzyy+zd1c\/d+7pRwpBW9ogm8gR2jaGlWNyrsirw7N0Z7vx3AYr8wVaWvIUloZJ1FdpJNuujPsSEQQ0N1VvYbnckicE76w\/zow1RMHsvmLVrxP2ZoyglIkQCkFAau4Ce7\/\/p5Rmxxgc6GD\/tjqb+2129GliMUmtlmByusDkTJXFZRBCZ80NW74pRNf9L7mZT1WI6LIjqM3w+NdtZ3i7NUXguyws1JBhiFI2gYpoRD7StMg4NpXAJwwDHNRlJAihMC2BEA6eFyDrPmtCYOXihEmHlnSclZVVnj6+yNjIHA8+cJSeXomlFL4XMXxxnOHFOoPdazjFFeLbevnT\/\/QEve0OGbHGponnOL\/7A+h\/LI\/lbUBGrbE3fJU\/z\/zBm35XCoVG03r2efa9\/BXaWObnPpZm9x6HfLITx7FQKoXnwdJclQuzmoklA6UU+bzFW2IAKa7dumgtbrqrE+tOoA7D49+1HuewnEIpyWphichyMG0bVYuQlqC1NYFpGHieD3UTFUmMdZeHNCS27QCKej0CAiwUCUIM0yIUGktKpMxQqxksLFf528df4IF7Orlj3178RhHllzH9Ve7b042uTzJxIWAm8RArs89wqEdSHf0RE1sfxHdu6QW\/bpJvEonrYOqIn69+kfPWHUyY265r8jbsqMij\/eSP2Xvy7+hylnnonZId+0xiyRJStxGFmnrdYW6+zNmRBnMLdaJIk8062LZ4awxwNahrDn2umphx9R5YkpEB\/7b1ZQ7piyAF5WKdTD6PY6ZwPY98XCFME2GYFFeKaDcgYVuAgRAgDYnjGAghCIOQMFD4foSpNTECTKkIpERLiVYSKR2kNCgVizzx7AhLRXj7\/i0QNkgbNVqNEjKT4sXX6\/Qe+WVe+corPLLPYH51mXxhnKWeg5fnorXGieqoSBE4qQ2Jo29lHAreYD90hrPc5z3Dv235v9GG9ab4SAQ+fa98ix2nf0Bfssqdd+XZsbeKYwtEZOMHDrVawNx8wNRUmfmFGq6nSSYTxOMaIfT\/PAOA4opvtekEvt7vb6D5bO4Mh9VZpG0SAfnePmqejwgE8XgcJ2ujQ8Xq8hpBGBCLx1CquRuS0sCJxbFSCYxIocKARMLFWguxzQbJRMjERQi1wjEEdcekGoWYMYGRsln1U7xwYpqZZZ9YfIWH37uJtdWzxLp28GJ9B0eG4CnzKKNLP6Yz1WBg+Hssd+5FG1e2rK2iQ
+05-08 02:22:38.954 W/Zygote  (11274): BindMount ,  SpecializeCommon: source /data/system/etc/mumu-configs/app/com.HolydayStudios.Firestone/currentApp, target: /system/etc/mumu-configs/currentApp , chownRet: 0
+05-08 02:22:39.037 V/Vector  (11274): Loading Vector/Xposed for com.HolydayStudios.Firestone (UID: 10117)
+05-08 02:22:39.066 I/FirestoneHooks(11274): com.firestone.hooks: Loaded in process=com.HolydayStudios.Firestone, framework=Vector 2.0, api=101
+05-08 02:22:39.069 D/NemuJavaHotPatchHelper(11274): onHandleBindApplication reportedPackageName:com.HolydayStudios.Firestone isMatchJavaPatch:false
+05-08 02:22:39.133 I/FirestoneHooks(11274): com.firestone.hooks: onPackageLoaded com.HolydayStudios.Firestone process=com.HolydayStudios.Firestone firstPackage=true dataDir=/data/user/0/com.HolydayStudios.Firestone
+05-08 02:22:39.133 I/FirestoneHooks(11274): com.firestone.hooks: Hooked Application.attach
+05-08 02:22:39.133 I/FirestoneHooks(11274): com.firestone.hooks: Hooked Activity.onResume sample
+05-08 02:22:39.134 I/FirestoneHooks(11274): com.firestone.hooks: onPackageReady com.HolydayStudios.Firestone process=com.HolydayStudios.Firestone firstPackage=true dataDir=/data/user/0/com.HolydayStudios.Firestone
+05-08 02:22:39.137 V/GraphicsEnvironment(11274): ANGLE Developer option for 'com.HolydayStudios.Firestone' set to: 'default'
+05-08 02:22:39.137 V/GraphicsEnvironment(11274): ANGLE GameManagerService for com.HolydayStudios.Firestone: false
+05-08 02:22:39.514 I/FirestoneHooks(11274): com.firestone.hooks: Detected engine=UNITY evidence=[libil2cpp.so, libunity.so, libmain.so]
+05-08 02:22:39.520 I/shadowhook_tag(11274): linker: hook soinfo::call_constructors
+05-08 02:22:39.520 I/shadowhook_tag(11274): a64 rewrite: type 0, inst d10283ff
+05-08 02:22:39.520 I/shadowhook_tag(11274): elf: find phdr gap 7f9d2cc070-7f9d2cd000(load_bias 7f9d1aa000, 122070-123000)
+05-08 02:22:39.520 I/shadowhook_tag(11274): elf: find phdr gap 7f9d2e2e38-7f9d2e3000(load_bias 7f9d1aa000, 138e38-139000)
+05-08 02:22:39.520 I/shadowhook_tag(11274): elf: alloc addr 7f9d2cc070(load_bias 7f9d1aa000, 122070), size 16, idx [0, 4)
+05-08 02:22:39.520 I/shadowhook_tag(11274): island: alloc in ELF-gap, addr 7f9d2cc070, size 16, pc 7f9d1fbfd4, range [7f951fbfd4, 7fa51fbfd0]
+05-08 02:22:39.520 I/shadowhook_tag(11274): a64: hook (with island) OK. target 7f9d1fbfd4 -> island-exit 7f9d2cc070 -> new 7ca629cfc0 -> enter 7f85c76000 -> resume 7f9d1fbfd8
+05-08 02:22:39.520 I/shadowhook_tag(11274): switch: hook invisible OK: target_addr 7f9d1fbfd4, new_addr 7ca629cfc0
+05-08 02:22:39.520 I/shadowhook_tag(11274): linker: hook soinfo::call_destructors
+05-08 02:22:39.520 I/shadowhook_tag(11274): a64 rewrite: type 0, inst d10283ff
+05-08 02:22:39.520 I/shadowhook_tag(11274): elf: alloc addr 7f9d2cc080(load_bias 7f9d1aa000, 122080), size 16, idx [4, 8)
+05-08 02:22:39.520 I/shadowhook_tag(11274): island: alloc in ELF-gap, addr 7f9d2cc080, size 16, pc 7f9d1fc3bc, range [7f951fc3bc, 7fa51fc3b8]
+05-08 02:22:39.520 I/shadowhook_tag(11274): a64: hook (with island) OK. target 7f9d1fc3bc -> island-exit 7f9d2cc080 -> new 7ca629d738 -> enter 7f85c76040 -> resume 7f9d1fc3c0
+05-08 02:22:39.520 I/shadowhook_tag(11274): switch: hook invisible OK: target_addr 7f9d1fc3bc, new_addr 7ca629d738
+05-08 02:22:39.520 I/shadowhook_tag(11274): linker: soinfo memory scan pre OK. load_bias 208, name 216, phdr 0, phnum 8, called 248
+05-08 02:22:39.520 I/shadowhook_tag(11274): linker: soinfo memory scan post OK
+05-08 02:22:39.520 I/shadowhook_tag(11274): linker: hook ctors and dtors OK
+05-08 02:22:39.520 I/shadowhook_tag(11274): task: start linker DL-init/fini monitor ...
+05-08 02:22:39.520 E/shadowhook_tag(11274): shadowhook version 2.0.0: shadowhook init(default_mode: SHARED, debuggable: true), return: 0, real-init: yes
+05-08 02:22:39.520 I/FirestoneHooks(11274): ShadowHook ready: version=shadowhook version 2.0.0, arch=arm64
+05-08 02:22:39.521 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7ca6169000, name /data/app/~~Te3TrpoEMQTJR4gt43jTqQ==/com.firestone.hooks-S9B65HQy_Lpb0a2jF3nCNw==/base.apk!/lib/arm64-v8a/libfirestonehooks.so
+05-08 02:22:39.521 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7ca6169000, name /data/app/~~Te3TrpoEMQTJR4gt43jTqQ==/com.firestone.hooks-S9B65HQy_Lpb0a2jF3nCNw==/base.apk!/lib/arm64-v8a/libfirestonehooks.so
+05-08 02:22:39.521 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7ca6169000, name /data/app/~~Te3TrpoEMQTJR4gt43jTqQ==/com.firestone.hooks-S9B65HQy_Lpb0a2jF3nCNw==/base.apk!/lib/arm64-v8a/libfirestonehooks.so
+05-08 02:22:39.522 I/FirestoneHooks(11274): JNI_OnLoad firestonehooks
+05-08 02:22:39.522 I/FirestoneHooks(11274): Loaded libfirestonehooks.so
+05-08 02:22:39.522 I/FirestoneHooks(11274): install worker package=com.HolydayStudios.Firestone settings=/data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json shadowhook=shadowhook version 2.0.0
+05-08 02:22:39.523 E/shadowhook_tag(11274): shadowhook version 2.0.0: shadowhook init(default_mode: SHARED, debuggable: false), return: 0, real-init: no
+05-08 02:22:39.523 I/FirestoneHooks(11274): settings refresh thread path=/data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json
+05-08 02:22:39.540 I/FirestoneHooks(11274): com.firestone.hooks: Synced settings to /data/user/0/com.HolydayStudios.Firestone/files/firestonehooks.json
+05-08 02:22:39.545 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7c9fa93000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_DynamiteLoader_installtime.odex
+05-08 02:22:39.545 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7c9fa93000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_DynamiteLoader_installtime.odex
+05-08 02:22:39.545 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7c9fa93000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_DynamiteLoader_installtime.odex
+05-08 02:22:39.547 I/shadowhook_tag(11274): linker: call_dtors pre, load_bias 7c9fa93000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_DynamiteLoader_installtime.odex
+05-08 02:22:39.547 I/shadowhook_tag(11274): linker: call_dtors post, load_bias 7c9fa93000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_DynamiteLoader_installtime.odex
+05-08 02:22:39.547 I/shadowhook_tag(11274): task: call_dtors() post callback. load_bias 7c9fa93000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_DynamiteLoader_installtime.odex
+05-08 02:22:39.549 V/DynamiteModule(11274): Dynamite loader version >= 2, using loadModule2NoCrashUtils
+05-08 02:22:39.551 W/ActivityManager( 2432): callingPackage:com.HolydayStudios.Firestone, packageName:com.google.android.gms, name:com.google.android.gms.games.chimera.GamesAndroidServiceProxy, isSkip: true
+05-08 02:22:39.559 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7ca192c000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_MeasurementDynamite_installtime.odex
+05-08 02:22:39.559 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7ca192c000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_MeasurementDynamite_installtime.odex
+05-08 02:22:39.559 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7ca192c000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_MeasurementDynamite_installtime.odex
+05-08 02:22:39.561 W/udios.Fireston(11274): ClassLoaderContext classpath size mismatch. expected=16, found=3 (DLC[];PCL[base.apk*545294799:base.apk!classes2.dex*352801010:base.apk!classes3.dex*3343406984:base.apk!classes4.dex*2440093784:base.apk!classes5.dex*3849908652:base.apk!classes6.dex*990115835:base.apk!classes7.dex*2111835892:base.apk!classes8.dex*3444068947:base.apk!classes9.dex*3508519706:base.apk!classes10.dex*3738386946:base.apk!classes11.dex*1150016488:base.apk!classes12.dex*2136424662:base.apk!classes13.dex*3076236650:base.apk!classes14.dex*2602640587:base.apk!classes15.dex*1985522381:base.apk!classes16.dex*3850485896]{PCL[/system/framework/org.apache.http.legacy.jar*2255768530]#PCL[/system/framework/com.android.location.provider.jar*1360179951]} | DLC[];PCL[/data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/base.apk*389183222:/data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/base.apk!classes2.dex*1299875608:/data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/base.apk!classes3.dex*251234054]{PCL[/system/framework/org.apache.http.legacy.jar*2255768530]})
+05-08 02:22:39.561 I/shadowhook_tag(11274): linker: call_dtors pre, load_bias 7ca192c000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_MeasurementDynamite_installtime.odex
+05-08 02:22:39.561 I/shadowhook_tag(11274): linker: call_dtors post, load_bias 7ca192c000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_MeasurementDynamite_installtime.odex
+05-08 02:22:39.561 I/shadowhook_tag(11274): task: call_dtors() post callback. load_bias 7ca192c000, name /data/app/~~tgC2c5ssgk9r73G-imUtqg==/com.google.android.gms-CMAnXXGUTmLyUglZWdA9Yw==/oat/arm64/split_MeasurementDynamite_installtime.odex
+05-08 02:22:39.565 W/ActivityManager( 2432): callingPackage:com.HolydayStudios.Firestone, packageName:com.google.android.gms, name:com.google.android.gms.games.chimera.GamesAndroidServiceProxy, isSkip: true
+05-08 02:22:39.575 W/ActivityManager( 2432): callingPackage:com.HolydayStudios.Firestone, packageName:com.google.android.gms, name:com.google.android.gms.chimera.PersistentApiService, isSkip: true
+05-08 02:22:39.577 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7ca0f5f000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libmain.so
+05-08 02:22:39.577 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7ca0f5f000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libmain.so
+05-08 02:22:39.577 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7ca0f5f000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libmain.so
+05-08 02:22:39.581 I/PhenotypeResourceReader( 2757): unable to find any Phenotype resource metadata for com.HolydayStudios.Firestone
+05-08 02:22:39.581 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7c9a60b000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libunity.so
+05-08 02:22:39.581 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7c9a60b000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libunity.so
+05-08 02:22:39.590 I/FA      (11274):   adb shell setprop debug.firebase.analytics.app com.HolydayStudios.Firestone
+05-08 02:22:39.600 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7c9a60b000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libunity.so
+05-08 02:22:39.621 W/ActivityManager( 2432): callingPackage:com.HolydayStudios.Firestone, packageName:com.google.android.gms, name:com.google.android.gms.measurement.service.MeasurementBrokerService, isSkip: true
+05-08 02:22:39.629 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7c78359000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libil2cpp.so
+05-08 02:22:39.629 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7c78359000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libil2cpp.so
+05-08 02:22:39.629 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7c78359000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libil2cpp.so
+05-08 02:22:39.661 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7c9c8b2000, name /system/vendor/lib64/hw/android.hardware.graphics.mapper@2.0-impl.so
+05-08 02:22:39.662 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7c9c8b2000, name /system/vendor/lib64/hw/android.hardware.graphics.mapper@2.0-impl.so
+05-08 02:22:39.662 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7c9c8b2000, name /system/vendor/lib64/hw/android.hardware.graphics.mapper@2.0-impl.so
+05-08 02:22:39.670 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7c91e00000, name /system/lib64/hw/gralloc.kona.so
+05-08 02:22:39.670 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7c91e00000, name /system/lib64/hw/gralloc.kona.so
+05-08 02:22:39.670 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7c91d41000, name /system/lib64/libOpenglSystemCommon.so
+05-08 02:22:39.670 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7c91d41000, name /system/lib64/libOpenglSystemCommon.so
+05-08 02:22:39.670 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7c75a48000, name /system/lib64/libvulkan_enc.so
+05-08 02:22:39.670 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7c75a48000, name /system/lib64/libvulkan_enc.so
+05-08 02:22:39.670 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7c91ddd000, name /system/lib64/libandroidemu.so
+05-08 02:22:39.670 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7c91ddd000, name /system/lib64/libandroidemu.so
+05-08 02:22:39.670 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7c91ddd000, name /system/lib64/libandroidemu.so
+05-08 02:22:39.670 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7c91da7000, name /system/lib64/lib_renderControl_enc.so
+05-08 02:22:39.670 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7c91da7000, name /system/lib64/lib_renderControl_enc.so
+05-08 02:22:39.670 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7c91da7000, name /system/lib64/lib_renderControl_enc.so
+05-08 02:22:39.670 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7c91d1e000, name /system/lib64/libdrm.so
+05-08 02:22:39.670 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7c91d1e000, name /system/lib64/libdrm.so
+05-08 02:22:39.670 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7c91d1e000, name /system/lib64/libdrm.so
+05-08 02:22:39.671 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7c75a48000, name /system/lib64/libvulkan_enc.so
+05-08 02:22:39.671 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7c91c8a000, name /system/lib64/libGLESv2_enc.so
+05-08 02:22:39.671 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7c91c8a000, name /system/lib64/libGLESv2_enc.so
+05-08 02:22:39.671 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7c91c8a000, name /system/lib64/libGLESv2_enc.so
+05-08 02:22:39.671 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7c91e5a000, name /system/lib64/libGLESv1_enc.so
+05-08 02:22:39.671 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7c91e5a000, name /system/lib64/libGLESv1_enc.so
+05-08 02:22:39.671 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7c91e5a000, name /system/lib64/libGLESv1_enc.so
+05-08 02:22:39.671 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7c91d41000, name /system/lib64/libOpenglSystemCommon.so
+05-08 02:22:39.671 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7c91e00000, name /system/lib64/hw/gralloc.kona.so
+05-08 02:22:39.674 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7c9c85d000, name /system/vendor/lib64/hw/android.hardware.graphics.allocator@2.0-impl.so
+05-08 02:22:39.674 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7c9c85d000, name /system/vendor/lib64/hw/android.hardware.graphics.allocator@2.0-impl.so
+05-08 02:22:39.674 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7c9c85d000, name /system/vendor/lib64/hw/android.hardware.graphics.allocator@2.0-impl.so
+05-08 02:22:39.695 W/NewFileUpdater( 2657): MSG_GET_PACKAGE_TAG_INFO, no available new tag for: com.HolydayStudios.Firestone, workingTag: 12.2011
+05-08 02:22:39.751 I/ActivityTaskManager( 2432): Displayed com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity: +951ms
+05-08 02:22:39.755 W/ActivityManager( 2432): callingPackage:com.HolydayStudios.Firestone, packageName:com.google.android.gms, name:com.google.android.gms.games.chimera.GamesAndroidServiceProxy, isSkip: true
+05-08 02:22:39.776 I/Unity   (11274): ApplicationInfo 'com.HolydayStudios.Firestone', Version '3.43', Min API Level '23', Target API Level '36'
+05-08 02:22:39.777 I/FirestoneHooks(11274): libil2cpp.so base=0x7c78359000
+05-08 02:22:39.777 I/shadowhook_tag(11274): shadowhook: hook_func_addr(libil2cpp.so, EasyWin.CentralCurrencyHandler.HaveCurrency, 0x7c7aefee48, 0x7ca6188538, 9) ...
+05-08 02:22:39.777 I/shadowhook_tag(11274): switch: create, target_addr 7c7aefee48
+05-08 02:22:39.777 I/shadowhook_tag(11274): hub: create trampo at 7f85b05000, size 96 + 16 = 112
+05-08 02:22:39.777 I/shadowhook_tag(11274): hub: add(new) func 7ca6188538
+05-08 02:22:39.777 I/shadowhook_tag(11274): a64 rewrite: type 0, inst fc1d0fe8
+05-08 02:22:39.779 I/shadowhook_tag(11274): linker: get dlinfo by target addr: target_addr 0x7c7aefee48, sym_name (NULL), sym_sz 0, load_bias 7c78359000, pathname /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libil2cpp.so
+05-08 02:22:39.779 I/shadowhook_tag(11274): elf: find phdr gap 7c7a117000-7c7a11a000(load_bias 7c78359000, 1dbe000-1dc1000)
+05-08 02:22:39.779 I/shadowhook_tag(11274): elf: find phdr gap 7c7d14f8b0-7c7d153000(load_bias 7c78359000, 4df68b0-4dfa000)
+05-08 02:22:39.779 I/shadowhook_tag(11274): elf: find phdr gap 7c7d46b000-7c7d46e000(load_bias 7c78359000, 5112000-5115000)
+05-08 02:22:39.779 I/shadowhook_tag(11274): elf: find phdr gap 7c7d9b7de0-7c7d9b8000(load_bias 7c78359000, 565ede0-565f000)
+05-08 02:22:39.779 I/shadowhook_tag(11274): elf: alloc addr 7c7a117000(load_bias 7c78359000, 1dbe000), size 16, idx [0, 4)
+05-08 02:22:39.779 I/shadowhook_tag(11274): island: alloc in ELF-gap, addr 7c7a117000, size 16, pc 7c7aefee48, range [7c72efee48, 7c82efee44]
+05-08 02:22:39.779 I/shadowhook_tag(11274): a64: hook (with island) OK. target 7c7aefee48 -> island-exit 7c7a117000 -> new 7f85b05000 -> enter 7f85c76080 -> resume 7c7aefee4c
+05-08 02:22:39.779 I/shadowhook_tag(11274): switch: hook in SHARED mode OK: target_addr 7c7aefee48, new_addr 7ca6188538
+05-08 02:22:39.779 I/shadowhook_tag(11274): shadowhook: hook_func_addr(0x7c7aefee48, 0x7ca6188538, 9) OK. return: 0xb400007d4fed4950
+05-08 02:22:39.779 I/FirestoneHooks(11274): EasyWin.CentralCurrencyHandler.HaveCurrency hook installed rva=0x2ba5e48 target=0x7c7aefee48 stub=0xb400007d4fed4950 err=0 OK
+05-08 02:22:39.779 I/shadowhook_tag(11274): shadowhook: hook_func_addr(libil2cpp.so, EasyWin.Currency.HaveCurrency, 0x7c7aefeed8, 0x7ca6188660, 9) ...
+05-08 02:22:39.779 I/shadowhook_tag(11274): switch: create, target_addr 7c7aefeed8
+05-08 02:22:39.779 I/shadowhook_tag(11274): hub: create trampo at 7f85b05070, size 96 + 16 = 112
+05-08 02:22:39.779 I/shadowhook_tag(11274): hub: add(new) func 7ca6188660
+05-08 02:22:39.779 I/shadowhook_tag(11274): a64 rewrite: type 0, inst fd401c01
+05-08 02:22:39.779 I/shadowhook_tag(11274): elf: alloc addr 7c7a117010(load_bias 7c78359000, 1dbe010), size 16, idx [4, 8)
+05-08 02:22:39.779 I/shadowhook_tag(11274): island: alloc in ELF-gap, addr 7c7a117010, size 16, pc 7c7aefeed8, range [7c72efeed8, 7c82efeed4]
+05-08 02:22:39.779 I/shadowhook_tag(11274): a64: hook (with island) OK. target 7c7aefeed8 -> island-exit 7c7a117010 -> new 7f85b05070 -> enter 7f85c760c0 -> resume 7c7aefeedc
+05-08 02:22:39.779 I/shadowhook_tag(11274): switch: hook in SHARED mode OK: target_addr 7c7aefeed8, new_addr 7ca6188660
+05-08 02:22:39.779 I/shadowhook_tag(11274): shadowhook: hook_func_addr(0x7c7aefeed8, 0x7ca6188660, 9) OK. return: 0xb400007d4fed7380
+05-08 02:22:39.779 I/FirestoneHooks(11274): EasyWin.Currency.HaveCurrency hook installed rva=0x2ba5ed8 target=0x7c7aefeed8 stub=0xb400007d4fed7380 err=0 OK
+05-08 02:22:39.779 I/FirestoneHooks(11274): easy-win FreeCurrency toggle active; affordability hooks installed
+05-08 02:22:39.779 I/shadowhook_tag(11274): shadowhook: hook_func_addr(libil2cpp.so, GodMode.BattleHero.IsImmune, 0x7c7ae19170, 0x7ca6188a4c, 9) ...
+05-08 02:22:39.779 I/shadowhook_tag(11274): switch: create, target_addr 7c7ae19170
+05-08 02:22:39.779 I/shadowhook_tag(11274): hub: create trampo at 7f85b050e0, size 96 + 16 = 112
+05-08 02:22:39.779 I/shadowhook_tag(11274): hub: add(new) func 7ca6188a4c
+05-08 02:22:39.780 I/shadowhook_tag(11274): a64 rewrite: type 0, inst f81e0ffe
+05-08 02:22:39.781 I/shadowhook_tag(11274): elf: alloc addr 7c7a117020(load_bias 7c78359000, 1dbe020), size 16, idx [8, 12)
+05-08 02:22:39.781 I/shadowhook_tag(11274): island: alloc in ELF-gap, addr 7c7a117020, size 16, pc 7c7ae19170, range [7c72e19170, 7c82e1916c]
+05-08 02:22:39.781 I/shadowhook_tag(11274): a64: hook (with island) OK. target 7c7ae19170 -> island-exit 7c7a117020 -> new 7f85b050e0 -> enter 7f85c76100 -> resume 7c7ae19174
+05-08 02:22:39.781 I/shadowhook_tag(11274): switch: hook in SHARED mode OK: target_addr 7c7ae19170, new_addr 7ca6188a4c
+05-08 02:22:39.781 I/shadowhook_tag(11274): shadowhook: hook_func_addr(0x7c7ae19170, 0x7ca6188a4c, 9) OK. return: 0xb400007d4fed6f00
+05-08 02:22:39.781 I/FirestoneHooks(11274): GodMode.BattleHero.IsImmune hook installed rva=0x2ac0170 target=0x7c7ae19170 stub=0xb400007d4fed6f00 err=0 OK
+05-08 02:22:39.781 I/shadowhook_tag(11274): shadowhook: hook_func_addr(libil2cpp.so, GameSpeed.Time.set_timeScale, 0x7c7cd67aa4, 0x7ca6188da4, 9) ...
+05-08 02:22:39.781 I/shadowhook_tag(11274): switch: create, target_addr 7c7cd67aa4
+05-08 02:22:39.781 I/shadowhook_tag(11274): hub: create trampo at 7f85b05150, size 96 + 16 = 112
+05-08 02:22:39.781 I/shadowhook_tag(11274): hub: add(new) func 7ca6188da4
+05-08 02:22:39.781 I/shadowhook_tag(11274): a64 rewrite: type 0, inst fc1e0fe8
+05-08 02:22:39.782 I/shadowhook_tag(11274): elf: alloc addr 7c7a117030(load_bias 7c78359000, 1dbe030), size 16, idx [12, 16)
+05-08 02:22:39.782 I/shadowhook_tag(11274): island: alloc in ELF-gap, addr 7c7a117030, size 16, pc 7c7cd67aa4, range [7c74d67aa4, 7c84d67aa0]
+05-08 02:22:39.782 I/shadowhook_tag(11274): a64: hook (with island) OK. target 7c7cd67aa4 -> island-exit 7c7a117030 -> new 7f85b05150 -> enter 7f85c76140 -> resume 7c7cd67aa8
+05-08 02:22:39.782 I/shadowhook_tag(11274): switch: hook in SHARED mode OK: target_addr 7c7cd67aa4, new_addr 7ca6188da4
+05-08 02:22:39.782 I/shadowhook_tag(11274): shadowhook: hook_func_addr(0x7c7cd67aa4, 0x7ca6188da4, 9) OK. return: 0xb400007d4fed5760
+05-08 02:22:39.782 I/FirestoneHooks(11274): GameSpeed.Time.set_timeScale hook installed rva=0x4a0eaa4 target=0x7c7cd67aa4 stub=0xb400007d4fed5760 err=0 OK
+05-08 02:22:39.782 I/shadowhook_tag(11274): shadowhook: hook_func_addr(libil2cpp.so, GameSpeed.Time.get_fixedDeltaTime, 0x7c7cd679f4, 0x7ca6188e38, 9) ...
+05-08 02:22:39.782 I/shadowhook_tag(11274): switch: create, target_addr 7c7cd679f4
+05-08 02:22:39.782 I/shadowhook_tag(11274): hub: create trampo at 7f85b051c0, size 96 + 16 = 112
+05-08 02:22:39.782 I/shadowhook_tag(11274): hub: add(new) func 7ca6188e38
+05-08 02:22:39.782 I/shadowhook_tag(11274): a64 rewrite: type 0, inst a9bf4ffe
+05-08 02:22:39.783 I/shadowhook_tag(11274): elf: alloc addr 7c7a117040(load_bias 7c78359000, 1dbe040), size 16, idx [16, 20)
+05-08 02:22:39.783 I/shadowhook_tag(11274): island: alloc in ELF-gap, addr 7c7a117040, size 16, pc 7c7cd679f4, range [7c74d679f4, 7c84d679f0]
+05-08 02:22:39.783 I/shadowhook_tag(11274): a64: hook (with island) OK. target 7c7cd679f4 -> island-exit 7c7a117040 -> new 7f85b051c0 -> enter 7f85c76180 -> resume 7c7cd679f8
+05-08 02:22:39.783 I/shadowhook_tag(11274): switch: hook in SHARED mode OK: target_addr 7c7cd679f4, new_addr 7ca6188e38
+05-08 02:22:39.783 I/shadowhook_tag(11274): shadowhook: hook_func_addr(0x7c7cd679f4, 0x7ca6188e38, 9) OK. return: 0xb400007d4fed5e20
+05-08 02:22:39.783 I/FirestoneHooks(11274): GameSpeed.Time.get_fixedDeltaTime hook installed rva=0x4a0e9f4 target=0x7c7cd679f4 stub=0xb400007d4fed5e20 err=0 OK
+05-08 02:22:39.783 I/shadowhook_tag(11274): shadowhook: hook_func_addr(libil2cpp.so, GameSpeed.TeamLogic.ApplyWaveTransitionSpeedModifierToDuration, 0x7c7ae229dc, 0x7ca6188ef8, 9) ...
+05-08 02:22:39.783 I/shadowhook_tag(11274): switch: create, target_addr 7c7ae229dc
+05-08 02:22:39.783 I/shadowhook_tag(11274): hub: create trampo at 7f85b05230, size 96 + 16 = 112
+05-08 02:22:39.783 I/shadowhook_tag(11274): hub: add(new) func 7ca6188ef8
+05-08 02:22:39.784 I/shadowhook_tag(11274): a64 rewrite: type 0, inst fc1e0fe8
+05-08 02:22:39.784 I/shadowhook_tag(11274): elf: alloc addr 7c7a117050(load_bias 7c78359000, 1dbe050), size 16, idx [20, 24)
+05-08 02:22:39.784 I/shadowhook_tag(11274): island: alloc in ELF-gap, addr 7c7a117050, size 16, pc 7c7ae229dc, range [7c72e229dc, 7c82e229d8]
+05-08 02:22:39.784 I/shadowhook_tag(11274): a64: hook (with island) OK. target 7c7ae229dc -> island-exit 7c7a117050 -> new 7f85b05230 -> enter 7f85c761c0 -> resume 7c7ae229e0
+05-08 02:22:39.784 I/shadowhook_tag(11274): switch: hook in SHARED mode OK: target_addr 7c7ae229dc, new_addr 7ca6188ef8
+05-08 02:22:39.784 I/shadowhook_tag(11274): shadowhook: hook_func_addr(0x7c7ae229dc, 0x7ca6188ef8, 9) OK. return: 0xb400007d4fed5c70
+05-08 02:22:39.784 I/FirestoneHooks(11274): GameSpeed.TeamLogic.ApplyWaveTransitionSpeedModifierToDuration hook installed rva=0x2ac99dc target=0x7c7ae229dc stub=0xb400007d4fed5c70 err=0 OK
+05-08 02:22:39.784 I/shadowhook_tag(11274): shadowhook: hook_func_addr(libil2cpp.so, GameSpeed.TeamLogic.set_WaveTransitionSpeedMultiplier, 0x7c7ae22814, 0x7ca6188fc8, 9) ...
+05-08 02:22:39.784 I/shadowhook_tag(11274): switch: create, target_addr 7c7ae22814
+05-08 02:22:39.784 I/shadowhook_tag(11274): hub: create trampo at 7f85b052a0, size 96 + 16 = 112
+05-08 02:22:39.784 I/shadowhook_tag(11274): hub: add(new) func 7ca6188fc8
+05-08 02:22:39.784 I/shadowhook_tag(11274): a64 rewrite: type 0, inst fc1e0fe8
+05-08 02:22:39.784 I/shadowhook_tag(11274): elf: alloc addr 7c7a117060(load_bias 7c78359000, 1dbe060), size 16, idx [24, 28)
+05-08 02:22:39.784 I/shadowhook_tag(11274): island: alloc in ELF-gap, addr 7c7a117060, size 16, pc 7c7ae22814, range [7c72e22814, 7c82e22810]
+05-08 02:22:39.784 I/shadowhook_tag(11274): a64: hook (with island) OK. target 7c7ae22814 -> island-exit 7c7a117060 -> new 7f85b052a0 -> enter 7f85c76200 -> resume 7c7ae22818
+05-08 02:22:39.784 I/shadowhook_tag(11274): switch: hook in SHARED mode OK: target_addr 7c7ae22814, new_addr 7ca6188fc8
+05-08 02:22:39.784 I/shadowhook_tag(11274): shadowhook: hook_func_addr(0x7c7ae22814, 0x7ca6188fc8, 9) OK. return: 0xb400007d4fed6960
+05-08 02:22:39.784 I/FirestoneHooks(11274): GameSpeed.TeamLogic.set_WaveTransitionSpeedMultiplier hook installed rva=0x2ac9814 target=0x7c7ae22814 stub=0xb400007d4fed6960 err=0 OK
+05-08 02:22:39.784 I/shadowhook_tag(11274): shadowhook: hook_func_addr(libil2cpp.so, GameSpeed.Spine.AnimationState.set_TimeScale, 0x7c7c6c3ac8, 0x7ca618905c, 9) ...
+05-08 02:22:39.784 I/shadowhook_tag(11274): switch: create, target_addr 7c7c6c3ac8
+05-08 02:22:39.784 I/shadowhook_tag(11274): hub: create trampo at 7f85b05310, size 96 + 16 = 112
+05-08 02:22:39.784 I/shadowhook_tag(11274): hub: add(new) func 7ca618905c
+05-08 02:22:39.784 I/shadowhook_tag(11274): a64 rewrite: type 0, inst bd006c00
+05-08 02:22:39.785 I/shadowhook_tag(11274): elf: alloc addr 7c7a117070(load_bias 7c78359000, 1dbe070), size 16, idx [28, 32)
+05-08 02:22:39.785 I/shadowhook_tag(11274): island: alloc in ELF-gap, addr 7c7a117070, size 16, pc 7c7c6c3ac8, range [7c746c3ac8, 7c846c3ac4]
+05-08 02:22:39.785 I/shadowhook_tag(11274): a64: hook (with island) OK. target 7c7c6c3ac8 -> island-exit 7c7a117070 -> new 7f85b05310 -> enter 7f85c76240 -> resume 7c7c6c3acc
+05-08 02:22:39.785 I/shadowhook_tag(11274): switch: hook in SHARED mode OK: target_addr 7c7c6c3ac8, new_addr 7ca618905c
+05-08 02:22:39.785 I/shadowhook_tag(11274): shadowhook: hook_func_addr(0x7c7c6c3ac8, 0x7ca618905c, 9) OK. return: 0xb400007d4fed60f0
+05-08 02:22:39.785 I/FirestoneHooks(11274): GameSpeed.Spine.AnimationState.set_TimeScale hook installed rva=0x436aac8 target=0x7c7c6c3ac8 stub=0xb400007d4fed60f0 err=0 OK
+05-08 02:22:39.785 I/shadowhook_tag(11274): shadowhook: hook_func_addr(libil2cpp.so, OHK.BattleController.ApplyDamage.short, 0x7c7ab1de00, 0x7ca6189418, 9) ...
+05-08 02:22:39.785 I/shadowhook_tag(11274): switch: create, target_addr 7c7ab1de00
+05-08 02:22:39.785 I/shadowhook_tag(11274): hub: create trampo at 7f85b05380, size 96 + 16 = 112
+05-08 02:22:39.785 I/shadowhook_tag(11274): hub: add(new) func 7ca6189418
+05-08 02:22:39.785 I/shadowhook_tag(11274): a64 rewrite: type 0, inst 2a0503e6
+05-08 02:22:39.785 I/shadowhook_tag(11274): elf: alloc addr 7c7a117080(load_bias 7c78359000, 1dbe080), size 16, idx [32, 36)
+05-08 02:22:39.785 I/shadowhook_tag(11274): island: alloc in ELF-gap, addr 7c7a117080, size 16, pc 7c7ab1de00, range [7c72b1de00, 7c82b1ddfc]
+05-08 02:22:39.785 I/shadowhook_tag(11274): a64: hook (with island) OK. target 7c7ab1de00 -> island-exit 7c7a117080 -> new 7f85b05380 -> enter 7f85c76280 -> resume 7c7ab1de04
+05-08 02:22:39.785 I/shadowhook_tag(11274): switch: hook in SHARED mode OK: target_addr 7c7ab1de00, new_addr 7ca6189418
+05-08 02:22:39.785 I/shadowhook_tag(11274): shadowhook: hook_func_addr(0x7c7ab1de00, 0x7ca6189418, 9) OK. return: 0xb400007d4fed5d90
+05-08 02:22:39.785 I/FirestoneHooks(11274): OHK.BattleController.ApplyDamage.short hook installed rva=0x27c4e00 target=0x7c7ab1de00 stub=0xb400007d4fed5d90 err=0 OK
+05-08 02:22:39.785 I/shadowhook_tag(11274): shadowhook: hook_func_addr(libil2cpp.so, OHK.BattleController.ApplyDamage.full, 0x7c7ab1de10, 0x7ca618955c, 9) ...
+05-08 02:22:39.785 I/shadowhook_tag(11274): switch: create, target_addr 7c7ab1de10
+05-08 02:22:39.785 I/shadowhook_tag(11274): hub: create trampo at 7f85b053f0, size 96 + 16 = 112
+05-08 02:22:39.785 I/shadowhook_tag(11274): hub: add(new) func 7ca618955c
+05-08 02:22:39.785 I/shadowhook_tag(11274): a64 rewrite: type 0, inst fc190fea
+05-08 02:22:39.785 I/shadowhook_tag(11274): elf: alloc addr 7c7a117090(load_bias 7c78359000, 1dbe090), size 16, idx [36, 40)
+05-08 02:22:39.785 I/shadowhook_tag(11274): island: alloc in ELF-gap, addr 7c7a117090, size 16, pc 7c7ab1de10, range [7c72b1de10, 7c82b1de0c]
+05-08 02:22:39.785 I/shadowhook_tag(11274): a64: hook (with island) OK. target 7c7ab1de10 -> island-exit 7c7a117090 -> new 7f85b053f0 -> enter 7f85c762c0 -> resume 7c7ab1de14
+05-08 02:22:39.785 I/shadowhook_tag(11274): switch: hook in SHARED mode OK: target_addr 7c7ab1de10, new_addr 7ca618955c
+05-08 02:22:39.785 I/shadowhook_tag(11274): shadowhook: hook_func_addr(0x7c7ab1de10, 0x7ca618955c, 9) OK. return: 0xb400007d4fed6f90
+05-08 02:22:39.785 I/FirestoneHooks(11274): OHK.BattleController.ApplyDamage.full hook installed rva=0x27c4e10 target=0x7c7ab1de10 stub=0xb400007d4fed6f90 err=0 OK
+05-08 02:22:39.785 I/shadowhook_tag(11274): shadowhook: hook_func_addr(libil2cpp.so, OHK.BattleCharacter.ReceiveDamage, 0x7c7ad3aac8, 0x7ca61896ac, 9) ...
+05-08 02:22:39.785 I/shadowhook_tag(11274): switch: create, target_addr 7c7ad3aac8
+05-08 02:22:39.785 I/shadowhook_tag(11274): hub: create trampo at 7f85b05460, size 96 + 16 = 112
+05-08 02:22:39.785 I/shadowhook_tag(11274): hub: add(new) func 7ca61896ac
+05-08 02:22:39.785 I/shadowhook_tag(11274): a64 rewrite: type 0, inst a9bc7bfd
+05-08 02:22:39.785 I/shadowhook_tag(11274): elf: alloc addr 7c7a1170a0(load_bias 7c78359000, 1dbe0a0), size 16, idx [40, 44)
+05-08 02:22:39.785 I/shadowhook_tag(11274): island: alloc in ELF-gap, addr 7c7a1170a0, size 16, pc 7c7ad3aac8, range [7c72d3aac8, 7c82d3aac4]
+05-08 02:22:39.785 I/shadowhook_tag(11274): a64: hook (with island) OK. target 7c7ad3aac8 -> island-exit 7c7a1170a0 -> new 7f85b05460 -> enter 7f85c76300 -> resume 7c7ad3aacc
+05-08 02:22:39.785 I/shadowhook_tag(11274): switch: hook in SHARED mode OK: target_addr 7c7ad3aac8, new_addr 7ca61896ac
+05-08 02:22:39.785 I/shadowhook_tag(11274): shadowhook: hook_func_addr(0x7c7ad3aac8, 0x7ca61896ac, 9) OK. return: 0xb400007d4fed5be0
+05-08 02:22:39.785 I/FirestoneHooks(11274): OHK.BattleCharacter.ReceiveDamage hook installed rva=0x29e1ac8 target=0x7c7ad3aac8 stub=0xb400007d4fed5be0 err=0 OK
+05-08 02:22:39.785 I/shadowhook_tag(11274): shadowhook: hook_func_addr(libil2cpp.so, AttackSpeed.CharacterBattleLogic.FillAttackSpeedTimer, 0x7c7ae212e8, 0x7ca6189d04, 9) ...
+05-08 02:22:39.785 I/shadowhook_tag(11274): switch: create, target_addr 7c7ae212e8
+05-08 02:22:39.785 I/shadowhook_tag(11274): hub: create trampo at 7f85b054d0, size 96 + 16 = 112
+05-08 02:22:39.785 I/shadowhook_tag(11274): hub: add(new) func 7ca6189d04
+05-08 02:22:39.785 I/shadowhook_tag(11274): a64 rewrite: type 0, inst d10203ff
+05-08 02:22:39.786 I/shadowhook_tag(11274): elf: alloc addr 7c7a1170b0(load_bias 7c78359000, 1dbe0b0), size 16, idx [44, 48)
+05-08 02:22:39.786 I/shadowhook_tag(11274): island: alloc in ELF-gap, addr 7c7a1170b0, size 16, pc 7c7ae212e8, range [7c72e212e8, 7c82e212e4]
+05-08 02:22:39.787 I/shadowhook_tag(11274): a64: hook (with island) OK. target 7c7ae212e8 -> island-exit 7c7a1170b0 -> new 7f85b054d0 -> enter 7f85c76340 -> resume 7c7ae212ec
+05-08 02:22:39.787 I/shadowhook_tag(11274): switch: hook in SHARED mode OK: target_addr 7c7ae212e8, new_addr 7ca6189d04
+05-08 02:22:39.787 I/shadowhook_tag(11274): shadowhook: hook_func_addr(0x7c7ae212e8, 0x7ca6189d04, 9) OK. return: 0xb400007d4fed57f0
+05-08 02:22:39.787 I/FirestoneHooks(11274): AttackSpeed.CharacterBattleLogic.FillAttackSpeedTimer hook installed rva=0x2ac82e8 target=0x7c7ae212e8 stub=0xb400007d4fed57f0 err=0 OK
+05-08 02:22:39.787 I/shadowhook_tag(11274): shadowhook: hook_func_addr(libil2cpp.so, AttackSpeed.CharacterBattleLogic.UpdateIdleState, 0x7c7ae201f0, 0x7ca6189e94, 9) ...
+05-08 02:22:39.787 I/shadowhook_tag(11274): switch: create, target_addr 7c7ae201f0
+05-08 02:22:39.787 I/shadowhook_tag(11274): hub: create trampo at 7f85b05540, size 96 + 16 = 112
+05-08 02:22:39.787 I/shadowhook_tag(11274): hub: add(new) func 7ca6189e94
+05-08 02:22:39.787 I/shadowhook_tag(11274): a64 rewrite: type 0, inst d10243ff
+05-08 02:22:39.788 I/shadowhook_tag(11274): elf: alloc addr 7c7a1170c0(load_bias 7c78359000, 1dbe0c0), size 16, idx [48, 52)
+05-08 02:22:39.788 I/shadowhook_tag(11274): island: alloc in ELF-gap, addr 7c7a1170c0, size 16, pc 7c7ae201f0, range [7c72e201f0, 7c82e201ec]
+05-08 02:22:39.788 I/shadowhook_tag(11274): a64: hook (with island) OK. target 7c7ae201f0 -> island-exit 7c7a1170c0 -> new 7f85b05540 -> enter 7f85c76380 -> resume 7c7ae201f4
+05-08 02:22:39.788 I/shadowhook_tag(11274): switch: hook in SHARED mode OK: target_addr 7c7ae201f0, new_addr 7ca6189e94
+05-08 02:22:39.788 I/shadowhook_tag(11274): shadowhook: hook_func_addr(0x7c7ae201f0, 0x7ca6189e94, 9) OK. return: 0xb400007d4fed5b50
+05-08 02:22:39.788 I/FirestoneHooks(11274): AttackSpeed.CharacterBattleLogic.UpdateIdleState hook installed rva=0x2ac71f0 target=0x7c7ae201f0 stub=0xb400007d4fed5b50 err=0 OK
+05-08 02:22:39.788 I/shadowhook_tag(11274): shadowhook: hook_func_addr(libil2cpp.so, AttackSpeed.CharacterBattleLogic.UpdateAttackState, 0x7c7ae2008c, 0x7ca618a01c, 9) ...
+05-08 02:22:39.788 I/shadowhook_tag(11274): switch: create, target_addr 7c7ae2008c
+05-08 02:22:39.788 I/shadowhook_tag(11274): hub: create trampo at 7f85b055b0, size 96 + 16 = 112
+05-08 02:22:39.788 I/shadowhook_tag(11274): hub: add(new) func 7ca618a01c
+05-08 02:22:39.788 I/shadowhook_tag(11274): a64 rewrite: type 0, inst d10203ff
+05-08 02:22:39.789 I/shadowhook_tag(11274): elf: alloc addr 7c7a1170d0(load_bias 7c78359000, 1dbe0d0), size 16, idx [52, 56)
+05-08 02:22:39.789 I/shadowhook_tag(11274): island: alloc in ELF-gap, addr 7c7a1170d0, size 16, pc 7c7ae2008c, range [7c72e2008c, 7c82e20088]
+05-08 02:22:39.789 I/shadowhook_tag(11274): a64: hook (with island) OK. target 7c7ae2008c -> island-exit 7c7a1170d0 -> new 7f85b055b0 -> enter 7f85c763c0 -> resume 7c7ae20090
+05-08 02:22:39.789 I/shadowhook_tag(11274): switch: hook in SHARED mode OK: target_addr 7c7ae2008c, new_addr 7ca618a01c
+05-08 02:22:39.789 I/shadowhook_tag(11274): shadowhook: hook_func_addr(0x7c7ae2008c, 0x7ca618a01c, 9) OK. return: 0xb400007d4fed8190
+05-08 02:22:39.789 I/FirestoneHooks(11274): AttackSpeed.CharacterBattleLogic.UpdateAttackState hook installed rva=0x2ac708c target=0x7c7ae2008c stub=0xb400007d4fed8190 err=0 OK
+05-08 02:22:39.789 I/shadowhook_tag(11274): shadowhook: hook_func_addr(libil2cpp.so, AttackSpeed.BattleMainHero.CalculateAttackSpeedTotal, 0x7c7ae1baf8, 0x7ca618a218, 9) ...
+05-08 02:22:39.789 I/shadowhook_tag(11274): switch: create, target_addr 7c7ae1baf8
+05-08 02:22:39.789 I/shadowhook_tag(11274): hub: create trampo at 7f85b05620, size 96 + 16 = 112
+05-08 02:22:39.789 I/shadowhook_tag(11274): hub: add(new) func 7ca618a218
+05-08 02:22:39.789 I/shadowhook_tag(11274): a64 rewrite: type 0, inst d101c3ff
+05-08 02:22:39.789 I/shadowhook_tag(11274): elf: alloc addr 7c7a1170e0(load_bias 7c78359000, 1dbe0e0), size 16, idx [56, 60)
+05-08 02:22:39.789 I/shadowhook_tag(11274): island: alloc in ELF-gap, addr 7c7a1170e0, size 16, pc 7c7ae1baf8, range [7c72e1baf8, 7c82e1baf4]
+05-08 02:22:39.789 I/shadowhook_tag(11274): a64: hook (with island) OK. target 7c7ae1baf8 -> island-exit 7c7a1170e0 -> new 7f85b05620 -> enter 7f85c76400 -> resume 7c7ae1bafc
+05-08 02:22:39.789 I/shadowhook_tag(11274): switch: hook in SHARED mode OK: target_addr 7c7ae1baf8, new_addr 7ca618a218
+05-08 02:22:39.789 I/shadowhook_tag(11274): shadowhook: hook_func_addr(0x7c7ae1baf8, 0x7ca618a218, 9) OK. return: 0xb400007d4fed87c0
+05-08 02:22:39.789 I/FirestoneHooks(11274): AttackSpeed.BattleMainHero.CalculateAttackSpeedTotal hook installed rva=0x2ac2af8 target=0x7c7ae1baf8 stub=0xb400007d4fed87c0 err=0 OK
+05-08 02:22:39.789 I/shadowhook_tag(11274): shadowhook: hook_func_addr(libil2cpp.so, AttackSpeed.BattleMainEnemy.CalculateAttackSpeedTotal, 0x7c7ad3eb94, 0x7ca618a400, 9) ...
+05-08 02:22:39.789 I/shadowhook_tag(11274): switch: create, target_addr 7c7ad3eb94
+05-08 02:22:39.789 I/shadowhook_tag(11274): hub: create trampo at 7f85b05690, size 96 + 16 = 112
+05-08 02:22:39.789 I/shadowhook_tag(11274): hub: add(new) func 7ca618a400
+05-08 02:22:39.789 I/shadowhook_tag(11274): a64 rewrite: type 0, inst d10183ff
+05-08 02:22:39.789 I/shadowhook_tag(11274): elf: alloc addr 7c7a1170f0(load_bias 7c78359000, 1dbe0f0), size 16, idx [60, 64)
+05-08 02:22:39.789 I/shadowhook_tag(11274): island: alloc in ELF-gap, addr 7c7a1170f0, size 16, pc 7c7ad3eb94, range [7c72d3eb94, 7c82d3eb90]
+05-08 02:22:39.789 I/shadowhook_tag(11274): a64: hook (with island) OK. target 7c7ad3eb94 -> island-exit 7c7a1170f0 -> new 7f85b05690 -> enter 7f85c76440 -> resume 7c7ad3eb98
+05-08 02:22:39.789 I/shadowhook_tag(11274): switch: hook in SHARED mode OK: target_addr 7c7ad3eb94, new_addr 7ca618a400
+05-08 02:22:39.789 I/shadowhook_tag(11274): shadowhook: hook_func_addr(0x7c7ad3eb94, 0x7ca618a400, 9) OK. return: 0xb400007d4fed7fe0
+05-08 02:22:39.789 I/FirestoneHooks(11274): AttackSpeed.BattleMainEnemy.CalculateAttackSpeedTotal hook installed rva=0x29e5b94 target=0x7c7ad3eb94 stub=0xb400007d4fed7fe0 err=0 OK
+05-08 02:22:39.789 I/shadowhook_tag(11274): shadowhook: hook_func_addr(libil2cpp.so, AttackSpeed.Hero.CalculateBasicAttackSpeed, 0x7c7ae8dfb0, 0x7ca618a544, 9) ...
+05-08 02:22:39.789 I/shadowhook_tag(11274): switch: create, target_addr 7c7ae8dfb0
+05-08 02:22:39.789 I/shadowhook_tag(11274): hub: create trampo at 7f85b05700, size 96 + 16 = 112
+05-08 02:22:39.789 I/shadowhook_tag(11274): hub: add(new) func 7ca618a544
+05-08 02:22:39.790 I/shadowhook_tag(11274): a64 rewrite: type 0, inst 6dbc23e9
+05-08 02:22:39.790 I/shadowhook_tag(11274): elf: alloc addr 7c7a117100(load_bias 7c78359000, 1dbe100), size 16, idx [64, 68)
+05-08 02:22:39.790 I/shadowhook_tag(11274): island: alloc in ELF-gap, addr 7c7a117100, size 16, pc 7c7ae8dfb0, range [7c72e8dfb0, 7c82e8dfac]
+05-08 02:22:39.790 I/shadowhook_tag(11274): a64: hook (with island) OK. target 7c7ae8dfb0 -> island-exit 7c7a117100 -> new 7f85b05700 -> enter 7f85c76480 -> resume 7c7ae8dfb4
+05-08 02:22:39.790 I/shadowhook_tag(11274): switch: hook in SHARED mode OK: target_addr 7c7ae8dfb0, new_addr 7ca618a544
+05-08 02:22:39.790 I/shadowhook_tag(11274): shadowhook: hook_func_addr(0x7c7ae8dfb0, 0x7ca618a544, 9) OK. return: 0xb400007d4fed8580
+05-08 02:22:39.790 I/FirestoneHooks(11274): AttackSpeed.Hero.CalculateBasicAttackSpeed hook installed rva=0x2b34fb0 target=0x7c7ae8dfb0 stub=0xb400007d4fed8580 err=0 OK
+05-08 02:22:39.790 I/FirestoneHooks(11274): native hook install complete result=0
+05-08 02:22:39.926 W/InputManager-JNI( 2432): Input channel object 'b995380 Splash Screen com.HolydayStudios.Firestone (client)' was disposed without first being removed with the input manager!
+05-08 02:22:39.948 I/Unity   (11274): Company Name: HolydayStudios
+05-08 02:22:39.953 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7c75cc2000, name /system/lib64/egl/libEGL_emulation.so
+05-08 02:22:39.953 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7c75cc2000, name /system/lib64/egl/libEGL_emulation.so
+05-08 02:22:39.953 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7c75cc2000, name /system/lib64/egl/libEGL_emulation.so
+05-08 02:22:39.954 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7bd77de000, name /system/lib64/egl/libGLESv1_CM_emulation.so
+05-08 02:22:39.954 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7bd77de000, name /system/lib64/egl/libGLESv1_CM_emulation.so
+05-08 02:22:39.954 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7bd77de000, name /system/lib64/egl/libGLESv1_CM_emulation.so
+05-08 02:22:39.955 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7bd7787000, name /system/lib64/egl/libGLESv2_emulation.so
+05-08 02:22:39.955 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7bd7787000, name /system/lib64/egl/libGLESv2_emulation.so
+05-08 02:22:39.955 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7bd7787000, name /system/lib64/egl/libGLESv2_emulation.so
+05-08 02:22:40.346 I/FirestoneHooks(11274): Overlay attached to com.unity3d.player.UnityPlayerActivity
+05-08 02:22:40.808 I/ActivityTaskManager( 2432): Fully drawn com.HolydayStudios.Firestone/com.unity3d.player.UnityPlayerActivity: +2s10ms
+05-08 02:22:43.337 D/ConnectivityService( 2432): requestNetwork for uid/pid:10117/11274 activeRequest: null callbackRequest: 139 [NetworkRequest [ REQUEST id=140, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10117 RequestorUid: 10117 RequestorPkg: com.HolydayStudios.Firestone] ]] callback flags: 0 priority: 2147483647
+05-08 02:22:43.339 D/WifiNetworkFactory( 2432): got request NetworkRequest [ REQUEST id=140, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10117 RequestorUid: 10117 RequestorPkg: com.HolydayStudios.Firestone] ]
+05-08 02:22:43.339 D/UntrustedWifiNetworkFactory( 2432): got request NetworkRequest [ REQUEST id=140, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10117 RequestorUid: 10117 RequestorPkg: com.HolydayStudios.Firestone] ]
+05-08 02:22:43.340 D/OemPaidWifiNetworkFactory( 2432): got request NetworkRequest [ REQUEST id=140, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10117 RequestorUid: 10117 RequestorPkg: com.HolydayStudios.Firestone] ]
+05-08 02:22:43.343 W/ActivityManager( 2432): callingPackage:com.HolydayStudios.Firestone, packageName:com.android.vending, name:com.google.android.finsky.services.LicensingService, isSkip: true
+05-08 02:22:43.358 I/shadowhook_tag(11274): linker: call_ctors pre, load_bias 7b3bdca000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libFirebaseCppApp-12_10_1.so
+05-08 02:22:43.359 I/shadowhook_tag(11274): task: call_ctors() pre callback. load_bias 7b3bdca000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libFirebaseCppApp-12_10_1.so
+05-08 02:22:43.360 I/shadowhook_tag(11274): linker: call_ctors post, load_bias 7b3bdca000, name /data/app/~~ryKGytbhu8UsyVSRbwBSfw==/com.HolydayStudios.Firestone-B4EwQ1yI03d5cTi-pVVb6A==/lib/arm64/libFirebaseCppApp-12_10_1.so
+05-08 02:22:44.459 W/ActivityManager( 2432): callingPackage:com.HolydayStudios.Firestone, packageName:com.android.vending, name:com.google.android.finsky.billing.iab.InAppBillingService, isSkip: true
+05-08 02:22:44.464 W/ActivityManager( 2432): callingPackage:com.HolydayStudios.Firestone, packageName:com.android.vending, name:com.google.android.finsky.billing.iab.InAppBillingService, isSkip: true
+05-08 02:22:44.466 W/ActivityManager( 2432): callingPackage:com.HolydayStudios.Firestone, packageName:com.android.vending, name:com.google.android.finsky.billing.iab.InAppBillingService, isSkip: true
+05-08 02:22:44.468 W/ActivityManager( 2432): callingPackage:com.HolydayStudios.Firestone, packageName:com.android.vending, name:com.google.android.finsky.billing.iab.InAppBillingService, isSkip: true
+05-08 02:22:48.140 I/FirestoneHooks(11274): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #1 currency=16 qty=500.00
+05-08 02:22:48.145 I/FirestoneHooks(11274): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #2 currency=39 qty=100.00
+05-08 02:22:48.145 I/FirestoneHooks(11274): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #3 currency=38 qty=100.00
+05-08 02:22:48.145 I/FirestoneHooks(11274): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #4 currency=39 qty=100.00
+05-08 02:22:48.145 I/FirestoneHooks(11274): easy-win FreeCurrency CentralCurrencyHandler.HaveCurrency hit #5 currency=38 qty=100.00
+05-08 02:22:49.140 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #1 this=0x7cac818000 hero=0x7cabea1000 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.140 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #2 this=0x7cac911a80 hero=0x7cabf1c800 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.140 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #3 this=0x7cac911540 hero=0x7cabf1c000 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.140 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #4 this=0x7cac911000 hero=0x7cabf1f800 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.140 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #5 this=0x7cac91ca80 hero=0x7cabf1f000 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.140 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #6 this=0x7cac91c540 hero=0x7cabf24800 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.140 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #7 this=0x7cac91c000 hero=0x7cabf24000 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.140 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #8 this=0x7cac920a80 hero=0x7cabf26800 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.140 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #9 this=0x7cac920540 hero=0x7cabf26000 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.141 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #10 this=0x7cac920000 hero=0x7cabf29800 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.141 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #11 this=0x7cac926a80 hero=0x7cabf29000 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.141 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #12 this=0x7cac926540 hero=0x7cabf2b800 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.141 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #13 this=0x7cac926000 hero=0x7cabf2b000 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.141 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #14 this=0x7cac92ea80 hero=0x7cabf30800 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.141 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #15 this=0x7cac92e540 hero=0x7cabf30000 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.141 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #16 this=0x7cac92e000 hero=0x7cabf34800 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.141 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #17 this=0x7cac933a80 hero=0x7cabf34000 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.141 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #18 this=0x7cac933540 hero=0x7cabf36800 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.141 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #19 this=0x7cac933000 hero=0x7cabf36000 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.141 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #20 this=0x7cac93ba80 hero=0x7cabf39800 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.141 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #21 this=0x7cac93b540 hero=0x7cabf39000 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.141 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #22 this=0x7cac93b000 hero=0x7cabf3c800 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.141 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #23 this=0x7cac945a80 hero=0x7cabf3c000 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.141 I/FirestoneHooks(11274): attack-speed BattleMainHero.CalculateAttackSpeedTotal #24 this=0x7cac945540 hero=0x7cabf40800 target=20.00x stat=1.00x 0.0000->0.0000
+05-08 02:22:49.145 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #1 hero=0x7cabea1000 attackSpeedBasic 2.3000->0.1150 x20.00
+05-08 02:22:49.145 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #2 hero=0x7cabf1c800 attackSpeedBasic 2.0000->0.1000 x20.00
+05-08 02:22:49.145 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #3 hero=0x7cabf1c000 attackSpeedBasic 1.9000->0.0950 x20.00
+05-08 02:22:49.145 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #4 hero=0x7cabf1f800 attackSpeedBasic 1.5000->0.0750 x20.00
+05-08 02:22:49.145 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #5 hero=0x7cabf1f000 attackSpeedBasic 2.1000->0.1050 x20.00
+05-08 02:22:49.145 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #6 hero=0x7cabf24800 attackSpeedBasic 1.5000->0.0750 x20.00
+05-08 02:22:49.145 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #7 hero=0x7cabf24000 attackSpeedBasic 2.0000->0.1000 x20.00
+05-08 02:22:49.145 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #8 hero=0x7cabf26800 attackSpeedBasic 2.0000->0.1000 x20.00
+05-08 02:22:49.145 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #9 hero=0x7cabf26000 attackSpeedBasic 2.3000->0.1150 x20.00
+05-08 02:22:49.145 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #10 hero=0x7cabf29800 attackSpeedBasic 1.5000->0.0750 x20.00
+05-08 02:22:49.145 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #11 hero=0x7cabf29000 attackSpeedBasic 1.6000->0.0800 x20.00
+05-08 02:22:49.145 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #12 hero=0x7cabf2b800 attackSpeedBasic 1.9000->0.0950 x20.00
+05-08 02:22:49.145 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #13 hero=0x7cabf2b000 attackSpeedBasic 2.4000->0.1200 x20.00
+05-08 02:22:49.146 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #14 hero=0x7cabf30800 attackSpeedBasic 2.3000->0.1150 x20.00
+05-08 02:22:49.146 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #15 hero=0x7cabf30000 attackSpeedBasic 2.0000->0.1000 x20.00
+05-08 02:22:49.146 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #16 hero=0x7cabf34800 attackSpeedBasic 2.1000->0.1050 x20.00
+05-08 02:22:49.146 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #17 hero=0x7cabf34000 attackSpeedBasic 1.9000->0.0950 x20.00
+05-08 02:22:49.146 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #18 hero=0x7cabf36800 attackSpeedBasic 2.4000->0.1200 x20.00
+05-08 02:22:49.146 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #19 hero=0x7cabf36000 attackSpeedBasic 1.9000->0.0950 x20.00
+05-08 02:22:49.146 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #20 hero=0x7cabf39800 attackSpeedBasic 2.0000->0.1000 x20.00
+05-08 02:22:49.146 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #21 hero=0x7cabf39000 attackSpeedBasic 1.5000->0.0750 x20.00
+05-08 02:22:49.146 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #22 hero=0x7cabf3c800 attackSpeedBasic 2.2000->0.1100 x20.00
+05-08 02:22:49.146 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #23 hero=0x7cabf3c000 attackSpeedBasic 2.2000->0.1100 x20.00
+05-08 02:22:49.146 I/FirestoneHooks(11274): attack-speed Hero.CalculateBasicAttackSpeed roster #24 hero=0x7cabf40800 attackSpeedBasic 1.9000->0.0950 x20.00
+05-08 02:22:53.468 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #1 logic=0x7b9f73a8c0 character=0x7cac818000 timer 0.0000->0.0783
+05-08 02:22:53.469 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #2 logic=0x7b9f73a700 character=0x7cac911540 timer 0.0000->0.0407
+05-08 02:22:53.469 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #3 logic=0x7b9f73a540 character=0x7cac911000 timer 0.0000->0.0343
+05-08 02:22:53.469 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #4 logic=0x7b9f73a380 character=0x7cac911a80 timer 0.0000->0.0657
+05-08 02:22:53.469 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #5 logic=0x7b9f73a1c0 character=0x7cac91ca80 timer 0.0000->0.0451
+05-08 02:22:53.537 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #6 logic=0x7b9f73a8c0 character=0x7cac818000 timer 0.0509->0.0783
+05-08 02:22:53.544 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #7 logic=0x7b9f73a8c0 character=0x7cac818000 timer 0.0355->0.0783
+05-08 02:22:53.603 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #8 logic=0x7b9f73a8c0 character=0x7cac818000 timer 0.0531->0.0783
+05-08 02:22:55.369 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #1 logic=0x7b9f73a1c0 character=0x7cac91ca80 timer 0.0150->0.3002
+05-08 02:22:55.406 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #2 logic=0x7b9f73a1c0 character=0x7cac91ca80 timer 0.4179->8.3578
+05-08 02:22:55.419 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #3 logic=0x7b9f73a700 character=0x7cac911540 timer 0.0078->0.1563
+05-08 02:22:55.419 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #9 logic=0x7b9f73a1c0 character=0x7cac91ca80 timer 0.0000->0.0451
+05-08 02:22:55.455 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #4 logic=0x7b9f73a700 character=0x7cac911540 timer 0.4488->8.9769
+05-08 02:22:55.455 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #10 logic=0x7b9f73a1c0 character=0x7cac91ca80 timer 0.0446->0.0451
+05-08 02:22:55.594 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #5 logic=0x7b9f73a540 character=0x7cac911000 timer 0.0161->0.3223
+05-08 02:22:55.620 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #6 logic=0x7b9f73a540 character=0x7cac911000 timer 0.2381->4.7622
+05-08 02:22:55.652 I/FirestoneHooks(11274): attack-speed FillAttackSpeedTimer primed #1 logic=0x7b9f73a8c0 character=0x7cac818000 target=20.00x timer 0.0421->0.0783
+05-08 02:22:55.652 I/FirestoneHooks(11274): attack-speed FillAttackSpeedTimer primed #2 logic=0x7b9f73a700 character=0x7cac911540 target=20.00x timer 0.0000->0.0000
+05-08 02:22:55.652 I/FirestoneHooks(11274): attack-speed FillAttackSpeedTimer primed #3 logic=0x7b9f73a540 character=0x7cac911000 target=20.00x timer 0.0000->0.0000
+05-08 02:22:55.652 I/FirestoneHooks(11274): attack-speed FillAttackSpeedTimer primed #4 logic=0x7b9f73a380 character=0x7cac911a80 target=20.00x timer 0.0652->0.0657
+05-08 02:22:55.652 I/FirestoneHooks(11274): attack-speed FillAttackSpeedTimer primed #5 logic=0x7b9f73a1c0 character=0x7cac91ca80 target=20.00x timer 0.0000->0.0000
+05-08 02:22:55.652 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #11 logic=0x7b9f73a8c0 character=0x7cac818000 timer 0.0632->0.0783
+05-08 02:22:55.852 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #7 logic=0x7b9f73a380 character=0x7cac911a80 timer 0.0145->0.2892
+05-08 02:22:55.888 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #8 logic=0x7b9f73a380 character=0x7cac911a80 timer 0.2490->4.9800
+05-08 02:22:55.919 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #12 logic=0x7b9f73a380 character=0x7cac911a80 timer 0.0611->0.0657
+05-08 02:22:55.952 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #13 logic=0x7b9f73a380 character=0x7cac911a80 timer 0.0573->0.0657
+05-08 02:22:56.208 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #9 logic=0x7b9f73a1c0 character=0x7cac91ca80 timer 0.0603->1.2059
+05-08 02:22:56.213 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #10 logic=0x7b9f73a1c0 character=0x7cac91ca80 timer 0.7755->15.5097
+05-08 02:22:56.253 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #14 logic=0x7b9f73a1c0 character=0x7cac91ca80 timer 0.0000->0.0451
+05-08 02:22:56.286 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #15 logic=0x7b9f73a1c0 character=0x7cac91ca80 timer 0.0399->0.0451
+05-08 02:22:56.302 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #11 logic=0x7b9f73a8c0 character=0x7cac818000 timer 0.0290->0.5797
+05-08 02:22:56.310 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #12 logic=0x7b9f73a8c0 character=0x7cac818000 timer 1.0701->21.4016
+05-08 02:22:56.452 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #13 logic=0x7b9f73a700 character=0x7cac911540 timer 0.0194->0.3889
+05-08 02:22:56.470 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #14 logic=0x7b9f73a700 character=0x7cac911540 timer 0.2508->5.0151
+05-08 02:22:56.471 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #15 logic=0x7b9f73a540 character=0x7cac911000 timer 0.0390->0.7794
+05-08 02:22:56.487 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #16 logic=0x7b9f73a540 character=0x7cac911000 timer 0.9559->19.1176
+05-08 02:22:56.503 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #16 logic=0x7b9f73a540 character=0x7cac911000 timer 0.0000->0.0343
+05-08 02:22:56.669 I/FirestoneHooks(11274): god-mode BattleHero.IsImmune hit #1 this=0x7cac818000
+05-08 02:22:56.702 I/FirestoneHooks(11274): god-mode BattleHero.IsImmune hit #2 this=0x7cac818000
+05-08 02:22:56.710 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #17 logic=0x7b9f73a8c0 character=0x7cac818000 timer 0.0000->0.0783
+05-08 02:22:56.718 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #18 logic=0x7b9f73a8c0 character=0x7cac818000 timer 0.0328->0.0783
+05-08 02:22:56.777 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #19 logic=0x7b9f73a8c0 character=0x7cac818000 timer 0.0654->0.0783
+05-08 02:22:56.845 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #17 logic=0x7b9f73a1c0 character=0x7cac91ca80 timer 0.0081->0.1618
+05-08 02:22:56.845 I/FirestoneHooks(11274): god-mode BattleHero.IsImmune hit #3 this=0x7cac818000
+05-08 02:22:56.853 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #18 logic=0x7b9f73a1c0 character=0x7cac91ca80 timer 0.2284->4.5686
+05-08 02:22:56.919 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #20 logic=0x7b9f73a700 character=0x7cac911540 timer 0.0000->0.0407
+05-08 02:22:56.919 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #21 logic=0x7b9f73a1c0 character=0x7cac91ca80 timer 0.0000->0.0451
+05-08 02:22:56.927 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #22 logic=0x7b9f73a1c0 character=0x7cac91ca80 timer 0.0364->0.0451
+05-08 02:22:56.927 I/FirestoneHooks(11274): god-mode BattleHero.IsImmune hit #4 this=0x7cac818000
+05-08 02:22:56.968 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #23 logic=0x7b9f73a1c0 character=0x7cac91ca80 timer 0.0428->0.0451
+05-08 02:22:57.010 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #19 logic=0x7b9f73a380 character=0x7cac911a80 timer 0.0603->1.2059
+05-08 02:22:57.019 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #20 logic=0x7b9f73a380 character=0x7cac911a80 timer 0.6402->12.8037
+05-08 02:22:57.052 I/FirestoneHooks(11274): attack-speed UpdateIdleState gauge #24 logic=0x7b9f73a380 character=0x7cac911a80 timer 0.0000->0.0657
+05-08 02:22:57.328 I/FirestoneHooks(11274): god-mode BattleHero.IsImmune hit #5 this=0x7cac818000
+05-08 02:22:57.352 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #21 logic=0x7b9f73a540 character=0x7cac911000 timer 0.0135->0.2708
+05-08 02:22:57.386 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #22 logic=0x7b9f73a540 character=0x7cac911000 timer 0.2327->4.6544
+05-08 02:22:57.460 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #23 logic=0x7b9f73a8c0 character=0x7cac818000 timer 0.1140->2.2794
+05-08 02:22:57.469 I/FirestoneHooks(11274): attack-speed UpdateAttackState timer #24 logic=0x7b9f73a8c0 character=0x7cac818000 timer 2.8402->56.8042

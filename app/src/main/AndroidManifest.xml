@@ -18,6 +18,11 @@
             </intent-filter>
         </activity>
 
+        <provider
+            android:name=".SettingsProvider"
+            android:authorities="${applicationId}.settings"
+            android:exported="true" />
+
         <!-- Legacy markers are harmless for modern loaders and useful if you inspect the APK. -->
         <meta-data android:name="xposedmodule" android:value="true" />
         <meta-data android:name="xposeddescription" android:value="@string/xposed_description" />

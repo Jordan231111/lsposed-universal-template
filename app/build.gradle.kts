@@ -8,7 +8,7 @@ android {
     ndkVersion = "25.2.9519653"
 
     defaultConfig {
-        applicationId = "com.template.lsposed"
+        applicationId = "com.firestone.hooks"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
@@ -17,7 +17,7 @@ android {
         // ShadowHook supports arm32 and arm64 only. Use an arm64 emulator/device for native hooks.
         // Java-only LSPosed hooks still work after you disable native loading in TemplateConfig.
         ndk {
-            abiFilters += listOf("arm64-v8a", "armeabi-v7a")
+            abiFilters += listOf("arm64-v8a")
         }
 
         externalNativeBuild {

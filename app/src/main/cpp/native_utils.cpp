@@ -18,7 +18,7 @@
 #endif
 
 #if TEMPLATE_VERBOSE_LOGS
-#define NU_LOG_TAG "AppRuntime"
+#define NU_LOG_TAG "FirestoneHooks"
 #define NU_LOGW(...) __android_log_print(ANDROID_LOG_WARN, NU_LOG_TAG, __VA_ARGS__)
 #else
 #define NU_LOGW(...) ((void)0)

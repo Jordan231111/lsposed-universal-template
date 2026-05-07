@@ -88,9 +88,9 @@ public final class NativeBridge {
             return -12;
         }
         try {
-            String dataDir = context != null && context.getApplicationInfo() != null
-                    ? context.getApplicationInfo().dataDir : "";
-            int result = nativeInstallHooks(packageName != null ? packageName : "", dataDir);
+            String settingsPath = context != null
+                    ? FirestoneSettings.targetSettingsFile(context).getAbsolutePath() : "";
+            int result = nativeInstallHooks(packageName != null ? packageName : "", settingsPath);
             FeatureState.setLastMessage(result == 0 ? "Native scaffold installed" : "Native install returned " + result);
             return result;
         } catch (Throwable t) {
@@ -112,6 +112,6 @@ public final class NativeBridge {
 
     // Registered in C++ via JNI_OnLoad / RegisterNatives. Do not rename without updating the
     // method table in app/src/main/cpp/template_native.cpp.
-    private static native int nativeInstallHooks(String packageName, String dataDir);
+    private static native int nativeInstallHooks(String packageName, String settingsPath);
     private static native String nativeGetShadowHookRecords();
 }
