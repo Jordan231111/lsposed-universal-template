@@ -61,6 +61,13 @@ Shared mode proxy functions must use `SHADOWHOOK_STACK_SCOPE()` or `SHADOWHOOK_P
 - Export operation records from the overlay/Java bridge when debugging.
 - Prefer `library + symbol` for stable exported symbols.
 - Prefer Frida reconnaissance before committing a permanent native hook.
+- If you must hook by RVA, resolve the module base from `/proc/self/maps` after the target
+  library is loaded, then install `base + rva`. Keep this code app-specific.
+- Do not install native hooks from `Application.attach` synchronously when the target library
+  loads later in process startup. Use a short worker thread, a linker callback, or ShadowHook
+  pending hooks and log the final install result.
+- Gate every non-smoke-test hook behind a runtime feature flag. A module-level disable belongs
+  in LSPosed/Vector; in-app switches should enable or disable individual behaviors.
 - Avoid hooking extremely hot libc/pthread functions in production unless required and thoroughly profiled.
 - Disable verbose ShadowHook logs in release builds.
 

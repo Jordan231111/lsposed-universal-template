@@ -40,6 +40,8 @@ What it includes:
   obvious `libtemplate_native.so`.
 - Frida-first Android emulator workflow documentation for reconnaissance before building
   permanent hooks.
+- Engine-specific native workflow notes for Unity IL2CPP and other native-heavy targets,
+  kept as optional documentation so the template remains engine-neutral.
 
 Use this only on apps/systems you own or are authorized to test.
 
@@ -137,6 +139,17 @@ The template’s native code installs a harmless `libc.so!getpid` smoke-test hoo
 
 See `docs/SHADOWHOOK_NOTES.md`.
 
+## Engine-specific native workflows
+
+The template is deliberately not IL2CPP-specific. `EngineDetector` is only a routing helper:
+use it to decide which research notes or hook installers are relevant, but keep target-specific
+offsets, metadata dumps, and generated analysis files out of `main`.
+
+For Unity IL2CPP targets, see `docs/ENGINE_NATIVE_WORKFLOWS.md`. That document covers static
+metadata recovery, RVA-to-runtime-address mapping, value-type ABI checks, delayed library loading,
+and settings-bridge issues that also apply to other native-heavy engines. Treat it as a playbook
+for a branch that targets one app, not as default template behavior.
+
 ## Frida-first workflow
 
 Use Frida first to answer questions like:
@@ -164,6 +177,7 @@ If you use an x86/x86_64 emulator, Java LSPosed hooks can still work, but the na
 - `LICENSE` — CC BY-NC-ND 4.0 license notice and official license links.
 - `SECURITY.md` — safe issue-reporting expectations.
 - `CONTRIBUTING.md` — contribution and validation expectations.
+- `docs/ENGINE_NATIVE_WORKFLOWS.md` — optional notes for Unity IL2CPP and native-heavy targets.
 - `.github/workflows/android.yml` — GitHub Actions build for debug and release APKs.
 
 ## License
