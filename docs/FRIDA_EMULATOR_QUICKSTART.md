@@ -39,16 +39,26 @@ adb root
 adb remount
 adb shell id
 adb shell su -c id
+adb shell 'echo $PATH'
+adb shell 'command -v su || which su'
 adb shell ls -ld /data/local/tmp
 ```
 
 If `adb root` fails, try `adb shell su -c id`. If both fail, use a rooted emulator image, Magisk-rooted AVD, Genymotion, or a rooted test device.
 
+Some Magisk-rooted emulators resolve `su` from the Android runtime APEX path. For example, one confirmed setup resolves `su` as `/apex/com.android.runtime/bin/su`, with `/apex/com.android.runtime/bin` already present in `PATH`. If your image behaves this way, keep that path available when running root commands and Frida server:
+
+```bash
+adb shell 'export PATH=/apex/com.android.runtime/bin:$PATH; su -c id'
+```
+
 ## 3. Download matching zer0def/undetected-frida release
 
-Open the releases page and choose the same version as your host `frida-tools` if possible:
+Open the releases page and choose the latest release, then make your host `frida --version` match the device `frida-server` version:
 
 - https://github.com/zer0def/undetected-frida/releases
+
+Use this undetected Frida server build for the workflow below. Do not use older `17.8.x` builds just because they still run; only pin an older release when your host tools are deliberately pinned to the same version. Do not substitute stock `frida-server` unless you are intentionally comparing behavior or debugging a version/build mismatch.
 
 Architecture mapping:
 
@@ -57,11 +67,12 @@ Architecture mapping:
 - `x86_64` -> `android-x86_64`
 - `x86` / `i686` -> `android-x86`
 
-Example for arm64; replace the version and filename with the release you downloaded:
+Example for arm64 using the latest release when this doc was updated; replace the version if the releases page shows a newer one:
 
 ```bash
-xz -d frida-server-17.9.1-android-arm64.xz
-mv frida-server-17.9.1-android-arm64 frida-server
+UND_FRIDA_VERSION=17.9.6
+xz -d undetected-frida-server-${UND_FRIDA_VERSION}-android-arm64.xz
+mv undetected-frida-server-${UND_FRIDA_VERSION}-android-arm64 frida-server
 chmod +x frida-server
 ```
 
@@ -70,9 +81,9 @@ chmod +x frida-server
 ```bash
 adb push frida-server /data/local/tmp/frida-server
 adb shell chmod 755 /data/local/tmp/frida-server
-adb shell su -c 'pkill -f frida-server || true'
-adb shell su -c '/data/local/tmp/frida-server -D'
-adb shell su -c 'ps -A | grep frida'
+adb shell 'export PATH=/apex/com.android.runtime/bin:$PATH; su -c "pidof frida-server >/dev/null && kill $(pidof frida-server) || true"'
+adb shell 'export PATH=/apex/com.android.runtime/bin:$PATH; su -c "/data/local/tmp/frida-server -D"'
+adb shell 'export PATH=/apex/com.android.runtime/bin:$PATH; su -c "ps -A | grep frida"'
 frida-ls-devices
 frida-ps -Uai
 ```
@@ -174,8 +185,10 @@ Frida cannot connect:
 adb kill-server
 adb start-server
 adb devices
-adb shell su -c 'pkill -f frida-server || true'
-adb shell su -c '/data/local/tmp/frida-server -D'
+adb shell 'echo $PATH'
+adb shell 'command -v su || which su'
+adb shell 'export PATH=/apex/com.android.runtime/bin:$PATH; su -c "pidof frida-server >/dev/null && kill $(pidof frida-server) || true"'
+adb shell 'export PATH=/apex/com.android.runtime/bin:$PATH; su -c "/data/local/tmp/frida-server -D"'
 frida-ps -U
 ```
 

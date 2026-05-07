@@ -147,6 +147,8 @@ Use Frida first to answer questions like:
 - Which exported symbols exist?
 - Which Java methods or native symbols are stable enough to become permanent LSPosed/ShadowHook hooks?
 
+Use the latest undetected Frida server linked in `docs/FRIDA_EMULATOR_QUICKSTART.md` for this workflow. Keep the host `frida-tools` version and device `frida-server` version aligned, and do not mix these steps with stock `frida-server` unless you are intentionally debugging a version/build mismatch.
+
 See `docs/FRIDA_EMULATOR_QUICKSTART.md`.
 
 ## Moving the menu panel
