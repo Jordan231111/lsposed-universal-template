@@ -97,6 +97,18 @@ deliberately choosing the minimum exponent remains persistent.
 adb install -r app/build/outputs/apk/debug/app-debug.apk
 ```
 
+For day-to-day use, install the quieter release module instead:
+
+```bash
+./gradlew clean assembleRelease
+adb install -r app/build/outputs/apk/release/app-release.apk
+```
+
+Release builds compile with `BuildConfig.VERBOSE_LOGS=false` and native
+`TEMPLATE_VERBOSE_LOGS=0`, so the `FirestoneHooks` hook-install / hit logs are intentionally
+silent. Use the overlay bubble or feature behavior to confirm runtime load; reserve the debug APK
+for detailed hook diagnostics.
+
 2. In LSPosed Manager:
 
 ```text

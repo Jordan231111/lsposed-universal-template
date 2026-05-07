@@ -95,6 +95,7 @@ bool install_rva_hook(uintptr_t base,
             "libil2cpp.so",
             name);
     int err = shadowhook_get_errno();
+    (void) err;
     if (*stub == nullptr) {
         ALOGE("%s hook failed rva=0x%lx err=%d %s", name, static_cast<unsigned long>(rva),
               err, shadowhook_to_errmsg(err));
@@ -123,6 +124,7 @@ bool install_rva_intercept(uintptr_t base,
             "libil2cpp.so",
             name);
     int err = shadowhook_get_errno();
+    (void) err;
     if (*stub == nullptr) {
         ALOGE("%s intercept failed rva=0x%lx err=%d %s", name, static_cast<unsigned long>(rva),
               err, shadowhook_to_errmsg(err));
