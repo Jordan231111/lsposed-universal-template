@@ -22,6 +22,8 @@ public final class FirestoneSettings {
     public static final String METHOD_READ = "read";
     public static final String METHOD_WRITE = "write";
     public static final String EXTRA_JSON = "json";
+    public static final String KEY_SCHEMA_VERSION = "settings_schema_version";
+    public static final int CURRENT_SCHEMA_VERSION = 2;
     private static volatile boolean providerFailureLogged;
 
     private FirestoneSettings() {}
@@ -29,6 +31,7 @@ public final class FirestoneSettings {
     public static String defaultJson() {
         try {
             JSONObject o = new JSONObject();
+            o.put(KEY_SCHEMA_VERSION, CURRENT_SCHEMA_VERSION);
             o.put(FeatureRegistry.KEY_ENABLED, true);
             o.put(FeatureRegistry.KEY_NATIVE_HOOKS, true);
             o.put(FeatureRegistry.KEY_FREE_CURRENCY, true);
@@ -46,7 +49,7 @@ public final class FirestoneSettings {
             o.put(FeatureRegistry.KEY_SLOW_ENEMIES, false);
             o.put(FeatureRegistry.KEY_MULTIPLIER, 2.0);
             o.put(FeatureRegistry.KEY_WAVE_SPEED_MULTIPLIER, 2.0);
-            o.put(FeatureRegistry.KEY_DAMAGE_MULTIPLIER, 1000.0);
+            o.put(FeatureRegistry.KEY_DAMAGE_MULTIPLIER, 1000000.0);
             o.put(FeatureRegistry.KEY_ATTACK_SPEED_MULTIPLIER, 2.0);
             o.put(FeatureRegistry.KEY_ENEMY_ATTACK_SPEED_MULTIPLIER, 2.0);
             return o.toString();
@@ -90,6 +93,14 @@ public final class FirestoneSettings {
             }) {
                 if (!out.has(key)) out.put(key, fallback.get(key));
             }
+            int schemaVersion = out.optInt(KEY_SCHEMA_VERSION, 1);
+            double damageExponent = out.optDouble(FeatureRegistry.KEY_DAMAGE_MULTIPLIER,
+                    fallback.getDouble(FeatureRegistry.KEY_DAMAGE_MULTIPLIER));
+            if (schemaVersion < CURRENT_SCHEMA_VERSION && damageExponent <= 1000.0) {
+                out.put(FeatureRegistry.KEY_DAMAGE_MULTIPLIER,
+                        fallback.getDouble(FeatureRegistry.KEY_DAMAGE_MULTIPLIER));
+            }
+            out.put(KEY_SCHEMA_VERSION, CURRENT_SCHEMA_VERSION);
             out.put(FeatureRegistry.KEY_ENABLED, true);
             return out.toString();
         } catch (Throwable t) {

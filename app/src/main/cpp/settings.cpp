@@ -82,7 +82,7 @@ void apply_json(const std::string &json) {
                                   std::memory_order_relaxed);
     s.wave_speed_multiplier.store(json_float(json, "wave_speed_multiplier", 2.0f, 0.25f, 10.0f),
                                   std::memory_order_relaxed);
-    s.damage_multiplier.store(json_float(json, "damage_multiplier", 1000.0f, 1.0f, 1000000.0f),
+    s.damage_multiplier.store(json_float(json, "damage_multiplier", 1000000.0f, 1000.0f, 1000000.0f),
                               std::memory_order_relaxed);
     s.attack_speed_multiplier.store(json_float(json, "attack_speed_multiplier", 2.0f, 1.0f, 20.0f),
                                     std::memory_order_relaxed);

@@ -23,7 +23,7 @@ struct Settings {
     std::atomic<bool> slow_enemies{false};
     std::atomic<float> game_speed_multiplier{2.0f};
     std::atomic<float> wave_speed_multiplier{2.0f};
-    std::atomic<float> damage_multiplier{1000.0f};
+    std::atomic<float> damage_multiplier{1000000.0f};
     std::atomic<float> attack_speed_multiplier{2.0f};
     std::atomic<float> enemy_attack_speed_multiplier{2.0f};
 };

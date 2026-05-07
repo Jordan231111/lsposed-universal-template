@@ -59,6 +59,7 @@ Default schema:
 
 ```json
 {
+  "settings_schema_version": 2,
   "enabled": true,
   "native_hooks": true,
   "free_currency": true,
@@ -76,14 +77,17 @@ Default schema:
   "slow_enemies": false,
   "game_speed_multiplier": 2.0,
   "wave_speed_multiplier": 2.0,
-  "damage_multiplier": 1000.0,
+  "damage_multiplier": 1000000.0,
   "attack_speed_multiplier": 2.0,
   "enemy_attack_speed_multiplier": 2.0
 }
 ```
 
 Multiplier ranges: game speed and wave speed are `0.25x..10x`; hero attack speed is `1x..20x`;
-enemy attack interval is `1x..25x`; damage multiplier is `1x..1000x` in the UI.
+enemy attack interval is `1x..25x`; OHK damage uses a BigDouble exponent slider from
+`9.99e1000` to `9.99e1000000`. Schema version `2` migrates old saved OHK
+`damage_multiplier <= 1000` values to the new default exponent `1000000` once; after that,
+deliberately choosing the minimum exponent remains persistent.
 
 ## Install / Scope
 

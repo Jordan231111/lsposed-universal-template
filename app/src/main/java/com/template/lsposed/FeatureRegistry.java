@@ -120,7 +120,7 @@ public final class FeatureRegistry {
                 TemplateConfig.ENABLE_SAMPLE_ACTIVITY_LOG_HOOK));
         register(Feature.number(KEY_MULTIPLIER, "Game speed", 2f, 0.25f, 10f));
         register(Feature.number(KEY_WAVE_SPEED_MULTIPLIER, "Wave speed", 2f, 0.25f, 10f));
-        register(Feature.number(KEY_DAMAGE_MULTIPLIER, "Damage", 1000f, 1f, 1000000f));
+        register(Feature.number(KEY_DAMAGE_MULTIPLIER, "OHK damage exponent", 1000000f, 1000f, 1000000f));
         register(Feature.number(KEY_ATTACK_SPEED_MULTIPLIER, "Attack speed", 2f, 1f, 20f));
         register(Feature.number(KEY_ENEMY_ATTACK_SPEED_MULTIPLIER, "Enemy attack interval", 2f, 1f, 25f));
 
@@ -229,7 +229,9 @@ public final class FeatureRegistry {
         if (file == null) return;
         StringBuilder sb = new StringBuilder(256);
         sb.append("{");
-        boolean first = true;
+        sb.append('"').append(FirestoneSettings.KEY_SCHEMA_VERSION).append("\":")
+                .append(FirestoneSettings.CURRENT_SCHEMA_VERSION);
+        boolean first = false;
         for (Map.Entry<String, Boolean> e : BOOLS.entrySet()) {
             if (!first) sb.append(',');
             first = false;

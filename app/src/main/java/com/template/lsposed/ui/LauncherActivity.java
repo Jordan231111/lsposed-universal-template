@@ -51,7 +51,7 @@ public final class LauncherActivity extends Activity {
         addToggle(root, FeatureRegistry.KEY_WAVE_SPEED, "Wave transition speed");
         addSlider(root, FeatureRegistry.KEY_WAVE_SPEED_MULTIPLIER, "Wave speed", 0.25f, 10f, 0.25f);
         addToggle(root, FeatureRegistry.KEY_OHK, "One-hit kill");
-        addSlider(root, FeatureRegistry.KEY_DAMAGE_MULTIPLIER, "Damage multiplier", 1f, 1000f, 1f);
+        addSlider(root, FeatureRegistry.KEY_DAMAGE_MULTIPLIER, "OHK damage exponent", 1000f, 1000000f, 1000f);
         addToggle(root, FeatureRegistry.KEY_ATTACK_SPEED, "Hero attack speed");
         addSlider(root, FeatureRegistry.KEY_ATTACK_SPEED_MULTIPLIER, "Hero attack speed", 1f, 20f, 0.5f);
         addToggle(root, FeatureRegistry.KEY_ATTACK_SPEED_BATTLE_STAT, "Atk battle stat");

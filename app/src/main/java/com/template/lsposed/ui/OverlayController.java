@@ -283,6 +283,34 @@ public final class OverlayController {
         attackMultBar.setThumbTintList(lavender);
         root.addView(attackMultBar);
 
+        final FeatureRegistry.Feature damageExponent =
+                findFloatFeature(FeatureRegistry.KEY_DAMAGE_MULTIPLIER);
+        final float minDamageExponent = damageExponent != null ? damageExponent.min : 1000f;
+        final float maxDamageExponent = damageExponent != null ? damageExponent.max : 1000000f;
+        final float damageExponentStep = 1000f;
+        final String damageExponentLabelText =
+                damageExponent != null ? damageExponent.label : "OHK damage exponent";
+
+        final TextView damageExponentLabel = new TextView(appCtx);
+        damageExponentLabel.setTextColor(Color.WHITE);
+        damageExponentLabel.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        damageExponentLabel.setPadding(0, dp(8), 0, 0);
+        damageExponentLabel.setText(formatExponent(damageExponentLabelText,
+                FeatureRegistry.getFloat(FeatureRegistry.KEY_DAMAGE_MULTIPLIER)));
+        root.addView(damageExponentLabel);
+
+        final SeekBar damageExponentBar = new SeekBar(appCtx);
+        int damageExponentRange = Math.max(1,
+                Math.round((maxDamageExponent - minDamageExponent) / damageExponentStep));
+        damageExponentBar.setMax(damageExponentRange);
+        damageExponentBar.setProgress(clamp(Math.round(
+                (FeatureRegistry.getFloat(FeatureRegistry.KEY_DAMAGE_MULTIPLIER) - minDamageExponent) / damageExponentStep),
+                0, damageExponentBar.getMax()));
+        damageExponentBar.setProgressTintList(lavender);
+        damageExponentBar.setProgressBackgroundTintList(trackBg);
+        damageExponentBar.setThumbTintList(lavender);
+        root.addView(damageExponentBar);
+
         for (FeatureRegistry.Feature f : FeatureRegistry.features()) {
             if (f.type == FeatureRegistry.Type.BOOL) addToggleRow(root, f);
         }
@@ -318,6 +346,18 @@ public final class OverlayController {
             @Override public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
+        damageExponentBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                float value = minDamageExponent + progress * damageExponentStep;
+                FeatureRegistry.setFloat(FeatureRegistry.KEY_DAMAGE_MULTIPLIER, value);
+                damageExponentLabel.setText(formatExponent(damageExponentLabelText,
+                        FeatureRegistry.getFloat(FeatureRegistry.KEY_DAMAGE_MULTIPLIER)));
+                stats.setText(FeatureState.summary());
+            }
+            @Override public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+
         LinearLayout row = new LinearLayout(appCtx);
         row.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams rowLp = new LinearLayout.LayoutParams(
@@ -336,6 +376,11 @@ public final class OverlayController {
                     0, attackMultBar.getMax()));
             attackMultLabel.setText(formatMultiplier(attackMultLabelText,
                     FeatureRegistry.getFloat(FeatureRegistry.KEY_ATTACK_SPEED_MULTIPLIER)));
+            damageExponentBar.setProgress(clamp(Math.round(
+                    (FeatureRegistry.getFloat(FeatureRegistry.KEY_DAMAGE_MULTIPLIER) - minDamageExponent) / damageExponentStep),
+                    0, damageExponentBar.getMax()));
+            damageExponentLabel.setText(formatExponent(damageExponentLabelText,
+                    FeatureRegistry.getFloat(FeatureRegistry.KEY_DAMAGE_MULTIPLIER)));
             Toast.makeText(appCtx, "Defaults restored", Toast.LENGTH_SHORT).show();
         });
 
@@ -410,6 +455,10 @@ public final class OverlayController {
 
     private static String formatMultiplier(String label, float value) {
         return String.format(Locale.US, "%s  \u00d7%.1f", label, value);
+    }
+
+    private static String formatExponent(String label, float value) {
+        return String.format(Locale.US, "%s  9.99e%.0f", label, value);
     }
 
     private void refreshPanel() {
