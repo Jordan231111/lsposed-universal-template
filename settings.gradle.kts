@@ -16,3 +16,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "LSPosedUniversalTemplate"
 include(":app")
+include(":modules:rogue")
+include(":modules:once")

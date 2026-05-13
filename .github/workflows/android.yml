@@ -31,5 +31,17 @@ jobs:
       - name: Make Gradle executable
         run: chmod +x ./gradlew
 
-      - name: Build debug and release
+      - name: Build template app debug and release
         run: ./gradlew :app:assembleDebug :app:assembleRelease --stacktrace
+
+      - name: Build game modules debug and release
+        run: ./gradlew :modules:rogue:assembleDebug :modules:rogue:assembleRelease :modules:once:assembleDebug :modules:once:assembleRelease --stacktrace
+
+      - name: Upload module APKs
+        uses: actions/upload-artifact@v4
+        with:
+          name: module-apks
+          path: |
+            modules/rogue/build/outputs/apk/**/*.apk
+            modules/once/build/outputs/apk/**/*.apk
+          if-no-files-found: warn
