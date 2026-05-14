@@ -1,4 +1,4 @@
-package com.template.lsposed.ui;
+package com.jordan.rogue.recovery.ui;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -9,7 +9,7 @@ import android.view.Gravity;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.template.lsposed.TemplateConfig;
+import com.jordan.rogue.recovery.TemplateConfig;
 
 /** Simple launcher screen so the APK is easy to identify after install. */
 public final class LauncherActivity extends Activity {
@@ -24,7 +24,7 @@ public final class LauncherActivity extends Activity {
         text.setPadding(dp(18), dp(18), dp(18), dp(18));
         text.setLinksClickable(true);
         text.setMovementMethod(LinkMovementMethod.getInstance());
-        text.setText("LSPosed Universal Template\n\n"
+        text.setText("Rogue Recovery\n\n"
                 + "1. Edit TemplateConfig.TARGET_PACKAGES.\n"
                 + "2. Edit META-INF/xposed/scope.list and res/values/arrays.xml.\n"
                 + "3. Build: ./gradlew :app:assembleRelease\n"

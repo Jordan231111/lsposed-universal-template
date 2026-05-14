@@ -1,4 +1,4 @@
-package com.template.lsposed;
+package com.jordan.rogue.recovery;
 
 import android.content.Context;
 import android.util.Log;
@@ -28,8 +28,11 @@ public final class FeatureRegistry {
     private static final String FILE_NAME = TemplateConfig.FEATURE_STATE_FILE_NAME;
 
     public static final String KEY_ENABLED = "enabled";
-    public static final String KEY_MULTIPLIER = "multiplier";
-    public static final String KEY_SAMPLE_ACTIVITY_HOOK = "sample_activity_hook";
+    public static final String KEY_DAMAGE_MULTIPLIER = "damage_multiplier";
+    public static final String KEY_DEFENSE_MULTIPLIER = "defense_multiplier";
+    public static final String KEY_GOD_MODE = "god_mode";
+    public static final String KEY_FREE_SHOP = "free_shop";
+    public static final String KEY_ROGUE_ACTIVITY_HOOK = "rogue_activity_hook";
     public static final String KEY_NATIVE_HOOKS = "native_hooks";
 
     public enum Type { BOOL, FLOAT }
@@ -83,11 +86,14 @@ public final class FeatureRegistry {
         initialized = true;
 
         register(Feature.bool(KEY_ENABLED, "Module enabled", true));
-        register(Feature.bool(KEY_SAMPLE_ACTIVITY_HOOK, "Log Activity.onResume",
-                TemplateConfig.ENABLE_SAMPLE_ACTIVITY_LOG_HOOK));
+        register(Feature.bool(KEY_ROGUE_ACTIVITY_HOOK, "Hook MyActivity.onCreate",
+                TemplateConfig.ENABLE_ROGUE_ACTIVITY_HOOK));
         register(Feature.bool(KEY_NATIVE_HOOKS, "Native ShadowHook scaffold",
                 TemplateConfig.ENABLE_NATIVE_SHADOWHOOK));
-        register(Feature.number(KEY_MULTIPLIER, "Multiplier", 1f, 1f, 30f));
+        register(Feature.number(KEY_DAMAGE_MULTIPLIER, "Damage multi", 1f, 1f, 100f));
+        register(Feature.number(KEY_DEFENSE_MULTIPLIER, "Defense multi", 1f, 1f, 100f));
+        register(Feature.bool(KEY_GOD_MODE, "God mode", false));
+        register(Feature.bool(KEY_FREE_SHOP, "Free shop", false));
 
         if (ctx != null) {
             try {

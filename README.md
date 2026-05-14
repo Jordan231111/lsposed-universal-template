@@ -1,4 +1,4 @@
-# LSPosed Universal Template
+# Rogue Recovery
 
 [![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)](LICENSE)
 
@@ -37,7 +37,7 @@ What it includes:
 - Release signing falls back to the debug keystore when no env keystore is configured
   (`TEMPLATE_KS_PATH`, `TEMPLATE_KS_PASS`, `TEMPLATE_KEY_ALIAS`, `TEMPLATE_KEY_PASS`).
 - Configure script supports `--native-lib` to rename the packaged `.so` away from the
-  obvious `libtemplate_native.so`.
+  obvious `librogue_recovery.so`.
 - Frida-first Android emulator workflow documentation for reconnaissance before building
   permanent hooks.
 - Engine-specific native workflow notes for Unity IL2CPP and other native-heavy targets,
@@ -61,8 +61,8 @@ From this directory:
   --package com.yourname.yourmodule \
   --name "Your Module" \
   --target com.example.target \
-  --author "YourName" \
-  --native-lib audio_util      # optional; renames libtemplate_native.so
+  --author "Jordan" \
+  --native-lib audio_util      # optional; renames librogue_recovery.so
 ```
 
 Then build:
@@ -91,7 +91,7 @@ Use `./gradlew :app:installDebug` while developing to get the chatty tag.
 
 ## Files you normally edit first
 
-- `app/src/main/java/com/template/lsposed/TemplateConfig.java`
+- `app/src/main/java/com/jordan/rogue/recovery/TemplateConfig.java`
 - `app/src/main/resources/META-INF/xposed/scope.list`
 - `app/src/main/resources/META-INF/xposed/module.prop`
 - `app/src/main/res/values/arrays.xml`

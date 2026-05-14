@@ -1,4 +1,4 @@
-package com.template.lsposed.engine;
+package com.jordan.rogue.recovery.engine;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;

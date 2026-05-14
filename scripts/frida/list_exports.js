@@ -1,7 +1,8 @@
 'use strict';
 
-// Edit this before running, or use it as a starting point for app-specific scripts.
-const LIB_NAME = 'libtarget.so';
+// Use `libbmt.so` while tracing the recovered old module, or `libil2cpp.so`
+// when inspecting the target game's IL2CPP exports.
+const LIB_NAME = 'libbmt.so';
 
 const module = Process.findModuleByName(LIB_NAME);
 if (!module) {

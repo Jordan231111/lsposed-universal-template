@@ -6,7 +6,7 @@ Example:
     --package com.yourname.yourmodule \
     --name "Your Module" \
     --target com.example.target \
-    --author "YourName"
+    --author "Jordan"
 """
 
 from __future__ import annotations
@@ -17,7 +17,7 @@ import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_PACKAGE = "com.template.lsposed"
+DEFAULT_PACKAGE = "com.jordan.rogue.recovery"
 DEFAULT_JNI = DEFAULT_PACKAGE.replace(".", "_")
 DEFAULT_NATIVE_LIB = "template_native"
 SKIP_DIRS = {".git", ".gradle", ".idea", ".cxx", "build", ".externalNativeBuild"}
@@ -30,7 +30,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--package", required=True, help="New module package/applicationId, e.g. com.acme.mod")
     parser.add_argument("--name", required=True, help="Human-readable module/app name")
     parser.add_argument("--target", required=True, action="append", help="Target package. Repeat or comma-separate multiple packages")
-    parser.add_argument("--author", default="YourName", help="Author for module.prop")
+    parser.add_argument("--author", default="Jordan", help="Author for module.prop")
     parser.add_argument("--old-package", default=DEFAULT_PACKAGE, help="Current package to replace")
     parser.add_argument("--native-lib", default=None,
                         help="Optional new native library short name (e.g. 'audio_util') replacing 'template_native'.")
@@ -95,9 +95,9 @@ def replace_in_text_files(old_package: str, new_package: str, module_name: str, 
         old_package: new_package,
         old_jni: new_jni,
         old_slash: new_slash,
-        "LSPosed Universal Template": module_name,
-        "Universal Module": module_name,
-        "YourName": author,
+        "Rogue Recovery": module_name,
+        "Rogue Recovery": module_name,
+        "Jordan": author,
     }
     for path in ROOT.rglob("*"):
         if not path.is_file() or should_skip(path):

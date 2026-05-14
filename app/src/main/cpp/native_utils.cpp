@@ -271,7 +271,7 @@ jboolean native_write_memory(JNIEnv *env, jclass, jlong address_j, jbyteArray da
 }  // namespace
 
 bool register_natives(JNIEnv *env) {
-    jclass cls = env->FindClass("com/template/lsposed/NativeUtils");
+    jclass cls = env->FindClass("com/jordan/rogue/recovery/NativeUtils");
     if (cls == nullptr) return false;
     static JNINativeMethod methods[] = {
             {"nativeFindModule", "(Ljava/lang/String;)[J",

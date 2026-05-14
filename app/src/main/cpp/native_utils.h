@@ -5,7 +5,7 @@
 namespace native_utils {
 
 /**
- * Registers the NativeUtils JNI surface on com.template.lsposed.NativeUtils.
+ * Registers the NativeUtils JNI surface on com.jordan.rogue.recovery.NativeUtils.
  * Called from template_native.cpp's JNI_OnLoad. Returns true on success.
  */
 bool register_natives(JNIEnv *env);

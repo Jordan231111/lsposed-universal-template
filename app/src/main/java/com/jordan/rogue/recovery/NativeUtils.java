@@ -1,4 +1,4 @@
-package com.template.lsposed;
+package com.jordan.rogue.recovery;
 
 /**
  * Java-side facade for the native helper toolkit implemented in {@code native_utils.cpp}.

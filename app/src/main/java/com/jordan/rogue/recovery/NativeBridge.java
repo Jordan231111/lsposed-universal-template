@@ -1,4 +1,4 @@
-package com.template.lsposed;
+package com.jordan.rogue.recovery;
 
 import android.content.Context;
 import android.os.Build;
@@ -91,12 +91,26 @@ public final class NativeBridge {
             String dataDir = context != null && context.getApplicationInfo() != null
                     ? context.getApplicationInfo().dataDir : "";
             int result = nativeInstallHooks(packageName != null ? packageName : "", dataDir);
+            syncFeatureState();
             FeatureState.setLastMessage(result == 0 ? "Native scaffold installed" : "Native install returned " + result);
             return result;
         } catch (Throwable t) {
             if (TemplateConfig.VERBOSE_LOGS) Log.e(TemplateConfig.LOG_TAG, "nativeInstallHooks failed", t);
             FeatureState.setLastMessage("nativeInstallHooks exception: " + t.getClass().getSimpleName());
             return -13;
+        }
+    }
+
+    public static synchronized void syncFeatureState() {
+        try {
+            if (!libraryLoaded && !loadTemplateNative()) return;
+            nativeSyncFeatureState(
+                    FeatureState.getDamageMultiplier(),
+                    FeatureState.getDefenseMultiplier(),
+                    FeatureState.isGodMode(),
+                    FeatureState.isFreeShop());
+        } catch (Throwable t) {
+            if (TemplateConfig.VERBOSE_LOGS) Log.w(TemplateConfig.LOG_TAG, "nativeSyncFeatureState failed", t);
         }
     }
 
@@ -113,5 +127,7 @@ public final class NativeBridge {
     // Registered in C++ via JNI_OnLoad / RegisterNatives. Do not rename without updating the
     // method table in app/src/main/cpp/template_native.cpp.
     private static native int nativeInstallHooks(String packageName, String dataDir);
+    private static native void nativeSyncFeatureState(int damageMultiplier, int defenseMultiplier,
+                                                     boolean godMode, boolean freeShop);
     private static native String nativeGetShadowHookRecords();
 }

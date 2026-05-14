@@ -1,4 +1,4 @@
-package com.template.lsposed;
+package com.jordan.rogue.recovery;
 
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -25,14 +25,30 @@ public final class FeatureState {
         lastMessage = value ? "Enabled" : "Disabled";
     }
 
-    public static float getMultiplier() {
-        return FeatureRegistry.getFloat(FeatureRegistry.KEY_MULTIPLIER);
+    public static int getDamageMultiplier() {
+        return positiveInt(FeatureRegistry.getFloat(FeatureRegistry.KEY_DAMAGE_MULTIPLIER));
     }
 
-    public static void setMultiplier(float value) {
-        if (Float.isNaN(value) || Float.isInfinite(value)) value = 1.0f;
-        FeatureRegistry.setFloat(FeatureRegistry.KEY_MULTIPLIER, value);
-        lastMessage = String.format(Locale.US, "Multiplier ×%.1f", getMultiplier());
+    public static void setDamageMultiplier(float value) {
+        FeatureRegistry.setFloat(FeatureRegistry.KEY_DAMAGE_MULTIPLIER, sanePositive(value));
+        lastMessage = String.format(Locale.US, "Damage multi x%d", getDamageMultiplier());
+    }
+
+    public static int getDefenseMultiplier() {
+        return positiveInt(FeatureRegistry.getFloat(FeatureRegistry.KEY_DEFENSE_MULTIPLIER));
+    }
+
+    public static void setDefenseMultiplier(float value) {
+        FeatureRegistry.setFloat(FeatureRegistry.KEY_DEFENSE_MULTIPLIER, sanePositive(value));
+        lastMessage = String.format(Locale.US, "Defense multi x%d", getDefenseMultiplier());
+    }
+
+    public static boolean isGodMode() {
+        return FeatureRegistry.getBool(FeatureRegistry.KEY_GOD_MODE);
+    }
+
+    public static boolean isFreeShop() {
+        return FeatureRegistry.getBool(FeatureRegistry.KEY_FREE_SHOP);
     }
 
     public static int bumpJavaHookHits() {
@@ -53,12 +69,24 @@ public final class FeatureState {
 
     public static String summary() {
         return String.format(Locale.US,
-                "Enabled: %s\nMultiplier: \u00d7%.1f\nEngine: %s\nJava hook hits: %d\nNative install attempts: %d\nStatus: %s",
+                "Enabled: %s\nDamage multi: x%d\nDefense multi: x%d\nGod mode: %s\nFree shop: %s\nEngine: %s\nJava hook hits: %d\nNative install attempts: %d\nStatus: %s",
                 isEnabled() ? "yes" : "no",
-                getMultiplier(),
+                getDamageMultiplier(),
+                getDefenseMultiplier(),
+                isGodMode() ? "on" : "off",
+                isFreeShop() ? "on" : "off",
                 engineLabel,
                 javaHookHits.get(),
                 nativeInstallAttempts.get(),
                 lastMessage);
+    }
+
+    private static float sanePositive(float value) {
+        if (Float.isNaN(value) || Float.isInfinite(value) || value < 1.0f) return 1.0f;
+        return value;
+    }
+
+    private static int positiveInt(float value) {
+        return Math.max(1, Math.round(sanePositive(value)));
     }
 }

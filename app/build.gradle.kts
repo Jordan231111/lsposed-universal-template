@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    namespace = "com.template.lsposed"
+    namespace = "com.jordan.rogue.recovery"
     compileSdk = 35
     ndkVersion = "25.2.9519653"
 
     defaultConfig {
-        applicationId = "com.template.lsposed"
+        applicationId = "com.jordan.rogue.recovery"
         minSdk = 26
         targetSdk = 35
         versionCode = 1

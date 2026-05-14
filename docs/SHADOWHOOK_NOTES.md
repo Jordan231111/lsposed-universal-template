@@ -33,15 +33,19 @@ It does **not** support:
 
 For an Android Studio emulator on an Intel Mac, native hooks with ShadowHook are usually not available because those AVDs are typically x86_64. Use Java hooks only there, or use an arm64 device. On Apple Silicon, choose an arm64 emulator image if available.
 
-## Native smoke test in this template
+## Native scaffold in this recovery clone
 
-`app/src/main/cpp/template_native.cpp` installs a safe smoke-test hook:
+`app/src/main/cpp/template_native.cpp` does not install a final app-specific hook yet.
+It currently:
 
-- target: `libc.so!getpid`
-- behavior: increments an in-memory counter and calls the original function unchanged
-- purpose: verify ShadowHook loading, symbol resolution, and call-chain behavior
+- initializes ShadowHook
+- waits for `libil2cpp.so`
+- resolves common IL2CPP API exports
+- logs the `Assembly-CSharp` image when verbose logs are enabled
+- stores the recovered feature state from Java
 
-Replace it after you have used Frida to identify a stable target in your authorized test app.
+Replace the scaffold after the Frida traces identify the old module's exact IL2CPP
+classes/methods and hook addresses.
 
 ## Hook modes
 

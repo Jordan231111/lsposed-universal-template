@@ -1,4 +1,4 @@
-package com.template.lsposed.ui;
+package com.jordan.rogue.recovery.ui;
 
 import android.app.Activity;
 import android.app.Application;
@@ -24,10 +24,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.template.lsposed.FeatureRegistry;
-import com.template.lsposed.FeatureState;
-import com.template.lsposed.NativeBridge;
-import com.template.lsposed.TemplateConfig;
+import com.jordan.rogue.recovery.FeatureRegistry;
+import com.jordan.rogue.recovery.FeatureState;
+import com.jordan.rogue.recovery.NativeBridge;
+import com.jordan.rogue.recovery.TemplateConfig;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -55,6 +55,8 @@ public final class OverlayController {
     private TextView panelStats;
     private FeatureRegistry.Listener panelListener;
     private final Map<String, Button> toggleRefs = new HashMap<>();
+    private final Map<String, SeekBar> numberBars = new HashMap<>();
+    private final Map<String, TextView> numberLabels = new HashMap<>();
 
     private OverlayController(Application app) {
         this.app = app;
@@ -237,26 +239,9 @@ public final class OverlayController {
         ColorStateList lavender = ColorStateList.valueOf(Color.argb(0xFF, 0xB8, 0x9A, 0xFF));
         ColorStateList trackBg = ColorStateList.valueOf(Color.argb(0xFF, 0x3A, 0x35, 0x50));
 
-        final FeatureRegistry.Feature multiplier = findFloatFeature(FeatureRegistry.KEY_MULTIPLIER);
-        final float minMult = multiplier != null ? multiplier.min : 1f;
-        final float maxMult = multiplier != null ? multiplier.max : 30f;
-        final String multLabelText = multiplier != null ? multiplier.label : "Multiplier";
-
-        final TextView multLabel = new TextView(appCtx);
-        multLabel.setTextColor(Color.WHITE);
-        multLabel.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        multLabel.setText(formatMultiplier(multLabelText, FeatureState.getMultiplier()));
-        root.addView(multLabel);
-
-        final SeekBar multBar = new SeekBar(appCtx);
-        int range = (int) Math.round((maxMult - minMult) * 10f);
-        multBar.setMax(Math.max(1, range));
-        multBar.setProgress(clamp(Math.round((FeatureState.getMultiplier() - minMult) * 10f),
-                0, multBar.getMax()));
-        multBar.setProgressTintList(lavender);
-        multBar.setProgressBackgroundTintList(trackBg);
-        multBar.setThumbTintList(lavender);
-        root.addView(multBar);
+        for (FeatureRegistry.Feature f : FeatureRegistry.features()) {
+            if (f.type == FeatureRegistry.Type.FLOAT) addNumberRow(root, f, lavender, trackBg);
+        }
 
         for (FeatureRegistry.Feature f : FeatureRegistry.features()) {
             if (f.type == FeatureRegistry.Type.BOOL) addToggleRow(root, f);
@@ -270,17 +255,6 @@ public final class OverlayController {
         root.addView(stats);
         panelStats = stats;
 
-        multBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                float value = minMult + progress / 10f;
-                FeatureState.setMultiplier(value);
-                multLabel.setText(formatMultiplier(multLabelText, FeatureState.getMultiplier()));
-                stats.setText(FeatureState.summary());
-            }
-            @Override public void onStartTrackingTouch(SeekBar seekBar) {}
-            @Override public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
-
         LinearLayout row = new LinearLayout(appCtx);
         row.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams rowLp = new LinearLayout.LayoutParams(
@@ -291,9 +265,7 @@ public final class OverlayController {
         Button reset = nyxButton("Reset");
         reset.setOnClickListener(v -> {
             FeatureRegistry.resetToDefaults();
-            multBar.setProgress(clamp(Math.round((FeatureState.getMultiplier() - minMult) * 10f),
-                    0, multBar.getMax()));
-            multLabel.setText(formatMultiplier(multLabelText, FeatureState.getMultiplier()));
+            refreshPanel();
             Toast.makeText(appCtx, "Defaults restored", Toast.LENGTH_SHORT).show();
         });
 
@@ -324,6 +296,38 @@ public final class OverlayController {
         FeatureRegistry.addListener(listener);
 
         return root;
+    }
+
+    private void addNumberRow(LinearLayout parent, FeatureRegistry.Feature feature,
+                              ColorStateList progressTint, ColorStateList trackTint) {
+        final int min = Math.max(1, Math.round(feature.min));
+        final int max = Math.max(min, Math.round(feature.max));
+
+        final TextView label = new TextView(appCtx);
+        label.setTextColor(Color.WHITE);
+        label.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        label.setText(formatNumber(feature));
+        parent.addView(label);
+
+        final SeekBar bar = new SeekBar(appCtx);
+        bar.setMax(Math.max(1, max - min));
+        bar.setProgress(clamp(Math.round(FeatureRegistry.getFloat(feature.key)) - min, 0, bar.getMax()));
+        bar.setProgressTintList(progressTint);
+        bar.setProgressBackgroundTintList(trackTint);
+        bar.setThumbTintList(progressTint);
+        bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                int value = min + progress;
+                setNumberFeature(feature.key, value);
+                label.setText(formatNumber(feature));
+                if (panelStats != null) panelStats.setText(FeatureState.summary());
+            }
+            @Override public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+        parent.addView(bar);
+        numberBars.put(feature.key, bar);
+        numberLabels.put(feature.key, label);
     }
 
     private void addToggleRow(LinearLayout parent, FeatureRegistry.Feature feature) {
@@ -359,15 +363,19 @@ public final class OverlayController {
         toggleRefs.put(feature.key, toggle);
     }
 
-    private FeatureRegistry.Feature findFloatFeature(String key) {
-        for (FeatureRegistry.Feature f : FeatureRegistry.features()) {
-            if (f.type == FeatureRegistry.Type.FLOAT && key.equals(f.key)) return f;
+    private static void setNumberFeature(String key, int value) {
+        if (FeatureRegistry.KEY_DAMAGE_MULTIPLIER.equals(key)) {
+            FeatureState.setDamageMultiplier(value);
+        } else if (FeatureRegistry.KEY_DEFENSE_MULTIPLIER.equals(key)) {
+            FeatureState.setDefenseMultiplier(value);
+        } else {
+            FeatureRegistry.setFloat(key, value);
         }
-        return null;
     }
 
-    private static String formatMultiplier(String label, float value) {
-        return String.format(Locale.US, "%s  \u00d7%.1f", label, value);
+    private static String formatNumber(FeatureRegistry.Feature feature) {
+        return String.format(Locale.US, "%s  x%d", feature.label,
+                Math.max(1, Math.round(FeatureRegistry.getFloat(feature.key))));
     }
 
     private void refreshPanel() {
@@ -376,11 +384,23 @@ public final class OverlayController {
             Button b = e.getValue();
             if (b != null) b.setText(FeatureRegistry.getBool(e.getKey()) ? "ON" : "OFF");
         }
+        for (FeatureRegistry.Feature f : FeatureRegistry.features()) {
+            if (f.type != FeatureRegistry.Type.FLOAT) continue;
+            TextView label = numberLabels.get(f.key);
+            if (label != null) label.setText(formatNumber(f));
+            SeekBar bar = numberBars.get(f.key);
+            if (bar != null) {
+                int min = Math.max(1, Math.round(f.min));
+                bar.setProgress(clamp(Math.round(FeatureRegistry.getFloat(f.key)) - min, 0, bar.getMax()));
+            }
+        }
     }
 
     private void closePanelResources() {
         panelStats = null;
         toggleRefs.clear();
+        numberBars.clear();
+        numberLabels.clear();
         if (panelListener != null) {
             FeatureRegistry.removeListener(panelListener);
             panelListener = null;

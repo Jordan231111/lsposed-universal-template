@@ -18,4 +18,4 @@ Behavior:
 
 Main implementation:
 
-- `app/src/main/java/com/template/lsposed/ui/OverlayController.java`
+- `app/src/main/java/com/jordan/rogue/recovery/ui/OverlayController.java`

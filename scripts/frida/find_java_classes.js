@@ -1,7 +1,7 @@
 'use strict';
 
-// Edit this regex for your app. Example: /login|crypto|billing|unity|lua/i
-const PATTERN = /example|target/i;
+// Edit this regex as traces narrow down the target surface.
+const PATTERN = /room6|horizon|android\.support|menu|unity|il2cpp/i;
 
 if (!Java.available) {
   console.log('Java runtime unavailable');

@@ -1,15 +1,16 @@
-package com.template.lsposed;
+package com.jordan.rogue.recovery;
 
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
-import com.template.lsposed.engine.EngineDetector;
-import com.template.lsposed.ui.OverlayController;
+import com.jordan.rogue.recovery.engine.EngineDetector;
+import com.jordan.rogue.recovery.ui.OverlayController;
 
 import java.lang.reflect.Method;
 import java.util.Locale;
@@ -51,15 +52,15 @@ public final class ModuleEntry extends XposedModule {
 
     @Override
     public void onPackageLoaded(PackageLoadedParam param) {
-        preparePackage(param, "onPackageLoaded");
+        preparePackage(param, "onPackageLoaded", param.getDefaultClassLoader());
     }
 
     @Override
     public void onPackageReady(PackageReadyParam param) {
-        preparePackage(param, "onPackageReady");
+        preparePackage(param, "onPackageReady", param.getClassLoader());
     }
 
-    private void preparePackage(PackageLoadedParam param, String phase) {
+    private void preparePackage(PackageLoadedParam param, String phase, ClassLoader classLoader) {
         String pkg = param.getPackageName();
         String proc = processName != null ? processName : pkg;
         if (!TemplateConfig.shouldHookProcess(pkg, proc)) return;
@@ -74,7 +75,7 @@ public final class ModuleEntry extends XposedModule {
 
         installApplicationAttachHook();
         // Install always; the hook itself checks the registry so users can flip it live.
-        installActivityResumeHook();
+        installRogueActivityHook(classLoader);
     }
 
     private synchronized void installApplicationAttachHook() {
@@ -147,7 +148,17 @@ public final class ModuleEntry extends XposedModule {
             if (FeatureRegistry.KEY_ENABLED.equals(key) || FeatureRegistry.KEY_NATIVE_HOOKS.equals(key)) {
                 maybeStartNativeHooks(appContext);
             }
+            if (nativeHooksStarted && isRecoveredFeatureKey(key)) {
+                NativeBridge.syncFeatureState();
+            }
         });
+    }
+
+    private static boolean isRecoveredFeatureKey(String key) {
+        return FeatureRegistry.KEY_DAMAGE_MULTIPLIER.equals(key)
+                || FeatureRegistry.KEY_DEFENSE_MULTIPLIER.equals(key)
+                || FeatureRegistry.KEY_GOD_MODE.equals(key)
+                || FeatureRegistry.KEY_FREE_SHOP.equals(key);
     }
 
     private synchronized void maybeStartNativeHooks(Context appContext) {
@@ -162,45 +173,64 @@ public final class ModuleEntry extends XposedModule {
         worker.start();
     }
 
-    private synchronized void installActivityResumeHook() {
+    private synchronized void installRogueActivityHook(ClassLoader classLoader) {
         if (activityHookInstalled) return;
-        activityHookInstalled = true;
+        if (!TemplateConfig.ENABLE_ROGUE_ACTIVITY_HOOK) return;
         try {
-            Method onResume = Activity.class.getDeclaredMethod("onResume");
-            onResume.setAccessible(true);
-            hook(onResume)
+            ClassLoader loader = classLoader != null ? classLoader : ModuleEntry.class.getClassLoader();
+            Class<?> targetActivity = Class.forName(TemplateConfig.TARGET_ACTIVITY_CLASS, false, loader);
+            Method onCreate = targetActivity.getDeclaredMethod("onCreate", Bundle.class);
+            onCreate.setAccessible(true);
+            hook(onCreate)
                     .setPriority(XposedInterface.PRIORITY_LOWEST)
                     .setExceptionMode(XposedInterface.ExceptionMode.PROTECTIVE)
                     .intercept(chain -> {
                         Object result = chain.proceed();
                         try {
-                            if (!FeatureRegistry.getBool(FeatureRegistry.KEY_ENABLED)) return result;
-                            if (!FeatureRegistry.getBool(FeatureRegistry.KEY_SAMPLE_ACTIVITY_HOOK)) return result;
-                            int hits = FeatureState.bumpJavaHookHits();
                             Object thiz = chain.getThisObject();
+                            Activity activity = thiz instanceof Activity ? (Activity) thiz : null;
                             String activityName = thiz != null ? thiz.getClass().getName() : "<null>";
-                            FeatureState.setLastMessage("Activity.onResume #" + hits + ": " + activityName);
+                            Context appContext = null;
+                            if (activity != null) {
+                                appContext = activity.getApplicationContext() != null
+                                        ? activity.getApplicationContext() : activity;
+                                FeatureRegistry.initialize(appContext);
+                            }
+                            if (!FeatureRegistry.getBool(FeatureRegistry.KEY_ENABLED)) return result;
+                            if (!FeatureRegistry.getBool(FeatureRegistry.KEY_ROGUE_ACTIVITY_HOOK)) return result;
+                            int hits = FeatureState.bumpJavaHookHits();
+                            FeatureState.setLastMessage("MyActivity.onCreate #" + hits + ": " + activityName);
+                            if (appContext != null) {
+                                installNativeHookToggleListener(appContext);
+                                maybeStartNativeHooks(appContext);
+                                if (TemplateConfig.ENABLE_OVERLAY) {
+                                    OverlayController.attach(appContext);
+                                }
+                            }
                             if (TemplateConfig.VERBOSE_LOGS) {
                                 log(Log.INFO, TemplateConfig.LOG_TAG,
-                                        "Activity.onResume #" + hits + " -> " + activityName);
+                                        "Recovered activity hook #" + hits + " -> " + activityName);
                             }
                         } catch (Throwable t) {
                             if (TemplateConfig.VERBOSE_LOGS) {
                                 log(Log.ERROR, TemplateConfig.LOG_TAG,
-                                        "Activity.onResume post-hook failed", t);
+                                        "MyActivity.onCreate post-hook failed", t);
                             }
                         }
                         return result;
                     });
+            activityHookInstalled = true;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                deoptimize(onResume);
+                deoptimize(onCreate);
             }
             if (TemplateConfig.VERBOSE_LOGS) {
-                log(Log.INFO, TemplateConfig.LOG_TAG, "Hooked Activity.onResume sample");
+                log(Log.INFO, TemplateConfig.LOG_TAG,
+                        "Hooked " + TemplateConfig.TARGET_ACTIVITY_CLASS + ".onCreate(Bundle)");
             }
         } catch (Throwable t) {
             if (TemplateConfig.VERBOSE_LOGS) {
-                log(Log.ERROR, TemplateConfig.LOG_TAG, "Could not hook Activity.onResume", t);
+                log(Log.ERROR, TemplateConfig.LOG_TAG,
+                        "Could not hook " + TemplateConfig.TARGET_ACTIVITY_CLASS + ".onCreate", t);
             }
         }
     }
