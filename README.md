@@ -42,6 +42,13 @@ What it includes:
   permanent hooks.
 - Engine-specific native workflow notes for Unity IL2CPP and other native-heavy targets,
   kept as optional documentation so the template remains engine-neutral.
+- Integrity-bypass scaffold (`com.jordan.rogue.recovery.protection.IntegrityBypass`) with
+  toggle-able PAIRIP signature, PAIRIP license, Play Integrity factory observer, and
+  CodeStage Anti-Cheat detector hooks. The native ShadowHook scaffold ships matching
+  IL2CPP hooks for `RogueServerCode.get_IsIntegrityError` and `get_IsSuccess` so the
+  cloud-save flow lands on "Transfer data registered" instead of
+  `VerifyIntegrityVerdictUnevaluated` even when running on a rooted emulator with the
+  PlayIntegrityFix Magisk module. See `docs/INTEGRITY_BYPASS_NOTES.md`.
 
 Use this only on apps/systems you own or are authorized to test.
 

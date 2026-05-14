@@ -34,6 +34,9 @@ public final class FeatureRegistry {
     public static final String KEY_FREE_SHOP = "free_shop";
     public static final String KEY_ROGUE_ACTIVITY_HOOK = "rogue_activity_hook";
     public static final String KEY_NATIVE_HOOKS = "native_hooks";
+    public static final String KEY_INTEGRITY_BYPASS = "integrity_bypass";
+    public static final String KEY_SERVER_INTEGRITY_BYPASS = "server_integrity_bypass";
+    public static final String KEY_ACTK_BYPASS = "actk_bypass";
 
     public enum Type { BOOL, FLOAT }
 
@@ -90,6 +93,13 @@ public final class FeatureRegistry {
                 TemplateConfig.ENABLE_ROGUE_ACTIVITY_HOOK));
         register(Feature.bool(KEY_NATIVE_HOOKS, "Native ShadowHook scaffold",
                 TemplateConfig.ENABLE_NATIVE_SHADOWHOOK));
+        register(Feature.bool(KEY_INTEGRITY_BYPASS, "Bypass PAIRIP + Play Integrity (java)",
+                TemplateConfig.ENABLE_INTEGRITY_BYPASS));
+        register(Feature.bool(KEY_SERVER_INTEGRITY_BYPASS,
+                "Force PrepareIntegrityCheck=Skip (native)",
+                TemplateConfig.ENABLE_SERVER_INTEGRITY_BYPASS));
+        register(Feature.bool(KEY_ACTK_BYPASS, "Silence CodeStage anti-cheat detectors",
+                TemplateConfig.ENABLE_ACTK_BYPASS));
         register(Feature.number(KEY_DAMAGE_MULTIPLIER, "Damage multi", 1f, 1f, 100f));
         register(Feature.number(KEY_DEFENSE_MULTIPLIER, "Defense multi", 1f, 1f, 100f));
         register(Feature.bool(KEY_GOD_MODE, "God mode", false));

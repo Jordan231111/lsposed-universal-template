@@ -108,7 +108,9 @@ public final class NativeBridge {
                     FeatureState.getDamageMultiplier(),
                     FeatureState.getDefenseMultiplier(),
                     FeatureState.isGodMode(),
-                    FeatureState.isFreeShop());
+                    FeatureState.isFreeShop(),
+                    FeatureRegistry.getBool(FeatureRegistry.KEY_SERVER_INTEGRITY_BYPASS),
+                    FeatureRegistry.getBool(FeatureRegistry.KEY_ACTK_BYPASS));
         } catch (Throwable t) {
             if (TemplateConfig.VERBOSE_LOGS) Log.w(TemplateConfig.LOG_TAG, "nativeSyncFeatureState failed", t);
         }
@@ -128,6 +130,8 @@ public final class NativeBridge {
     // method table in app/src/main/cpp/template_native.cpp.
     private static native int nativeInstallHooks(String packageName, String dataDir);
     private static native void nativeSyncFeatureState(int damageMultiplier, int defenseMultiplier,
-                                                     boolean godMode, boolean freeShop);
+                                                     boolean godMode, boolean freeShop,
+                                                     boolean serverIntegrityBypass,
+                                                     boolean actkBypass);
     private static native String nativeGetShadowHookRecords();
 }

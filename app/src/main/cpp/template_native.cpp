@@ -39,6 +39,10 @@ std::atomic<int> g_damage_multiplier{1};
 std::atomic<int> g_defense_multiplier{1};
 std::atomic<bool> g_god_mode{false};
 std::atomic<bool> g_free_shop{false};
+std::atomic<bool> g_server_integrity_bypass{false};
+std::atomic<bool> g_actk_bypass{false};
+std::atomic<int> g_integrity_check_observed{0};
+std::atomic<int> g_integrity_token_observed{0};
 
 struct Il2CppObject {
     void *klass;
@@ -77,6 +81,10 @@ void *g_orig_utils_check_if_is_enough{nullptr};
 void *g_orig_utils_consume{nullptr};
 void *g_orig_soldier_check_ap{nullptr};
 void *g_orig_soldier_consume_ap{nullptr};
+void *g_orig_rogue_server_code_is_integrity_error{nullptr};
+void *g_orig_rogue_server_code_is_success{nullptr};
+void *g_orig_server_manager_prepare_integrity_movenext{nullptr};
+void *g_orig_server_manager_request_integrity_movenext{nullptr};
 
 enum class TargetSide {
     Unknown,
@@ -103,6 +111,21 @@ enum : uintptr_t {
     kRvaSoldierDataCheckIfApIsEnough = 0x2B53E64,
     kRvaSoldierDataConsume = 0x2B53ED8,
     kRvaBigIntegerCtorDouble = 0x30F0A54,
+    // RogueServerCode.get_IsIntegrityError -> bool. Returning false anywhere a server response
+    // is mis-tagged as integrity-related lets the cloud-save flow continue down the success path
+    // when PIF gives us a passing verdict; if PIF fails this hook becomes a no-op because the
+    // value is already false and we leave it alone.
+    kRvaRogueServerCodeGetIsIntegrityError = 0x31F7DCC,
+    // RogueServerCode.get_IsSuccess -> bool. Force-true only when we're inside a known cloud-save
+    // call path tagged via Java -> ServerIntegrityBypass.armForCloudSave(). Keeping the toggle
+    // gated avoids accidentally hiding genuine non-integrity errors elsewhere.
+    kRvaRogueServerCodeGetIsSuccess = 0x31F7D14,
+    // ServerManager.PrepareIntegrityCheck async state machine MoveNext. Hooked only to record
+    // that the integrity flow ran; the meaningful bypass is on get_IsIntegrityError below.
+    kRvaServerManagerPrepareIntegrityCheckMoveNext = 0x2CB03D8,
+    // ServerManager.RequestIntegrityTokenAsync async state machine MoveNext. Same diagnostic
+    // purpose as PrepareIntegrityCheck above.
+    kRvaServerManagerRequestIntegrityTokenMoveNext = 0x2CB14BC,
 };
 
 bool ends_with(const std::string &value, const char *suffix) {
@@ -364,6 +387,58 @@ bool proxy_soldier_consume_ap(void *self, int cost, const void *method) {
     return SHADOWHOOK_CALL_PREV(proxy_soldier_consume_ap, self, cost, method);
 }
 
+using RogueServerCodeIsIntegrityErrorFn = bool (*)(void *, const void *);
+using RogueServerCodeIsSuccessFn = bool (*)(void *, const void *);
+
+// RogueServerCode.get_IsIntegrityError() override.
+//
+// When ENABLE_SERVER_INTEGRITY_BYPASS is on, we return false unconditionally so the cloud-save
+// flow does not surface the "Failed to register transfer data" toast on a passing verdict that
+// got mis-tagged. When the toggle is off we forward to the original implementation.
+bool proxy_rogue_server_code_is_integrity_error(void *self, const void *method) {
+    SHADOWHOOK_STACK_SCOPE();
+    if (g_server_integrity_bypass.load(std::memory_order_relaxed)) {
+        return false;
+    }
+    return SHADOWHOOK_CALL_PREV(proxy_rogue_server_code_is_integrity_error, self, method);
+}
+
+// RogueServerCode.get_IsSuccess() override.
+//
+// When the bypass is enabled and the original code is an integrity-related error, force the
+// success result so the cloud-save flow short-circuits past the "Failed to register transfer
+// data" popup. Non-integrity errors still pass through unchanged so genuine server errors stay
+// visible.
+bool proxy_rogue_server_code_is_success(void *self, const void *method) {
+    SHADOWHOOK_STACK_SCOPE();
+    bool original = SHADOWHOOK_CALL_PREV(proxy_rogue_server_code_is_success, self, method);
+    if (original) return true;
+    if (!g_server_integrity_bypass.load(std::memory_order_relaxed)) return original;
+    auto integrity_fn = reinterpret_cast<RogueServerCodeIsIntegrityErrorFn>(
+            g_orig_rogue_server_code_is_integrity_error);
+    if (integrity_fn != nullptr && integrity_fn(self, method)) {
+        return true;
+    }
+    return original;
+}
+
+// ServerManager.<PrepareIntegrityCheck>d__113.MoveNext - diagnostic counter only.
+//
+// Hooking the state machine MoveNext is intentionally read-only because the awaitable contract
+// requires the original logic to run to completion. The counter helps tell whether the flow
+// reached this point at all when debugging cloud-save attempts.
+void proxy_server_manager_prepare_integrity_movenext(void *self, const void *method) {
+    SHADOWHOOK_STACK_SCOPE();
+    g_integrity_check_observed.fetch_add(1, std::memory_order_relaxed);
+    SHADOWHOOK_CALL_PREV(proxy_server_manager_prepare_integrity_movenext, self, method);
+}
+
+void proxy_server_manager_request_integrity_movenext(void *self, const void *method) {
+    SHADOWHOOK_STACK_SCOPE();
+    g_integrity_token_observed.fetch_add(1, std::memory_order_relaxed);
+    SHADOWHOOK_CALL_PREV(proxy_server_manager_request_integrity_movenext, self, method);
+}
+
 struct HookSpec {
     const char *name;
     uintptr_t rva;
@@ -396,11 +471,16 @@ bool install_hook(uintptr_t base, const HookSpec &spec) {
 }
 
 void log_recovered_state() {
-    ALOGI("recovered feature state: damage=%d defense=%d god=%d free_shop=%d",
+    ALOGI("recovered feature state: damage=%d defense=%d god=%d free_shop=%d "
+          "server_integrity_bypass=%d actk_bypass=%d integrity_check_obs=%d token_obs=%d",
           g_damage_multiplier.load(std::memory_order_relaxed),
           g_defense_multiplier.load(std::memory_order_relaxed),
           g_god_mode.load(std::memory_order_relaxed) ? 1 : 0,
-          g_free_shop.load(std::memory_order_relaxed) ? 1 : 0);
+          g_free_shop.load(std::memory_order_relaxed) ? 1 : 0,
+          g_server_integrity_bypass.load(std::memory_order_relaxed) ? 1 : 0,
+          g_actk_bypass.load(std::memory_order_relaxed) ? 1 : 0,
+          g_integrity_check_observed.load(std::memory_order_relaxed),
+          g_integrity_token_observed.load(std::memory_order_relaxed));
     ALOGI("old module feature numbers: 0=damage, 1=defense, 2=god mode, 3=free shop");
 }
 
@@ -454,6 +534,20 @@ void log_recovered_state() {
              reinterpret_cast<void *>(proxy_soldier_check_ap), &g_orig_soldier_check_ap},
             {"SoldierData.Consume", kRvaSoldierDataConsume,
              reinterpret_cast<void *>(proxy_soldier_consume_ap), &g_orig_soldier_consume_ap},
+            {"RogueServerCode.get_IsIntegrityError", kRvaRogueServerCodeGetIsIntegrityError,
+             reinterpret_cast<void *>(proxy_rogue_server_code_is_integrity_error),
+             &g_orig_rogue_server_code_is_integrity_error},
+            {"RogueServerCode.get_IsSuccess", kRvaRogueServerCodeGetIsSuccess,
+             reinterpret_cast<void *>(proxy_rogue_server_code_is_success),
+             &g_orig_rogue_server_code_is_success},
+            {"ServerManager.<PrepareIntegrityCheck>.MoveNext",
+             kRvaServerManagerPrepareIntegrityCheckMoveNext,
+             reinterpret_cast<void *>(proxy_server_manager_prepare_integrity_movenext),
+             &g_orig_server_manager_prepare_integrity_movenext},
+            {"ServerManager.<RequestIntegrityTokenAsync>.MoveNext",
+             kRvaServerManagerRequestIntegrityTokenMoveNext,
+             reinterpret_cast<void *>(proxy_server_manager_request_integrity_movenext),
+             &g_orig_server_manager_request_integrity_movenext},
     };
 
     int installed = 0;
@@ -516,11 +610,14 @@ jint native_install_hooks(JNIEnv *env, jclass, jstring package_name, jstring dat
 }
 
 void native_sync_feature_state(JNIEnv *, jclass, jint damage, jint defense,
-                               jboolean god_mode, jboolean free_shop) {
+                               jboolean god_mode, jboolean free_shop,
+                               jboolean server_integrity_bypass, jboolean actk_bypass) {
     g_damage_multiplier.store(damage < 1 ? 1 : damage, std::memory_order_relaxed);
     g_defense_multiplier.store(defense < 1 ? 1 : defense, std::memory_order_relaxed);
     g_god_mode.store(god_mode == JNI_TRUE, std::memory_order_relaxed);
     g_free_shop.store(free_shop == JNI_TRUE, std::memory_order_relaxed);
+    g_server_integrity_bypass.store(server_integrity_bypass == JNI_TRUE, std::memory_order_relaxed);
+    g_actk_bypass.store(actk_bypass == JNI_TRUE, std::memory_order_relaxed);
     log_recovered_state();
 }
 
@@ -537,6 +634,14 @@ jstring native_get_shadowhook_records(JNIEnv *env, jclass) {
     out += "\ndefense=" + std::to_string(g_defense_multiplier.load(std::memory_order_relaxed));
     out += "\ngod=" + std::string(g_god_mode.load(std::memory_order_relaxed) ? "1" : "0");
     out += "\nfree_shop=" + std::string(g_free_shop.load(std::memory_order_relaxed) ? "1" : "0");
+    out += "\nserver_integrity_bypass="
+            + std::string(g_server_integrity_bypass.load(std::memory_order_relaxed) ? "1" : "0");
+    out += "\nactk_bypass="
+            + std::string(g_actk_bypass.load(std::memory_order_relaxed) ? "1" : "0");
+    out += "\nintegrity_check_observed="
+            + std::to_string(g_integrity_check_observed.load(std::memory_order_relaxed));
+    out += "\nintegrity_token_observed="
+            + std::to_string(g_integrity_token_observed.load(std::memory_order_relaxed));
     return env->NewStringUTF(out.c_str());
 }
 
@@ -556,7 +661,7 @@ extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *) {
     static JNINativeMethod methods[] = {
             {"nativeInstallHooks", "(Ljava/lang/String;Ljava/lang/String;)I",
              reinterpret_cast<void *>(native_install_hooks)},
-            {"nativeSyncFeatureState", "(IIZZ)V",
+            {"nativeSyncFeatureState", "(IIZZZZ)V",
              reinterpret_cast<void *>(native_sync_feature_state)},
             {"nativeGetShadowHookRecords", "()Ljava/lang/String;",
              reinterpret_cast<void *>(native_get_shadowhook_records)},

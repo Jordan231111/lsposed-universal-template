@@ -68,14 +68,16 @@ Current native hooks for Rogue with the Dead `3.11.1` arm64:
 - Defense multiplier: player-side `PlayerParams.get_damageTakenRate`, `PlayerScaledParams.get_damageTakenRate`, `UniquePlayerParams.get_damageTakenRate`, plus generic `Params.get_damageTakenRate`.
 - God mode: player-filtered `Fighter.DecreaseHp` and `Fighter.DecreaseHpWithoutSpGuard`.
 - Free shop: `ShopMaster.CalcPrice`, `ShopMaster.GetPriceType`, `ShopMaster.get_IsIAP`, `UseCase_Purchase.CanPurchase`, `UseCase_ViewSeasonalShopMenu.CanPurchase`, `UseCase_GameEvent.CanPurchase`, `Utils.CheckIfIsEnough`, `Utils.Consume`, `SoldierData.CheckIfApIsEnough`, and `SoldierData.Consume`.
+- Integrity bypass: `RogueServerCode.get_IsIntegrityError` (force-false), `RogueServerCode.get_IsSuccess` (force-true on integrity-tagged codes only), plus read-only counters on `ServerManager.<PrepareIntegrityCheck>d__113.MoveNext` and `ServerManager.<RequestIntegrityTokenAsync>d__114.MoveNext`. See `docs/INTEGRITY_BYPASS_NOTES.md`.
 
 Runtime verification on the emulator:
 
 - Old module `net.room6.horizon.com.android.support` is disabled because it crashes this app build while calling `il2cpp_domain_get`.
 - New module `com.jordan.rogue.recovery` is enabled and scoped to `net.room6.horizon`.
-- Debug APK installs and logs `installed 17 recovered hooks`.
+- Debug APK installs and logs `installed 20 recovered hooks` (was 17 before the integrity bypass landed).
 - Frida attach through the patched 17.9.8 server successfully drove the module registry and logcat confirmed native state sync: `damage=5 defense=7 god=1 free_shop=1`.
-- Full gameplay validation is currently blocked on this emulator by PairIP licensing: `LicenseCheckException: Could not bind with the licensing service`.
+- PAIRIP licensing now starts cleanly: `Hooked Application.attach`, `IntegrityBypass installed 6 java hooks`, `PAIRIP SignatureCheck.verifyIntegrity bypassed`, `PAIRIP initializeLicenseCheck bypassed`.
+- Tapping Options > Cloud save > Save now produces the "Transfer data registered" page instead of `ErrorCode:VerifyIntegrityVerdictUnevaluated`. See `docs/INTEGRITY_BYPASS_NOTES.md` for the full layered design (PAIRIP, Play Integrity, ACTk) and the device-side prep (PlayIntegrityFix Magisk module).
 
 ## Suggested Runtime Trace Flow
 

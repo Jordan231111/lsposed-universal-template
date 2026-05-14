@@ -55,6 +55,30 @@ public final class TemplateConfig {
     /** Recovered from the old module: hook MyActivity.onCreate(Bundle) and start from Activity context. */
     public static final boolean ENABLE_ROGUE_ACTIVITY_HOOK = true;
 
+    /**
+     * Bypass PAIRIP (Play Application Integrity Protection) signature/license checks plus the
+     * Java-layer Google Play Integrity surface. Required if you want the app to start cleanly on
+     * a rooted/emulated device where the licensing service bind fails. Cloud-save still depends
+     * on the Play Integrity verdict being PASS, which is handled by the PlayIntegrityFix Magisk
+     * module documented in docs/INTEGRITY_BYPASS_NOTES.md.
+     */
+    public static final boolean ENABLE_INTEGRITY_BYPASS = true;
+
+    /**
+     * Force {@code ServerManager.PrepareIntegrityCheck()} to short-circuit through the native
+     * ShadowHook layer so the IL2CPP code never tries to obtain or transmit a Play Integrity
+     * token. Use this in conjunction with PlayIntegrityFix; if PIF gives the device a passing
+     * verdict, the bypass is unused and harmless.
+     */
+    public static final boolean ENABLE_SERVER_INTEGRITY_BYPASS = true;
+
+    /**
+     * Neutralise CodeStage Anti-Cheat Toolkit detectors (Injection / ObscuredCheating / SpeedHack
+     * / TimeCheating / WallHack). Most builds expose detectors only via IL2CPP so this flag also
+     * gates the native silencing in template_native.cpp.
+     */
+    public static final boolean ENABLE_ACTK_BYPASS = true;
+
     /** Pulled from BuildConfig so release builds strip verbose logs automatically. */
     public static final boolean VERBOSE_LOGS = BuildConfig.VERBOSE_LOGS;
 

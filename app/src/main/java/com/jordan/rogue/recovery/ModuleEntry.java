@@ -10,6 +10,7 @@ import android.os.Looper;
 import android.util.Log;
 
 import com.jordan.rogue.recovery.engine.EngineDetector;
+import com.jordan.rogue.recovery.protection.IntegrityBypass;
 import com.jordan.rogue.recovery.ui.OverlayController;
 
 import java.lang.reflect.Method;
@@ -34,6 +35,7 @@ public final class ModuleEntry extends XposedModule {
     private volatile boolean activityHookInstalled;
     private volatile boolean nativeHookToggleListenerInstalled;
     private volatile boolean nativeHooksStarted;
+    private volatile boolean integrityBypassInstalled;
 
     @Override
     public void onModuleLoaded(ModuleLoadedParam param) {
@@ -74,8 +76,26 @@ public final class ModuleEntry extends XposedModule {
         }
 
         installApplicationAttachHook();
+        installIntegrityBypass(classLoader);
         // Install always; the hook itself checks the registry so users can flip it live.
         installRogueActivityHook(classLoader);
+    }
+
+    private synchronized void installIntegrityBypass(ClassLoader classLoader) {
+        if (integrityBypassInstalled) return;
+        if (!FeatureRegistry.getBool(FeatureRegistry.KEY_INTEGRITY_BYPASS)
+                && !TemplateConfig.ENABLE_INTEGRITY_BYPASS) {
+            return;
+        }
+        integrityBypassInstalled = true;
+        ClassLoader loader = classLoader != null ? classLoader : ModuleEntry.class.getClassLoader();
+        try {
+            IntegrityBypass.install(this, loader);
+        } catch (Throwable t) {
+            if (TemplateConfig.VERBOSE_LOGS) {
+                log(Log.ERROR, TemplateConfig.LOG_TAG, "IntegrityBypass install failed", t);
+            }
+        }
     }
 
     private synchronized void installApplicationAttachHook() {
@@ -158,7 +178,9 @@ public final class ModuleEntry extends XposedModule {
         return FeatureRegistry.KEY_DAMAGE_MULTIPLIER.equals(key)
                 || FeatureRegistry.KEY_DEFENSE_MULTIPLIER.equals(key)
                 || FeatureRegistry.KEY_GOD_MODE.equals(key)
-                || FeatureRegistry.KEY_FREE_SHOP.equals(key);
+                || FeatureRegistry.KEY_FREE_SHOP.equals(key)
+                || FeatureRegistry.KEY_SERVER_INTEGRITY_BYPASS.equals(key)
+                || FeatureRegistry.KEY_ACTK_BYPASS.equals(key);
     }
 
     private synchronized void maybeStartNativeHooks(Context appContext) {
