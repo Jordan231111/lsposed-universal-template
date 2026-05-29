@@ -72,9 +72,9 @@ using Il2CppStringNewFn = void *(*)(const char *);
 Il2CppStringNewFn g_il2cpp_string_new{nullptr};
 uintptr_t g_il2cpp_base{0};
 std::string g_il2cpp_path;
-void *g_orig_il2cpp_init{nullptr};
-void *g_orig_il2cpp_init_utf16{nullptr};
-void *g_orig_il2cpp_runtime_invoke{nullptr};
+std::atomic<void *> g_orig_il2cpp_init{nullptr};
+std::atomic<void *> g_orig_il2cpp_init_utf16{nullptr};
+std::atomic<void *> g_orig_il2cpp_runtime_invoke{nullptr};
 
 struct Il2CppObject {
     void *klass;
@@ -111,48 +111,48 @@ struct Il2CppByteArray {
 using BigIntegerCtorDouble = void (*)(BigInteger *, double, const void *);
 BigIntegerCtorDouble g_big_integer_ctor_double{nullptr};
 
-void *g_orig_monster_damage_taken{nullptr};
-void *g_orig_params_damage_taken{nullptr};
-void *g_orig_player_damage_taken{nullptr};
-void *g_orig_player_scaled_damage_taken{nullptr};
-void *g_orig_unique_player_damage_taken{nullptr};
-void *g_orig_fighter_decrease_hp{nullptr};
-void *g_orig_fighter_decrease_hp_without_sp_guard{nullptr};
-void *g_orig_shop_master_calc_price{nullptr};
-void *g_orig_shop_master_get_price_type{nullptr};
-void *g_orig_shop_master_get_is_iap{nullptr};
-void *g_orig_purchase_can_purchase{nullptr};
-void *g_orig_seasonal_shop_can_purchase{nullptr};
-void *g_orig_game_event_can_purchase{nullptr};
-void *g_orig_utils_check_if_is_enough{nullptr};
-void *g_orig_utils_consume{nullptr};
-void *g_orig_soldier_check_ap{nullptr};
-void *g_orig_soldier_consume_ap{nullptr};
-void *g_orig_rogue_server_code_is_integrity_error{nullptr};
-void *g_orig_rogue_server_code_is_success{nullptr};
-void *g_orig_server_manager_prepare_integrity_movenext{nullptr};
-void *g_orig_server_manager_request_integrity_movenext{nullptr};
-void *g_orig_prepare_integrity_on_success{nullptr};
-void *g_orig_playfab_execute_function{nullptr};
-void *g_orig_playfab_instance_execute_function{nullptr};
-void *g_orig_playfab_http_make_api_call_object{nullptr};
-void *g_orig_playfab_unity_make_api_call{nullptr};
-void *g_orig_playfab_unity_post{nullptr};
-void *g_orig_playfab_unity_on_response{nullptr};
-void *g_orig_playfab_unity_on_error{nullptr};
-void *g_orig_playfab_http_on_api_result{nullptr};
-void *g_orig_integrity_manager_request_token{nullptr};
-void *g_orig_integrity_token_request_ctor{nullptr};
-void *g_orig_integrity_token_response_ctor{nullptr};
-void *g_orig_issue_backup_key_on_success{nullptr};
-void *g_orig_issue_backup_key_on_error{nullptr};
-void *g_orig_verify_backup_key_on_success{nullptr};
-void *g_orig_verify_backup_key_on_error{nullptr};
-void *g_orig_rogue_server_code_ctor{nullptr};
-void *g_orig_server_manager_verify_backup_key_movenext{nullptr};
-void *g_orig_reflect_speed_up{nullptr};
-void *g_orig_switch_game_speed_setup{nullptr};
-void *g_orig_unity_time_set_time_scale{nullptr};
+std::atomic<void *> g_orig_monster_damage_taken{nullptr};
+std::atomic<void *> g_orig_params_damage_taken{nullptr};
+std::atomic<void *> g_orig_player_damage_taken{nullptr};
+std::atomic<void *> g_orig_player_scaled_damage_taken{nullptr};
+std::atomic<void *> g_orig_unique_player_damage_taken{nullptr};
+std::atomic<void *> g_orig_fighter_decrease_hp{nullptr};
+std::atomic<void *> g_orig_fighter_decrease_hp_without_sp_guard{nullptr};
+std::atomic<void *> g_orig_shop_master_calc_price{nullptr};
+std::atomic<void *> g_orig_shop_master_get_price_type{nullptr};
+std::atomic<void *> g_orig_shop_master_get_is_iap{nullptr};
+std::atomic<void *> g_orig_purchase_can_purchase{nullptr};
+std::atomic<void *> g_orig_seasonal_shop_can_purchase{nullptr};
+std::atomic<void *> g_orig_game_event_can_purchase{nullptr};
+std::atomic<void *> g_orig_utils_check_if_is_enough{nullptr};
+std::atomic<void *> g_orig_utils_consume{nullptr};
+std::atomic<void *> g_orig_soldier_check_ap{nullptr};
+std::atomic<void *> g_orig_soldier_consume_ap{nullptr};
+std::atomic<void *> g_orig_rogue_server_code_is_integrity_error{nullptr};
+std::atomic<void *> g_orig_rogue_server_code_is_success{nullptr};
+std::atomic<void *> g_orig_server_manager_prepare_integrity_movenext{nullptr};
+std::atomic<void *> g_orig_server_manager_request_integrity_movenext{nullptr};
+std::atomic<void *> g_orig_prepare_integrity_on_success{nullptr};
+std::atomic<void *> g_orig_playfab_execute_function{nullptr};
+std::atomic<void *> g_orig_playfab_instance_execute_function{nullptr};
+std::atomic<void *> g_orig_playfab_http_make_api_call_object{nullptr};
+std::atomic<void *> g_orig_playfab_unity_make_api_call{nullptr};
+std::atomic<void *> g_orig_playfab_unity_post{nullptr};
+std::atomic<void *> g_orig_playfab_unity_on_response{nullptr};
+std::atomic<void *> g_orig_playfab_unity_on_error{nullptr};
+std::atomic<void *> g_orig_playfab_http_on_api_result{nullptr};
+std::atomic<void *> g_orig_integrity_manager_request_token{nullptr};
+std::atomic<void *> g_orig_integrity_token_request_ctor{nullptr};
+std::atomic<void *> g_orig_integrity_token_response_ctor{nullptr};
+std::atomic<void *> g_orig_issue_backup_key_on_success{nullptr};
+std::atomic<void *> g_orig_issue_backup_key_on_error{nullptr};
+std::atomic<void *> g_orig_verify_backup_key_on_success{nullptr};
+std::atomic<void *> g_orig_verify_backup_key_on_error{nullptr};
+std::atomic<void *> g_orig_rogue_server_code_ctor{nullptr};
+std::atomic<void *> g_orig_server_manager_verify_backup_key_movenext{nullptr};
+std::atomic<void *> g_orig_reflect_speed_up{nullptr};
+std::atomic<void *> g_orig_switch_game_speed_setup{nullptr};
+std::atomic<void *> g_orig_unity_time_set_time_scale{nullptr};
 
 enum class TargetSide {
     Unknown,
@@ -315,8 +315,8 @@ bool read_file_chunk(FILE *f, uint64_t offset, void *buffer, size_t size) {
     return std::fread(buffer, 1, size, f) == size;
 }
 
-uintptr_t resolve_elf_symbol_from_sections(uintptr_t base, const std::string &path,
-                                           const char *symbol) {
+[[gnu::cold]] uintptr_t resolve_elf_symbol_from_sections(uintptr_t base, const std::string &path,
+                                                          const char *symbol) {
     if (base == 0 || path.empty() || symbol == nullptr) return 0;
     FILE *f = std::fopen(path.c_str(), "rb");
     if (f == nullptr) return 0;
@@ -385,10 +385,10 @@ uintptr_t resolve_loaded_symbol(uintptr_t base, const std::string &path, const c
     return 0;
 }
 
-std::string find_loaded_library_path(const char *name, uintptr_t *base_out = nullptr) {
+[[gnu::cold]] std::string find_loaded_library_path(const char *name, uintptr_t *base_out = nullptr) {
     FILE *f = std::fopen("/proc/self/maps", "r");
     if (f == nullptr) return {};
-    char line[1024];
+    char line[4096];
     std::string out;
     uintptr_t best_base = 0;
     uintptr_t fallback_base = 0;
@@ -418,6 +418,7 @@ std::string find_loaded_library_path(const char *name, uintptr_t *base_out = nul
             first_exec_offset = offset;
             first_exec_path = candidate;
         }
+        if (fallback_base != 0 && first_exec_start != 0) break;
     }
     std::fclose(f);
     if (first_exec_start != 0) {
@@ -461,7 +462,7 @@ uintptr_t find_loaded_library_base(const char *name) {
 bool is_executable_address(uintptr_t address) {
     FILE *f = std::fopen("/proc/self/maps", "r");
     if (f == nullptr) return false;
-    char line[1024];
+    char line[4096];
     bool executable = false;
     while (std::fgets(line, sizeof(line), f) != nullptr) {
         unsigned long map_start = 0;
@@ -493,7 +494,7 @@ bool resolve_il2cpp_export(uintptr_t base, const std::string &path, const char *
     return true;
 }
 
-bool resolve_il2cpp_api(uintptr_t base, const std::string &path) {
+[[gnu::cold]] bool resolve_il2cpp_api(uintptr_t base, const std::string &path) {
     bool ok = true;
     ok &= resolve_il2cpp_export(base, path, "il2cpp_domain_get", &g_il2cpp.domain_get);
     ok &= resolve_il2cpp_export(base, path, "il2cpp_domain_get_assemblies",
@@ -663,25 +664,25 @@ bool wait_for_il2cpp_metadata(int attempts, useconds_t sleep_us) {
     return false;
 }
 
-int load_multiplier(const std::atomic<int> &value) {
+int load_multiplier(const std::atomic<int> &value) noexcept {
     int current = value.load(std::memory_order_relaxed);
     return std::clamp(current, 1, 100);
 }
 
-float sanitize_game_speed_multiplier(float value) {
+float sanitize_game_speed_multiplier(float value) noexcept {
     if (!std::isfinite(value) || value < 0.1f) return 1.0f;
     if (value > 100.0f) return 100.0f;
     return value;
 }
 
-bool has_game_speed_override(float value) {
+[[gnu::pure]] bool has_game_speed_override(float value) noexcept {
     return std::fabs(value - 1.0f) > 0.001f;
 }
 
 void apply_launch_game_speed_if_needed(const char *reason);
 void install_after_il2cpp_init(const char *reason);
 
-const char *object_class_name(void *object) {
+[[gnu::pure]] const char *object_class_name(void *object) {
     if (object == nullptr) return "";
     auto *managed = reinterpret_cast<Il2CppObject *>(object);
     auto *klass = reinterpret_cast<Il2CppClassHead *>(managed->klass);
@@ -689,22 +690,22 @@ const char *object_class_name(void *object) {
     return klass->name;
 }
 
-void *object_class(void *object) {
+[[gnu::pure]] void *object_class(void *object) {
     if (object == nullptr) return nullptr;
     return reinterpret_cast<Il2CppObject *>(object)->klass;
 }
 
-void *read_object_field(void *object, ptrdiff_t offset) {
+[[gnu::pure]] void *read_object_field(void *object, ptrdiff_t offset) {
     if (object == nullptr || offset < 0) return nullptr;
     return *reinterpret_cast<void **>(reinterpret_cast<uint8_t *>(object) + offset);
 }
 
-bool read_bool_field(void *object, ptrdiff_t offset) {
+[[gnu::pure]] bool read_bool_field(void *object, ptrdiff_t offset) {
     if (object == nullptr || offset < 0) return false;
     return *reinterpret_cast<uint8_t *>(reinterpret_cast<uint8_t *>(object) + offset) != 0;
 }
 
-int read_int_field(void *object, ptrdiff_t offset, int fallback = 0) {
+[[gnu::pure]] int read_int_field(void *object, ptrdiff_t offset, int fallback = 0) {
     if (object == nullptr || offset < 0) return fallback;
     return *reinterpret_cast<int32_t *>(reinterpret_cast<uint8_t *>(object) + offset);
 }
@@ -793,7 +794,7 @@ void adjust_unboxed_value_type_field(ptrdiff_t &slot, const char *name) {
     }
 }
 
-bool resolve_managed_field_offsets() {
+[[gnu::cold]] bool resolve_managed_field_offsets() {
     bool ok = true;
     ok &= require_field(g_fields.rogue_code_value, "Assembly-CSharp", "",
                         "RogueServerCode", "value");
@@ -1151,7 +1152,7 @@ bool patch_integrity_token_request_project(void *request, const char *source) {
     return changed;
 }
 
-TargetSide side_from_params(void *params) {
+[[gnu::pure]] TargetSide side_from_params(void *params) {
     const char *name = object_class_name(params);
     if (contains(name, "MonsterParams")) return TargetSide::Enemy;
     if (contains(name, "PlayerParams") || contains(name, "PlayerScaledParams")
@@ -1165,7 +1166,7 @@ TargetSide side_from_params(void *params) {
     return TargetSide::Unknown;
 }
 
-TargetSide side_from_fighter(void *fighter) {
+[[gnu::pure]] TargetSide side_from_fighter(void *fighter) {
     const char *name = object_class_name(fighter);
     if (contains(name, "MonsterFighter")) return TargetSide::Enemy;
     if (contains(name, "PlayerFighter") || contains(name, "UniquePlayerFighter")) {
@@ -1174,10 +1175,10 @@ TargetSide side_from_fighter(void *fighter) {
     return side_from_params(read_object_field(fighter, g_fields.fighter_param));
 }
 
-float adjusted_damage_taken_rate(float original, TargetSide side) {
-    if (!std::isfinite(original)) return original;
+[[gnu::hot]] float adjusted_damage_taken_rate(float original, TargetSide side) {
+    if (!std::isfinite(original)) [[unlikely]] return original;
     if (side == TargetSide::Player) {
-        if (g_god_mode.load(std::memory_order_relaxed)) return 0.0f;
+        if (g_god_mode.load(std::memory_order_relaxed)) [[unlikely]] return 0.0f;
         int defense = load_multiplier(g_defense_multiplier);
         return defense > 1 ? original / static_cast<float>(defense) : original;
     }
@@ -1196,49 +1197,49 @@ BigInteger make_zero_big_integer() {
     return out;
 }
 
-float proxy_monster_damage_taken(void *self, const void *method) {
+[[gnu::hot]] float proxy_monster_damage_taken(void *self, const void *method) {
     SHADOWHOOK_STACK_SCOPE();
     float original = SHADOWHOOK_CALL_PREV(proxy_monster_damage_taken, self, method);
     return adjusted_damage_taken_rate(original, TargetSide::Enemy);
 }
 
-float proxy_params_damage_taken(void *self, const void *method) {
+[[gnu::hot]] float proxy_params_damage_taken(void *self, const void *method) {
     SHADOWHOOK_STACK_SCOPE();
     float original = SHADOWHOOK_CALL_PREV(proxy_params_damage_taken, self, method);
     return adjusted_damage_taken_rate(original, side_from_params(self));
 }
 
-float proxy_player_damage_taken(void *self, const void *method) {
+[[gnu::hot]] float proxy_player_damage_taken(void *self, const void *method) {
     SHADOWHOOK_STACK_SCOPE();
     float original = SHADOWHOOK_CALL_PREV(proxy_player_damage_taken, self, method);
     return adjusted_damage_taken_rate(original, TargetSide::Player);
 }
 
-float proxy_player_scaled_damage_taken(void *self, const void *method) {
+[[gnu::hot]] float proxy_player_scaled_damage_taken(void *self, const void *method) {
     SHADOWHOOK_STACK_SCOPE();
     float original = SHADOWHOOK_CALL_PREV(proxy_player_scaled_damage_taken, self, method);
     return adjusted_damage_taken_rate(original, TargetSide::Player);
 }
 
-float proxy_unique_player_damage_taken(void *self, const void *method) {
+[[gnu::hot]] float proxy_unique_player_damage_taken(void *self, const void *method) {
     SHADOWHOOK_STACK_SCOPE();
     float original = SHADOWHOOK_CALL_PREV(proxy_unique_player_damage_taken, self, method);
     return adjusted_damage_taken_rate(original, TargetSide::Player);
 }
 
-void proxy_fighter_decrease_hp(void *self, BigInteger value, const void *method) {
+[[gnu::hot]] void proxy_fighter_decrease_hp(void *self, BigInteger value, const void *method) {
     SHADOWHOOK_STACK_SCOPE();
     if (g_god_mode.load(std::memory_order_relaxed)
-            && side_from_fighter(self) == TargetSide::Player) {
+            && side_from_fighter(self) == TargetSide::Player) [[unlikely]] {
         return;
     }
     SHADOWHOOK_CALL_PREV(proxy_fighter_decrease_hp, self, value, method);
 }
 
-void proxy_fighter_decrease_hp_without_sp_guard(void *self, BigInteger value, const void *method) {
+[[gnu::hot]] void proxy_fighter_decrease_hp_without_sp_guard(void *self, BigInteger value, const void *method) {
     SHADOWHOOK_STACK_SCOPE();
     if (g_god_mode.load(std::memory_order_relaxed)
-            && side_from_fighter(self) == TargetSide::Player) {
+            && side_from_fighter(self) == TargetSide::Player) [[unlikely]] {
         return;
     }
     SHADOWHOOK_CALL_PREV(proxy_fighter_decrease_hp_without_sp_guard, self, value, method);
@@ -1407,9 +1408,11 @@ void proxy_rogue_server_code_ctor(void *self, int value, void *name, const void 
     SHADOWHOOK_CALL_PREV(proxy_rogue_server_code_ctor, self, value, name, method);
     if (value == 0 && g_rogue_server_code_success.load(std::memory_order_acquire) == nullptr) {
         g_rogue_server_code_success.store(self, std::memory_order_release);
+#if TEMPLATE_VERBOSE_LOGS
         std::string label = managed_string_to_ascii(name);
         ALOGI("RogueServerCode.Success captured @ %p name=%s",
               self, label.empty() ? "<empty>" : label.c_str());
+#endif
     }
 }
 
@@ -1540,17 +1543,19 @@ void proxy_verify_backup_key_on_error(void *self, void *error, const void *metho
 //     deliberate decelerations).
 // This keeps the in-game fast button working as the trigger; our hook just promotes its choice
 // to whatever the slider currently says.
-void proxy_unity_time_set_time_scale(float value, const void *method) {
+[[gnu::hot]] void proxy_unity_time_set_time_scale(float value, const void *method) {
     SHADOWHOOK_STACK_SCOPE();
     float multiplier = g_game_speed_multiplier.load(std::memory_order_relaxed);
     float effective = value;
-    if (has_game_speed_override(multiplier) && value >= 1.0f) {
+    if (has_game_speed_override(multiplier) && value >= 1.0f) [[unlikely]] {
         effective = multiplier;
-        g_launch_game_speed_applied.store(true, std::memory_order_release);
+        if (!g_launch_game_speed_applied.load(std::memory_order_relaxed)) {
+            g_launch_game_speed_applied.store(true, std::memory_order_release);
+        }
     }
     static std::atomic<int> hits{0};
     int previous = hits.fetch_add(1, std::memory_order_relaxed);
-    if (previous < 20) {
+    if (previous < 20) [[unlikely]] {
         __android_log_print(ANDROID_LOG_INFO, "AppRuntime",
                             "Time.set_timeScale hit #%d incoming=%.3f effective=%.3f",
                             previous + 1, value, effective);
@@ -1562,14 +1567,15 @@ void proxy_unity_time_set_time_scale(float value, const void *method) {
 // same frame. Going through the trampoline (rather than the proxy) avoids hooking ourselves
 // recursively and skips the >=1.0 guard so we can apply any value the user picks.
 bool apply_unity_time_scale(float value) {
-    if (g_orig_unity_time_set_time_scale == nullptr) {
+    void *orig = g_orig_unity_time_set_time_scale.load(std::memory_order_acquire);
+    if (orig == nullptr) {
         __android_log_print(ANDROID_LOG_WARN, "AppRuntime",
                             "apply_unity_time_scale skipped: orig not yet hooked (value=%.3f)",
                             value);
         return false;
     }
     using SetTimeScaleFn = void (*)(float, const void *);
-    auto fn = reinterpret_cast<SetTimeScaleFn>(g_orig_unity_time_set_time_scale);
+    auto fn = reinterpret_cast<SetTimeScaleFn>(orig);
     __android_log_print(ANDROID_LOG_INFO, "AppRuntime",
                         "apply_unity_time_scale calling trampoline @ %p with value=%.3f",
                         fn, value);
@@ -1639,9 +1645,10 @@ void proxy_switch_game_speed_setup_new_mode(void *self, void *world, const void 
     float multiplier = g_game_speed_multiplier.load(std::memory_order_relaxed);
     if (has_game_speed_override(multiplier)) {
         write_switch_game_speed_cache(multiplier);
-        if (g_orig_reflect_speed_up != nullptr) {
+        void *reflect_orig = g_orig_reflect_speed_up.load(std::memory_order_acquire);
+        if (reflect_orig != nullptr) {
             using ReflectFn = void (*)(void *, int, const void *);
-            auto fn = reinterpret_cast<ReflectFn>(g_orig_reflect_speed_up);
+            auto fn = reinterpret_cast<ReflectFn>(reflect_orig);
             fn(self, 2, nullptr);  // SuperFast - so the speed-type badge says "fast"
         }
         if (apply_unity_time_scale(multiplier)) {
@@ -1734,6 +1741,10 @@ void *proxy_playfab_unity_post(void *self, void *req_container, const void *meth
 void proxy_playfab_unity_on_response(void *self, void *response, void *req_container,
                                      const void *method) {
     SHADOWHOOK_STACK_SCOPE();
+    if (!TEMPLATE_VERBOSE_LOGS) {
+        SHADOWHOOK_CALL_PREV(proxy_playfab_unity_on_response, self, response, req_container, method);
+        return;
+    }
     static std::atomic<int> hits{0};
     int previous = hits.fetch_add(1, std::memory_order_relaxed);
     if (previous < 24) ALOGI("UnityHttp.OnResponse hit #%d responseLen=%d req=%p",
@@ -1750,6 +1761,10 @@ void proxy_playfab_unity_on_response(void *self, void *response, void *req_conta
 void proxy_playfab_unity_on_error(void *self, void *error, void *req_container,
                                   const void *method) {
     SHADOWHOOK_STACK_SCOPE();
+    if (!TEMPLATE_VERBOSE_LOGS) {
+        SHADOWHOOK_CALL_PREV(proxy_playfab_unity_on_error, self, error, req_container, method);
+        return;
+    }
     static std::atomic<int> hits{0};
     int previous = hits.fetch_add(1, std::memory_order_relaxed);
     if (previous < 24) ALOGW("UnityHttp.OnError hit #%d errorLen=%d req=%p",
@@ -1782,7 +1797,7 @@ struct HookSpec {
     const char *method;
     int param_count;
     void *proxy;
-    void **original;
+    std::atomic<void *> *original;
     bool required;
 };
 
@@ -1811,10 +1826,11 @@ bool install_hook(const HookSpec &spec) {
     if (target == nullptr) {
         return false;
     }
+    void *raw_orig = nullptr;
     void *stub = shadowhook_hook_func_addr_2(
             target,
             spec.proxy,
-            spec.original,
+            &raw_orig,
             SHADOWHOOK_HOOK_WITH_SHARED_MODE | SHADOWHOOK_HOOK_RECORD,
             kTargetLibrary,
             spec.name);
@@ -1824,11 +1840,14 @@ bool install_hook(const HookSpec &spec) {
               shadowhook_to_errmsg(err));
         return false;
     }
+    if (spec.original != nullptr) {
+        spec.original->store(raw_orig, std::memory_order_release);
+    }
     ALOGI("hooked %s target=%p stub=%p", spec.name, target, stub);
     return true;
 }
 
-void log_recovered_state() {
+[[gnu::cold]] void log_recovered_state() {
     ALOGI("recovered feature state: damage=%d defense=%d god=%d free_shop=%d "
           "server_integrity_bypass=%d actk_bypass=%d forge_backup_success=%d game_speed=%.2f "
           "integrity_check_obs=%d token_obs=%d project_number_injected=%d "
@@ -1848,7 +1867,7 @@ void log_recovered_state() {
     ALOGI("old module feature numbers: 0=damage, 1=defense, 2=god mode, 3=free shop");
 }
 
-[[maybe_unused]] int install_recovered_hooks() {
+[[maybe_unused]] [[gnu::cold]] int install_recovered_hooks() {
     void *big_integer_class = find_il2cpp_class("Assembly-CSharp", "", "BigInteger");
     void *big_integer_ctor = find_il2cpp_method(big_integer_class, ".ctor", 1);
     g_big_integer_ctor_double = reinterpret_cast<BigIntegerCtorDouble>(
@@ -2080,16 +2099,17 @@ void *proxy_il2cpp_runtime_invoke(void *method, void *obj, void **params, void *
     return result;
 }
 
-bool install_bootstrap_hook(const char *symbol, void *proxy, void **original) {
+bool install_bootstrap_hook(const char *symbol, void *proxy, std::atomic<void *> *original) {
     uintptr_t address = resolve_loaded_symbol(g_il2cpp_base, g_il2cpp_path, symbol);
     if (address == 0) {
         ALOGW("bootstrap export unresolved: %s", symbol);
         return false;
     }
+    void *raw_orig = nullptr;
     void *stub = shadowhook_hook_func_addr_2(
             reinterpret_cast<void *>(address),
             proxy,
-            original,
+            &raw_orig,
             SHADOWHOOK_HOOK_WITH_SHARED_MODE | SHADOWHOOK_HOOK_RECORD,
             kTargetLibrary,
             symbol);
@@ -2099,12 +2119,15 @@ bool install_bootstrap_hook(const char *symbol, void *proxy, void **original) {
               reinterpret_cast<void *>(address), err, shadowhook_to_errmsg(err));
         return false;
     }
+    if (original != nullptr) {
+        original->store(raw_orig, std::memory_order_release);
+    }
     ALOGI("bootstrap hooked %s target=%p stub=%p", symbol,
           reinterpret_cast<void *>(address), stub);
     return true;
 }
 
-[[maybe_unused]] bool install_il2cpp_bootstrap_hooks() {
+[[maybe_unused]] [[gnu::cold]] bool install_il2cpp_bootstrap_hooks() {
     bool any = false;
     any |= install_bootstrap_hook("il2cpp_init",
                                   reinterpret_cast<void *>(proxy_il2cpp_init),
@@ -2118,7 +2141,7 @@ bool install_bootstrap_hook(const char *symbol, void *proxy, void **original) {
     return any;
 }
 
-void install_after_il2cpp_init(const char *reason) {
+[[gnu::cold]] void install_after_il2cpp_init(const char *reason) {
     std::call_once(g_il2cpp_metadata_install_once, [reason]() {
         [[maybe_unused]] const char *install_reason =
                 reason != nullptr ? reason : "runtime-ready";
@@ -2150,7 +2173,7 @@ void install_after_il2cpp_init(const char *reason) {
     });
 }
 
-void install_once(const std::string &package_name, const std::string &data_dir) {
+[[gnu::cold]] void install_once(const std::string &package_name, const std::string &data_dir) {
     ALOGI("native recovered install package=%s dataDir=%s shadowhook=%s",
           package_name.c_str(), data_dir.c_str(), shadowhook_get_version());
 
@@ -2186,18 +2209,9 @@ void install_once(const std::string &package_name, const std::string &data_dir) 
 #endif
 }
 
-std::string jstring_to_string(JNIEnv *env, jstring value) {
-    if (value == nullptr) return {};
-    const char *chars = env->GetStringUTFChars(value, nullptr);
-    if (chars == nullptr) return {};
-    std::string out(chars);
-    env->ReleaseStringUTFChars(value, chars);
-    return out;
-}
-
 jint native_install_hooks(JNIEnv *env, jclass, jstring package_name, jstring data_dir) {
-    std::string package = jstring_to_string(env, package_name);
-    std::string data = jstring_to_string(env, data_dir);
+    std::string package = native_utils::jstring_to_string(env, package_name);
+    std::string data = native_utils::jstring_to_string(env, data_dir);
     std::call_once(g_install_once, install_once, package, data);
     return g_install_result.load(std::memory_order_relaxed);
 }
@@ -2246,7 +2260,7 @@ void native_set_game_speed_multiplier(JNIEnv *, jclass, jfloat value) {
     }
 }
 
-jstring native_get_shadowhook_records(JNIEnv *env, jclass) {
+[[gnu::cold]] jstring native_get_shadowhook_records(JNIEnv *env, jclass) {
     char *records = shadowhook_get_records(SHADOWHOOK_RECORD_ITEM_ALL);
     std::string out;
     if (records != nullptr) {
@@ -2254,6 +2268,7 @@ jstring native_get_shadowhook_records(JNIEnv *env, jclass) {
         std::free(records);
     }
     if (out.empty()) out = "No ShadowHook records yet";
+    out.reserve(out.size() + 2048);
     out += "\ninstall_result=" + std::to_string(g_install_result.load(std::memory_order_relaxed));
     out += "\ndamage=" + std::to_string(g_damage_multiplier.load(std::memory_order_relaxed));
     out += "\ndefense=" + std::to_string(g_defense_multiplier.load(std::memory_order_relaxed));

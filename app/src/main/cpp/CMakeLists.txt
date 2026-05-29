@@ -25,11 +25,13 @@ target_compile_options(rogue_recovery PRIVATE
         -Wall -Wextra -Wno-unused-parameter
         -ffunction-sections -fdata-sections
         -fno-rtti -fno-exceptions
+        $<$<CONFIG:Release,RelWithDebInfo,MinSizeRel>:-fmerge-all-constants>
 )
 
 target_link_options(rogue_recovery PRIVATE
         -Wl,--gc-sections
         -Wl,--exclude-libs,ALL
+        -Wl,--icf=safe
 )
 
 target_link_libraries(rogue_recovery PRIVATE

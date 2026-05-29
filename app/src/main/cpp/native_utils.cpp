@@ -37,9 +37,10 @@ struct Mapping {
 
 std::vector<Mapping> read_maps() {
     std::vector<Mapping> out;
+    out.reserve(1024);
     FILE *f = std::fopen("/proc/self/maps", "r");
     if (f == nullptr) return out;
-    char line[1024];
+    char line[4096];
     while (std::fgets(line, sizeof(line), f) != nullptr) {
         unsigned long start = 0;
         unsigned long end = 0;
@@ -61,15 +62,6 @@ std::vector<Mapping> read_maps() {
         out.push_back(std::move(m));
     }
     std::fclose(f);
-    return out;
-}
-
-std::string jstring_to_string(JNIEnv *env, jstring value) {
-    if (value == nullptr) return {};
-    const char *chars = env->GetStringUTFChars(value, nullptr);
-    if (chars == nullptr) return {};
-    std::string out(chars);
-    env->ReleaseStringUTFChars(value, chars);
     return out;
 }
 
@@ -102,7 +94,7 @@ const Mapping *containing_mapping(const std::vector<Mapping> &maps, uintptr_t ad
 
 struct Pattern {
     std::vector<uint8_t> bytes;
-    std::vector<bool> mask;
+    std::vector<uint8_t> mask;
 };
 
 bool is_hex_char(char c) {
@@ -118,7 +110,7 @@ bool parse_pattern(const std::string &pattern, Pattern &out) {
         if (*p == '\0') break;
         if (*p == '?') {
             out.bytes.push_back(0);
-            out.mask.push_back(false);
+            out.mask.push_back(0);
             ++p;
             if (*p == '?') ++p;
             continue;
@@ -133,7 +125,7 @@ bool parse_pattern(const std::string &pattern, Pattern &out) {
         long byte = std::strtol(hex, &end, 16);
         if (end == hex || byte < 0 || byte > 0xFF) return false;
         out.bytes.push_back(static_cast<uint8_t>(byte));
-        out.mask.push_back(true);
+        out.mask.push_back(1);
         p += 2;
     }
     return !out.bytes.empty();
@@ -250,9 +242,7 @@ jboolean native_write_memory(JNIEnv *env, jclass, jlong address_j, jbyteArray da
         return JNI_FALSE;
     }
 
-    std::vector<jbyte> buffer(static_cast<std::size_t>(length));
-    env->GetByteArrayRegion(data_j, 0, length, buffer.data());
-    std::memcpy(reinterpret_cast<void *>(address), buffer.data(), static_cast<std::size_t>(length));
+    env->GetByteArrayRegion(data_j, 0, length, reinterpret_cast<jbyte *>(address));
 
     int orig_prot = 0;
     if (m->perms[0] == 'r') orig_prot |= PROT_READ;
@@ -269,6 +259,15 @@ jboolean native_write_memory(JNIEnv *env, jclass, jlong address_j, jbyteArray da
 }
 
 }  // namespace
+
+std::string jstring_to_string(JNIEnv *env, jstring value) {
+    if (value == nullptr) return {};
+    const char *chars = env->GetStringUTFChars(value, nullptr);
+    if (chars == nullptr) return {};
+    std::string out(chars);
+    env->ReleaseStringUTFChars(value, chars);
+    return out;
+}
 
 bool register_natives(JNIEnv *env) {
     jclass cls = env->FindClass("com/jordan/rogue/recovery/NativeUtils");
