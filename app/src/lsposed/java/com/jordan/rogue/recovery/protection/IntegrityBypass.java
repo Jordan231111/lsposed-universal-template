@@ -89,7 +89,10 @@ public final class IntegrityBypass {
         hooks += hookPlayIntegrityFactory(module, classLoader);
         hooks += hookPlayIntegrityManager(module, classLoader);
         hooks += hookPlayIntegrityResponse(module, classLoader);
-        hooks += hookActkDetectors(module, classLoader);
+        // Anti-Cheat Toolkit detectors are pure IL2CPP/C# types (CodeStage.AntiCheat.Detectors.*),
+        // never Java classes, so a Java-side Class.forName/hook can never resolve them. ACTk is
+        // neutralised natively in template_native.cpp via the shared OnCheatingDetected report sink
+        // (gated on the actk_bypass toggle). No Java hook is attempted here by design.
 
         FeatureState.setLastMessage("IntegrityBypass installed " + hooks + " java hooks");
         if (TemplateConfig.VERBOSE_LOGS) {
@@ -478,43 +481,11 @@ public final class IntegrityBypass {
         return installed;
     }
 
-    private static int hookActkDetectors(XposedModule module, ClassLoader classLoader) {
-        int installed = 0;
-        String[] detectorClasses = {
-                "CodeStage.AntiCheat.Detectors.InjectionDetector",
-                "CodeStage.AntiCheat.Detectors.ObscuredCheatingDetector",
-                "CodeStage.AntiCheat.Detectors.SpeedHackDetector",
-                "CodeStage.AntiCheat.Detectors.TimeCheatingDetector",
-                "CodeStage.AntiCheat.Detectors.WallHackDetector"
-        };
-        for (String name : detectorClasses) {
-            try {
-                Class<?> cls = Class.forName(name, false, classLoader);
-                for (Method m : cls.getDeclaredMethods()) {
-                    if ("OnCheatingDetected".equals(m.getName())
-                            || "OnDetected".equals(m.getName())) {
-                        m.setAccessible(true);
-                        module.hook(m)
-                                .setPriority(XposedInterface.PRIORITY_HIGHEST)
-                                .setExceptionMode(XposedInterface.ExceptionMode.PROTECTIVE)
-                                .intercept(chain -> {
-                                    if (TemplateConfig.VERBOSE_LOGS) {
-                                        module.log(Log.INFO, TAG,
-                                                "ACTk detector callback silenced: " + name);
-                                    }
-                                    return null;
-                                });
-                        installed++;
-                    }
-                }
-            } catch (Throwable ignored) {
-                // ACTk Java glue is only present when the ACTk Android plugin is bundled in
-                // Java. Most pure-IL2CPP builds expose detectors through native code only -
-                // those are handled in template_native.cpp.
-            }
-        }
-        return installed;
-    }
+    // NOTE: a Java-side ACTk detector hook used to live here. It was removed because
+    // CodeStage.AntiCheat.Detectors.* are IL2CPP/C# types, never loadable as Java classes, so
+    // Class.forName always threw and the method installed zero hooks. ACTk is now neutralised
+    // natively (template_native.cpp: proxy_actk_on_cheating_detected on the shared
+    // ACTkDetectorBase<T>.OnCheatingDetected sink, gated on the actk_bypass toggle).
 
     /**
      * Construct a synthetic, "passing" PAIRIP license payload {@link Bundle}. Kept available for

@@ -7,6 +7,9 @@ local.properties
 .DS_Store
 captures/
 artifacts/
+# Reverse-engineering working set (multi-GB il2cpp dumps, APK splits, target binaries).
+# Kept on disk alongside the module for analysis, never committed.
+re/
 tools/lspatch-*/
 .externalNativeBuild/
 .cxx/

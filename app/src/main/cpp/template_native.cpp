@@ -153,6 +153,10 @@ std::atomic<void *> g_orig_server_manager_verify_backup_key_movenext{nullptr};
 std::atomic<void *> g_orig_reflect_speed_up{nullptr};
 std::atomic<void *> g_orig_switch_game_speed_setup{nullptr};
 std::atomic<void *> g_orig_unity_time_set_time_scale{nullptr};
+// Anti-Cheat Toolkit (CodeStage) cheat-report chokepoint. ACTk routes every detector
+// (Speed/Obscured/Injection/Time/WallHack) through the shared generic base method
+// ACTkDetectorBase<T>.OnCheatingDetected(); suppressing it neutralises the whole report path.
+std::atomic<void *> g_orig_actk_on_cheating_detected{nullptr};
 
 enum class TargetSide {
     Unknown,
@@ -1316,6 +1320,30 @@ bool proxy_rogue_server_code_is_integrity_error(void *self, const void *method) 
     return SHADOWHOOK_CALL_PREV(proxy_rogue_server_code_is_integrity_error, self, method);
 }
 
+// CodeStage.AntiCheat.Detectors.ACTkDetectorBase<T>.OnCheatingDetected().
+//
+// This is the single sink every ACTk detector funnels into when it trips: it sets
+// IsCheatDetected, fires the user CheatDetected callback (which a title can wire to a server
+// flag / kick), and optionally disposes the detector. The detectors themselves keep running;
+// we only swallow the *report* so no callback ever fires and IsCheatDetected stays false.
+//
+// Gated on g_actk_bypass so the published toggle stays meaningful: OFF preserves the original
+// report exactly (we forward via CALL_PREV), ON suppresses it. Installed as a non-required hook
+// because ACTk may be absent or the detectors may never be armed in a given title; resolution
+// failure is logged and ignored rather than failing the whole install.
+//
+// Note: the module's own value cheats (method-return hooks) and the timeScale speed override do
+// not trip ACTk in the first place (Obscured detector watches encrypted-memory mismatch; Speed
+// detector watches real wall-clocks, not Time.timeScale). This hook is defense-in-depth: it
+// covers a title enabling server-side cheat reporting, or the operator switching to memory edits.
+void proxy_actk_on_cheating_detected(void *self, const void *method) {
+    SHADOWHOOK_STACK_SCOPE();
+    if (g_actk_bypass.load(std::memory_order_relaxed)) {
+        return;  // swallow the detection report
+    }
+    SHADOWHOOK_CALL_PREV(proxy_actk_on_cheating_detected, self, method);
+}
+
 // RogueServerCode.get_IsSuccess() guard.
 //
 // Returns the original result. We also opportunistically capture the Success singleton here: the
@@ -2059,6 +2087,15 @@ bool install_hook(const HookSpec &spec) {
              "Assembly-CSharp", "", "RogueServerCode", nullptr, ".ctor", 2,
              reinterpret_cast<void *>(proxy_rogue_server_code_ctor),
              &g_orig_rogue_server_code_ctor, true},
+            // Anti-Cheat Toolkit report sink. Resolved through the concrete detector class;
+            // il2cpp_class_get_method_from_name walks to the inherited generic base method, whose
+            // shared (ref-type instantiation) implementation backs every detector. Not required:
+            // ACTk may be absent / unarmed, in which case this silently does not install.
+            {"ACTkDetectorBase.OnCheatingDetected",
+             "ACTk.Runtime", "CodeStage.AntiCheat.Detectors", "ObscuredCheatingDetector", nullptr,
+             "OnCheatingDetected", 0,
+             reinterpret_cast<void *>(proxy_actk_on_cheating_detected),
+             &g_orig_actk_on_cheating_detected, false},
     };
 
     int installed = 0;
