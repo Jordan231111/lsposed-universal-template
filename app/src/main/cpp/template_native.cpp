@@ -645,6 +645,150 @@ void *find_il2cpp_method(void *klass, const char *method_name, int param_count) 
     return nullptr;
 }
 
+// ===========================================================================
+// Ordinal-independent resolution of Roslyn compiler-generated nested types.
+//
+// async methods, capturing lambdas, and local functions compile to hidden
+// types/methods named by *method ordinal*:
+//     <Method>d__N            (async state machine)
+//     <>c__DisplayClassN_M    (lambda-capture closure)
+//     <Method>g__Local|N      (local function)
+// N is the position of the containing method within its declaring type, so it
+// renumbers whenever a method is added/removed/reordered earlier in that type
+// (here: ServerManager) - even though the embedded *method name* is unchanged.
+//
+// These helpers re-resolve such types/methods by the stable name fragment,
+// ignoring the ordinal. They run ONLY as a fallback after the exact-name lookup
+// misses, so the fast path and current-build behaviour are unchanged; the
+// fallback simply keeps the integrity/backup hooks + fields resolving across a
+// future version that only shuffles ServerManager's method order. Nested types
+// are enumerated via the image-wide class walk filtered by declaring type
+// (il2cpp_class_get_nested_types is not among the resolved exports); this is a
+// cold install-time path, so the O(classes) scan is acceptable.
+// ===========================================================================
+
+bool string_has_prefix(const char *s, const char *prefix) {
+    if (s == nullptr || prefix == nullptr) return false;
+    return std::strncmp(s, prefix, std::strlen(prefix)) == 0;
+}
+
+// "<VerifyBackupKeyAsync>d__119" -> "<VerifyBackupKeyAsync>d__"  (empty if not a state machine).
+std::string state_machine_name_prefix(const char *class_name) {
+    if (class_name == nullptr) return {};
+    const char *p = std::strstr(class_name, ">d__");
+    if (p == nullptr) return {};
+    return std::string(class_name, static_cast<size_t>(p - class_name) + 4);  // through ">d__"
+}
+
+bool is_display_class_name(const char *class_name) {
+    return string_has_prefix(class_name, "<>c__DisplayClass");
+}
+
+// "<IssueBackupKeyAsync>g__OnSuccess|0" -> "<IssueBackupKeyAsync>g__"  (the owning-closure key,
+// shared by every local function of that source method; empty if not a g__ name).
+std::string owning_method_g_prefix(const char *method_name) {
+    if (method_name == nullptr) return {};
+    const char *p = std::strstr(method_name, ">g__");
+    if (p == nullptr) return {};
+    return std::string(method_name, static_cast<size_t>(p - method_name) + 4);  // through ">g__"
+}
+
+// "<IssueBackupKeyAsync>g__OnSuccess|0" -> "<IssueBackupKeyAsync>g__OnSuccess"  (drops the |N
+// local-function ordinal; empty if not a g__ name).
+std::string local_function_name_prefix(const char *method_name) {
+    if (method_name == nullptr || std::strstr(method_name, ">g__") == nullptr) return {};
+    const char *bar = std::strrchr(method_name, '|');
+    if (bar == nullptr) return std::string(method_name);
+    return std::string(method_name, static_cast<size_t>(bar - method_name));
+}
+
+bool class_has_method_with_prefix(void *klass, const char *method_prefix) {
+    if (klass == nullptr || method_prefix == nullptr || g_il2cpp.class_get_methods == nullptr
+            || g_il2cpp.method_get_name == nullptr) {
+        return false;
+    }
+    void *iter = nullptr;
+    while (void *method = g_il2cpp.class_get_methods(klass, &iter)) {
+        if (string_has_prefix(g_il2cpp.method_get_name(method), method_prefix)) return true;
+    }
+    return false;
+}
+
+// Nested type of `parent` whose own name starts with `name_prefix`.
+void *find_nested_type_by_name_prefix(void *image, void *parent, const char *name_prefix) {
+    if (image == nullptr || parent == nullptr || name_prefix == nullptr
+            || g_il2cpp.image_get_class_count == nullptr || g_il2cpp.image_get_class == nullptr
+            || g_il2cpp.class_get_declaring_type == nullptr || g_il2cpp.class_get_name == nullptr) {
+        return nullptr;
+    }
+    size_t count = g_il2cpp.image_get_class_count(image);
+    if (count > 200000) return nullptr;
+    for (size_t i = 0; i < count; ++i) {
+        void *klass = g_il2cpp.image_get_class(image, i);
+        if (klass == nullptr || g_il2cpp.class_get_declaring_type(klass) != parent) continue;
+        if (string_has_prefix(g_il2cpp.class_get_name(klass), name_prefix)) return klass;
+    }
+    return nullptr;
+}
+
+// Nested type of `parent` that declares a method whose name starts with `method_prefix`.
+// Disambiguates <>c__DisplayClassN_0 closures (whose own names carry no method hint) by the
+// local function they own, e.g. "<IssueBackupKeyAsync>g__".
+void *find_nested_type_owning_method_prefix(void *image, void *parent, const char *method_prefix) {
+    if (image == nullptr || parent == nullptr || method_prefix == nullptr
+            || g_il2cpp.image_get_class_count == nullptr || g_il2cpp.image_get_class == nullptr
+            || g_il2cpp.class_get_declaring_type == nullptr) {
+        return nullptr;
+    }
+    size_t count = g_il2cpp.image_get_class_count(image);
+    if (count > 200000) return nullptr;
+    for (size_t i = 0; i < count; ++i) {
+        void *klass = g_il2cpp.image_get_class(image, i);
+        if (klass == nullptr || g_il2cpp.class_get_declaring_type(klass) != parent) continue;
+        if (class_has_method_with_prefix(klass, method_prefix)) return klass;
+    }
+    return nullptr;
+}
+
+// Method of `klass` whose name starts with `name_prefix` and takes `param_count` params.
+void *find_il2cpp_method_by_prefix(void *klass, const char *name_prefix, int param_count) {
+    if (klass == nullptr || name_prefix == nullptr || g_il2cpp.class_get_methods == nullptr
+            || g_il2cpp.method_get_name == nullptr || g_il2cpp.method_get_param_count == nullptr) {
+        return nullptr;
+    }
+    void *iter = nullptr;
+    while (void *method = g_il2cpp.class_get_methods(klass, &iter)) {
+        if (!string_has_prefix(g_il2cpp.method_get_name(method), name_prefix)) continue;
+        if (static_cast<int>(g_il2cpp.method_get_param_count(method)) == param_count) return method;
+    }
+    return nullptr;
+}
+
+// Re-resolve a compiler-generated nested class by stable fragment when the exact ordinal name
+// missed. `method_hint` (the intended method, or an explicit "<Owner>g__" prefix) is only needed
+// to pick a <>c__DisplayClass closure; state machines resolve from the class name alone.
+void *resolve_compiler_generated_class(const char *image_name, const char *namespaze,
+                                       const char *class_name, const char *declaring_name,
+                                       const char *method_hint) {
+    if (class_name == nullptr || declaring_name == nullptr || declaring_name[0] == '\0') {
+        return nullptr;
+    }
+    void *image = find_il2cpp_image(image_name);
+    void *parent = find_il2cpp_class(image_name, namespaze, declaring_name);
+    if (image == nullptr || parent == nullptr) return nullptr;
+
+    std::string sm_prefix = state_machine_name_prefix(class_name);
+    if (!sm_prefix.empty()) {
+        return find_nested_type_by_name_prefix(image, parent, sm_prefix.c_str());
+    }
+    if (is_display_class_name(class_name)) {
+        std::string owner = owning_method_g_prefix(method_hint);
+        if (owner.empty()) return nullptr;
+        return find_nested_type_owning_method_prefix(image, parent, owner.c_str());
+    }
+    return nullptr;
+}
+
 void *method_pointer(void *method) {
     auto *head = reinterpret_cast<Il2CppMethodInfoHead *>(method);
     if (head == nullptr) return nullptr;
@@ -745,16 +889,23 @@ ptrdiff_t find_il2cpp_field_offset_on_class(void *klass, const char *field_name)
 
 ptrdiff_t find_il2cpp_field_offset(const char *image_name, const char *namespaze,
                                    const char *class_name, const char *field_name,
-                                   const char *declaring_name = nullptr) {
+                                   const char *declaring_name = nullptr,
+                                   const char *owning_method_hint = nullptr) {
     void *klass = find_il2cpp_class(image_name, namespaze, class_name, declaring_name);
+    if (klass == nullptr) {
+        // Ordinal drifted across a version: re-resolve the compiler-generated owner by name.
+        klass = resolve_compiler_generated_class(image_name, namespaze, class_name,
+                                                 declaring_name, owning_method_hint);
+    }
     return find_il2cpp_field_offset_on_class(klass, field_name);
 }
 
 bool require_field(ptrdiff_t &slot, const char *image_name, const char *namespaze,
                    const char *class_name, const char *field_name,
-                   const char *declaring_name = nullptr) {
+                   const char *declaring_name = nullptr,
+                   const char *owning_method_hint = nullptr) {
     slot = find_il2cpp_field_offset(image_name, namespaze, class_name, field_name,
-                                    declaring_name);
+                                    declaring_name, owning_method_hint);
     if (slot < 0) {
         ALOGW("required field unresolved: %s/%s.%s",
               image_name != nullptr ? image_name : "<image>",
@@ -772,9 +923,10 @@ bool require_field(ptrdiff_t &slot, const char *image_name, const char *namespaz
 
 void optional_field(ptrdiff_t &slot, const char *image_name, const char *namespaze,
                     const char *class_name, const char *field_name,
-                    const char *declaring_name = nullptr) {
+                    const char *declaring_name = nullptr,
+                    const char *owning_method_hint = nullptr) {
     slot = find_il2cpp_field_offset(image_name, namespaze, class_name, field_name,
-                                    declaring_name);
+                                    declaring_name, owning_method_hint);
     if (slot >= 0) {
         ALOGI("resolved optional field %s/%s.%s offset=0x%zx",
               image_name != nullptr ? image_name : "<image>",
@@ -814,13 +966,17 @@ void adjust_unboxed_value_type_field(ptrdiff_t &slot, const char *name) {
                         "Google.Play.Integrity", "IntegrityTokenRequest",
                         "<CloudProjectNumber>k__BackingField");
     ok &= require_field(g_fields.backup_issue_error_code, "Assembly-CSharp", "",
-                        "<>c__DisplayClass118_0", "errorCode", "ServerManager");
+                        "<>c__DisplayClass118_0", "errorCode", "ServerManager",
+                        "<IssueBackupKeyAsync>g__");
     ok &= require_field(g_fields.backup_issue_msg, "Assembly-CSharp", "",
-                        "<>c__DisplayClass118_0", "msg", "ServerManager");
+                        "<>c__DisplayClass118_0", "msg", "ServerManager",
+                        "<IssueBackupKeyAsync>g__");
     ok &= require_field(g_fields.backup_verify_error_code, "Assembly-CSharp", "",
-                        "<>c__DisplayClass119_0", "errorCode", "ServerManager");
+                        "<>c__DisplayClass119_0", "errorCode", "ServerManager",
+                        "<VerifyBackupKeyAsync>g__");
     ok &= require_field(g_fields.backup_verify_msg, "Assembly-CSharp", "",
-                        "<>c__DisplayClass119_0", "msg", "ServerManager");
+                        "<>c__DisplayClass119_0", "msg", "ServerManager",
+                        "<VerifyBackupKeyAsync>g__");
     ok &= require_field(g_fields.verify_state_backup_key, "Assembly-CSharp", "",
                         "<VerifyBackupKeyAsync>d__119", "backupKey", "ServerManager");
     ok &= require_field(g_fields.verify_state_playfab_id, "Assembly-CSharp", "",
@@ -862,7 +1018,8 @@ void adjust_unboxed_value_type_field(ptrdiff_t &slot, const char *name) {
                    "Google.Play.Integrity", "IntegrityTokenResponse",
                    "<Token>k__BackingField");
     optional_field(g_fields.prepare_integrity_result, "Assembly-CSharp", "",
-                   "<>c__DisplayClass113_0", "result", "ServerManager");
+                   "<>c__DisplayClass113_0", "result", "ServerManager",
+                   "<PrepareIntegrityCheck>g__");
     optional_field(g_fields.rogue_function_return_code, "Assembly-CSharp", "",
                    "RogueServerFunctionResult", "returnCode");
     return ok;
@@ -1832,10 +1989,32 @@ struct HookSpec {
 void *resolve_hook_target(const HookSpec &spec) {
     void *klass = find_il2cpp_class(spec.image, spec.namespaze, spec.klass, spec.declaring_klass);
     if (klass == nullptr) {
+        // Literal lookup missed: if this is a compiler-generated nested class whose ordinal
+        // drifted across a game version, re-resolve it by the stable method-name fragment.
+        klass = resolve_compiler_generated_class(spec.image, spec.namespaze, spec.klass,
+                                                 spec.declaring_klass, spec.method);
+        if (klass != nullptr) {
+            ALOGI("hook %s: class re-resolved by ordinal-independent fallback (%s)",
+                  spec.name, spec.klass);
+        }
+    }
+    if (klass == nullptr) {
         ALOGW("hook class unresolved %s: %s/%s", spec.name, spec.image, spec.klass);
         return nullptr;
     }
     void *method = find_il2cpp_method(klass, spec.method, spec.param_count);
+    if (method == nullptr) {
+        // The method name itself may carry a drifted local-function ordinal (g__Name|N);
+        // retry on the stable "<Owner>g__Name" prefix.
+        std::string prefix = local_function_name_prefix(spec.method);
+        if (!prefix.empty()) {
+            method = find_il2cpp_method_by_prefix(klass, prefix.c_str(), spec.param_count);
+            if (method != nullptr) {
+                ALOGI("hook %s: method re-resolved by ordinal-independent prefix (%s)",
+                      spec.name, spec.method);
+            }
+        }
+    }
     if (method == nullptr) {
         ALOGW("hook method unresolved %s: %s/%s.%s/%d", spec.name, spec.image, spec.klass,
               spec.method, spec.param_count);
