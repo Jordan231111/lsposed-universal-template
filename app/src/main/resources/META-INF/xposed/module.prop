@@ -1,0 +1,11 @@
+id=com.jordan.rogue.recovery
+name=Rogue Recovery
+version=v0.1.0
+versionCode=1
+author=Jordan
+description=Recovered Rogue with the Dead LSPosed scaffold with Activity hook, overlay state, and IL2CPP tracing support for authorized testing.
+minApiVersion=101
+targetApiVersion=101
+staticScope=true
+# Protective catches/logs hooker exceptions and lets the original call continue.
+exceptionMode=protective

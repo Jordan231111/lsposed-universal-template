@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Rogue Recovery</string>
+    <string name="xposed_description">Recovered Rogue with the Dead LSPosed scaffold with Activity hook, overlay state, and IL2CPP tracing support.</string>
+</resources>
