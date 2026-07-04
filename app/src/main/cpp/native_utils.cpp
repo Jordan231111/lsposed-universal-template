@@ -526,6 +526,39 @@ uintptr_t find_ptr_in_range(uintptr_t start, uintptr_t end, uintptr_t value) {
     return 0;
 }
 
+uintptr_t pattern_scan(uintptr_t start, uintptr_t end, const char *aob) {
+    if (start == 0 || end <= start || aob == nullptr) return 0;
+    std::vector<uint8_t> bytes;
+    std::vector<bool> mask;
+    auto hex = [](char c) -> int {
+        if (c >= '0' && c <= '9') return c - '0';
+        c = static_cast<char>(c | 0x20);
+        if (c >= 'a' && c <= 'f') return c - 'a' + 10;
+        return -1;
+    };
+    for (const char *p = aob; *p;) {
+        if (*p == ' ' || *p == '\t') { ++p; continue; }
+        if (*p == '?') { bytes.push_back(0); mask.push_back(false); ++p; if (*p == '?') ++p; continue; }
+        int hi = hex(p[0]);
+        int lo = p[1] ? hex(p[1]) : -1;
+        if (hi < 0 || lo < 0) return 0;  // malformed pattern
+        bytes.push_back(static_cast<uint8_t>((hi << 4) | lo));
+        mask.push_back(true);
+        p += 2;
+    }
+    std::size_t n = bytes.size();
+    if (n == 0 || end - start < n) return 0;
+    for (uintptr_t a = start; a + n <= end; ++a) {
+        const uint8_t *d = reinterpret_cast<const uint8_t *>(a);
+        bool ok = true;
+        for (std::size_t i = 0; i < n; ++i) {
+            if (mask[i] && d[i] != bytes[i]) { ok = false; break; }
+        }
+        if (ok) return a;
+    }
+    return 0;
+}
+
 bool register_natives(JNIEnv *env) {
     jclass cls = env->FindClass("com/template/lsposed/NativeUtils");
     if (cls == nullptr) return false;

@@ -8,7 +8,7 @@ namespace native_utils {
 
 /**
  * Registers the NativeUtils JNI surface on com.template.lsposed.NativeUtils.
- * Called from candytest_native.cpp's JNI_OnLoad. Returns true on success.
+ * Called from template_native.cpp's JNI_OnLoad. Returns true on success.
  */
 bool register_natives(JNIEnv *env);
 
@@ -58,5 +58,13 @@ uintptr_t find_function_start(uintptr_t addr_in_func, std::size_t scan_back_limi
  * Returns 0 if not found.
  */
 uintptr_t find_string_va(uintptr_t rodata_start, uintptr_t rodata_end, const char *needle);
+
+/**
+ * AOB (array-of-bytes) pattern scan over [start,end). Pattern is space-separated hex with `??`
+ * wildcards, e.g. "1F 20 03 D5 ?? ?? 40 F9". Returns the first match address, or 0. The last-resort
+ * resolution rung (version-keyed signature) when there is no string/RTTI/export anchor — used by the
+ * IL2CPP/Godot/Lua/Cocos strategies and for stripped native code.
+ */
+uintptr_t pattern_scan(uintptr_t start, uintptr_t end, const char *aob);
 
 }  // namespace native_utils

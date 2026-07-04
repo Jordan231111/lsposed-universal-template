@@ -236,6 +236,20 @@ void hook_finished(int error_number, const char *lib_name, const char *sym_name,
     }
 }
 
+// Hook a RESOLVED code pointer (the real technique for a stripped game function — you can't hook it
+// by symbol name because there is none). Pass an address from the resolvers above (base + rva) and
+// a proxy that uses SHADOWHOOK_STACK_SCOPE()/SHADOWHOOK_CALL_PREV(). `orig` receives the trampoline
+// to call through. Returns the hook stub, or nullptr on failure.
+[[maybe_unused]] void *hook_resolved(uintptr_t addr, void *proxy, void **orig) {
+    if (!addr || !proxy) return nullptr;
+    void *stub = shadowhook_hook_func_addr(reinterpret_cast<void *>(addr), proxy, orig);
+    if (stub == nullptr) {
+        ALOGW("hook_resolved failed at %p errno=%d %s", reinterpret_cast<void *>(addr),
+              shadowhook_get_errno(), shadowhook_to_errmsg(shadowhook_get_errno()));
+    }
+    return stub;
+}
+
 // ── Your target library. Set this to the game's main native lib to auto-resolve g_features[].
 //    Left empty in the template (feature resolution is skipped until you set it). ──
 constexpr const char *TARGET_LIB = "";  // e.g. "libil2cpp.so" or "libyourgame.so"
