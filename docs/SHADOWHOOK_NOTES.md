@@ -2,9 +2,24 @@
 
 This template uses ByteDance `android-inline-hook` / ShadowHook through Maven Prefab:
 
-- Gradle dependency: `com.bytedance.android:shadowhook:2.0.0`
+- Gradle dependency: `com.bytedance.android:shadowhook:2.0.1`
 - CMake import: `find_package(shadowhook REQUIRED CONFIG)`
 - Link target: `shadowhook::shadowhook`
+
+> **Build requirement (important):** ShadowHook **2.0.1** ships an AAR whose metadata requires
+> **`compileSdk ≥ 37`**, which in turn needs **AGP 9.x** (this template pins `agp = 9.2.1`,
+> `compileSdk = 37`, Gradle `9.4.1`). If you downgrade ShadowHook to 2.0.0 you can drop back to
+> AGP 8.7 / compileSdk 35. Mismatching these is the usual "template won't even build" cause.
+
+## Byte-patch first, hook second (read this before reaching for ShadowHook)
+
+For native/C++ game targets, **most cheats are a guarded byte-patch, not a hook** — "force this
+bool true", "return this constant", "skip this check". Those are done with the patch engine +
+auto-resolving `CodeFeature`s in `template_native.cpp` (no trampoline, nothing to detect, trivially
+revertible). Reach for ShadowHook only when you must **intercept** — read/modify arguments or the
+return value, run your own logic, or trace during RE. Full workflow: `NATIVE_MODDING_PLAYBOOK.md`.
+For managed engines, prefer the engine API first (`ENGINE_IL2CPP.md`, `ENGINE_GODOT_LUA_COCOS.md`)
+and hook the resolved native code pointer with `shadowhook_hook_func_addr`.
 
 ## Why ShadowHook here
 
@@ -41,7 +56,11 @@ For an Android Studio emulator on an Intel Mac, native hooks with ShadowHook are
 - behavior: increments an in-memory counter and calls the original function unchanged
 - purpose: verify ShadowHook loading, symbol resolution, and call-chain behavior
 
-Replace it after you have used Frida to identify a stable target in your authorized test app.
+Note it hooks by **`library + symbol name`** — that only works for **exported** symbols (libc).
+A stripped game's own functions have no symbols, so a real hook targets a **resolved address**
+(`shadowhook_hook_func_addr` on `base + rva` from the resolvers) — you don't need Frida for that:
+the `tools/` static analyzers + `memtool` ("Frida without Frida") find the address, and the
+`CodeFeature` resolvers re-derive it at runtime. Replace the smoke test with your real target.
 
 ## Hook modes
 

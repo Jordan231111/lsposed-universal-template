@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.template.lsposed"
-    compileSdk = 35
+    compileSdk = 37
     ndkVersion = "25.2.9519653"
 
     defaultConfig {

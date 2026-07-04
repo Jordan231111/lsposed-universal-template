@@ -84,4 +84,5 @@ public final class NativeUtils {
     private static native long nativeResolveSymbol(String lib, String sym);
     private static native byte[] nativeReadMemory(long address, int length);
     private static native boolean nativeWriteMemory(long address, byte[] data);
+    private static native long[] nativeFindStringXRefs(String lib, long stringVa, int maxResults);
 }
