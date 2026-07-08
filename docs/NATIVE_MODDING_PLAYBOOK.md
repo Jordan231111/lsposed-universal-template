@@ -2,8 +2,8 @@
 
 This is the reusable methodology + toolkit this template ships for modding **native / C++ Android
 games** — the hard case where you can't just dump IL2CPP metadata. It was proven end-to-end on a
-hardened King title (moves-freeze, free boosters, anti-cheat bypass, all auto-resolving). For
-managed engines see `docs/ENGINE_IL2CPP.md` and `docs/ENGINE_GODOT_LUA_COCOS.md` — but even those
+hardened, stripped native title (real code features applied and reverted live, all auto-resolving).
+For managed engines see `docs/ENGINE_IL2CPP.md` and `docs/ENGINE_GODOT_LUA_COCOS.md` — but even those
 fall back to the native toolkit here when symbols are stripped.
 
 ## The core idea: resolve by a *stable anchor*, then *patch the producer*
@@ -15,9 +15,8 @@ Two principles do most of the work:
    and walk to the function at runtime. Then guard the patch by the expected opcode so a shifted
    anchor fails **closed** (feature disables) instead of corrupting code.
 2. **Patch the producer, not the runtime value.** Chasing a live value is a trap when it's
-   obfuscated, guarded, server-synced, or reallocated each update (see the moves saga in
-   `WHY_THIS_WAS_HARD.md`). Find the *function that changes it* and neutralize that. One reliable
-   line beats a fragile heap-scanning thread.
+   obfuscated, guarded, server-synced, or reallocated each update. Find the *function that changes
+   it* and neutralize that. One reliable line beats a fragile heap-scanning thread.
 
 ## Workflow
 

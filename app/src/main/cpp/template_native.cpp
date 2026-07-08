@@ -27,8 +27,8 @@
 //  For managed engines (Unity IL2CPP, Godot, Lua, Cocos2d-x) see docs/ENGINE_*.md — those use
 //  the engine's own C API first (il2cpp_*, lua_*, ClassDB) and fall back to the resolvers here.
 //
-//  This is a proven design: the same three toolkits shipped a full mod for a hardened King
-//  (Candy Crush) title — see docs/REVERSE_ENGINEERING_PLAYBOOK.md.
+//  This is a proven design: the same three toolkits are enough to ship a full mod for a
+//  hardened, stripped native title — see docs/NATIVE_MODDING_PLAYBOOK.md.
 // ─────────────────────────────────────────────────────────────────────────────
 
 #ifndef TEMPLATE_VERBOSE_LOGS
