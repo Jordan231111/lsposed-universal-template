@@ -1,6 +1,12 @@
 # LSPosed resolves this entry class by string from META-INF/xposed/java_init.list.
 -keep class com.template.lsposed.ModuleEntry { *; }
 
+# LSPatch (non-root) resolves this entry class by string from assets/xposed_init. Keep it intact.
+-keep class com.template.lsposed.LSPatchEntry { *; }
+# Classic Xposed API is provided by the framework at runtime (compileOnly); silence R8.
+-keep class de.robv.android.xposed.** { *; }
+-dontwarn de.robv.android.xposed.**
+
 # libxposed framework callbacks invoked reflectively by the loader.
 -keepclassmembers class com.template.lsposed.ModuleEntry {
     public void onModuleLoaded(...);

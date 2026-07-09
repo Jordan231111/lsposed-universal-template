@@ -76,6 +76,23 @@ android {
         }
     }
 
+    // Two framework targets, so each artifact declares exactly one API level and one entry set:
+    //   lsposed  -> modern libxposed API 101 (META-INF/xposed/java_init.list -> ModuleEntry). Root.
+    //   lspatch  -> classic Xposed API 93   (assets/xposed_init -> LSPatchEntry). Non-root; LSPatch is API 93.
+    // Per-flavor module.prop lives in src/<flavor>/resources/... ; the classic assets/xposed_init lives
+    // only in src/lspatch/. The manifest's xposedminversion is injected per flavor below.
+    flavorDimensions += "framework"
+    productFlavors {
+        create("lsposed") {
+            dimension = "framework"
+            manifestPlaceholders["xposedMinVersion"] = "101"
+        }
+        create("lspatch") {
+            dimension = "framework"
+            manifestPlaceholders["xposedMinVersion"] = "93"
+        }
+    }
+
     externalNativeBuild {
         cmake {
             path = file("src/main/cpp/CMakeLists.txt")
@@ -106,6 +123,9 @@ android {
 
 dependencies {
     compileOnly(libs.libxposed.api)
+    // Classic Xposed API for the LSPatch (non-root) entry point. compileOnly: the framework
+    // (LSPosed or LSPatch) supplies it at runtime, so it is never bundled into the module.
+    compileOnly("de.robv.android.xposed:api:82")
     compileOnly(libs.androidx.annotation)
     implementation(libs.shadowhook)
 }

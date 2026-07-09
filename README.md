@@ -7,6 +7,11 @@ A quick-start Android/LSPosed module template for authorized testing and rapid p
 What it includes:
 
 - Modern `libxposed` API 101 entry point (`io.github.libxposed:api:101.0.1`, `compileOnly`).
+- Root **and** non-root delivery via two build flavors on a `framework` dimension: `lsposed`
+  (modern API 101, root/LSPosed) and `lspatch` (classic `de.robv.android.xposed` API 93, non-root
+  via LSPatch). Both entries funnel through one idempotent `Bootstrap`. See
+  [`docs/LSPATCH_NONROOT.md`](docs/LSPATCH_NONROOT.md) — a modern-API-only module is silently
+  rejected by LSPatch, so the `lspatch` flavor exists specifically to avoid that.
 - Both `onPackageLoaded` and `onPackageReady` callbacks are overridden for broad compatibility.
 - Process-level filter: `TemplateConfig.TARGET_PROCESS_SUFFIXES` + `SKIP_PROCESS_SUFFIXES`
   default to hooking only the main process and skipping common anti-cheat / push /
@@ -17,7 +22,11 @@ What it includes:
   - `module.prop` with the correct `exceptionMode=protective` key
 - A safe Java hook smoke test using the API 101 interceptor-chain style.
 - `FeatureRegistry` — runtime feature flags (bool/float) with best-effort persistence and
-  live-updating overlay toggles bound to each feature key.
+  live-updating overlay toggles bound to each feature key. OPSEC caveat: persistence writes a
+  plaintext toggle file into the **target app's own sandbox** (`getFilesDir()`); a readable file
+  naming your features/toggles inside the target is a detection surface, so prefer in-memory-only
+  state for stealth (drop the `save()`/`load()` calls or point `FEATURE_STATE_FILE_NAME` at a path
+  outside the target).
 - `EngineDetector` — identifies Unity / Unreal / Cocos2d-x / Godot / Flutter /
   React-Native / Xamarin targets at startup so you can branch hook strategies.
 - `NativeUtils` — JNI helpers for `/proc/self/maps` module lookup, IDA-style pattern
@@ -30,8 +39,11 @@ What it includes:
   registered via `JNI_OnLoad` / `RegisterNatives` so there are no package-derived JNI export
   names in the `.so` symbol table.
 - Debug/release split with `VERBOSE_LOGS` as a `BuildConfig` field — release builds strip
-  verbose logs, rename no class/method in the `ModuleEntry` path (required for LSPosed
-  discovery) but obfuscate everything else via R8.
+  verbose logs and run R8. Note that `proguard-rules.pro` deliberately `-keep`s the classes the
+  framework/JNI must find by name — the entry classes (`ModuleEntry`, `LSPatchEntry`),
+  `NativeBridge` and `NativeUtils` (their method names are bound as strings in `JNI_OnLoad`), and
+  the `FeatureRegistry.KEY_*` constants — so those names are **not** obfuscated and stay visible to
+  an app enumerating its classloader. Everything not kept is renamed/obfuscated by R8.
 - Neutral log tag (`AppRuntime`) and worker thread name; release builds disable verbose Java and
   native logging by default.
 - Release signing falls back to the debug keystore when no env keystore is configured
@@ -150,6 +162,20 @@ metadata recovery, RVA-to-runtime-address mapping, value-type ABI checks, delaye
 and settings-bridge issues that also apply to other native-heavy engines. Treat it as a playbook
 for a branch that targets one app, not as default template behavior.
 
+## Non-root delivery (LSPatch)
+
+To ship without root, build the `lspatch` flavor and embed it into a target APK with the LSPatch
+CLI:
+
+```bash
+./gradlew :app:assembleLspatchRelease   # app-lspatch-release.apk (classic API 93 entry)
+./gradlew :app:assembleLsposedRelease   # app-lsposed-release.apk (modern API 101 entry, root)
+```
+
+LSPatch only accepts the **classic** API-93 flavor; the modern one is silently ignored. Split-APK
+signing, `sigBypassLevel`, the first-launch metaloader flake, and the optional PairIP/licensing
+caveat are all covered in [`docs/LSPATCH_NONROOT.md`](docs/LSPATCH_NONROOT.md).
+
 ## Frida-first workflow
 
 Use Frida first to answer questions like:
@@ -178,6 +204,7 @@ If you use an x86/x86_64 emulator, Java LSPosed hooks can still work, but the na
 - `SECURITY.md` — safe issue-reporting expectations.
 - `CONTRIBUTING.md` — contribution and validation expectations.
 - `docs/ENGINE_NATIVE_WORKFLOWS.md` — optional notes for Unity IL2CPP and native-heavy targets.
+- `docs/LSPATCH_NONROOT.md` — non-root delivery via LSPatch (flavors, split signing, sig bypass).
 - `.github/workflows/android.yml` — GitHub Actions build for debug and release APKs.
 
 ## License

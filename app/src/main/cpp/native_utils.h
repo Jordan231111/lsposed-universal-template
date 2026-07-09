@@ -27,6 +27,15 @@ struct ModuleInfo {
 ModuleInfo find_module_info(const char *library_name);
 
 /**
+ * Resolve an exported symbol by NAME from a mapped module's dynamic symbol table (.dynsym), parsing
+ * the ELF image in memory. This is the namespace-proof, version-tolerant way to get the `il2cpp_*`
+ * C API: it does not need dlopen/dlsym (which the LSPatch / LSPosed linker namespace can hide) and
+ * it matches by symbol name rather than a per-version offset. `module_base` is ModuleInfo::base.
+ * Returns the symbol's runtime address, or 0 if not found. Hash-table-independent.
+ */
+uintptr_t resolve_export(uintptr_t module_base, const char *symbol_name);
+
+/**
  * Scan [start,end) for an 8-byte-aligned pointer-sized word equal to `value`.
  * Returns the address of the first match, or 0.
  *

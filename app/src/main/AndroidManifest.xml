@@ -18,10 +18,13 @@
             </intent-filter>
         </activity>
 
-        <!-- Legacy markers are harmless for modern loaders and useful if you inspect the APK. -->
+        <!-- Classic-Xposed markers. LSPatch (non-root) reads these + assets/xposed_init and gates on
+             xposedminversion, so it must be <= LSPatch's API level (93). LSPosed (API 100+) also
+             accepts it and uses META-INF/xposed/* for the modern entry. The value is injected per
+             product flavor (lsposed=101, lspatch=93) via the ${xposedMinVersion} placeholder. -->
         <meta-data android:name="xposedmodule" android:value="true" />
         <meta-data android:name="xposeddescription" android:value="@string/xposed_description" />
-        <meta-data android:name="xposedminversion" android:value="101" />
+        <meta-data android:name="xposedminversion" android:value="${xposedMinVersion}" />
         <meta-data android:name="xposedscope" android:resource="@array/xposed_scope" />
     </application>
 </manifest>

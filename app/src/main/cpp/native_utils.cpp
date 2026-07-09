@@ -447,6 +447,55 @@ ModuleInfo find_module_info(const char *library_name) {
     return info;
 }
 
+uintptr_t resolve_export(uintptr_t module_base, const char *symbol_name) {
+    if (module_base == 0 || symbol_name == nullptr) return 0;
+
+    const auto *ehdr = reinterpret_cast<const ElfW(Ehdr) *>(module_base);
+    if (memcmp(ehdr->e_ident, ELFMAG, SELFMAG) != 0) return 0;
+    const auto *phdr = reinterpret_cast<const ElfW(Phdr) *>(module_base + ehdr->e_phoff);
+
+    const ElfW(Dyn) *dyn = nullptr;
+    for (int i = 0; i < ehdr->e_phnum; ++i) {
+        if (phdr[i].p_type == PT_DYNAMIC) {
+            dyn = reinterpret_cast<const ElfW(Dyn) *>(module_base + phdr[i].p_vaddr);
+            break;
+        }
+    }
+    if (dyn == nullptr) return 0;
+
+    // Some linkers pre-relocate DT_* pointers to absolute addresses; others leave them as vaddrs.
+    // Normalise: a value below the load base is a vaddr and needs the base added.
+    auto fix = [module_base](uintptr_t p) -> uintptr_t { return p < module_base ? module_base + p : p; };
+
+    const char *strtab = nullptr;
+    const ElfW(Sym) *symtab = nullptr;
+    size_t syment = sizeof(ElfW(Sym));
+    for (const ElfW(Dyn) *d = dyn; d->d_tag != DT_NULL; ++d) {
+        switch (d->d_tag) {
+            case DT_STRTAB: strtab = reinterpret_cast<const char *>(fix(d->d_un.d_ptr)); break;
+            case DT_SYMTAB: symtab = reinterpret_cast<const ElfW(Sym) *>(fix(d->d_un.d_ptr)); break;
+            case DT_SYMENT: syment = d->d_un.d_val; break;
+            default: break;
+        }
+    }
+    if (strtab == nullptr || symtab == nullptr || syment == 0) return 0;
+
+    // dynstr conventionally follows dynsym immediately, so the symbol count is the gap between them.
+    // This avoids parsing DT_HASH / DT_GNU_HASH and works whichever the module ships.
+    uintptr_t sym_addr = reinterpret_cast<uintptr_t>(symtab);
+    uintptr_t str_addr = reinterpret_cast<uintptr_t>(strtab);
+    if (str_addr <= sym_addr) return 0;
+    size_t nsyms = (str_addr - sym_addr) / syment;
+    if (nsyms == 0 || nsyms > 5000000) return 0;  // sanity clamp against a bad layout
+
+    for (size_t i = 0; i < nsyms; ++i) {
+        const ElfW(Sym) &sym = symtab[i];
+        if (sym.st_value == 0 || sym.st_name == 0) continue;
+        if (strcmp(strtab + sym.st_name, symbol_name) == 0) return fix(sym.st_value);
+    }
+    return 0;
+}
+
 std::vector<uintptr_t> find_adrp_add_xrefs(uintptr_t text_start, uintptr_t text_end,
                                             uintptr_t target_va, std::size_t max_results) {
     std::vector<uintptr_t> results;

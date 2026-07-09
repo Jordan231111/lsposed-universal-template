@@ -4,15 +4,9 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 
-import com.template.lsposed.engine.EngineDetector;
-import com.template.lsposed.ui.OverlayController;
-
 import java.lang.reflect.Method;
-import java.util.Locale;
 
 import io.github.libxposed.api.XposedInterface;
 import io.github.libxposed.api.XposedModule;
@@ -31,8 +25,6 @@ public final class ModuleEntry extends XposedModule {
     private volatile boolean applicationAttachHookInstalled;
     private volatile boolean applicationContextReady;
     private volatile boolean activityHookInstalled;
-    private volatile boolean nativeHookToggleListenerInstalled;
-    private volatile boolean nativeHooksStarted;
 
     @Override
     public void onModuleLoaded(ModuleLoadedParam param) {
@@ -116,50 +108,8 @@ public final class ModuleEntry extends XposedModule {
         if (applicationContextReady) return;
         applicationContextReady = true;
         Context appContext = context.getApplicationContext() != null ? context.getApplicationContext() : context;
-
-        FeatureRegistry.initialize(appContext);
-
-        try {
-            EngineDetector.Engine engine = EngineDetector.detect(appContext);
-            FeatureState.setEngineLabel(engine.name().toLowerCase(Locale.US));
-            if (TemplateConfig.VERBOSE_LOGS) {
-                log(Log.INFO, TemplateConfig.LOG_TAG, "Detected engine=" + engine
-                        + " evidence=" + EngineDetector.evidenceFromNativeLibraryDir(appContext));
-            }
-        } catch (Throwable t) {
-            if (TemplateConfig.VERBOSE_LOGS) {
-                log(Log.WARN, TemplateConfig.LOG_TAG, "Engine detection failed", t);
-            }
-        }
-
-        installNativeHookToggleListener(appContext);
-        maybeStartNativeHooks(appContext);
-
-        if (TemplateConfig.ENABLE_OVERLAY) {
-            new Handler(Looper.getMainLooper()).post(() -> OverlayController.attach(appContext));
-        }
-    }
-
-    private synchronized void installNativeHookToggleListener(Context appContext) {
-        if (nativeHookToggleListenerInstalled) return;
-        nativeHookToggleListenerInstalled = true;
-        FeatureRegistry.addListener(key -> {
-            if (FeatureRegistry.KEY_ENABLED.equals(key) || FeatureRegistry.KEY_NATIVE_HOOKS.equals(key)) {
-                maybeStartNativeHooks(appContext);
-            }
-        });
-    }
-
-    private synchronized void maybeStartNativeHooks(Context appContext) {
-        if (nativeHooksStarted) return;
-        if (!FeatureRegistry.getBool(FeatureRegistry.KEY_ENABLED)) return;
-        if (!FeatureRegistry.getBool(FeatureRegistry.KEY_NATIVE_HOOKS)) return;
-        nativeHooksStarted = true;
-        Thread worker = new Thread(
-                () -> NativeBridge.installNativeHooks(appContext, packageName),
-                TemplateConfig.WORKER_THREAD_NAME);
-        worker.setDaemon(true);
-        worker.start();
+        // Shared with the classic LSPatch entry; idempotent via a static guard.
+        Bootstrap.start(appContext);
     }
 
     private synchronized void installActivityResumeHook() {

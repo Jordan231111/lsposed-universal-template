@@ -97,6 +97,39 @@ If both fail (some hardened loaders hide the handle), you can still call exports
 their addresses manually from the ELF `.dynsym` you get via the base — but if names are exported
 at all, `dlsym` on the full-path handle almost always works.
 
+### 1.2b Namespace-proof fallback: parse `.dynsym` yourself (LSPatch / isolated namespaces)
+
+Under **LSPatch (non-root) and any isolated linker namespace**, `dlopen` can return `null` **even
+with the full path** — the linker deliberately hides `libil2cpp.so` from your namespace, so there
+is no handle and `dlsym` has nothing to query. The module is still **mapped and readable** in the
+process, though; the linker only withholds the *handle*, not the memory. So resolve exports by
+walking the module's in-memory dynamic symbol table (`.dynsym`) directly, keyed by **name** (not a
+per-version offset). This template ships exactly that helper —
+`native_utils::resolve_export(base, "il2cpp_domain_get")` (see
+[`app/src/main/cpp/native_utils.cpp`](../app/src/main/cpp/native_utils.cpp)) — which is
+hash-table-independent and needs only the load base from `find_module_info()`:
+
+```cpp
+#include "native_utils.h"
+
+// Namespace-proof bind: try dlsym first (fast path), fall back to .dynsym parsing.
+static void* il2cpp_export(void* h, uintptr_t base, const char* name) {
+    if (h) { if (void* p = dlsym(h, name)) return p; }
+    return reinterpret_cast<void*>(native_utils::resolve_export(base, name));  // 0 -> nullptr
+}
+
+// Usage inside il2cpp_bind(): get the base once, then resolve every symbol by name.
+native_utils::ModuleInfo mi = native_utils::find_module_info("libil2cpp.so");
+void* h = open_il2cpp();  // may be null under LSPatch — that's fine
+g_api.domain_get = reinterpret_cast<t_domain_get>(
+        il2cpp_export(h, mi.base, "il2cpp_domain_get"));
+// ... repeat for the rest; drop the BIND() dlsym-only macro in §1.4 for this on hidden namespaces.
+```
+
+Because `resolve_export` matches by symbol name, it stays version-tolerant just like the `dlsym`
+path — it only replaces *how* you look the name up, not the Tier A design. It cannot recover
+symbols that were genuinely **stripped or renamed**; that is still Tier B (§2).
+
 ### 1.3 Correct export signatures (verified)
 
 Opaque forward types (we never need their layout for Tier A except `MethodInfo`'s first field):
@@ -439,6 +472,49 @@ see [`SHADOWHOOK_NOTES.md`](SHADOWHOOK_NOTES.md). Unhook with `shadowhook_unhook
   sequences (multi-step reads that must be consistent) in `il2cpp_gc_disable()` /
   `il2cpp_gc_enable()`, and keep that window tiny — disabling GC for long leaks memory and can
   trip anti-cheat heuristics.
+
+### 3.5 Runtime readiness — do NOT call the il2cpp API before `il2cpp_init` finishes
+
+This is the single most common early-init crash. An LSPosed/LSPatch module gets control at
+`Application.attach`, and a worker thread that resolves offsets typically starts there — **long
+before** Unity has called `il2cpp_init()`. Calling **any** `il2cpp_*` function (even
+`il2cpp_domain_get`) before init completes segfaults deep inside `libil2cpp.so` (fault addr is a
+small value like `0x135`), because the runtime's globals/TLS aren't set up yet. Waiting in a loop
+that *calls* `il2cpp_domain_get()` doesn't help — the call itself is what crashes.
+
+The reliable gate: `il2cpp_init` is an **exported** symbol, so hook it (you can `resolve_export`
+it before the runtime is up) and only touch the API after it returns.
+
+```cpp
+static std::atomic<bool> g_rt_ready{false};
+static void* g_orig_init = nullptr;
+static void* il2cpp_init_proxy(const char* name) {
+    SHADOWHOOK_STACK_SCOPE();
+    void* r = SHADOWHOOK_CALL_PREV(il2cpp_init_proxy, name);
+    g_rt_ready.store(true, std::memory_order_release);   // runtime is now up
+    return r;
+}
+// the instant libil2cpp is mapped (before Unity calls init):
+if (void* f = (void*)native_utils::resolve_export(base, "il2cpp_init"))
+    shadowhook_hook_func_addr(f, (void*)il2cpp_init_proxy, &g_orig_init);
+for (int i = 0; i < 1200 && !g_rt_ready.load(std::memory_order_acquire); ++i) usleep(25000);
+// only now: attach this worker thread, poll find_class(...) until a known class resolves
+// (assemblies register slightly after init), then resolve everything by name.
+```
+
+Order that works: **map libil2cpp → hook `il2cpp_init` → wait flag → `il2cpp_thread_attach` this
+worker → poll `find_class("<known class>")` until non-null → resolve all names → install hooks.**
+Because the gate lands right after `il2cpp_init` (still before any scene `MonoBehaviour.Start`),
+launch-gate/anti-cheat hooks resolved here are in time.
+
+### 3.6 Overloaded methods: `il2cpp_class_get_method_from_name` matches name + argc only
+
+It returns the *first* method with that name and parameter **count**, so overloads that share both
+are ambiguous (`SceneManager.LoadScene(string)` vs `(int)`; a conversion operator's two
+`op_Implicit(x)` directions). Disambiguate by the first parameter's type: iterate
+`il2cpp_class_get_methods(klass, &iter)`, match `il2cpp_method_get_name` + `param_count`, then check
+`il2cpp_type_get_name(il2cpp_method_get_param(m, 0))` contains e.g. `"String"` / `"Int32"`. Free the
+returned type-name string with `il2cpp_free`.
 
 ---
 
