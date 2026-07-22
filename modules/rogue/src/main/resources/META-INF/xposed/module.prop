@@ -1,0 +1,11 @@
+id=com.devin.lsposed.rogue
+name=Rogue with the Dead Toolkit
+version=v0.1.0
+versionCode=1
+author=Devin
+description=LSPosed module for Rogue with the Dead (net.room6.horizon). Time multiplier, ACTk time-tamper bypass, PAIRIP signature/license no-op, anti-idle, telemetry suppression. Java-only hooks; arm64-v8a and x86_64 compatible.
+minApiVersion=101
+targetApiVersion=101
+staticScope=true
+# Protective catches/logs hooker exceptions and lets the original call continue.
+exceptionMode=protective

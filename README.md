@@ -207,6 +207,25 @@ If you use an x86/x86_64 emulator, Java LSPosed hooks can still work, but the na
 - `docs/LSPATCH_NONROOT.md` — non-root delivery via LSPatch (flavors, split signing, sig bypass).
 - `.github/workflows/android.yml` — GitHub Actions build for debug and release APKs.
 
+## Bundled game modules
+
+Two production modules live under `modules/`. They share the base template's hook
+infrastructure but ship as independent, ABI-neutral APKs:
+
+| Module | Target | Doc |
+| --- | --- | --- |
+| `modules/rogue/` | `net.room6.horizon` (Rogue with the Dead) | [`docs/MODULE_ROGUE.md`](docs/MODULE_ROGUE.md) |
+| `modules/once/` | `work.ponix.onceworld` (OnceWorld) | [`docs/MODULE_ONCE.md`](docs/MODULE_ONCE.md) |
+
+See [`docs/MODULES_OVERVIEW.md`](docs/MODULES_OVERVIEW.md) for the design rationale (Java-only,
+time-acceleration as a stable cheat surface, PAIRIP/ACTk handling).
+
+Build both at once:
+
+```bash
+./gradlew :modules:rogue:assembleRelease :modules:once:assembleRelease
+```
+
 ## License
 
 This project is licensed under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (`CC-BY-NC-ND-4.0`). You may share the unmodified template with attribution for non-commercial use. Do not distribute modified versions without separate permission.
