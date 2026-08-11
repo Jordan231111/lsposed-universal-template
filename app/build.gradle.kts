@@ -62,6 +62,8 @@ android {
         }
         release {
             isMinifyEnabled = true
+            // Release-only Android res/ optimization. It does not strip assets, META-INF entries,
+            // or native libraries; every resource in this template is referenced statically.
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             buildConfigField("boolean", "VERBOSE_LOGS", "false")
