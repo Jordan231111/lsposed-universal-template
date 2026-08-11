@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">LSPosed Universal Template</string>
-    <string name="xposed_description">Modern libxposed API 101 template with a movable Nyx-styled overlay and optional ShadowHook native scaffold.</string>
+    <string name="xposed_description">Modern libxposed API 102 and classic LSPatch template with a movable Nyx-styled overlay and optional ShadowHook native scaffold.</string>
+    <string name="launcher_instructions">LSPosed Universal Template\n\n1. Edit TemplateConfig.TARGET_PACKAGES.\n2. Edit META-INF/xposed/scope.list and res/values/arrays.xml.\n3. Build: ./gradlew :app:assembleLsposedRelease\n4. Install and enable the lsposed artifact in LSPosed / Vector.\n   For non-root LSPatch, build assembleLspatchRelease instead.\n\nCurrent first target: %1$s\n\nThe in-app Nyx bubble appears inside the target Activity after Application.attach. Tap it to open the rectangular panel; drag the panel header to move it.</string>
 </resources>

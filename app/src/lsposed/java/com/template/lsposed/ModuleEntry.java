@@ -1,9 +1,9 @@
 package com.template.lsposed;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.os.Build;
 import android.util.Log;
 
 import java.lang.reflect.Method;
@@ -12,7 +12,7 @@ import io.github.libxposed.api.XposedInterface;
 import io.github.libxposed.api.XposedModule;
 
 /**
- * Modern libxposed API 101 entry point.
+ * Modern libxposed API 102 entry point.
  *
  * <p>Registered in {@code META-INF/xposed/java_init.list}. The framework calls this class in each
  * scoped target process. Process-level filtering is enforced here (see {@link TemplateConfig}) so
@@ -69,6 +69,7 @@ public final class ModuleEntry extends XposedModule {
         installActivityResumeHook();
     }
 
+    @SuppressLint("DiscouragedPrivateApi") // Xposed needs this stable pre-Activity context handoff.
     private synchronized void installApplicationAttachHook() {
         if (applicationAttachHookInstalled) return;
         applicationAttachHookInstalled = true;
@@ -142,9 +143,7 @@ public final class ModuleEntry extends XposedModule {
                         }
                         return result;
                     });
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                deoptimize(onResume);
-            }
+            deoptimize(onResume);
             if (TemplateConfig.VERBOSE_LOGS) {
                 log(Log.INFO, TemplateConfig.LOG_TAG, "Hooked Activity.onResume sample");
             }

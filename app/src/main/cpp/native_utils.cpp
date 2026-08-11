@@ -13,7 +13,6 @@
 #include <string>
 #include <vector>
 #include <link.h>
-#include <dlfcn.h>
 
 #ifndef TEMPLATE_VERBOSE_LOGS
 #define TEMPLATE_VERBOSE_LOGS 0
@@ -317,7 +316,8 @@ jbyteArray native_read_memory(JNIEnv *env, jclass, jlong address_j, jint length)
 jboolean native_write_memory(JNIEnv *env, jclass, jlong address_j, jbyteArray data_j) {
     if (address_j == 0 || data_j == nullptr) return JNI_FALSE;
     jsize length = env->GetArrayLength(data_j);
-    if (length <= 0) return JNI_FALSE;
+    constexpr jsize kMaxWriteBytes = 8 * 1024 * 1024;
+    if (length <= 0 || length > kMaxWriteBytes) return JNI_FALSE;
 
     auto maps = read_maps();
     uintptr_t address = static_cast<uintptr_t>(address_j);
@@ -336,6 +336,10 @@ jboolean native_write_memory(JNIEnv *env, jclass, jlong address_j, jbyteArray da
 
     int new_prot = PROT_READ | PROT_WRITE;
     if (m->perms[2] == 'x') new_prot |= PROT_EXEC;
+    int orig_prot = 0;
+    if (m->perms[0] == 'r') orig_prot |= PROT_READ;
+    if (m->perms[1] == 'w') orig_prot |= PROT_WRITE;
+    if (m->perms[2] == 'x') orig_prot |= PROT_EXEC;
 
     if (mprotect(reinterpret_cast<void *>(aligned_start), aligned_len, new_prot) != 0) {
         NU_LOGW("mprotect(+W) failed at %p len=%zu", reinterpret_cast<void *>(aligned_start), aligned_len);
@@ -344,13 +348,18 @@ jboolean native_write_memory(JNIEnv *env, jclass, jlong address_j, jbyteArray da
 
     std::vector<jbyte> buffer(static_cast<std::size_t>(length));
     env->GetByteArrayRegion(data_j, 0, length, buffer.data());
+    if (env->ExceptionCheck()) {
+        env->ExceptionClear();
+        mprotect(reinterpret_cast<void *>(aligned_start), aligned_len, orig_prot);
+        return JNI_FALSE;
+    }
     std::memcpy(reinterpret_cast<void *>(address), buffer.data(), static_cast<std::size_t>(length));
 
-    int orig_prot = 0;
-    if (m->perms[0] == 'r') orig_prot |= PROT_READ;
-    if (m->perms[1] == 'w') orig_prot |= PROT_WRITE;
-    if (m->perms[2] == 'x') orig_prot |= PROT_EXEC;
-    mprotect(reinterpret_cast<void *>(aligned_start), aligned_len, orig_prot);
+    if (mprotect(reinterpret_cast<void *>(aligned_start), aligned_len, orig_prot) != 0) {
+        NU_LOGW("mprotect(restore) failed at %p len=%zu",
+                reinterpret_cast<void *>(aligned_start), aligned_len);
+        return JNI_FALSE;
+    }
 
     if ((orig_prot & PROT_EXEC) != 0) {
         __builtin___clear_cache(reinterpret_cast<char *>(address),
@@ -361,21 +370,23 @@ jboolean native_write_memory(JNIEnv *env, jclass, jlong address_j, jbyteArray da
 
 jlongArray native_find_string_xrefs(JNIEnv *env, jclass, jstring lib_j, jlong string_va_j, jint max_results_j) {
     std::string lib = jstring_to_string(env, lib_j);
-    jlongArray out = env->NewLongArray(0);
-    if (out == nullptr) return nullptr;
+    auto empty_result = [env]() { return env->NewLongArray(0); };
+    if (lib.empty() || string_va_j <= 0) return empty_result();
+
+#if !defined(__aarch64__)
+    return empty_result();
+#else
 
     ModuleInfo info = find_module_info(lib.c_str());
-    if (!info.valid) return out;
+    if (!info.valid) return empty_result();
 
     uintptr_t target_va = static_cast<uintptr_t>(string_va_j);
-    if (target_va == 0) {
-        target_va = info.base + static_cast<uintptr_t>(string_va_j);
-    }
-
-    std::size_t max_results = max_results_j > 0 ? static_cast<std::size_t>(max_results_j) : 16;
+    std::size_t max_results = max_results_j > 0
+            ? std::min<std::size_t>(static_cast<std::size_t>(max_results_j), 4096)
+            : 16;
     auto xrefs = find_adrp_add_xrefs(info.text_start, info.text_end, target_va, max_results);
 
-    out = env->NewLongArray(static_cast<jsize>(xrefs.size()));
+    jlongArray out = env->NewLongArray(static_cast<jsize>(xrefs.size()));
     if (out == nullptr) return nullptr;
     std::vector<jlong> vals(xrefs.size());
     for (std::size_t i = 0; i < xrefs.size(); ++i) {
@@ -383,6 +394,7 @@ jlongArray native_find_string_xrefs(JNIEnv *env, jclass, jstring lib_j, jlong st
     }
     env->SetLongArrayRegion(out, 0, static_cast<jsize>(xrefs.size()), vals.data());
     return out;
+#endif
 }
 
 }  // namespace
@@ -401,24 +413,34 @@ ModuleInfo find_module_info(const char *library_name) {
         const char *name = pinfo->dlpi_name;
         if (name == nullptr || *name == '\0') return 0;
         std::string path(name);
-        if (path.find(arg->needle) == std::string::npos) return 0;
+        if (!library_matches(path, arg->needle)) return 0;
 
-        // Derive segment bounds from the program headers instead of hardcoding section offsets,
-        // so xref/string/vtable resolution survives version & offset shifts. The RX LOAD holds
-        // both code and .rodata strings; the RW LOAD(s) hold .data.rel.ro (vtables/typeinfo).
+        // Derive segment bounds from program headers instead of hardcoding section offsets.
+        // Modern Android ELFs commonly put .rodata in a separate R-- LOAD rather than RX.
         uintptr_t base = pinfo->dlpi_addr;
         uintptr_t rx_lo = 0, rx_hi = 0, rw_lo = 0, rw_hi = 0;
+        uintptr_t ro_lo = 0, ro_hi = 0;
+        uintptr_t best_ro_size = 0;
         for (int i = 0; i < pinfo->dlpi_phnum; ++i) {
             const ElfW(Phdr) &ph = pinfo->dlpi_phdr[i];
             if (ph.p_type != PT_LOAD) continue;
+            if (ph.p_vaddr > UINTPTR_MAX - base) continue;
             uintptr_t lo = base + ph.p_vaddr;
+            if (ph.p_memsz > UINTPTR_MAX - lo) continue;
             uintptr_t hi = lo + ph.p_memsz;
             if (ph.p_flags & PF_X) {
-                rx_lo = lo;
-                rx_hi = hi;
+                if (rx_lo == 0 || lo < rx_lo) rx_lo = lo;
+                if (hi > rx_hi) rx_hi = hi;
             } else if (ph.p_flags & PF_W) {
                 if (rw_lo == 0 || lo < rw_lo) rw_lo = lo;
                 if (hi > rw_hi) rw_hi = hi;
+            } else if (ph.p_flags & PF_R) {
+                uintptr_t size = hi - lo;
+                if (size > best_ro_size) {
+                    ro_lo = lo;
+                    ro_hi = hi;
+                    best_ro_size = size;
+                }
             }
         }
         if (rx_hi == 0) return 0;  // no executable segment -> not the lib we want
@@ -426,11 +448,11 @@ ModuleInfo find_module_info(const char *library_name) {
         arg->out->base = base;
         arg->out->text_start = rx_lo;
         arg->out->text_end = rx_hi;
-        arg->out->rodata_start = rx_lo;  // .rodata strings live inside the RX LOAD segment
-        arg->out->rodata_end = rx_hi;
+        arg->out->rodata_start = ro_lo != 0 ? ro_lo : rx_lo;
+        arg->out->rodata_end = ro_hi != 0 ? ro_hi : rx_hi;
         arg->out->data_start = rw_lo;
         arg->out->data_end = rw_hi;
-        arg->out->end = rw_hi > rx_hi ? rw_hi : rx_hi;
+        arg->out->end = std::max({rx_hi, ro_hi, rw_hi});
         arg->out->valid = true;
         arg->found = true;
         return 1;
@@ -448,7 +470,7 @@ ModuleInfo find_module_info(const char *library_name) {
 }
 
 uintptr_t resolve_export(uintptr_t module_base, const char *symbol_name) {
-    if (module_base == 0 || symbol_name == nullptr) return 0;
+    if (module_base == 0 || symbol_name == nullptr || *symbol_name == '\0') return 0;
 
     const auto *ehdr = reinterpret_cast<const ElfW(Ehdr) *>(module_base);
     if (memcmp(ehdr->e_ident, ELFMAG, SELFMAG) != 0) return 0;
@@ -470,28 +492,67 @@ uintptr_t resolve_export(uintptr_t module_base, const char *symbol_name) {
     const char *strtab = nullptr;
     const ElfW(Sym) *symtab = nullptr;
     size_t syment = sizeof(ElfW(Sym));
+    size_t strsz = 0;
+    const uint32_t *sysv_hash = nullptr;
+    const uint32_t *gnu_hash = nullptr;
     for (const ElfW(Dyn) *d = dyn; d->d_tag != DT_NULL; ++d) {
         switch (d->d_tag) {
             case DT_STRTAB: strtab = reinterpret_cast<const char *>(fix(d->d_un.d_ptr)); break;
             case DT_SYMTAB: symtab = reinterpret_cast<const ElfW(Sym) *>(fix(d->d_un.d_ptr)); break;
             case DT_SYMENT: syment = d->d_un.d_val; break;
+            case DT_STRSZ: strsz = d->d_un.d_val; break;
+            case DT_HASH: sysv_hash = reinterpret_cast<const uint32_t *>(fix(d->d_un.d_ptr)); break;
+            case DT_GNU_HASH: gnu_hash = reinterpret_cast<const uint32_t *>(fix(d->d_un.d_ptr)); break;
             default: break;
         }
     }
-    if (strtab == nullptr || symtab == nullptr || syment == 0) return 0;
+    if (strtab == nullptr || symtab == nullptr || syment != sizeof(ElfW(Sym)) || strsz == 0) return 0;
 
-    // dynstr conventionally follows dynsym immediately, so the symbol count is the gap between them.
-    // This avoids parsing DT_HASH / DT_GNU_HASH and works whichever the module ships.
-    uintptr_t sym_addr = reinterpret_cast<uintptr_t>(symtab);
-    uintptr_t str_addr = reinterpret_cast<uintptr_t>(strtab);
-    if (str_addr <= sym_addr) return 0;
-    size_t nsyms = (str_addr - sym_addr) / syment;
-    if (nsyms == 0 || nsyms > 5000000) return 0;  // sanity clamp against a bad layout
+    constexpr size_t kMaxSymbols = 5000000;
+    size_t nsyms = 0;
+    if (sysv_hash != nullptr) {
+        // DT_HASH: nbucket, nchain, buckets..., chains...; nchain is the dynsym count.
+        nsyms = sysv_hash[1];
+    } else if (gnu_hash != nullptr) {
+        // DT_GNU_HASH does not store the count directly. Find the greatest bucket, then walk its
+        // chain to the terminating low bit. Word size affects only the bloom-filter span.
+        const uint32_t nbuckets = gnu_hash[0];
+        const uint32_t symoffset = gnu_hash[1];
+        const uint32_t bloom_size = gnu_hash[2];
+        if (nbuckets == 0 || bloom_size > kMaxSymbols) return 0;
+        const auto *bloom = reinterpret_cast<const ElfW(Addr) *>(gnu_hash + 4);
+        const uint32_t *buckets = reinterpret_cast<const uint32_t *>(bloom + bloom_size);
+        const uint32_t *chains = buckets + nbuckets;
+        uint32_t greatest = 0;
+        for (uint32_t i = 0; i < nbuckets; ++i) greatest = std::max(greatest, buckets[i]);
+        if (greatest < symoffset) {
+            nsyms = symoffset;
+        } else {
+            size_t index = greatest;
+            while (index < kMaxSymbols && (chains[index - symoffset] & 1U) == 0) ++index;
+            if (index >= kMaxSymbols) return 0;
+            nsyms = index + 1;
+        }
+    } else {
+        // Conservative fallback for unusual hash-less ELFs whose dynstr follows dynsym.
+        uintptr_t sym_addr = reinterpret_cast<uintptr_t>(symtab);
+        uintptr_t str_addr = reinterpret_cast<uintptr_t>(strtab);
+        if (str_addr <= sym_addr) return 0;
+        nsyms = (str_addr - sym_addr) / syment;
+    }
+    if (nsyms == 0 || nsyms > kMaxSymbols) return 0;
 
     for (size_t i = 0; i < nsyms; ++i) {
         const ElfW(Sym) &sym = symtab[i];
-        if (sym.st_value == 0 || sym.st_name == 0) continue;
-        if (strcmp(strtab + sym.st_name, symbol_name) == 0) return fix(sym.st_value);
+        if (sym.st_value == 0 || sym.st_name == 0 || sym.st_name >= strsz
+                || sym.st_shndx == SHN_UNDEF) continue;
+        const char *name = strtab + sym.st_name;
+        size_t remaining = strsz - sym.st_name;
+        if (std::memchr(name, '\0', remaining) == nullptr) continue;
+        if (std::strcmp(name, symbol_name) == 0) {
+            if (sym.st_shndx == SHN_ABS) return sym.st_value;
+            return sym.st_value <= UINTPTR_MAX - module_base ? module_base + sym.st_value : 0;
+        }
     }
     return 0;
 }
@@ -558,7 +619,7 @@ uintptr_t find_string_va(uintptr_t rodata_start, uintptr_t rodata_end, const cha
     if (needle_len == 0) return 0;
     const char *base = reinterpret_cast<const char *>(rodata_start);
     std::size_t size = rodata_end - rodata_start;
-    for (std::size_t i = 0; i + needle_len < size; ++i) {
+    for (std::size_t i = 0; i + needle_len <= size; ++i) {
         if (std::memcmp(base + i, needle, needle_len) == 0) {
             return rodata_start + i;
         }
@@ -568,7 +629,8 @@ uintptr_t find_string_va(uintptr_t rodata_start, uintptr_t rodata_end, const cha
 
 uintptr_t find_ptr_in_range(uintptr_t start, uintptr_t end, uintptr_t value) {
     if (start == 0 || end <= start) return 0;
-    start = (start + 7) & ~uintptr_t(7);  // 8-byte align
+    constexpr uintptr_t alignment = alignof(uintptr_t);
+    start = (start + alignment - 1) & ~(alignment - 1);
     for (uintptr_t p = start; p + sizeof(uintptr_t) <= end; p += sizeof(uintptr_t)) {
         if (*reinterpret_cast<const uintptr_t *>(p) == value) return p;
     }

@@ -17,7 +17,7 @@ body:
     id: lsposed
     attributes:
       label: LSPosed or Vector version
-      placeholder: API 101 compatible build
+      placeholder: API 102 modern build or API 93 LSPatch classic build
   - type: textarea
     id: steps
     attributes:

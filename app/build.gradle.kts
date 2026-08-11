@@ -5,12 +5,12 @@ plugins {
 android {
     namespace = "com.template.lsposed"
     compileSdk = 37
-    ndkVersion = "25.2.9519653"
+    ndkVersion = "29.0.14206865"
 
     defaultConfig {
         applicationId = "com.template.lsposed"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 37
         versionCode = 1
         versionName = "0.1.0"
 
@@ -62,7 +62,7 @@ android {
         }
         release {
             isMinifyEnabled = true
-            isShrinkResources = false
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             buildConfigField("boolean", "VERBOSE_LOGS", "false")
             externalNativeBuild {
@@ -77,7 +77,7 @@ android {
     }
 
     // Two framework targets, so each artifact declares exactly one API level and one entry set:
-    //   lsposed  -> modern libxposed API 101 (META-INF/xposed/java_init.list -> ModuleEntry). Root.
+    //   lsposed  -> modern libxposed API 102 (META-INF/xposed/java_init.list -> ModuleEntry). Root.
     //   lspatch  -> classic Xposed API 93   (assets/xposed_init -> LSPatchEntry). Non-root; LSPatch is API 93.
     // Per-flavor module.prop lives in src/<flavor>/resources/... ; the classic assets/xposed_init lives
     // only in src/lspatch/. The manifest's xposedminversion is injected per flavor below.
@@ -85,7 +85,7 @@ android {
     productFlavors {
         create("lsposed") {
             dimension = "framework"
-            manifestPlaceholders["xposedMinVersion"] = "101"
+            manifestPlaceholders["xposedMinVersion"] = "102"
         }
         create("lspatch") {
             dimension = "framework"
@@ -96,7 +96,7 @@ android {
     externalNativeBuild {
         cmake {
             path = file("src/main/cpp/CMakeLists.txt")
-            version = "3.22.1"
+            version = "4.1.2"
         }
     }
 
@@ -108,6 +108,11 @@ android {
     buildFeatures {
         prefab = true
         buildConfig = true
+    }
+
+    lint {
+        // ShadowHook intentionally supports ARM/ARM64 only; Java-only users can disable native loading.
+        disable += "ChromeOsAbiSupport"
     }
 
     packaging {
@@ -122,10 +127,12 @@ android {
 }
 
 dependencies {
-    compileOnly(libs.libxposed.api)
-    // Classic Xposed API for the LSPatch (non-root) entry point. compileOnly: the framework
-    // (LSPosed or LSPatch) supplies it at runtime, so it is never bundled into the module.
-    compileOnly("de.robv.android.xposed:api:82")
-    compileOnly(libs.androidx.annotation)
+    // Keep the two framework APIs out of the opposite flavor. In particular, an API-102 modern
+    // module must not call the legacy API, while LSPatch still requires the classic entry surface.
+    add("lsposedCompileOnly", libs.libxposed.api)
+    add("lsposedCompileOnly", libs.androidx.annotation)
+    // API 82 is the final official classic compile artifact. LSPatch implements the compatible
+    // classic API level 93 at runtime; the framework supplies these classes, so do not package them.
+    add("lspatchCompileOnly", "de.robv.android.xposed:api:82")
     implementation(libs.shadowhook)
 }

@@ -12,14 +12,18 @@ Authorized testing only. Only patch apps you own or are explicitly permitted to 
 
 ## 1. Why you must build the `lspatch` flavor (not the modern one)
 
-LSPosed (root) speaks the **modern** `io.github.libxposed` API (level 101 here). LSPatch (non-root)
+LSPosed/Vector (root) speaks the **modern** `io.github.libxposed` API (level 102 here). LSPatch (non-root)
 only implements the **classic** `de.robv.android.xposed` API, whose level is **93**. The two use
 different entry-point discovery:
 
 | Framework | API | Discovers entry via | Entry class |
 |-----------|-----|---------------------|-------------|
-| LSPosed (root) | 101 | `META-INF/xposed/java_init.list` | `ModuleEntry` (extends `XposedModule`) |
+| LSPosed/Vector (root) | 102 | `META-INF/xposed/java_init.list` | `ModuleEntry` (extends `XposedModule`) |
 | LSPatch (non-root) | 93 | `assets/xposed_init` | `LSPatchEntry` (implements `IXposedHookLoadPackage`) |
+
+The classic Maven dependency is still `de.robv.android.xposed:api:82`, the final official compile
+artifact. That does not downgrade LSPatch: its runtime implements the backward-compatible classic
+API level 93.
 
 This template ships **both** via a `framework` product-flavor dimension (see `app/build.gradle.kts`):
 
@@ -29,13 +33,13 @@ export ANDROID_HOME=$HOME/Library/Android/sdk
 ./gradlew :app:assembleLsposedRelease   # -> app-lsposed-release.apk  (install for root/LSPosed)
 ```
 
-**The silent-rejection failure mode.** LSPatch reads the manifest `xposedminversion` and the
-`minApiVersion` in `META-INF/xposed/module.prop`. If those advertise **101** (the modern flavor),
-LSPatch treats the module as incompatible and **loads nothing** — no crash, no toast, no logcat
-error from your code, because your code never runs. The `lspatch` flavor sets `xposedminversion=93`
-(via the `${xposedMinVersion}` manifest placeholder) and ships `assets/xposed_init` pointing at the
-classic `LSPatchEntry`, so LSPatch accepts and loads it. If your patched app "does nothing", the
-first thing to check is that you embedded the **lspatch** artifact, not the lsposed one.
+**The silent-rejection failure mode.** LSPatch discovers modules through the manifest's classic
+`xposedminversion` marker and `assets/xposed_init`; it cannot load the modern entry. The `lspatch`
+flavor therefore sets `xposedminversion=93`, ships only the classic entry class/dependency, and sets
+both versions in `META-INF/xposed/module.prop` to 93. The last detail matters to newer loaders that
+choose modern-vs-classic from `targetApiVersion`: advertising 101/102 there can make them select a
+missing modern entry and ignore `assets/xposed_init`. If a patched app "does nothing", first check
+that you embedded the **lspatch** artifact, not the lsposed one.
 
 ---
 
@@ -168,7 +172,7 @@ delivered to the license verifier, so there is no Play-Store redirect. Keep `sig
 ## 6. Quick checklist
 
 - [ ] Built and embedded the **`lspatch`** flavor (`assembleLspatchRelease`), not `lsposed`.
-- [ ] `xposedminversion` / `minApiVersion` resolve to **93** in the embedded module.
+- [ ] `xposedminversion`, `minApiVersion`, and `targetApiVersion` resolve to **93** in the embedded module.
 - [ ] Chose a `sigBypassLevel` (default **2**) appropriate to the target's self-checks.
 - [ ] Patched **every** split and signed them all with the **same** key.
 - [ ] Used `adb install-multiple`; uninstalled any prior differently-signed install first.

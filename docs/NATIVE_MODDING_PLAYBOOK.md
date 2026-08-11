@@ -77,7 +77,8 @@ The native core gives you three toolkits:
   guard-mismatch ⇒ the feature no-ops (fail-closed).
 
 Add a feature in ~6 lines: write a `resolve_x()` that returns the address, then append
-`CodeFeature{ "x", {true}, resolve_x, 1, {A64_RET, 0}, … }` to `g_features[]` and set `TARGET_LIB`.
+Increase the `g_features` `std::array` size, add a
+`CodeFeature{ "x", {true}, resolve_x, 1, {A64_RET, 0}, … }` initializer, and set `TARGET_LIB`.
 
 ### 5. Verify durably
 Relaunch the game (ASLR moves the base every time) and confirm the module re-resolves and re-applies

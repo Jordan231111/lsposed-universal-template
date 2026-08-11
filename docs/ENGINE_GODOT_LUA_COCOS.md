@@ -17,7 +17,7 @@ It plugs into the existing template pieces:
   `nativeFindModule` (module base+size from `/proc/self/maps`), `nativePatternScan` (AOB scan),
   `nativeResolveSymbol` (`dlopen(RTLD_NOLOAD)` + `dlsym`), `nativeReadMemory`,
   `nativeWriteMemory`. See `app/src/main/cpp/native_utils.cpp`.
-- ShadowHook 2.0.0 is the hook engine (`shadowhook_hook_sym_name*`, `shadowhook_hook_func_addr*`).
+- ShadowHook 2.0.1 is the hook engine (`shadowhook_hook_sym_name*`, `shadowhook_hook_func_addr*`).
   See `docs/SHADOWHOOK_NOTES.md`.
 
 > Scope / ethics: same rules as the rest of the template — authorized targets only, keep

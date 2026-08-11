@@ -15,3 +15,5 @@ artifacts/
 *.jks
 *.keystore
 .env
+__pycache__/
+*.py[cod]

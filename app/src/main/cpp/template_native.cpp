@@ -1,6 +1,7 @@
 #include <jni.h>
 #include <android/log.h>
 #include <shadowhook.h>
+#include <array>
 #include <atomic>
 #include <cstdint>
 #include <cstring>
@@ -51,41 +52,52 @@ namespace {
 
 std::once_flag g_install_once;
 std::atomic<int> g_install_result{7777};
-std::atomic<uintptr_t> g_module_base{0};
+[[maybe_unused]] std::atomic<uintptr_t> g_module_base{0};
 
 // ═══════════════════════════════════════════════════════════════════════════════
 //  1. ARM64 BYTE-PATCH ENGINE
 //  Overwrite instructions at a function entry — no hook/trampoline. This is the right tool
-//  for "force a constant return" or "skip a check": nothing to detect, no relocation.
-//  (For ARM32 targets add Thumb/ARM encodings; most modern games are arm64-v8a only.)
+//  for "force a constant return" or "skip a check": no trampoline or instruction relocation.
+//  This scaffold skips code features on ARM32; add a separate guarded Thumb/ARM implementation
+//  before enabling patches there. ShadowHook itself still supports both arm32 and arm64.
 // ═══════════════════════════════════════════════════════════════════════════════
-constexpr uint32_t A64_RET = 0xD65F03C0;  // ret
-constexpr uint32_t A64_NOP = 0xD503201F;  // nop
+[[maybe_unused]] constexpr uint32_t A64_RET = 0xD65F03C0;  // ret
+[[maybe_unused]] constexpr uint32_t A64_NOP = 0xD503201F;  // nop
 constexpr uint32_t MOV_W(int rd, uint16_t imm) {  // movz Wd, #imm
     return 0x52800000u | (static_cast<uint32_t>(imm) << 5) | (static_cast<uint32_t>(rd) & 0x1F);
 }
 constexpr uint32_t MOV_W_ZR(int rd) {  // mov Wd, wzr  (i.e. #0)
     return 0x2A1F03E0u | (static_cast<uint32_t>(rd) & 0x1F);
 }
-constexpr uint32_t MOV_W0_1  = MOV_W(0, 1);   // return true / 1
-constexpr uint32_t MOV_W0_0  = MOV_W_ZR(0);   // return false / 0
+[[maybe_unused]] constexpr uint32_t MOV_W0_1  = MOV_W(0, 1);   // return true / 1
+[[maybe_unused]] constexpr uint32_t MOV_W0_0  = MOV_W_ZR(0);   // return false / 0
 
 // Write one ARM64 word to code (mprotect RWX -> memcpy -> restore RX -> flush i-cache).
-void write_code(uintptr_t addr, uint32_t word) {
-    if (*reinterpret_cast<uint32_t *>(addr) == word) return;
-    uintptr_t page = addr & ~0xFFFULL;
-    if (mprotect(reinterpret_cast<void *>(page), 0x1000, PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
+// Query the runtime page size: recent Android devices may use 16 KiB pages.
+[[maybe_unused]] bool write_code(uintptr_t addr, uint32_t word) {
+    if (addr == 0 || (addr & (alignof(uint32_t) - 1)) != 0) return false;
+    if (*reinterpret_cast<uint32_t *>(addr) == word) return true;
+    long page_size_raw = sysconf(_SC_PAGESIZE);
+    if (page_size_raw <= 0) page_size_raw = 4096;
+    const uintptr_t page_size = static_cast<uintptr_t>(page_size_raw);
+    const uintptr_t page = addr & ~(page_size - 1);
+    if (mprotect(reinterpret_cast<void *>(page), page_size,
+                 PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
         ALOGW("write_code mprotect failed at %p", reinterpret_cast<void *>(addr));
-        return;
+        return false;
     }
     std::memcpy(reinterpret_cast<void *>(addr), &word, sizeof(word));
-    mprotect(reinterpret_cast<void *>(page), 0x1000, PROT_READ | PROT_EXEC);
     __builtin___clear_cache(reinterpret_cast<char *>(addr), reinterpret_cast<char *>(addr + 4));
+    if (mprotect(reinterpret_cast<void *>(page), page_size, PROT_READ | PROT_EXEC) != 0) {
+        ALOGW("write_code could not restore RX at %p", reinterpret_cast<void *>(page));
+        return false;
+    }
+    return true;
 }
 
 // Guarded patch: only writes if the current word equals `expected` (the known original), so a
 // wrong/shifted address is skipped instead of corrupting code. Returns true if applied/already-on.
-bool patch_instruction(uintptr_t addr, uint32_t expected, uint32_t replacement) {
+[[maybe_unused]] bool patch_instruction(uintptr_t addr, uint32_t expected, uint32_t replacement) {
     uint32_t cur = *reinterpret_cast<uint32_t *>(addr);
     if (cur == replacement) return true;
     if (cur != expected) {
@@ -93,8 +105,7 @@ bool patch_instruction(uintptr_t addr, uint32_t expected, uint32_t replacement) 
               reinterpret_cast<void *>(addr), cur, expected);
         return false;
     }
-    write_code(addr, replacement);
-    return true;
+    return write_code(addr, replacement);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -104,7 +115,7 @@ bool patch_instruction(uintptr_t addr, uint32_t expected, uint32_t replacement) 
 // ═══════════════════════════════════════════════════════════════════════════════
 
 // Decode the target of the first BL within [fn, fn+maxInsn*4); returns absolute addr or 0.
-uintptr_t first_bl_target(uintptr_t fn, uintptr_t lo, uintptr_t hi, int maxInsn) {
+[[maybe_unused]] uintptr_t first_bl_target(uintptr_t fn, uintptr_t lo, uintptr_t hi, int maxInsn) {
     for (int i = 0; i < maxInsn; ++i) {
         uintptr_t at = fn + i * 4;
         if (at < lo || at + 4 > hi) break;
@@ -121,8 +132,9 @@ uintptr_t first_bl_target(uintptr_t fn, uintptr_t lo, uintptr_t hi, int maxInsn)
 
 // Resolve a function by a UNIQUE string it references (e.g. its own __func__/assert literal).
 // Optionally guard on its expected first opcode. Returns absolute address, or 0.
-uintptr_t resolve_by_string_xref(const native_utils::ModuleInfo &info, const char *needle,
-                                 uint32_t expect_prologue /*0 = no guard*/) {
+[[maybe_unused]] uintptr_t resolve_by_string_xref(
+        const native_utils::ModuleInfo &info, const char *needle,
+        uint32_t expect_prologue /*0 = no guard*/) {
     uintptr_t s = native_utils::find_string_va(info.rodata_start, info.rodata_end, needle);
     if (!s) return 0;
     auto xrefs = native_utils::find_adrp_add_xrefs(info.text_start, info.text_end, s, 8);
@@ -136,7 +148,8 @@ uintptr_t resolve_by_string_xref(const native_utils::ModuleInfo &info, const cha
 
 // Resolve a class vtable by its Itanium RTTI type-info name (e.g. "24CMemoryTamperingDetector",
 // where 24 = strlen of the class name). Returns the vtable's slot-0 address, or 0.
-uintptr_t resolve_rtti_vtable(const native_utils::ModuleInfo &info, const char *typeinfo_name) {
+[[maybe_unused]] uintptr_t resolve_rtti_vtable(
+        const native_utils::ModuleInfo &info, const char *typeinfo_name) {
     uintptr_t nm = native_utils::find_string_va(info.rodata_start, info.rodata_end, typeinfo_name);
     if (!nm) return 0;
     uintptr_t ti8 = native_utils::find_ptr_in_range(info.data_start, info.data_end, nm);  // typeinfo+8 (name ptr)
@@ -147,8 +160,9 @@ uintptr_t resolve_rtti_vtable(const native_utils::ModuleInfo &info, const char *
 }
 
 // Read vtable slot `idx` (its resolved function pointer). RELATIVE reloc already applied.
-uintptr_t vtable_slot(uintptr_t vtable, int idx) {
-    return *reinterpret_cast<uintptr_t *>(vtable + static_cast<uintptr_t>(idx) * 8);
+[[maybe_unused]] uintptr_t vtable_slot(uintptr_t vtable, int idx) {
+    return *reinterpret_cast<uintptr_t *>(
+            vtable + static_cast<uintptr_t>(idx) * sizeof(uintptr_t));
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -169,8 +183,12 @@ struct CodeFeature {
     bool captured;
 };
 
-void feature_init(CodeFeature &f, const native_utils::ModuleInfo &info) {
+[[maybe_unused]] void feature_init(CodeFeature &f, const native_utils::ModuleInfo &info) {
     f.addr = 0; f.captured = false;
+    if (f.name == nullptr || f.resolve == nullptr || f.nwords < 1 || f.nwords > 2) {
+        ALOGW("feature has invalid configuration");
+        return;
+    }
     uintptr_t a = f.resolve(info);
     if (!a) { ALOGW("feature %s: UNRESOLVED (disabled)", f.name); return; }
     f.addr = a;
@@ -180,16 +198,19 @@ void feature_init(CodeFeature &f, const native_utils::ModuleInfo &info) {
     ALOGI("feature %s: resolved @%p", f.name, reinterpret_cast<void *>(a));
 }
 
-void feature_apply(CodeFeature &f, bool on) {
+[[maybe_unused]] void feature_apply(CodeFeature &f, bool on) {
     if (!f.captured || f.addr == 0) return;
-    write_code(f.addr, on ? f.on[0] : f.orig[0]);
-    if (f.nwords == 2) write_code(f.addr + 4, on ? f.on[1] : f.orig[1]);
+    if (!write_code(f.addr, on ? f.on[0] : f.orig[0])) return;
+    if (f.nwords == 2 && !write_code(f.addr + 4, on ? f.on[1] : f.orig[1])) {
+        ALOGW("feature %s: second instruction write failed", f.name);
+        return;
+    }
     f.enabled.store(on, std::memory_order_relaxed);
     ALOGI("feature %s -> %s", f.name, on ? "ON" : "OFF");
 }
 
 // ── EXAMPLE features (disabled placeholders) ────────────────────────────────────────────────
-//  Fill these in for your target, then add them to g_features[]. Two canonical shapes:
+//  Fill these in for your target, then set the g_features std::array size and initializers.
 //
 //  // (A) force a bool getter to return true, resolved by a nearby string:
 //  uintptr_t resolve_is_unlocked(const native_utils::ModuleInfo &i) {
@@ -206,10 +227,9 @@ void feature_apply(CodeFeature &f, bool on) {
 //  }
 //  // ... CodeFeature{ "ac", {true}, resolve_detector_predicate, 2, {MOV_W0_0, A64_RET}, ... }
 
-CodeFeature g_features[] = {
-    // (empty in the template — add your resolved features here; the framework above is ready)
-};
-constexpr int NUM_FEATURES = sizeof(g_features) / sizeof(g_features[0]);
+// Increase the std::array size and add initializers when defining target-specific features.
+std::array<CodeFeature, 0> g_features{};
+constexpr std::size_t NUM_FEATURES = g_features.size();
 
 // ═══════════════════════════════════════════════════════════════════════════════
 //  ShadowHook smoke-test — proves inline hooking works on this build. Replace with a real
@@ -229,10 +249,14 @@ pid_t getpid_proxy() {
 void hook_finished(int error_number, const char *lib_name, const char *sym_name,
                    void *sym_addr, void *new_addr, void *orig_addr, void *) {
     if (error_number == 0) {
-        ALOGI("hook ready: %s!%s target=%p", lib_name, sym_name, sym_addr);
+        ALOGI("hook ready: %s!%s target=%p",
+              lib_name != nullptr ? lib_name : "<address>",
+              sym_name != nullptr ? sym_name : "<address>", sym_addr);
     } else {
-        ALOGW("hook failed later: %s!%s errno=%d %s", lib_name, sym_name,
-              error_number, shadowhook_to_errmsg(error_number));
+        ALOGW("hook failed later: %s!%s errno=%d %s",
+              lib_name != nullptr ? lib_name : "<address>",
+              sym_name != nullptr ? sym_name : "<address>", error_number,
+              shadowhook_to_errmsg(error_number));
     }
 }
 
@@ -244,18 +268,23 @@ void hook_finished(int error_number, const char *lib_name, const char *sym_name,
     if (!addr || !proxy) return nullptr;
     void *stub = shadowhook_hook_func_addr(reinterpret_cast<void *>(addr), proxy, orig);
     if (stub == nullptr) {
+        const int error_number = shadowhook_get_errno();
         ALOGW("hook_resolved failed at %p errno=%d %s", reinterpret_cast<void *>(addr),
-              shadowhook_get_errno(), shadowhook_to_errmsg(shadowhook_get_errno()));
+              error_number, shadowhook_to_errmsg(error_number));
     }
     return stub;
 }
 
-// ── Your target library. Set this to the game's main native lib to auto-resolve g_features[].
+// ── Your target library. Set this to the game's main native lib to auto-resolve g_features.
 //    Left empty in the template (feature resolution is skipped until you set it). ──
 constexpr const char *TARGET_LIB = "";  // e.g. "libil2cpp.so" or "libyourgame.so"
 
 void resolve_and_apply_features() {
     if (TARGET_LIB[0] == '\0' || NUM_FEATURES == 0) return;
+#if !defined(__aarch64__)
+    ALOGW("code features skipped: the template patch/resolver scaffold is ARM64-only");
+    return;
+#else
     native_utils::ModuleInfo info{};
     for (int attempt = 0; attempt < 120; ++attempt) {  // the .so may load after us
         info = native_utils::find_module_info(TARGET_LIB);
@@ -264,26 +293,35 @@ void resolve_and_apply_features() {
     }
     if (!info.valid) { ALOGW("target lib %s not found", TARGET_LIB); return; }
     g_module_base.store(info.base, std::memory_order_relaxed);
-    for (int i = 0; i < NUM_FEATURES; ++i) {
-        feature_init(g_features[i], info);
-        feature_apply(g_features[i], g_features[i].enabled.load(std::memory_order_relaxed));
+    for (CodeFeature &feature : g_features) {
+        feature_init(feature, info);
+        feature_apply(feature, feature.enabled.load(std::memory_order_relaxed));
     }
+#endif
 }
 
 void install_once(const std::string &package_name, const std::string &data_dir) {
     ALOGI("native install package=%s dataDir=%s shadowhook=%s",
           package_name.c_str(), data_dir.c_str(), shadowhook_get_version());
-    int init_errno = shadowhook_init(SHADOWHOOK_MODE_SHARED, false);
+    int init_errno = shadowhook_init(SHADOWHOOK_MODE_SHARED, TEMPLATE_VERBOSE_LOGS != 0);
     if (init_errno != SHADOWHOOK_ERRNO_OK) {
         ALOGE("shadowhook not ready: %d %s", init_errno, shadowhook_to_errmsg(init_errno));
         g_install_result.store(init_errno, std::memory_order_relaxed);
         return;
     }
+    shadowhook_set_recordable(TEMPLATE_VERBOSE_LOGS != 0);
     // Smoke-test hook (safe, returns the original value).
     g_getpid_stub = shadowhook_hook_sym_name_callback_2(
             "libc.so", "getpid", reinterpret_cast<void *>(getpid_proxy), &g_getpid_orig,
             SHADOWHOOK_HOOK_WITH_SHARED_MODE, hook_finished, nullptr);
     ALOGI("getpid hook stub=%p", g_getpid_stub);
+    if (g_getpid_stub == nullptr) {
+        const int error_number = shadowhook_get_errno();
+        ALOGE("getpid smoke hook failed: %d %s", error_number,
+              shadowhook_to_errmsg(error_number));
+        g_install_result.store(error_number, std::memory_order_relaxed);
+        return;
+    }
 
     // Resolve + apply the auto-resolving code features against TARGET_LIB (no-op if unset).
     resolve_and_apply_features();
@@ -312,9 +350,9 @@ jstring native_get_shadowhook_records(JNIEnv *env, jclass) {
     if (records != nullptr) { out = records; std::free(records); }
     out += "\ngetpid hits=" + std::to_string(g_getpid_hits.load(std::memory_order_relaxed));
     out += "\n--- Code features (auto-resolved) ---";
-    for (int i = 0; i < NUM_FEATURES; ++i) {
-        out += "\n  " + std::string(g_features[i].name) +
-               (g_features[i].captured ? (g_features[i].enabled.load() ? " ON" : " OFF") : " UNRESOLVED");
+    for (const CodeFeature &feature : g_features) {
+        out += "\n  " + std::string(feature.name) +
+               (feature.captured ? (feature.enabled.load() ? " ON" : " OFF") : " UNRESOLVED");
     }
     return env->NewStringUTF(out.c_str());
 }

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
         android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="false"
         android:description="@string/xposed_description"
         android:icon="@android:drawable/sym_def_app_icon"
         android:label="@string/app_name"
@@ -10,8 +12,7 @@
 
         <activity
             android:name=".ui.LauncherActivity"
-            android:exported="true"
-            android:label="@string/app_name">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -19,9 +20,9 @@
         </activity>
 
         <!-- Classic-Xposed markers. LSPatch (non-root) reads these + assets/xposed_init and gates on
-             xposedminversion, so it must be <= LSPatch's API level (93). LSPosed (API 100+) also
-             accepts it and uses META-INF/xposed/* for the modern entry. The value is injected per
-             product flavor (lsposed=101, lspatch=93) via the ${xposedMinVersion} placeholder. -->
+             xposedminversion, so it must be <= LSPatch's API level (93). Modern loaders also
+             accept it and use META-INF/xposed/* for the modern entry. The value is injected per
+             product flavor (lsposed=102, lspatch=93) via the ${xposedMinVersion} placeholder. -->
         <meta-data android:name="xposedmodule" android:value="true" />
         <meta-data android:name="xposeddescription" android:value="@string/xposed_description" />
         <meta-data android:name="xposedminversion" android:value="${xposedMinVersion}" />

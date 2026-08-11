@@ -6,9 +6,9 @@ A quick-start Android/LSPosed module template for authorized testing and rapid p
 
 What it includes:
 
-- Modern `libxposed` API 101 entry point (`io.github.libxposed:api:101.0.1`, `compileOnly`).
+- Modern `libxposed` API 102 entry point (`io.github.libxposed:api:102.0.0`, `compileOnly`).
 - Root **and** non-root delivery via two build flavors on a `framework` dimension: `lsposed`
-  (modern API 101, root/LSPosed) and `lspatch` (classic `de.robv.android.xposed` API 93, non-root
+  (modern API 102, root/LSPosed/Vector) and `lspatch` (classic `de.robv.android.xposed` API 93, non-root
   via LSPatch). Both entries funnel through one idempotent `Bootstrap`. See
   [`docs/LSPATCH_NONROOT.md`](docs/LSPATCH_NONROOT.md) — a modern-API-only module is silently
   rejected by LSPatch, so the `lspatch` flavor exists specifically to avoid that.
@@ -20,7 +20,7 @@ What it includes:
   - `java_init.list`
   - `scope.list`
   - `module.prop` with the correct `exceptionMode=protective` key
-- A safe Java hook smoke test using the API 101 interceptor-chain style.
+- A safe Java hook smoke test using the API 102 interceptor-chain style.
 - `FeatureRegistry` — runtime feature flags (bool/float) with best-effort persistence and
   live-updating overlay toggles bound to each feature key. OPSEC caveat: persistence writes a
   plaintext toggle file into the **target app's own sandbox** (`getFilesDir()`); a readable file
@@ -35,7 +35,7 @@ What it includes:
   - movable oval bubble
   - movable rectangular panel when opened (drag the header)
   - one toggle row per `FeatureRegistry` bool feature
-- Optional native scaffold using ByteDance ShadowHook (`com.bytedance.android:shadowhook:2.0.0`)
+- Optional native scaffold using ByteDance ShadowHook (`com.bytedance.android:shadowhook:2.0.1`)
   registered via `JNI_OnLoad` / `RegisterNatives` so there are no package-derived JNI export
   names in the `.so` symbol table.
 - Debug/release split with `VERBOSE_LOGS` as a `BuildConfig` field — release builds strip
@@ -59,9 +59,16 @@ Use this only on apps/systems you own or are authorized to test.
 
 ## Current researched versions
 
-- `libxposed` API latest on Maven Central: `101.0.1`.
-- LSPosed/Vector modern API level: `101`.
-- ByteDance Android inline hook library (`shadowhook`) latest Maven release: `2.0.0`.
+- Verified against upstream releases on **2026-08-11**.
+- `libxposed` API: `102.0.0`; Vector 2.2 implements modern API level 102.
+- Classic LSPatch remains on runtime API level 93 and compiles against the final official classic
+  artifact, `de.robv.android.xposed:api:82`.
+- ByteDance Android inline hook library (`shadowhook`): `2.0.1`.
+- Android Gradle Plugin `9.3.1`, Gradle `9.7.0`, compile/target SDK 37,
+  Android NDK `29.0.14206865`, CMake `4.1.2`, and AndroidX Annotation `1.10.0`.
+- The resolved Kotlin stdlib remains `2.2.10`, supplied by AGP's built-in Kotlin toolchain and
+  ShadowHook. Do not override only the stdlib to 2.4.x; update the compiler/runtime together when
+  a later AGP toolchain adopts it.
 - ShadowHook supports `armeabi-v7a` and `arm64-v8a`; it does **not** support `x86`/`x86_64` or Houdini-translated environments.
 
 ## Quick start
@@ -80,13 +87,13 @@ From this directory:
 Then build:
 
 ```bash
-./gradlew :app:assembleRelease
+./gradlew :app:assembleLsposedRelease
 ```
 
 Install:
 
 ```bash
-adb install -r app/build/outputs/apk/release/app-release.apk
+adb install -r app/build/outputs/apk/lsposed/release/app-lsposed-release.apk
 ```
 
 Enable the module in LSPosed/Vector, select the target scope, then force-stop and reopen the target app:
@@ -99,13 +106,14 @@ adb logcat -s AppRuntime shadowhook_tag
 ```
 
 Release builds silence these logs by default (`BuildConfig.VERBOSE_LOGS=false`).
-Use `./gradlew :app:installDebug` while developing to get the chatty tag.
+Use `./gradlew :app:installLsposedDebug` while developing to get the chatty tag.
 
 ## Files you normally edit first
 
 - `app/src/main/java/com/template/lsposed/TemplateConfig.java`
 - `app/src/main/resources/META-INF/xposed/scope.list`
-- `app/src/main/resources/META-INF/xposed/module.prop`
+- `app/src/lsposed/resources/META-INF/xposed/module.prop`
+- `app/src/lspatch/resources/META-INF/xposed/module.prop`
 - `app/src/main/res/values/arrays.xml`
 - `app/src/main/res/values/strings.xml`
 
@@ -114,7 +122,7 @@ Use `./gradlew :app:installDebug` while developing to get the chatty tag.
 The entry class extends `io.github.libxposed.api.XposedModule` and is listed in:
 
 ```text
-app/src/main/resources/META-INF/xposed/java_init.list
+app/src/lsposed/resources/META-INF/xposed/java_init.list
 ```
 
 Hooking is interceptor-chain based:
@@ -135,6 +143,9 @@ Important points:
 - Keep scope tight. Do not hook every app unless you are building a framework/system module and know why.
 - Use `PROTECTIVE` exception mode for release builds so hook failures do not crash the target app.
 - Use `deoptimize(executable)` only when you actually need it; overusing deopt can hurt performance.
+- API 102 hot reload is deliberately disabled (`autoHotReload=false`): the template owns native
+  hooks, a worker thread, and Activity lifecycle callbacks, so safe hot reload requires a
+  target-specific teardown/unhook implementation first.
 
 ## ShadowHook notes
 
@@ -169,7 +180,7 @@ CLI:
 
 ```bash
 ./gradlew :app:assembleLspatchRelease   # app-lspatch-release.apk (classic API 93 entry)
-./gradlew :app:assembleLsposedRelease   # app-lsposed-release.apk (modern API 101 entry, root)
+./gradlew :app:assembleLsposedRelease   # app-lsposed-release.apk (modern API 102 entry, root)
 ```
 
 LSPatch only accepts the **classic** API-93 flavor; the modern one is silently ignored. Split-APK

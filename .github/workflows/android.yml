@@ -26,10 +26,14 @@ jobs:
 
       - name: Install CMake and NDK
         run: |
-          sdkmanager "platforms;android-35" "build-tools;35.0.0" "cmake;3.22.1" "ndk;25.2.9519653"
+          sdkmanager "platforms;android-37" "build-tools;37.0.0" "cmake;4.1.2" "ndk;29.0.14206865"
 
       - name: Make Gradle executable
         run: chmod +x ./gradlew
 
       - name: Build debug and release
-        run: ./gradlew :app:assembleDebug :app:assembleRelease --stacktrace
+        run: |
+          ./gradlew \
+            :app:assembleLsposedDebug :app:assembleLspatchDebug \
+            :app:assembleLsposedRelease :app:assembleLspatchRelease \
+            :app:lintLsposedDebug :app:lintLspatchDebug --stacktrace --warning-mode all

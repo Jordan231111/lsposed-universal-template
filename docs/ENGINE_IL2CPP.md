@@ -396,7 +396,7 @@ version." For protected games that is the realistic state of the art; do not pro
 
 Once you have the native `methodPointer` (Tier A: `*(void**)MethodInfo`; Tier B: `base + rva`),
 hook it exactly like any native function. ShadowHook is already wired into this template
-(`com.bytedance.android:shadowhook:2.0.0`, `shadowhook::shadowhook`; see
+(`com.bytedance.android:shadowhook:2.0.1`, `shadowhook::shadowhook`; see
 [`SHADOWHOOK_NOTES.md`](SHADOWHOOK_NOTES.md)).
 
 ### 3.1 The `MethodInfo` first-field trick (version-tolerant)

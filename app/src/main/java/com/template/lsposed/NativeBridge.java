@@ -1,10 +1,11 @@
 package com.template.lsposed;
 
 import android.content.Context;
-import android.os.Build;
 import android.util.Log;
 
 import com.bytedance.shadowhook.ShadowHook;
+
+import java.util.Locale;
 
 /**
  * Safe Java wrapper around the optional native ShadowHook scaffold.
@@ -21,10 +22,10 @@ public final class NativeBridge {
     private NativeBridge() {}
 
     public static synchronized boolean isArmProcess() {
-        for (String abi : Build.SUPPORTED_ABIS) {
-            if ("arm64-v8a".equals(abi) || "armeabi-v7a".equals(abi)) return true;
-        }
-        return false;
+        // Build.SUPPORTED_ABIS describes the device, not necessarily the ABI of this process
+        // (notably on x86 devices with a native bridge). os.arch is the running VM architecture.
+        String arch = System.getProperty("os.arch", "").toLowerCase(Locale.US);
+        return arch.equals("aarch64") || arch.startsWith("arm") || arch.contains("arm64");
     }
 
     public static synchronized int initShadowHook() {

@@ -3,9 +3,11 @@ name=LSPosed Universal Template
 version=v0.1.0
 versionCode=1
 author=YourName
-description=Modern libxposed API 101 template with movable overlay and optional ShadowHook native scaffold for authorized testing.
-minApiVersion=101
-targetApiVersion=101
+description=Modern libxposed API 102 template with movable overlay and optional ShadowHook native scaffold for authorized testing.
+minApiVersion=102
+targetApiVersion=102
 staticScope=true
+# Native hooks, worker threads, and Activity lifecycle callbacks need explicit teardown before hot reload is safe.
+autoHotReload=false
 # Protective catches/logs hooker exceptions and lets the original call continue.
 exceptionMode=protective

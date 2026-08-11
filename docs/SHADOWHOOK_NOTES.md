@@ -7,16 +7,17 @@ This template uses ByteDance `android-inline-hook` / ShadowHook through Maven Pr
 - Link target: `shadowhook::shadowhook`
 
 > **Build requirement (important):** ShadowHook **2.0.1** ships an AAR whose metadata requires
-> **`compileSdk ≥ 37`**, which in turn needs **AGP 9.x** (this template pins `agp = 9.2.1`,
-> `compileSdk = 37`, Gradle `9.4.1`). If you downgrade ShadowHook to 2.0.0 you can drop back to
+> **`compileSdk ≥ 37`**, which in turn needs **AGP 9.x** (this template pins `agp = 9.3.1`,
+> `compileSdk = 37`, Gradle `9.7.0`). If you downgrade ShadowHook to 2.0.0 you can drop back to
 > AGP 8.7 / compileSdk 35. Mismatching these is the usual "template won't even build" cause.
 
 ## Byte-patch first, hook second (read this before reaching for ShadowHook)
 
 For native/C++ game targets, **most cheats are a guarded byte-patch, not a hook** — "force this
 bool true", "return this constant", "skip this check". Those are done with the patch engine +
-auto-resolving `CodeFeature`s in `template_native.cpp` (no trampoline, nothing to detect, trivially
-revertible). Reach for ShadowHook only when you must **intercept** — read/modify arguments or the
+auto-resolving `CodeFeature`s in `template_native.cpp` (no trampoline and directly revertible, but
+still observable through code-integrity checks). Reach for ShadowHook only when you must
+**intercept** — read/modify arguments or the
 return value, run your own logic, or trace during RE. Full workflow: `NATIVE_MODDING_PLAYBOOK.md`.
 For managed engines, prefer the engine API first (`ENGINE_IL2CPP.md`, `ENGINE_GODOT_LUA_COCOS.md`)
 and hook the resolved native code pointer with `shadowhook_hook_func_addr`.
@@ -39,6 +40,9 @@ ShadowHook supports:
 
 - `arm64-v8a`
 - `armeabi-v7a`
+
+ShadowHook 2.0.1 declares Android 4.1 through Android 17 support. This template intentionally keeps
+`minSdk=26`, which is a project policy rather than a ShadowHook limitation.
 
 It does **not** support:
 

@@ -23,6 +23,7 @@ DEFAULT_NATIVE_LIB = "template_native"
 SKIP_DIRS = {".git", ".gradle", ".idea", ".cxx", "build", ".externalNativeBuild"}
 SKIP_SUFFIXES = {".jar", ".png", ".jpg", ".jpeg", ".webp", ".gif", ".so", ".a", ".zip", ".apk", ".xapk"}
 PACKAGE_RE = re.compile(r"^[a-zA-Z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)+$")
+JAVA_SOURCE_SETS = ("main", "lsposed", "lspatch")
 
 
 def parse_args() -> argparse.Namespace:
@@ -52,29 +53,30 @@ def normalized_targets(raw: list[str]) -> list[str]:
     return out
 
 
-def package_path(package: str) -> Path:
-    return ROOT / "app" / "src" / "main" / "java" / Path(package.replace(".", "/"))
+def package_path(source_set: str, package: str) -> Path:
+    return ROOT / "app" / "src" / source_set / "java" / Path(package.replace(".", "/"))
 
 
 def move_package_dir(old_package: str, new_package: str) -> None:
-    old_path = package_path(old_package)
-    new_path = package_path(new_package)
-    if old_path == new_path or not old_path.exists():
-        return
-    new_path.parent.mkdir(parents=True, exist_ok=True)
-    if new_path.exists():
-        raise SystemExit(f"Destination package path already exists: {new_path}")
-    shutil.move(str(old_path), str(new_path))
+    for source_set in JAVA_SOURCE_SETS:
+        old_path = package_path(source_set, old_package)
+        new_path = package_path(source_set, new_package)
+        if old_path == new_path or not old_path.exists():
+            continue
+        new_path.parent.mkdir(parents=True, exist_ok=True)
+        if new_path.exists():
+            raise SystemExit(f"Destination package path already exists: {new_path}")
+        shutil.move(str(old_path), str(new_path))
 
-    # Clean empty parent directories left behind under java/.
-    java_root = ROOT / "app" / "src" / "main" / "java"
-    parent = old_path.parent
-    while parent != java_root and parent.exists():
-        try:
-            parent.rmdir()
-        except OSError:
-            break
-        parent = parent.parent
+        # Clean empty parent directories left behind under this source set's java/ tree.
+        java_root = ROOT / "app" / "src" / source_set / "java"
+        parent = old_path.parent
+        while parent != java_root and parent.exists():
+            try:
+                parent.rmdir()
+            except OSError:
+                break
+            parent = parent.parent
 
 
 def should_skip(path: Path) -> bool:
@@ -131,11 +133,13 @@ def rewrite_native_lib(old_name: str, new_name: str) -> None:
     if not NATIVE_LIB_RE.match(new_name):
         raise SystemExit(f"Invalid --native-lib value: {new_name} (use lowercase/digits/underscores)")
 
-    # CMakeLists: add_library(<name> SHARED ...) and project(<name> ...)
+    # CMakeLists: rename the project/target token, but keep the implementation
+    # filename template_native.cpp stable. Renaming that reference without also
+    # renaming the source file makes every configured native build fail.
     cmake_path = ROOT / "app" / "src" / "main" / "cpp" / "CMakeLists.txt"
     if cmake_path.exists():
         text = cmake_path.read_text(encoding="utf-8")
-        text = re.sub(rf"\b{re.escape(old_name)}\b", new_name, text)
+        text = re.sub(rf"\b{re.escape(old_name)}\b(?!\.cpp)", new_name, text)
         cmake_path.write_text(text, encoding="utf-8")
 
     # Java usages: System.loadLibrary and the constant in TemplateConfig.

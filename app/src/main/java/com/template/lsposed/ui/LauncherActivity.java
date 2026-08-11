@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.template.lsposed.R;
 import com.template.lsposed.TemplateConfig;
 
 /** Simple launcher screen so the APK is easy to identify after install. */
@@ -24,14 +25,7 @@ public final class LauncherActivity extends Activity {
         text.setPadding(dp(18), dp(18), dp(18), dp(18));
         text.setLinksClickable(true);
         text.setMovementMethod(LinkMovementMethod.getInstance());
-        text.setText("LSPosed Universal Template\n\n"
-                + "1. Edit TemplateConfig.TARGET_PACKAGES.\n"
-                + "2. Edit META-INF/xposed/scope.list and res/values/arrays.xml.\n"
-                + "3. Build: ./gradlew :app:assembleRelease\n"
-                + "4. Install and enable this module in LSPosed / Vector.\n\n"
-                + "Current first target: " + TemplateConfig.TARGET_PACKAGES[0] + "\n\n"
-                + "The in-app Nyx bubble appears inside the target Activity after Application.attach. "
-                + "Tap it to open the rectangular panel; drag the panel header to move it.");
+        text.setText(getString(R.string.launcher_instructions, firstTarget()));
 
         ScrollView scroll = new ScrollView(this);
         scroll.setBackgroundColor(Color.rgb(14, 14, 20));
@@ -41,5 +35,10 @@ public final class LauncherActivity extends Activity {
 
     private int dp(float value) {
         return (int) (value * getResources().getDisplayMetrics().density);
+    }
+
+    private static String firstTarget() {
+        return TemplateConfig.TARGET_PACKAGES.length == 0
+                ? "<none configured>" : TemplateConfig.TARGET_PACKAGES[0];
     }
 }

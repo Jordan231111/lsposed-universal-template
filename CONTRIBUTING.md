@@ -8,7 +8,9 @@ Contributions are welcome when they improve the template for authorized research
 - Preserve fail-closed behavior in target processes.
 - Keep release logging quiet by default.
 - Do not add secrets, private app code, or proprietary offsets/signatures.
-- Run `./gradlew :app:assembleDebug :app:assembleRelease` before submitting changes.
+- Run `./gradlew :app:assembleLsposedDebug :app:assembleLspatchDebug
+  :app:assembleLsposedRelease :app:assembleLspatchRelease
+  :app:lintLsposedDebug :app:lintLspatchDebug` before submitting changes.
 
 ## License note
 

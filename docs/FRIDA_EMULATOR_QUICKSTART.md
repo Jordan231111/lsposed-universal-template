@@ -70,7 +70,7 @@ Architecture mapping:
 Example for arm64 using the latest release when this doc was updated; replace the version if the releases page shows a newer one:
 
 ```bash
-UND_FRIDA_VERSION=17.9.6
+UND_FRIDA_VERSION=17.17.0
 xz -d undetected-frida-server-${UND_FRIDA_VERSION}-android-arm64.xz
 mv undetected-frida-server-${UND_FRIDA_VERSION}-android-arm64 frida-server
 chmod +x frida-server
@@ -122,7 +122,7 @@ adb logcat -v time | grep -E 'ActivityTaskManager|AndroidRuntime|AppRuntime|shad
 ## 6. Run the provided Frida reconnaissance script
 
 ```bash
-frida -U -f com.example.target -l scripts/frida/android_recon.js --no-pause
+frida -U -f com.example.target -l scripts/frida/android_recon.js
 ```
 
 Attach to an already running app:
@@ -209,7 +209,7 @@ ShadowHook native scaffold skipped:
 
 ```bash
 adb shell getprop ro.product.cpu.abi
-adb logcat -d -s AppRuntime AppRuntime shadowhook_tag
+adb logcat -d -s AppRuntime shadowhook_tag
 ```
 
 If ABI is x86/x86_64, use Java hooks on emulator or switch to arm64 hardware/emulator for native inline hooks.

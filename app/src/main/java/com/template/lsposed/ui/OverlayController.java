@@ -7,7 +7,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -41,7 +40,7 @@ import java.util.Map;
  */
 public final class OverlayController {
     private static final Object LOCK = new Object();
-    private static OverlayController INSTANCE;
+    private static boolean started;
 
     private final Application app;
     private final Context appCtx;
@@ -72,9 +71,9 @@ public final class OverlayController {
         }
         FeatureRegistry.initialize(appContext);
         synchronized (LOCK) {
-            if (INSTANCE != null) return;
-            INSTANCE = new OverlayController((Application) appContext);
-            INSTANCE.start();
+            if (started) return;
+            started = true;
+            new OverlayController((Application) appContext).start();
         }
     }
 
@@ -115,7 +114,6 @@ public final class OverlayController {
             mainHandler.post(this::ensureOverlayAlive);
             return;
         }
-        if (currentActivity == null) currentActivity = resolveCurrentActivityViaReflection();
         Activity target = currentActivity;
         if (target == null) return;
 
@@ -179,7 +177,6 @@ public final class OverlayController {
             closePanelResources();
             return;
         }
-        if (currentActivity == null) currentActivity = resolveCurrentActivityViaReflection();
         Activity target = currentActivity != null ? currentActivity : attachedActivity;
         if (target == null) return;
 
@@ -405,10 +402,8 @@ public final class OverlayController {
         b.setMinimumWidth(0);
         b.setMinWidth(0);
         b.setPadding(dp(10), dp(6), dp(10), dp(6));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            b.setStateListAnimator(null);
-            b.setElevation(0f);
-        }
+        b.setStateListAnimator(null);
+        b.setElevation(0f);
         return b;
     }
 
@@ -490,41 +485,9 @@ public final class OverlayController {
         if (view == null) return;
         view.setVisibility(View.VISIBLE);
         view.setAlpha(1f);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            view.setElevation(dp(64));
-            view.setTranslationZ(dp(64));
-        }
+        view.setElevation(dp(64));
+        view.setTranslationZ(dp(64));
         view.bringToFront();
-    }
-
-    private static Activity resolveCurrentActivityViaReflection() {
-        try {
-            Class<?> atClass = Class.forName("android.app.ActivityThread");
-            Object at = atClass.getMethod("currentActivityThread").invoke(null);
-            java.lang.reflect.Field activitiesField = atClass.getDeclaredField("mActivities");
-            activitiesField.setAccessible(true);
-            Object activitiesObj = activitiesField.get(at);
-            if (!(activitiesObj instanceof java.util.Map)) return null;
-            java.util.Map<?, ?> activities = (java.util.Map<?, ?>) activitiesObj;
-            for (Object record : activities.values()) {
-                if (record == null) continue;
-                Class<?> recClass = record.getClass();
-                java.lang.reflect.Field pausedField;
-                try {
-                    pausedField = recClass.getDeclaredField("paused");
-                } catch (NoSuchFieldException ignored) {
-                    continue;
-                }
-                pausedField.setAccessible(true);
-                if (pausedField.getBoolean(record)) continue;
-                java.lang.reflect.Field activityField = recClass.getDeclaredField("activity");
-                activityField.setAccessible(true);
-                Object activity = activityField.get(record);
-                if (activity instanceof Activity) return (Activity) activity;
-            }
-        } catch (Throwable ignored) {
-        }
-        return null;
     }
 
     private int dp(float value) {

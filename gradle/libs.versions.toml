@@ -1,14 +1,14 @@
 [versions]
-agp = "9.2.1"
-libxposedApi = "101.0.1"
+agp = "9.3.1"
+libxposedApi = "102.0.0"
 shadowhook = "2.0.1"
-androidxAnnotation = "1.9.1"
+androidxAnnotation = "1.10.0"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 
 [libraries]
-# Latest libxposed API 101 artifact on Maven Central. Use compileOnly; the framework supplies it at runtime.
+# Latest stable libxposed API artifact on Maven Central. Use compileOnly; the framework supplies it at runtime.
 libxposed-api = { group = "io.github.libxposed", name = "api", version.ref = "libxposedApi" }
 
 # ByteDance ShadowHook from android-inline-hook. Maven latest is 2.0.1; supports arm/arm64.

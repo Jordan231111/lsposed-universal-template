@@ -69,12 +69,29 @@ public final class NativeUtils {
      * Returns {@code true} only when the full write succeeded.
      */
     public static boolean writeMemory(long address, byte[] data) {
-        if (address == 0 || data == null || data.length == 0) return false;
+        if (address == 0 || data == null || data.length == 0 || data.length > (8 * 1024 * 1024)) {
+            return false;
+        }
         if (!NativeBridge.loadTemplateNative()) return false;
         try {
             return nativeWriteMemory(address, data);
         } catch (Throwable t) {
             return false;
+        }
+    }
+
+    /**
+     * Finds ARM64 ADRP+ADD/LDR references to an absolute in-memory string address.
+     * Returns an empty array on non-ARM64 processes or when the module/address is unavailable.
+     */
+    public static long[] findStringXRefs(String libraryName, long stringAddress, int maxResults) {
+        if (libraryName == null || libraryName.isEmpty() || stringAddress <= 0) return new long[0];
+        if (!NativeBridge.loadTemplateNative()) return new long[0];
+        try {
+            long[] out = nativeFindStringXRefs(libraryName, stringAddress, maxResults);
+            return out != null ? out : new long[0];
+        } catch (Throwable t) {
+            return new long[0];
         }
     }
 
