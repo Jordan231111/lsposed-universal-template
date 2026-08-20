@@ -23,7 +23,7 @@ DEFAULT_NATIVE_LIB = "template_native"
 SKIP_DIRS = {".git", ".gradle", ".idea", ".cxx", "build", ".externalNativeBuild"}
 SKIP_SUFFIXES = {".jar", ".png", ".jpg", ".jpeg", ".webp", ".gif", ".so", ".a", ".zip", ".apk", ".xapk"}
 PACKAGE_RE = re.compile(r"^[a-zA-Z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)+$")
-JAVA_SOURCE_SETS = ("main", "lsposed", "lspatch")
+JAVA_SOURCE_SETS = ("main",)
 
 
 def parse_args() -> argparse.Namespace:
@@ -118,10 +118,6 @@ def replace_in_text_files(old_package: str, new_package: str, module_name: str, 
 def rewrite_scope_files(targets: list[str]) -> None:
     scope = "\n".join(targets) + "\n"
     (ROOT / "app" / "src" / "main" / "resources" / "META-INF" / "xposed" / "scope.list").write_text(scope, encoding="utf-8")
-
-    items = "\n".join(f"        <item>{target}</item>" for target in targets)
-    arrays = f'''<?xml version="1.0" encoding="utf-8"?>\n<resources>\n    <string-array name="xposed_scope">\n{items}\n    </string-array>\n</resources>\n'''
-    (ROOT / "app" / "src" / "main" / "res" / "values" / "arrays.xml").write_text(arrays, encoding="utf-8")
 
 
 NATIVE_LIB_RE = re.compile(r"^[a-z][a-z0-9_]*$")

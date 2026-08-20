@@ -15,7 +15,7 @@ android {
         versionName = "0.1.0"
 
         // ShadowHook supports arm32 and arm64 only. Use an arm64 emulator/device for native hooks.
-        // Java-only LSPosed hooks still work after you disable native loading in TemplateConfig.
+        // Java-only libxposed hooks still work after you disable native loading in TemplateConfig.
         ndk {
             abiFilters += listOf("arm64-v8a", "armeabi-v7a")
         }
@@ -78,23 +78,6 @@ android {
         }
     }
 
-    // Two framework targets, so each artifact declares exactly one API level and one entry set:
-    //   lsposed  -> modern libxposed API 102 (META-INF/xposed/java_init.list -> ModuleEntry). Root.
-    //   lspatch  -> classic Xposed API 93   (assets/xposed_init -> LSPatchEntry). Non-root; LSPatch is API 93.
-    // Per-flavor module.prop lives in src/<flavor>/resources/... ; the classic assets/xposed_init lives
-    // only in src/lspatch/. The manifest's xposedminversion is injected per flavor below.
-    flavorDimensions += "framework"
-    productFlavors {
-        create("lsposed") {
-            dimension = "framework"
-            manifestPlaceholders["xposedMinVersion"] = "102"
-        }
-        create("lspatch") {
-            dimension = "framework"
-            manifestPlaceholders["xposedMinVersion"] = "93"
-        }
-    }
-
     externalNativeBuild {
         cmake {
             path = file("src/main/cpp/CMakeLists.txt")
@@ -129,12 +112,8 @@ android {
 }
 
 dependencies {
-    // Keep the two framework APIs out of the opposite flavor. In particular, an API-102 modern
-    // module must not call the legacy API, while LSPatch still requires the classic entry surface.
-    add("lsposedCompileOnly", libs.libxposed.api)
-    add("lsposedCompileOnly", libs.androidx.annotation)
-    // API 82 is the final official classic compile artifact. LSPatch implements the compatible
-    // classic API level 93 at runtime; the framework supplies these classes, so do not package them.
-    add("lspatchCompileOnly", "de.robv.android.xposed:api:82")
+    // Vector and LSPatch 1.0 both provide libxposed API 102 at runtime. Keep the API out of the APK.
+    compileOnly(libs.libxposed.api)
+    compileOnly(libs.androidx.annotation)
     implementation(libs.shadowhook)
 }

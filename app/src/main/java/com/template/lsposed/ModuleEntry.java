@@ -14,10 +14,10 @@ import io.github.libxposed.api.XposedModule;
 /**
  * Modern libxposed API 102 entry point.
  *
- * <p>Registered in {@code META-INF/xposed/java_init.list}. The framework calls this class in each
- * scoped target process. Process-level filtering is enforced here (see {@link TemplateConfig}) so
- * the module does not bloat satellite processes such as {@code :push}, {@code :pushservice},
- * {@code :gameservice} or dedicated anti-cheat processes that many games ship.</p>
+ * <p>Registered in {@code META-INF/xposed/java_init.list}. Vector and LSPatch 1.0 call this class in
+ * each scoped target process. Process-level filtering is enforced here (see
+ * {@link TemplateConfig}) so the module does not bloat satellite processes such as {@code :push},
+ * {@code :pushservice}, {@code :gameservice}, or dedicated anti-cheat processes.</p>
  */
 public final class ModuleEntry extends XposedModule {
     private volatile String packageName;
@@ -109,7 +109,7 @@ public final class ModuleEntry extends XposedModule {
         if (applicationContextReady) return;
         applicationContextReady = true;
         Context appContext = context.getApplicationContext() != null ? context.getApplicationContext() : context;
-        // Shared with the classic LSPatch entry; idempotent via a static guard.
+        // Idempotent via Bootstrap's static guard.
         Bootstrap.start(appContext);
     }
 

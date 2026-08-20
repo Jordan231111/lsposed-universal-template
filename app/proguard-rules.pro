@@ -1,11 +1,5 @@
-# LSPosed resolves this entry class by string from META-INF/xposed/java_init.list.
+# Vector and LSPatch 1.0 resolve this entry class by string from META-INF/xposed/java_init.list.
 -keep class com.template.lsposed.ModuleEntry { *; }
-
-# LSPatch (non-root) resolves this entry class by string from assets/xposed_init. Keep it intact.
--keep class com.template.lsposed.LSPatchEntry { *; }
-# Classic Xposed API is provided by the framework at runtime (compileOnly); silence R8.
--keep class de.robv.android.xposed.** { *; }
--dontwarn de.robv.android.xposed.**
 
 # libxposed framework callbacks invoked reflectively by the loader.
 -keepclassmembers class com.template.lsposed.ModuleEntry {
@@ -25,7 +19,7 @@
     public static final java.lang.String KEY_*;
 }
 
-# libxposed API is compileOnly, but R8 may still encounter references via the base class.
+# libxposed API is supplied by Vector/LSPatch at runtime, but R8 still sees the base class.
 -dontwarn io.github.libxposed.api.**
 -keep class io.github.libxposed.api.** { *; }
 

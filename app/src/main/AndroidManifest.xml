@@ -19,13 +19,8 @@
             </intent-filter>
         </activity>
 
-        <!-- Classic-Xposed markers. LSPatch (non-root) reads these + assets/xposed_init and gates on
-             xposedminversion, so it must be <= LSPatch's API level (93). Modern loaders also
-             accept it and use META-INF/xposed/* for the modern entry. The value is injected per
-             product flavor (lsposed=102, lspatch=93) via the ${xposedMinVersion} placeholder. -->
-        <meta-data android:name="xposedmodule" android:value="true" />
-        <meta-data android:name="xposeddescription" android:value="@string/xposed_description" />
-        <meta-data android:name="xposedminversion" android:value="${xposedMinVersion}" />
-        <meta-data android:name="xposedscope" android:resource="@array/xposed_scope" />
+        <!-- Modern module discovery lives entirely under META-INF/xposed/. Vector and LSPatch 1.0
+             both load the API-102 entry from java_init.list, so no classic manifest markers or
+             assets/xposed_init entry are needed. -->
     </application>
 </manifest>

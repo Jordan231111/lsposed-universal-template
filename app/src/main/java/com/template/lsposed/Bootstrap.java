@@ -11,14 +11,11 @@ import com.template.lsposed.ui.OverlayController;
 import java.util.Locale;
 
 /**
- * Shared, framework-agnostic init. Both entry points call this exactly once per process:
- *   - {@code ModuleEntry}  (modern libxposed API 102, used by LSPosed / Vector with root)
- *   - {@code LSPatchEntry} (classic {@code de.robv.android.xposed} API, used by LSPatch / non-root)
+ * Framework-neutral initialization called by the API-102 {@link ModuleEntry} once per process.
  *
- * <p>A static guard makes it idempotent, so it is safe even if a framework happens to invoke both
- * entries. It initialises the feature registry, detects the engine, wires the native-hook toggle
- * listener, starts native hooks if enabled, and attaches the overlay. This is the single init path
- * both entries hand off to once they have the target's {@link Context}.</p>
+ * <p>A static guard makes it idempotent. It initializes the feature registry, detects the engine,
+ * wires the native-hook toggle listener, starts native hooks if enabled, and attaches the overlay
+ * once the target's {@link Context} is available.</p>
  */
 public final class Bootstrap {
     private static final int ENGINE_DETECTION_RETRIES = 3;

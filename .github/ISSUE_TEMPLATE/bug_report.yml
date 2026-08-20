@@ -16,8 +16,8 @@ body:
   - type: input
     id: lsposed
     attributes:
-      label: LSPosed or Vector version
-      placeholder: API 102 modern build or API 93 LSPatch classic build
+      label: Framework and version
+      placeholder: Vector 2.2 or LSPatch 1.0 build 455
   - type: textarea
     id: steps
     attributes:

@@ -1,181 +1,222 @@
-# Non-root delivery with LSPatch
+# Non-root delivery with LSPatch 1.0
 
-Purpose: ship this module to a device **without root** by embedding it into a target APK with
-[LSPatch](https://github.com/JingMatrix/LSPatch) (the maintained fork; the original
-`LSPosed/LSPatch` works the same way). This is the counterpart to the root/LSPosed flow in the
-main `README.md`. It is engine-neutral — nothing here is specific to Unity/IL2CPP; it applies to
-any app you are authorized to test.
+Use [JingMatrix/LSPatch](https://github.com/JingMatrix/LSPatch) to run this module in an app without
+root or Zygisk. LSPatch rewrites the target APK so that the app starts Vector's framework runtime
+and loads the selected Xposed modules inside its own processes.
 
-Authorized testing only. Only patch apps you own or are explicitly permitted to modify.
+Only patch apps you own or are explicitly authorized to test.
 
----
+## 1. Current release and compatibility
 
-## 1. Why you must build the `lspatch` flavor (not the modern one)
+This guide was checked on **2026-08-19** against the official
+[LSPatch releases](https://github.com/JingMatrix/LSPatch/releases):
 
-LSPosed/Vector (root) speaks the **modern** `io.github.libxposed` API (level 102 here). LSPatch (non-root)
-only implements the **classic** `de.robv.android.xposed` API, whose level is **93**. The two use
-different entry-point discovery:
+| Channel | Release | Patcher | Status |
+|---|---|---|---|
+| Stable | [`v1.0`](https://github.com/JingMatrix/LSPatch/releases/tag/v1.0), build 455 | `lspatch-v1.0-455-release.jar` | Recommended |
+| Canary | [`canary-460`](https://github.com/JingMatrix/LSPatch/releases/tag/canary-460) | `lspatch-v1.0-460-release.jar` | CI-tested prerelease |
 
-| Framework | API | Discovers entry via | Entry class |
-|-----------|-----|---------------------|-------------|
-| LSPosed/Vector (root) | 102 | `META-INF/xposed/java_init.list` | `ModuleEntry` (extends `XposedModule`) |
-| LSPatch (non-root) | 93 | `assets/xposed_init` | `LSPatchEntry` (implements `IXposedHookLoadPackage`) |
+The stable release assets used by this guide are:
 
-The classic Maven dependency is still `de.robv.android.xposed:api:82`, the final official compile
-artifact. That does not downgrade LSPatch: its runtime implements the backward-compatible classic
-API level 93.
+| Asset | SHA-256 |
+|---|---|
+| `lspatch-v1.0-455-release.jar` | `405e466336d89dcdeca0a5faebc7a5bcc17470a03f9de1ac047647a80febf351` |
+| `manager-v1.0-455-release.apk` | `fc6b7967afef72412288eb2aa52d001d4f339d6e4232f6d0be9830af7bbc7108` |
 
-This template ships **both** via a `framework` product-flavor dimension (see `app/build.gradle.kts`):
+Download the stable command-line patcher and verify it before use:
 
 ```bash
-export ANDROID_HOME=$HOME/Library/Android/sdk
-./gradlew :app:assembleLspatchRelease   # -> app-lspatch-release.apk  (embed THIS into the target)
-./gradlew :app:assembleLsposedRelease   # -> app-lsposed-release.apk  (install for root/LSPosed)
+curl -fL \
+  -o lspatch-v1.0-455-release.jar \
+  https://github.com/JingMatrix/LSPatch/releases/download/v1.0/lspatch-v1.0-455-release.jar
+shasum -a 256 lspatch-v1.0-455-release.jar
 ```
 
-**The silent-rejection failure mode.** LSPatch discovers modules through the manifest's classic
-`xposedminversion` marker and `assets/xposed_init`; it cannot load the modern entry. The `lspatch`
-flavor therefore sets `xposedminversion=93`, ships only the classic entry class/dependency, and sets
-both versions in `META-INF/xposed/module.prop` to 93. The last detail matters to newer loaders that
-choose modern-vs-classic from `targetApiVersion`: advertising 101/102 there can make them select a
-missing modern entry and ignore `assets/xposed_init`. If a patched app "does nothing", first check
-that you embedded the **lspatch** artifact, not the lsposed one.
+Check [`releases/latest`](https://github.com/JingMatrix/LSPatch/releases/latest) before copying a
+pinned command from this document. Canary releases are deliberately short-lived; the project keeps
+only the five newest canaries.
 
----
+LSPatch 1.0 is a ground-up rebuild on Vector. Its patched-app runtime supports:
 
-## 2. Embedding the module into a target APK
+- modern libxposed modules at API 101 or newer (API 102 in this template);
+- legacy `de.robv.android.xposed` modules for compatibility;
+- Android 9 (API 28) or newer;
+- a real `IXposedService` for modern modules.
 
-Grab `lspatch.jar` from LSPatch releases and run the CLI:
+This is materially different from LSPatch 0.8 and older. A target patched with an older LSPatch does
+not acquire the 1.0 runtime merely because the manager was updated: **re-patch every target app**.
+
+## 2. One modern module APK for Vector and LSPatch
+
+Build the template once:
 
 ```bash
-java -jar lspatch.jar <base.apk> \
-  -m app-lspatch-release.apk \   # the module APK (repeatable: -m a.apk -m b.apk)
-  -o out \                       # output directory
-  -l 2 \                         # sigBypassLevel (see below)
-  -k <keystore> <ks-pass> <key-alias> <key-pass> \   # optional: sign with your own keystore
-  -f                             # force overwrite existing output
+./gradlew :app:assembleRelease
+MODULE_APK=app/build/outputs/apk/release/app-release.apk
 ```
 
-If you omit `-k`, LSPatch signs the output with its **bundled debug keystore**. That is fine for a
-throwaway test, but every re-patch with the bundled key still produces a signature different from
-the app's original Play/store signature — see §3 on why that matters and §4 on uninstall-first.
+The resulting APK is valid for both rooted Vector and rootless LSPatch 1.0. There is no separate
+classic `lspatch` flavor anymore. LSPatch 1.0 reads `META-INF/xposed/module.prop`; when
+`targetApiVersion` is 101 or newer, it loads entry classes from
+`META-INF/xposed/java_init.list`. This template advertises API 102 and lists `ModuleEntry` there.
 
-### `sigBypassLevel` (`-l`) — what 0/1/2 mean
-
-Re-signing changes the APK signature, so any in-app signature check (or Play integrity check) will
-see the "wrong" certificate. `sigBypassLevel` controls how hard LSPatch works to hide that:
-
-- **0 — none.** No signature spoofing. Use only for apps that never verify their own signature.
-- **1 — `PackageManager` spoofing.** Hooks `PackageManager.getPackageInfo(...)` so calls that ask
-  for the app's signature get the **original** signature back. Defeats most app-level self-checks.
-- **2 — level 1 + on-disk APK reference.** Also serves the original signing block when the app reads
-  its own APK file directly (some anti-tamper and licensing paths do this). This is the most
-  compatible setting and a good default; drop to 1 or 0 only if you have a reason.
-
-Install the patched output from `out/` (see §3 for split apps).
-
----
-
-## 3. Split APKs: sign every split with the SAME certificate
-
-Modern apps (especially anything from Google Play as an App Bundle) ship as **split APKs**: a
-`base.apk` plus `config.*` splits (`config.arm64_v8a`, `config.xxhdpi`, `config.en`, …). Two rules:
-
-1. **Patch/sign all of them, and with the same certificate.** Android requires every installed split
-   of a package to share one signing certificate. If the base is signed with key A and a config
-   split with key B (or is left store-signed), installation fails with:
-
-   ```
-   INSTALL_FAILED_UPDATE_INCOMPATIBLE      (or INSTALL_FAILED_INVALID_APK / signatures do not match)
-   ```
-
-2. **Install them together, atomically:**
-
-   ```bash
-   adb install-multiple out/base.apk out/split_config.arm64_v8a.apk out/split_config.xxhdpi.apk ...
-   ```
-
-   `install-multiple` commits all splits in one session so the signature-consistency check passes.
-   Installing the base alone and adding splits later tends to fail the same way.
-
-If a build of this app is **already installed** (e.g. the Play version, or a previous patch signed
-with a different key), its signature will not match your newly signed splits. **Uninstall first**,
-then install the patched set:
+You can verify those two load-bearing files before patching:
 
 ```bash
-adb uninstall <package>
-adb install-multiple out/*.apk
+unzip -p "$MODULE_APK" META-INF/xposed/module.prop
+unzip -p "$MODULE_APK" META-INF/xposed/java_init.list
 ```
 
-Uninstalling clears app data too, so re-do any login/first-run setup afterward.
+Expected values include `minApiVersion=102`, `targetApiVersion=102`, and
+`com.template.lsposed.ModuleEntry`. LSPatch 1.0 rejects API 100 and treats a lower target API as
+legacy only when `assets/xposed_init` is present.
 
----
+## 3. Choose a patch mode
 
-## 4. The metaloader first-launch flake
+LSPatch 1.0 chooses the module source at patch time:
 
-A **freshly installed** LSPatch build sometimes crashes **once** on first launch inside LSPatch's
-bootstrap component:
+| Mode | CLI switch | Module source | Manager required after install? |
+|---|---|---|---|
+| Embedded (called Integrated in parts of the UI) | `-m <module.apk>` | Module APKs baked into the patched target | No |
+| Manager | `--manager` | Modules and scope supplied live by the installed manager | Yes |
 
-```
-java.lang.NoClassDefFoundError: ... org.lsposed.lspatch.metaloader.LSPAppComponentFactoryStub
-```
+Use embedded mode for a self-contained test APK. Changing its modules requires another patch. Use
+manager mode when you want to change scope or module selection without rebuilding the target.
+`--manager` and `-m` are mutually exclusive.
 
-This is a known first-launch timing issue in the metaloader stub (the AppComponentFactory shim
-LSPatch injects). **Just relaunch the app** — the second start loads the stub and boots normally. If
-it crashes *every* launch, that is a different problem (usually a bad/incomplete split install from
-§3 or the wrong flavor from §1).
+This template sets `autoHotReload=false` because it owns native hooks, a worker thread, and activity
+lifecycle callbacks without a teardown path. Manager-mode changes therefore require a target
+restart even though LSPatch 1.0 can hot-reload modules that explicitly opt in safely.
 
-**Aggravated by a root LSPosed framework.** If the same device also runs a root LSPosed/Zygisk
-framework that is scoped to (or not excluding) this package, both LSPosed and the embedded LSPatch
-loader can inject the same process and race, which makes the metaloader flake far more likely (and
-muddies your logs). For a clean non-root test, **exclude the target app** from Zygisk / the LSPosed
-scope / the denylist so only LSPatch is injecting it.
+## 4. Patch from the command line
 
----
+### Embedded mode, one APK
 
-## 5. Optional: PairIP / Play licensing (app-category-specific, NOT in the template by default)
-
-Many Play-distributed apps embed Google's **PairIP** anti-tamper and/or Play licensing
-(`com.pairip.licensecheck.*`). These verify that the running APK is the untouched, Play-signed
-build. A re-signed LSPatch build fails that check, and the app typically bounces the user to its
-Play Store page instead of starting.
-
-This only affects the **non-root, re-signed** path (a root install runs the original Play-signed
-APK, so the check passes natively). Because it is specific to that app category — not something the
-generic template should carry — the template code does **not** include a bypass. If you need it for
-an authorized target, add it to your `LSPatchEntry` at `Application.attach`, wrapped so it is a
-no-op when the class is absent:
-
-```java
-// In LSPatchEntry, inside the afterHookedMethod once you have the Context/ClassLoader.
-// App-category-specific — only for a non-root re-signed build of a PairIP-protected app.
-private static void bypassPairipLicense(ClassLoader cl) {
-    if (cl == null) return;
-    try {
-        XposedHelpers.findAndHookMethod(
-                "com.pairip.licensecheck.ILicenseV2ResultListener$Stub", cl,
-                "onTransact", int.class, android.os.Parcel.class,
-                android.os.Parcel.class, int.class,
-                XC_MethodReplacement.returnConstant(true));
-    } catch (Throwable ignored) {
-        // Class not present (non-PairIP app) or already handled — leave the app untouched.
-    }
-}
+```bash
+java -jar lspatch-v1.0-455-release.jar \
+  -m "$MODULE_APK" \
+  -o out \
+  -l 2 \
+  -f \
+  base.apk
 ```
 
-Forcing the binder result callback `onTransact` to report success means the deny verdict is never
-delivered to the license verifier, so there is no Play-Store redirect. Keep `sigBypassLevel` at 2
-(§2) alongside this, since PairIP also inspects the on-disk signing block.
+The stable build writes `out/base-455-lspatched.apk`.
 
----
+### Embedded mode, split APK set
 
-## 6. Quick checklist
+Pass the base and every split in the **same invocation**:
 
-- [ ] Built and embedded the **`lspatch`** flavor (`assembleLspatchRelease`), not `lsposed`.
-- [ ] `xposedminversion`, `minApiVersion`, and `targetApiVersion` resolve to **93** in the embedded module.
-- [ ] Chose a `sigBypassLevel` (default **2**) appropriate to the target's self-checks.
-- [ ] Patched **every** split and signed them all with the **same** key.
-- [ ] Used `adb install-multiple`; uninstalled any prior differently-signed install first.
-- [ ] If it crashed once on `LSPAppComponentFactoryStub`, relaunched.
-- [ ] Excluded the app from any root LSPosed/Zygisk injection for a clean non-root test.
-- [ ] (Only if the app uses PairIP/licensing) added the bypass to your `LSPatchEntry`.
+```bash
+java -jar lspatch-v1.0-455-release.jar \
+  -m "$MODULE_APK" \
+  -o out \
+  -l 2 \
+  -f \
+  base.apk \
+  split_config.arm64_v8a.apk \
+  split_config.en.apk \
+  split_config.xxhdpi.apk
+```
+
+LSPatch injects the loader into the APK carrying the application component and repacks the other
+splits. It signs every output with the same key, which is required for an atomic split install.
+
+### Manager mode
+
+Install `manager-v1.0-455-release.apk`, then patch without `-m`:
+
+```bash
+java -jar lspatch-v1.0-455-release.jar \
+  --manager \
+  -o out \
+  -l 2 \
+  -f \
+  base.apk
+```
+
+Install the module APK on the device and assign the patched target in LSPatch Manager. The manager
+must remain installed. If you used LSPatch 1.0's manager-cloaking feature, add
+`--manager-package <actual.manager.package>` so the patched app binds to the renamed manager.
+
+### Current CLI options worth knowing
+
+Run `java -jar lspatch-v1.0-455-release.jar --help` for the authoritative list.
+
+| Option | Effect |
+|---|---|
+| `-m`, `--embed <apk>` | Embed a module; repeat for multiple modules. Incompatible with `--manager`. |
+| `--manager` | Resolve modules and scope from LSPatch Manager at runtime. |
+| `--manager-package <id>` | Bind manager mode to a cloaked/custom manager package. |
+| `-l`, `--sigbypasslv 0..2` | Select local signature bypass. The CLI default is **0**. |
+| `-k`, `--keystore <file> <store-pass> <alias> <key-pass>` | Use a stable custom signing key. |
+| `--injectdex` | Inject loader dex directly; mainly useful for browser-style targets that need it. |
+| `--documents-provider` | Expose the patched app's private data through Android's document picker. |
+| `--version-code <n>` | Override the patched app's version code. |
+| `--name <label>` | Override its launcher label. |
+| `--target-sdk <n>` | Override `targetSdkVersion`. |
+| `--extract-libs` | Force `android:extractNativeLibs=true`. |
+| `--cleartext` | Force `android:usesCleartextTraffic=true`. |
+| `--add-permission <name>` | Add a permission; repeat as needed. |
+| `-d`, `--debuggable` | Make the target debuggable. |
+| `-v`, `--verbose` | Print verbose patcher output. |
+
+`--documents-provider`, `--cleartext`, and `--debuggable` deliberately widen access or weaken target
+settings. Enable them only when the test requires them, and do not distribute that build as though
+it were the original app.
+
+## 5. Signing, signature bypass, and installation
+
+If `-k` is omitted, LSPatch uses its bundled key. Use your own stable keystore when repeated patches
+must upgrade one another. Neither key matches a store-signed installation unless you own and use the
+original signing key, so uninstall a differently signed copy first:
+
+```bash
+adb uninstall com.example.target
+```
+
+Install a single output with:
+
+```bash
+adb install out/base-455-lspatched.apk
+```
+
+Install a split set together:
+
+```bash
+adb install-multiple \
+  out/base-455-lspatched.apk \
+  out/split_config.arm64_v8a-455-lspatched.apk \
+  out/split_config.en-455-lspatched.apk \
+  out/split_config.xxhdpi-455-lspatched.apk
+```
+
+Uninstalling clears app data. Back up authorized test data first when necessary.
+
+The `-l` levels affect local signature checks:
+
+- **0:** disabled. This is the command-line default.
+- **1:** spoof signature results returned through `PackageManager`.
+- **2:** level 1 plus handling for direct reads of the APK through libc `openat`.
+
+The manager UI defaults a new patch to level 2, but the CLI does not. Signature bypass cannot make a
+re-signed APK pass Play Integrity, server-side attestation, or every app-specific anti-tamper scheme.
+Do not treat it as a general licensing or integrity bypass.
+
+## 6. Upgrade and troubleshooting checklist
+
+- [ ] Downloaded the current stable release (or deliberately selected a named canary) and verified its hash.
+- [ ] Re-patched targets that were built with LSPatch 0.8 or older.
+- [ ] Built `app-release.apk`; did not use the removed API-93 flavor.
+- [ ] Confirmed `targetApiVersion=102` and `META-INF/xposed/java_init.list` in the module APK.
+- [ ] Chose embedded (`-m`) or manager (`--manager`) mode, never both.
+- [ ] Passed the base and all splits in one patch command and installed all outputs together.
+- [ ] Used one stable signing key and uninstalled any copy signed by another key.
+- [ ] Restarted the target after changing this template's module because hot reload is disabled.
+- [ ] Kept root Vector/LSPosed injection out of the same target during a clean LSPatch test.
+
+If LSPatch does not list the module, inspect the two `META-INF/xposed` files from section 2. If the
+module is listed but does not run, use the debug module and LSPatch's `-debug.jar`/manager build,
+enable verbose patcher output with `-v`, force-stop the target, and capture a fresh logcat. If an app
+patched before v1.0 behaves inconsistently, rebuild it rather than attempting to reuse the old
+embedded loader.

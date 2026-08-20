@@ -37,6 +37,5 @@ jobs:
       - name: Build debug and release
         run: |
           ./gradlew \
-            :app:assembleLsposedDebug :app:assembleLspatchDebug \
-            :app:assembleLsposedRelease :app:assembleLspatchRelease \
-            :app:lintLsposedDebug :app:lintLspatchDebug --stacktrace --warning-mode all
+            :app:assembleDebug :app:assembleRelease :app:lintDebug \
+            --stacktrace --warning-mode all

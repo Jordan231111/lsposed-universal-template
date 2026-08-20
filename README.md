@@ -2,21 +2,19 @@
 
 [![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)](LICENSE)
 
-A quick-start Android/LSPosed module template for authorized testing and rapid prototyping.
+A quick-start Android/Vector module template for authorized testing and rapid prototyping.
 
 What it includes:
 
 - Modern `libxposed` API 102 entry point (`io.github.libxposed:api:102.0.0`, `compileOnly`).
-- Root **and** non-root delivery via two build flavors on a `framework` dimension: `lsposed`
-  (modern API 102, root/LSPosed/Vector) and `lspatch` (classic `de.robv.android.xposed` API 93, non-root
-  via LSPatch). Both entries funnel through one idempotent `Bootstrap`. See
-  [`docs/LSPATCH_NONROOT.md`](docs/LSPATCH_NONROOT.md) — a modern-API-only module is silently
-  rejected by LSPatch, so the `lspatch` flavor exists specifically to avoid that.
+- One module APK for both rooted Vector and rootless LSPatch 1.0. LSPatch 1.0 is rebuilt on Vector
+  and loads modern libxposed API-102 modules through `META-INF/xposed/java_init.list`; the obsolete
+  API-93-only `lspatch` flavor is no longer needed. See [`docs/LSPATCH_NONROOT.md`](docs/LSPATCH_NONROOT.md).
 - Both `onPackageLoaded` and `onPackageReady` callbacks are overridden for broad compatibility.
 - Process-level filter: `TemplateConfig.TARGET_PROCESS_SUFFIXES` + `SKIP_PROCESS_SUFFIXES`
   default to hooking only the main process and skipping common anti-cheat / push /
   crash-handler satellite processes.
-- Modern LSPosed metadata under `META-INF/xposed/`:
+- Modern libxposed metadata under `META-INF/xposed/`:
   - `java_init.list`
   - `scope.list`
   - `module.prop` with the correct `exceptionMode=protective` key
@@ -40,8 +38,8 @@ What it includes:
   names in the `.so` symbol table.
 - Debug/release split with `VERBOSE_LOGS` as a `BuildConfig` field — release builds strip
   verbose logs and run R8. Note that `proguard-rules.pro` deliberately `-keep`s the classes the
-  framework/JNI must find by name — the entry classes (`ModuleEntry`, `LSPatchEntry`),
-  `NativeBridge` and `NativeUtils` (their method names are bound as strings in `JNI_OnLoad`), and
+  framework/JNI must find by name — the entry class (`ModuleEntry`), `NativeBridge`, and
+  `NativeUtils` (their method names are bound as strings in `JNI_OnLoad`), and
   the `FeatureRegistry.KEY_*` constants — so those names are **not** obfuscated and stay visible to
   an app enumerating its classloader. Everything not kept is renamed/obfuscated by R8.
 - Neutral log tag (`AppRuntime`) and worker thread name; release builds disable verbose Java and
@@ -59,10 +57,10 @@ Use this only on apps/systems you own or are authorized to test.
 
 ## Current researched versions
 
-- Verified against upstream releases on **2026-08-11**.
-- `libxposed` API: `102.0.0`; Vector 2.2 implements modern API level 102.
-- Classic LSPatch remains on runtime API level 93 and compiles against the final official classic
-  artifact, `de.robv.android.xposed:api:82`.
+- Verified against upstream releases on **2026-08-19**.
+- `libxposed` API: `102.0.0`; Vector 2.2 and LSPatch 1.0 implement modern API level 102.
+- LSPatch: stable `v1.0` build 455 (released 2026-08-18). The newest prerelease checked was
+  `canary-460` (2026-08-19); use stable unless you are validating a specific canary fix.
 - ByteDance Android inline hook library (`shadowhook`): `2.0.1`.
 - Android Gradle Plugin `9.3.1`, Gradle `9.7.0`, compile/target SDK 37,
   Android NDK `29.0.14206865`, CMake `4.1.2`, and AndroidX Annotation `1.10.0`.
@@ -87,16 +85,16 @@ From this directory:
 Then build:
 
 ```bash
-./gradlew :app:assembleLsposedRelease
+./gradlew :app:assembleRelease
 ```
 
 Install:
 
 ```bash
-adb install -r app/build/outputs/apk/lsposed/release/app-lsposed-release.apk
+adb install -r app/build/outputs/apk/release/app-release.apk
 ```
 
-Enable the module in LSPosed/Vector, select the target scope, then force-stop and reopen the target app:
+Enable the module in Vector, select the target scope, then force-stop and reopen the target app:
 
 ```bash
 adb shell am force-stop com.example.target
@@ -106,15 +104,13 @@ adb logcat -s AppRuntime shadowhook_tag
 ```
 
 Release builds silence these logs by default (`BuildConfig.VERBOSE_LOGS=false`).
-Use `./gradlew :app:installLsposedDebug` while developing to get the chatty tag.
+Use `./gradlew :app:installDebug` while developing to get the chatty tag.
 
 ## Files you normally edit first
 
 - `app/src/main/java/com/template/lsposed/TemplateConfig.java`
 - `app/src/main/resources/META-INF/xposed/scope.list`
-- `app/src/lsposed/resources/META-INF/xposed/module.prop`
-- `app/src/lspatch/resources/META-INF/xposed/module.prop`
-- `app/src/main/res/values/arrays.xml`
+- `app/src/main/resources/META-INF/xposed/module.prop`
 - `app/src/main/res/values/strings.xml`
 
 ## Modern libxposed API shape
@@ -122,7 +118,7 @@ Use `./gradlew :app:installLsposedDebug` while developing to get the chatty tag.
 The entry class extends `io.github.libxposed.api.XposedModule` and is listed in:
 
 ```text
-app/src/lsposed/resources/META-INF/xposed/java_init.list
+app/src/main/resources/META-INF/xposed/java_init.list
 ```
 
 Hooking is interceptor-chain based:
@@ -175,17 +171,19 @@ for a branch that targets one app, not as default template behavior.
 
 ## Non-root delivery (LSPatch)
 
-To ship without root, build the `lspatch` flavor and embed it into a target APK with the LSPatch
-CLI:
+LSPatch 1.0 uses Vector's runtime and accepts this template's modern API-102 module directly. Build
+the same release APK used by rooted Vector, then embed it into an authorized target:
 
 ```bash
-./gradlew :app:assembleLspatchRelease   # app-lspatch-release.apk (classic API 93 entry)
-./gradlew :app:assembleLsposedRelease   # app-lsposed-release.apk (modern API 102 entry, root)
+./gradlew :app:assembleRelease
+java -jar lspatch-v1.0-455-release.jar \
+  -m app/build/outputs/apk/release/app-release.apk \
+  -o out -l 2 -f base.apk
 ```
 
-LSPatch only accepts the **classic** API-93 flavor; the modern one is silently ignored. Split-APK
-signing, `sigBypassLevel`, the first-launch metaloader flake, and the optional PairIP/licensing
-caveat are all covered in [`docs/LSPATCH_NONROOT.md`](docs/LSPATCH_NONROOT.md).
+Stable/canary downloads, embedded versus manager mode, multi-APK input, signing, current CLI
+options, migration from pre-1.0 patches, and integrity limitations are covered in
+[`docs/LSPATCH_NONROOT.md`](docs/LSPATCH_NONROOT.md).
 
 ## Frida-first workflow
 
@@ -195,7 +193,7 @@ Use Frida first to answer questions like:
 - Which classes/methods are loaded?
 - Which native libraries load and when?
 - Which exported symbols exist?
-- Which Java methods or native symbols are stable enough to become permanent LSPosed/ShadowHook hooks?
+- Which Java methods or native symbols are stable enough to become permanent libxposed/ShadowHook hooks?
 
 Use the latest undetected Frida server linked in `docs/FRIDA_EMULATOR_QUICKSTART.md` for this workflow. Keep the host `frida-tools` version and device `frida-server` version aligned, and do not mix these steps with stock `frida-server` unless you are intentionally debugging a version/build mismatch.
 
@@ -207,7 +205,7 @@ Tap the `Nyx` bubble to open the rectangular display. Drag the title/subtitle he
 
 ## Architecture warning
 
-If you use an x86/x86_64 emulator, Java LSPosed hooks can still work, but the native ShadowHook scaffold will not. For native inline-hook testing, use a real arm64 device or an arm64 emulator image on Apple Silicon.
+If you use an x86/x86_64 emulator, Java libxposed hooks can still work, but the native ShadowHook scaffold will not. For native inline-hook testing, use a real arm64 device or an arm64 emulator image on Apple Silicon.
 
 ## Repository files
 
@@ -215,7 +213,7 @@ If you use an x86/x86_64 emulator, Java LSPosed hooks can still work, but the na
 - `SECURITY.md` — safe issue-reporting expectations.
 - `CONTRIBUTING.md` — contribution and validation expectations.
 - `docs/ENGINE_NATIVE_WORKFLOWS.md` — optional notes for Unity IL2CPP and native-heavy targets.
-- `docs/LSPATCH_NONROOT.md` — non-root delivery via LSPatch (flavors, split signing, sig bypass).
+- `docs/LSPATCH_NONROOT.md` — non-root delivery via LSPatch 1.0 (modes, splits, signing, CLI).
 - `.github/workflows/android.yml` — GitHub Actions build for debug and release APKs.
 
 ## License
