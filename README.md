@@ -44,8 +44,9 @@ What it includes:
   an app enumerating its classloader. Everything not kept is renamed/obfuscated by R8.
 - Neutral log tag (`AppRuntime`) and worker thread name; release builds disable verbose Java and
   native logging by default.
-- Release signing falls back to the debug keystore when no env keystore is configured
-  (`TEMPLATE_KS_PATH`, `TEMPLATE_KS_PASS`, `TEMPLATE_KEY_ALIAS`, `TEMPLATE_KEY_PASS`).
+- The documented LSPatch/SAI workflow deliberately signs both the module and every patched target
+  split with the same existing Android debug key at `${HOME}/.android/debug.keystore`. This is a
+  stable local test key, not a production-distribution key.
 - Configure script supports `--native-lib` to rename the packaged `.so` away from the
   obvious `libtemplate_native.so`.
 - Frida-first Android emulator workflow documentation for reconnaissance before building
@@ -172,17 +173,24 @@ for a branch that targets one app, not as default template behavior.
 ## Non-root delivery (LSPatch)
 
 LSPatch 1.0 uses Vector's runtime and accepts this template's modern API-102 module directly. Build
-the same release APK used by rooted Vector, then embed it into an authorized target:
+the same release APK used by rooted Vector. For this template, the non-root workflow is always:
+
+1. embed the module with `-m` (never use manager mode);
+2. sign the module and every patched target split with `${HOME}/.android/debug.keystore`;
+3. package the patched target APK set as `target-lspatched.apks`; and
+4. install that bundle with SAI (Split APKs Installer).
 
 ```bash
-./gradlew :app:assembleRelease
-java -jar lspatch-v1.0-455-release.jar \
-  -m app/build/outputs/apk/release/app-release.apk \
-  -o out -l 2 -f base.apk
+ANDROID_DEBUG_KEYSTORE="${HOME}/.android/debug.keystore"
+test -f "$ANDROID_DEBUG_KEYSTORE"
+env -u TEMPLATE_KS_PATH -u TEMPLATE_KS_PASS \
+  -u TEMPLATE_KEY_ALIAS -u TEMPLATE_KEY_PASS \
+  ./gradlew :app:assembleRelease
 ```
 
-Stable/canary downloads, embedded versus manager mode, multi-APK input, signing, current CLI
-options, migration from pre-1.0 patches, and integrity limitations are covered in
+The module is already nested inside the patched base APK, so do not add `app-release.apk` as a
+separate top-level member of the `.apks` archive. The complete copy-paste patch, signing, bundling,
+verification, and SAI installation workflow is in
 [`docs/LSPATCH_NONROOT.md`](docs/LSPATCH_NONROOT.md).
 
 ## Frida-first workflow

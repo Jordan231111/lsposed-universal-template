@@ -21,7 +21,6 @@ The stable release assets used by this guide are:
 | Asset | SHA-256 |
 |---|---|
 | `lspatch-v1.0-455-release.jar` | `405e466336d89dcdeca0a5faebc7a5bcc17470a03f9de1ac047647a80febf351` |
-| `manager-v1.0-455-release.apk` | `fc6b7967afef72412288eb2aa52d001d4f339d6e4232f6d0be9830af7bbc7108` |
 
 Download the stable command-line patcher and verify it before use:
 
@@ -46,177 +45,191 @@ LSPatch 1.0 is a ground-up rebuild on Vector. Its patched-app runtime supports:
 This is materially different from LSPatch 0.8 and older. A target patched with an older LSPatch does
 not acquire the 1.0 runtime merely because the manager was updated: **re-patch every target app**.
 
-## 2. One modern module APK for Vector and LSPatch
+## 2. Build the module with the existing Android debug key
 
-Build the template once:
+This workflow deliberately uses the standard local Android debug key for repeatable test installs:
 
-```bash
-./gradlew :app:assembleRelease
-MODULE_APK=app/build/outputs/apk/release/app-release.apk
+```text
+${HOME}/.android/debug.keystore
+store password: android
+alias:          androiddebugkey
+key password:   android
 ```
 
-The resulting APK is valid for both rooted Vector and rootless LSPatch 1.0. There is no separate
-classic `lspatch` flavor anymore. LSPatch 1.0 reads `META-INF/xposed/module.prop`; when
-`targetApiVersion` is 101 or newer, it loads entry classes from
-`META-INF/xposed/java_init.list`. This template advertises API 102 and lists `ModuleEntry` there.
+Verify the key exists, then build without any release-signing environment override:
 
-You can verify those two load-bearing files before patching:
+```zsh
+ANDROID_DEBUG_KEYSTORE="${HOME}/.android/debug.keystore"
+test -f "$ANDROID_DEBUG_KEYSTORE"
+keytool -list \
+  -keystore "$ANDROID_DEBUG_KEYSTORE" \
+  -storepass android \
+  -alias androiddebugkey
 
-```bash
+env -u TEMPLATE_KS_PATH -u TEMPLATE_KS_PASS \
+  -u TEMPLATE_KEY_ALIAS -u TEMPLATE_KEY_PASS \
+  ./gradlew :app:assembleRelease
+
+MODULE_APK="$PWD/app/build/outputs/apk/release/app-release.apk"
+```
+
+With those four environment overrides absent, the Gradle release build falls back to Android's
+debug signing configuration. The LSPatch command in section 4 passes the same keystore explicitly,
+so the module APK and every patched target APK use one consistent certificate.
+
+The module is valid for both rooted Vector and rootless LSPatch 1.0. LSPatch reads
+`META-INF/xposed/module.prop`; when `targetApiVersion` is 101 or newer, it loads entries from
+`META-INF/xposed/java_init.list`. Verify the module before patching:
+
+```zsh
 unzip -p "$MODULE_APK" META-INF/xposed/module.prop
 unzip -p "$MODULE_APK" META-INF/xposed/java_init.list
 ```
 
 Expected values include `minApiVersion=102`, `targetApiVersion=102`, and
-`com.template.lsposed.ModuleEntry`. LSPatch 1.0 rejects API 100 and treats a lower target API as
-legacy only when `assets/xposed_init` is present.
+`com.template.lsposed.ModuleEntry`.
 
-## 3. Choose a patch mode
+## 3. Required delivery: embedded module inside an SAI bundle
 
-LSPatch 1.0 chooses the module source at patch time:
+This template's non-root workflow is intentionally fixed:
 
-| Mode | CLI switch | Module source | Manager required after install? |
-|---|---|---|---|
-| Embedded (called Integrated in parts of the UI) | `-m <module.apk>` | Module APKs baked into the patched target | No |
-| Manager | `--manager` | Modules and scope supplied live by the installed manager | Yes |
+- always pass `-m "$MODULE_APK"` so the module is embedded;
+- never use `--manager` mode;
+- pass the target base APK and every target split to one LSPatch invocation;
+- sign every output with `${HOME}/.android/debug.keystore`; and
+- package the patched target APK set as one `target-lspatched.apks` file.
 
-Use embedded mode for a self-contained test APK. Changing its modules requires another patch. Use
-manager mode when you want to change scope or module selection without rebuilding the target.
-`--manager` and `-m` are mutually exclusive.
+The module APK becomes `assets/lspatch/modules/<module-package>.apk` **inside the patched base APK**.
+Do not also place `app-release.apk` at the top level of `target-lspatched.apks`: SAI treats top-level
+APK files as the package set it must install, and a separate module package would make that set
+invalid. The top level contains only the patched target base and its patched target splits.
 
-This template sets `autoHotReload=false` because it owns native hooks, a worker thread, and activity
-lifecycle callbacks without a teardown path. Manager-mode changes therefore require a target
-restart even though LSPatch 1.0 can hot-reload modules that explicitly opt in safely.
+[SAI's format description](https://github.com/Aefyr/SAI/blob/master/META-FORMAT.md) defines `.apks`
+as a renamed ZIP archive. `icon.png` and `meta.sai_v1.json`/`meta.sai_v2.json` are metadata added by
+SAI exports, not requirements for installing a ZIP that contains a valid base-and-split APK set.
 
-## 4. Patch from the command line
+## 4. Copy-paste embedded patch and `.apks` bundle workflow
 
-### Embedded mode, one APK
+The example below works in macOS `zsh`. Keep only `base.apk` in `TARGET_APKS` for a monolithic app;
+for a split app, list the base and every required split.
 
-```bash
-java -jar lspatch-v1.0-455-release.jar \
+```zsh
+LSPATCH_JAR="$PWD/lspatch-v1.0-455-release.jar"
+MODULE_APK="$PWD/app/build/outputs/apk/release/app-release.apk"
+ANDROID_DEBUG_KEYSTORE="${HOME}/.android/debug.keystore"
+PATCH_OUTPUT_DIR="$(mktemp -d "${TMPDIR:-/tmp}/lspatch-output.XXXXXX")"
+SAI_TEMP_BUNDLE="${PATCH_OUTPUT_DIR}.apks"
+SAI_BUNDLE="$PWD/target-lspatched.apks"
+
+TARGET_APKS=(
+  "$PWD/base.apk"
+  "$PWD/split_config.arm64_v8a.apk"
+  "$PWD/split_config.en.apk"
+  "$PWD/split_config.xxhdpi.apk"
+)
+
+test -f "$LSPATCH_JAR"
+test -f "$MODULE_APK"
+test -f "$ANDROID_DEBUG_KEYSTORE"
+
+java -jar "$LSPATCH_JAR" \
   -m "$MODULE_APK" \
-  -o out \
+  -k "$ANDROID_DEBUG_KEYSTORE" android androiddebugkey android \
+  -o "$PATCH_OUTPUT_DIR" \
   -l 2 \
   -f \
-  base.apk
+  "${TARGET_APKS[@]}"
+
+(
+  cd "$PATCH_OUTPUT_DIR"
+  /usr/bin/zip -q -9 "$SAI_TEMP_BUNDLE" ./*.apk
+)
+
+mv -f "$SAI_TEMP_BUNDLE" "$SAI_BUNDLE"
+/usr/bin/zip -T "$SAI_BUNDLE"
+unzip -Z1 "$SAI_BUNDLE"
+shasum -a 256 "$SAI_BUNDLE"
 ```
 
-The stable build writes `out/base-455-lspatched.apk`.
+The result is always `target-lspatched.apks`, including when the target has only one APK. The
+temporary patch directory is unique, so a stale split from an earlier run cannot leak into the new
+bundle. Re-running the final `mv -f` deliberately replaces the prior bundle with the newly verified
+one.
 
-### Embedded mode, split APK set
+### Verify the embedded module and consistent signer
 
-Pass the base and every split in the **same invocation**:
+Before transferring the bundle, confirm that LSPatch embedded the module and that every APK has the
+same signer:
 
-```bash
-java -jar lspatch-v1.0-455-release.jar \
-  -m "$MODULE_APK" \
-  -o out \
-  -l 2 \
-  -f \
-  base.apk \
-  split_config.arm64_v8a.apk \
-  split_config.en.apk \
-  split_config.xxhdpi.apk
+```zsh
+unzip -l "$PATCH_OUTPUT_DIR"/base-*-lspatched.apk \
+  | grep 'assets/lspatch/modules/.*\.apk'
+
+for apk in "$MODULE_APK" "$PATCH_OUTPUT_DIR"/*.apk; do
+  printf '%s\n' "$apk"
+  apksigner verify --verbose --print-certs "$apk" \
+    | grep 'certificate SHA-256 digest'
+done
 ```
 
-LSPatch injects the loader into the APK carrying the application component and repacks the other
-splits. It signs every output with the same key, which is required for an atomic split install.
+Every printed certificate digest must be identical. If `apksigner` is not on `PATH`, use
+`${HOME}/Library/Android/sdk/build-tools/37.0.0/apksigner`.
 
-### Manager mode
+## 5. Install the bundle with SAI
 
-Install `manager-v1.0-455-release.apk`, then patch without `-m`:
+1. Copy `target-lspatched.apks` to the Android device.
+2. Open SAI (Split APKs Installer) and choose **Install APKs**.
+3. Select `target-lspatched.apks`.
+4. Leave any SAI re-signing/signing option disabled; LSPatch already signed every member with the
+   consistent Android debug key.
+5. Approve the Android package-installer prompt.
 
-```bash
-java -jar lspatch-v1.0-455-release.jar \
-  --manager \
-  -o out \
-  -l 2 \
-  -f \
-  base.apk
-```
+SAI installs all APK members in one package session. A differently signed store build or an older
+patch made with another key cannot be upgraded in place. Uninstall that copy first, noting that an
+uninstall clears its app data.
 
-Install the module APK on the device and assign the patched target in LSPatch Manager. The manager
-must remain installed. If you used LSPatch 1.0's manager-cloaking feature, add
-`--manager-package <actual.manager.package>` so the patched app binds to the renamed manager.
+## 6. Relevant LSPatch options and signing limits
 
-### Current CLI options worth knowing
+Run `java -jar lspatch-v1.0-455-release.jar --help` for the authoritative option list.
 
-Run `java -jar lspatch-v1.0-455-release.jar --help` for the authoritative list.
-
-| Option | Effect |
+| Option | Use in this workflow |
 |---|---|
-| `-m`, `--embed <apk>` | Embed a module; repeat for multiple modules. Incompatible with `--manager`. |
-| `--manager` | Resolve modules and scope from LSPatch Manager at runtime. |
-| `--manager-package <id>` | Bind manager mode to a cloaked/custom manager package. |
-| `-l`, `--sigbypasslv 0..2` | Select local signature bypass. The CLI default is **0**. |
-| `-k`, `--keystore <file> <store-pass> <alias> <key-pass>` | Use a stable custom signing key. |
-| `--injectdex` | Inject loader dex directly; mainly useful for browser-style targets that need it. |
-| `--documents-provider` | Expose the patched app's private data through Android's document picker. |
-| `--version-code <n>` | Override the patched app's version code. |
-| `--name <label>` | Override its launcher label. |
-| `--target-sdk <n>` | Override `targetSdkVersion`. |
-| `--extract-libs` | Force `android:extractNativeLibs=true`. |
-| `--cleartext` | Force `android:usesCleartextTraffic=true`. |
-| `--add-permission <name>` | Add a permission; repeat as needed. |
-| `-d`, `--debuggable` | Make the target debuggable. |
-| `-v`, `--verbose` | Print verbose patcher output. |
+| `-m`, `--embed <apk>` | Required. Embeds this template's module in the target. |
+| `-k`, `--keystore <file> <store-pass> <alias> <key-pass>` | Required. Uses the existing Android debug key consistently. |
+| `-l`, `--sigbypasslv 2` | Explicitly enables `PackageManager` plus libc `openat` signature handling. |
+| `--injectdex` | Optional; mainly useful for browser-style targets that require direct loader-dex injection. |
+| `--documents-provider` | Optional; exposes the patched app's private data through Android's document picker. |
+| `--version-code <n>` | Optional version-code override. |
+| `--name <label>` | Optional launcher-label override. |
+| `--target-sdk <n>` | Optional `targetSdkVersion` override. |
+| `--extract-libs` | Optional `android:extractNativeLibs=true` override. |
+| `--cleartext` | Optional `android:usesCleartextTraffic=true` override. |
+| `--add-permission <name>` | Optional permission addition; repeat as needed. |
+| `-d`, `--debuggable` | Optional debuggable target build. |
+| `-v`, `--verbose` | Optional verbose patcher log. |
 
-`--documents-provider`, `--cleartext`, and `--debuggable` deliberately widen access or weaken target
-settings. Enable them only when the test requires them, and do not distribute that build as though
-it were the original app.
+The standard Android debug keystore credentials are public and intended only for development. They
+provide consistent local signatures, not production identity or security. Signature bypass also
+cannot make a re-signed APK pass Play Integrity, server-side attestation, or every app-specific
+anti-tamper scheme.
 
-## 5. Signing, signature bypass, and installation
+## 7. Upgrade and troubleshooting checklist
 
-If `-k` is omitted, LSPatch uses its bundled key. Use your own stable keystore when repeated patches
-must upgrade one another. Neither key matches a store-signed installation unless you own and use the
-original signing key, so uninstall a differently signed copy first:
-
-```bash
-adb uninstall com.example.target
-```
-
-Install a single output with:
-
-```bash
-adb install out/base-455-lspatched.apk
-```
-
-Install a split set together:
-
-```bash
-adb install-multiple \
-  out/base-455-lspatched.apk \
-  out/split_config.arm64_v8a-455-lspatched.apk \
-  out/split_config.en-455-lspatched.apk \
-  out/split_config.xxhdpi-455-lspatched.apk
-```
-
-Uninstalling clears app data. Back up authorized test data first when necessary.
-
-The `-l` levels affect local signature checks:
-
-- **0:** disabled. This is the command-line default.
-- **1:** spoof signature results returned through `PackageManager`.
-- **2:** level 1 plus handling for direct reads of the APK through libc `openat`.
-
-The manager UI defaults a new patch to level 2, but the CLI does not. Signature bypass cannot make a
-re-signed APK pass Play Integrity, server-side attestation, or every app-specific anti-tamper scheme.
-Do not treat it as a general licensing or integrity bypass.
-
-## 6. Upgrade and troubleshooting checklist
-
-- [ ] Downloaded the current stable release (or deliberately selected a named canary) and verified its hash.
-- [ ] Re-patched targets that were built with LSPatch 0.8 or older.
-- [ ] Built `app-release.apk`; did not use the removed API-93 flavor.
+- [ ] Downloaded the current stable LSPatch release and verified its hash.
+- [ ] Re-patched targets built with LSPatch 0.8 or older.
+- [ ] Built `app-release.apk` with the existing Android debug key and no signing-env override.
 - [ ] Confirmed `targetApiVersion=102` and `META-INF/xposed/java_init.list` in the module APK.
-- [ ] Chose embedded (`-m`) or manager (`--manager`) mode, never both.
-- [ ] Passed the base and all splits in one patch command and installed all outputs together.
-- [ ] Used one stable signing key and uninstalled any copy signed by another key.
-- [ ] Restarted the target after changing this template's module because hot reload is disabled.
+- [ ] Passed `-m "$MODULE_APK"`; did not use manager mode.
+- [ ] Passed the target base and every required target split in one patch command.
+- [ ] Passed the explicit `-k ... debug.keystore android androiddebugkey android` arguments.
+- [ ] Confirmed the module is nested inside the patched base APK.
+- [ ] Confirmed every module/target certificate digest is identical.
+- [ ] Confirmed the `.apks` top level contains only patched APKs from the target package.
+- [ ] Installed `target-lspatched.apks` through SAI with SAI re-signing disabled.
+- [ ] Re-patched and reinstalled after changing the module; this template disables hot reload.
 - [ ] Kept root Vector/LSPosed injection out of the same target during a clean LSPatch test.
 
-If LSPatch does not list the module, inspect the two `META-INF/xposed` files from section 2. If the
-module is listed but does not run, use the debug module and LSPatch's `-debug.jar`/manager build,
-enable verbose patcher output with `-v`, force-stop the target, and capture a fresh logcat. If an app
-patched before v1.0 behaves inconsistently, rebuild it rather than attempting to reuse the old
-embedded loader.
+If the module does not run, inspect the modern metadata from section 2 and the embedded module path
+from section 4. Re-run with LSPatch's debug JAR plus `-v`, force-stop the target, and capture a fresh
+logcat. If a target patched before v1.0 behaves inconsistently, rebuild it rather than reusing the
+old embedded loader.
