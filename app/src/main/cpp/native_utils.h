@@ -25,6 +25,7 @@ struct MemoryRange {
 std::vector<MemoryRange> process_ranges();
 
 struct ModuleInfo {
+    // Summary extents may span unmapped gaps. Iterate ranges for every memory read/scan.
     uintptr_t base{0};
     uintptr_t end{0};
     uintptr_t text_start{0};

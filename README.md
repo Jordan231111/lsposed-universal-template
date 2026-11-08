@@ -97,6 +97,8 @@ old filename if it needs existing preferences; unrelated modules' files are neve
 Slider changes are live; persistence commits on drag completion or panel close. File replacement
 is atomic and failed writes preserve the previous file and remain retryable. The in-app values
 are target-process settings, not a companion-application preferences bridge.
+Persistence assumes one writing process, as in the default main-process scope. A fork enabling
+multiple writers needs a coordinator or process-specific filenames.
 
 Every real hook must read its own live setting and the module enable flag. Registering a menu
 control does not implement native behavior or an undo operation. The native startup control
