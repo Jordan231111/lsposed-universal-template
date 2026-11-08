@@ -1,6 +1,7 @@
 package com.template.lsposed.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -17,6 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -54,6 +56,8 @@ public final class OverlayController {
     private TextView panelStats;
     private FeatureRegistry.Listener panelListener;
     private final Map<String, Button> toggleRefs = new HashMap<>();
+    private final Map<String, Runnable> numberRefreshers = new HashMap<>();
+    private AlertDialog inputDialog;
 
     private OverlayController(Application app) {
         this.app = app;
@@ -182,7 +186,9 @@ public final class OverlayController {
 
         ViewGroup root = (ViewGroup) target.getWindow().getDecorView();
         panelView = buildPanelView();
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(dp(280), FrameLayout.LayoutParams.WRAP_CONTENT);
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
+                Math.max(1, Math.min(dp(340), root.getWidth() - dp(24))),
+                Math.max(1, Math.min(dp(600), root.getHeight() - dp(24))));
         lp.gravity = Gravity.CENTER;
         root.addView(panelView, lp);
         lift(panelView);
@@ -193,8 +199,11 @@ public final class OverlayController {
         }
     }
 
+    // Labels/status come from the consuming module; this in-app panel uses the target Context.
+    @android.annotation.SuppressLint("SetTextI18n")
     private View buildPanelView() {
         toggleRefs.clear();
+        numberRefreshers.clear();
 
         LinearLayout root = new LinearLayout(appCtx);
         root.setOrientation(LinearLayout.VERTICAL);
@@ -231,32 +240,15 @@ public final class OverlayController {
         hairline.setBackgroundColor(Color.argb(0x55, 0xB8, 0x9A, 0xFF));
         root.addView(hairline, hp);
 
-        ColorStateList lavender = ColorStateList.valueOf(Color.argb(0xFF, 0xB8, 0x9A, 0xFF));
-        ColorStateList trackBg = ColorStateList.valueOf(Color.argb(0xFF, 0x3A, 0x35, 0x50));
-
-        final FeatureRegistry.Feature multiplier = findFloatFeature(FeatureRegistry.KEY_MULTIPLIER);
-        final float minMult = multiplier != null ? multiplier.min : 1f;
-        final float maxMult = multiplier != null ? multiplier.max : 30f;
-        final String multLabelText = multiplier != null ? multiplier.label : "Multiplier";
-
-        final TextView multLabel = new TextView(appCtx);
-        multLabel.setTextColor(Color.WHITE);
-        multLabel.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        multLabel.setText(formatMultiplier(multLabelText, FeatureState.getMultiplier()));
-        root.addView(multLabel);
-
-        final SeekBar multBar = new SeekBar(appCtx);
-        int range = (int) Math.round((maxMult - minMult) * 10f);
-        multBar.setMax(Math.max(1, range));
-        multBar.setProgress(clamp(Math.round((FeatureState.getMultiplier() - minMult) * 10f),
-                0, multBar.getMax()));
-        multBar.setProgressTintList(lavender);
-        multBar.setProgressBackgroundTintList(trackBg);
-        multBar.setThumbTintList(lavender);
-        root.addView(multBar);
+        android.widget.ScrollView scroll = new android.widget.ScrollView(appCtx);
+        LinearLayout content = new LinearLayout(appCtx);
+        content.setOrientation(LinearLayout.VERTICAL);
+        scroll.addView(content);
+        root.addView(scroll, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1));
 
         for (FeatureRegistry.Feature f : FeatureRegistry.features()) {
-            if (f.type == FeatureRegistry.Type.BOOL) addToggleRow(root, f);
+            if (f.type == FeatureRegistry.Type.BOOL) addToggleRow(content, f);
+            else addNumberRow(content, f);
         }
 
         final TextView stats = new TextView(appCtx);
@@ -264,19 +256,8 @@ public final class OverlayController {
         stats.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         stats.setPadding(0, dp(12), 0, dp(10));
         stats.setText(FeatureState.summary());
-        root.addView(stats);
+        content.addView(stats);
         panelStats = stats;
-
-        multBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                float value = minMult + progress / 10f;
-                FeatureState.setMultiplier(value);
-                multLabel.setText(formatMultiplier(multLabelText, FeatureState.getMultiplier()));
-                stats.setText(FeatureState.summary());
-            }
-            @Override public void onStartTrackingTouch(SeekBar seekBar) {}
-            @Override public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
 
         LinearLayout row = new LinearLayout(appCtx);
         row.setOrientation(LinearLayout.HORIZONTAL);
@@ -288,17 +269,13 @@ public final class OverlayController {
         Button reset = nyxButton("Reset");
         reset.setOnClickListener(v -> {
             FeatureRegistry.resetToDefaults();
-            multBar.setProgress(clamp(Math.round((FeatureState.getMultiplier() - minMult) * 10f),
-                    0, multBar.getMax()));
-            multLabel.setText(formatMultiplier(multLabelText, FeatureState.getMultiplier()));
+            refreshPanel();
             Toast.makeText(appCtx, "Defaults restored", Toast.LENGTH_SHORT).show();
         });
 
-        Button nativeRetry = nyxButton("Native");
+        Button nativeRetry = nyxButton("Status");
         nativeRetry.setOnClickListener(v -> {
-            int result = NativeBridge.installNativeHooks(appCtx, appCtx.getPackageName());
-            stats.setText(FeatureState.summary());
-            Toast.makeText(appCtx, "Native install: " + result, Toast.LENGTH_SHORT).show();
+            stats.setText(FeatureState.summary() + "\n" + NativeBridge.getNativeRecords());
         });
 
         Button close = nyxButton("X");
@@ -321,6 +298,80 @@ public final class OverlayController {
         FeatureRegistry.addListener(listener);
 
         return root;
+    }
+
+    // Direct entry deliberately round-trips Float's invariant decimal syntax without losing precision.
+    @android.annotation.SuppressLint("SetTextI18n")
+    private void addNumberRow(LinearLayout parent, FeatureRegistry.Feature feature) {
+        TextView label = new TextView(appCtx);
+        label.setTextColor(Color.WHITE);
+        label.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
+        label.setPadding(0, dp(10), 0, 0);
+        parent.addView(label);
+        double step = feature.step > 0 ? feature.step : ((double) feature.max - feature.min) / 1000;
+        LinearLayout row = new LinearLayout(appCtx);
+        row.setOrientation(LinearLayout.HORIZONTAL);
+        Button minus = nyxButton("−");
+        Button plus = nyxButton("+");
+        SeekBar bar = new SeekBar(appCtx);
+        bar.setMax((int) Math.ceil(((double) feature.max - feature.min) / step));
+        ColorStateList tint = ColorStateList.valueOf(Color.argb(0xFF, 0xB8, 0x9A, 0xFF));
+        bar.setProgressTintList(tint);
+        bar.setThumbTintList(tint);
+        bar.setProgressBackgroundTintList(ColorStateList.valueOf(Color.argb(0xFF, 0x3A, 0x35, 0x50)));
+        row.addView(minus, new LinearLayout.LayoutParams(dp(48), dp(48)));
+        row.addView(bar, new LinearLayout.LayoutParams(0, dp(48), 1));
+        row.addView(plus, new LinearLayout.LayoutParams(dp(48), dp(48)));
+        parent.addView(row);
+        Runnable refresh = () -> {
+            float value = FeatureRegistry.getFloat(feature.key);
+            String text = feature.label + ": " + Float.toString(value);
+            label.setText(text);
+            bar.setContentDescription(text);
+            int progress = value == feature.max ? bar.getMax() : (int) Math.round(((double) value - feature.min) / step);
+            if (bar.getProgress() != progress) bar.setProgress(progress);
+        };
+        refresh.run();
+        numberRefreshers.put(feature.key, refresh);
+        minus.setOnClickListener(v -> FeatureRegistry.setFloat(feature.key,
+                (float) (FeatureRegistry.getFloat(feature.key) - step)));
+        plus.setOnClickListener(v -> FeatureRegistry.setFloat(feature.key,
+                (float) (FeatureRegistry.getFloat(feature.key) + step)));
+        bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (!fromUser) return;
+                FeatureRegistry.previewFloat(feature.key, progress == bar.getMax() ? feature.max
+                        : (float) (feature.min + progress * step));
+            }
+            @Override public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override public void onStopTrackingTouch(SeekBar seekBar) { FeatureRegistry.commit(); }
+        });
+        label.setOnClickListener(v -> {
+            Activity activity = currentActivity != null ? currentActivity : attachedActivity;
+            if (activity == null || activity.isFinishing()) return;
+            EditText input = new EditText(activity);
+            input.setSingleLine(true);
+            input.setInputType(android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
+                    | android.text.InputType.TYPE_NUMBER_FLAG_SIGNED);
+            input.setText(Float.toString(FeatureRegistry.getFloat(feature.key)));
+            input.selectAll();
+            inputDialog = new AlertDialog.Builder(activity).setTitle(feature.label).setView(input)
+                    .setNegativeButton("Cancel", null).setPositiveButton("Apply", (dialog, which) -> {
+                        try {
+                            float value = Float.parseFloat(input.getText().toString().trim());
+                            if (!Float.isFinite(value)) throw new NumberFormatException();
+                            FeatureRegistry.setFloat(feature.key, value);
+                        } catch (NumberFormatException error) {
+                            Toast.makeText(appCtx, "Enter a finite number", Toast.LENGTH_SHORT).show();
+                        }
+                    }).create();
+            inputDialog.setOnDismissListener(dialog -> inputDialog = null);
+            inputDialog.show();
+            input.requestFocus();
+            input.selectAll();
+            if (inputDialog.getWindow() != null) inputDialog.getWindow().setSoftInputMode(
+                    android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        });
     }
 
     private void addToggleRow(LinearLayout parent, FeatureRegistry.Feature feature) {
@@ -356,19 +407,9 @@ public final class OverlayController {
         toggleRefs.put(feature.key, toggle);
     }
 
-    private FeatureRegistry.Feature findFloatFeature(String key) {
-        for (FeatureRegistry.Feature f : FeatureRegistry.features()) {
-            if (f.type == FeatureRegistry.Type.FLOAT && key.equals(f.key)) return f;
-        }
-        return null;
-    }
-
-    private static String formatMultiplier(String label, float value) {
-        return String.format(Locale.US, "%s  \u00d7%.1f", label, value);
-    }
-
     private void refreshPanel() {
         if (panelStats != null) panelStats.setText(FeatureState.summary());
+        for (Runnable refresh : numberRefreshers.values()) refresh.run();
         for (Map.Entry<String, Button> e : toggleRefs.entrySet()) {
             Button b = e.getValue();
             if (b != null) b.setText(FeatureRegistry.getBool(e.getKey()) ? "ON" : "OFF");
@@ -376,8 +417,11 @@ public final class OverlayController {
     }
 
     private void closePanelResources() {
+        FeatureRegistry.commit();
+        if (inputDialog != null) { inputDialog.dismiss(); inputDialog = null; }
         panelStats = null;
         toggleRefs.clear();
+        numberRefreshers.clear();
         if (panelListener != null) {
             FeatureRegistry.removeListener(panelListener);
             panelListener = null;

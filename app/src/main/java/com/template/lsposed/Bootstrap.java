@@ -59,7 +59,7 @@ public final class Bootstrap {
         try {
             EngineDetector.Engine engine = EngineDetector.detect(app);
             FeatureState.setEngineLabel(engine.name().toLowerCase(Locale.US));
-            if (engine == EngineDetector.Engine.NATIVE && retriesRemaining > 0) {
+            if ((engine == EngineDetector.Engine.NATIVE || engine == EngineDetector.Engine.UNKNOWN) && retriesRemaining > 0) {
                 new Handler(Looper.getMainLooper()).postDelayed(
                         () -> detectEngine(app, retriesRemaining - 1),
                         ENGINE_DETECTION_RETRY_MS);

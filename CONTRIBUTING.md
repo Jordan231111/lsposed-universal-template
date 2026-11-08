@@ -10,7 +10,10 @@ Contributions are welcome when they improve the template for authorized research
 - Do not add secrets, private app code, or proprietary offsets/signatures.
 - Run `python3 -m unittest discover -s tests -v` for configure, ELF tool, Java contract,
   native scanner and documentation checks. See `tests/README.md` for requirements.
-- Run `./gradlew :app:assembleDebug :app:assembleRelease :app:lintDebug` before submitting changes.
+- Run `./gradlew :app:assembleDebug :app:assembleRelease :app:lintDebug :app:lintRelease
+  -Ptemplate.localTestSigning=true` for local QA, without production signing variables.
+- Keep real engine/ABI compatibility claims tied to device evidence; fixture success is not proof
+  that an arbitrary protected or stripped runtime supports the same contracts.
 
 ## License note
 

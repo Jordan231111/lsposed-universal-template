@@ -50,7 +50,8 @@ public final class ModuleEntry extends XposedModule {
 
     private void preparePackage(PackageLoadedParam param, String phase) {
         String pkg = param.getPackageName();
-        String proc = processName != null ? processName : pkg;
+        String proc = processName;
+        if (proc == null || proc.isEmpty()) return;
         if (!TemplateConfig.shouldHookProcess(pkg, proc)) return;
         if (TemplateConfig.VERBOSE_LOGS) {
             log(Log.INFO, TemplateConfig.LOG_TAG, phase + " " + pkg
@@ -101,6 +102,7 @@ public final class ModuleEntry extends XposedModule {
 
     private synchronized void onApplicationContextReady(Context context) {
         if (applicationContextReady) return;
+        if (!TemplateConfig.shouldHook(context.getPackageName())) return;
         applicationContextReady = true;
         Context appContext = context.getApplicationContext() != null ? context.getApplicationContext() : context;
         // Idempotent via Bootstrap's static guard.

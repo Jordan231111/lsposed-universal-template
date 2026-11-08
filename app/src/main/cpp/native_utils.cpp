@@ -1,6 +1,7 @@
 #include "native_utils.h"
 
 #include <android/log.h>
+#include <shadowhook.h>
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
@@ -30,6 +31,16 @@
 namespace native_utils {
 
 namespace {
+
+// Allocation/resolver failures must not unwind a C++ exception across the JVM's JNI boundary.
+template<auto Function> struct JniBoundary;
+template<class Return, class... Args, Return (*Function)(JNIEnv*, jclass, Args...)>
+struct JniBoundary<Function> {
+    static Return call(JNIEnv* env, jclass cls, Args... args) noexcept {
+        try { return Function(env, cls, args...); }
+        catch (...) { return Return{}; }
+    }
+};
 
 struct Mapping {
     uintptr_t start{0};
@@ -166,14 +177,10 @@ std::string jstring_to_string(JNIEnv *env, jstring value) {
 
 bool library_matches(const std::string &path, const std::string &name) {
     if (path.empty() || name.empty()) return false;
+    if (name.find('/') != std::string::npos) return path == name;
     std::size_t pos = path.rfind('/');
     std::string base = pos == std::string::npos ? path : path.substr(pos + 1);
-    if (base == name) return true;
-    if (base.size() > name.size() && base.compare(0, name.size(), name) == 0) {
-        char next = base[name.size()];
-        return next == '.';
-    }
-    return false;
+    return base == name;
 }
 
 bool checked_range_end(uintptr_t start, std::size_t len, uintptr_t *end) {
@@ -257,17 +264,9 @@ jlongArray native_find_module(JNIEnv *env, jclass, jstring name_j) {
         env->SetLongArrayRegion(out, 0, 2, values);
         return out;
     }
-    auto maps = read_maps();
-    uintptr_t start = 0;
-    uintptr_t end = 0;
-    for (const auto &m : maps) {
-        if (!library_matches(m.path, name)) continue;
-        if (m.perms[0] != 'r') continue;
-        if (start == 0 || m.start < start) start = m.start;
-        if (m.end > end) end = m.end;
-    }
-    values[0] = static_cast<jlong>(start);
-    values[1] = static_cast<jlong>(end > start ? end - start : 0);
+    const auto info = find_module_info(name.c_str());
+    values[0] = static_cast<jlong>(info.valid ? info.base : 0);
+    values[1] = static_cast<jlong>(info.valid && info.end > info.base ? info.end - info.base : 0);
     env->SetLongArrayRegion(out, 0, 2, values);
     return out;
 }
@@ -299,11 +298,8 @@ jlong native_resolve_symbol(JNIEnv *env, jclass, jstring lib_j, jstring sym_j) {
     std::string lib = jstring_to_string(env, lib_j);
     std::string sym = jstring_to_string(env, sym_j);
     if (lib.empty() || sym.empty()) return 0;
-    void *handle = dlopen(lib.c_str(), RTLD_NOW | RTLD_NOLOAD);
-    if (handle == nullptr) return 0;
-    void *addr = dlsym(handle, sym.c_str());
-    dlclose(handle);
-    return static_cast<jlong>(reinterpret_cast<uintptr_t>(addr));
+    const auto info = find_module_info(lib.c_str());
+    return static_cast<jlong>(info.valid ? resolve_export(info.base, sym.c_str()) : 0);
 }
 
 jbyteArray native_read_memory(JNIEnv *env, jclass, jlong address_j, jint length) {
@@ -329,8 +325,13 @@ jboolean native_write_memory(JNIEnv *env, jclass, jlong address_j, jbyteArray da
     const Mapping *m = containing_mapping(maps, address, static_cast<std::size_t>(length));
     if (m == nullptr) return JNI_FALSE;
 
+    // Complete all allocation/JNI work before changing page permissions.
+    std::vector<jbyte> buffer(static_cast<std::size_t>(length));
+    env->GetByteArrayRegion(data_j, 0, length, buffer.data());
+    if (env->ExceptionCheck()) return JNI_FALSE;
+
     long page_size = sysconf(_SC_PAGESIZE);
-    if (page_size <= 0) page_size = 4096;
+    if (page_size <= 0) return JNI_FALSE;
     uintptr_t mask = static_cast<uintptr_t>(page_size) - 1;
     uintptr_t aligned_start = address & ~mask;
     uintptr_t raw_end = 0;
@@ -351,14 +352,12 @@ jboolean native_write_memory(JNIEnv *env, jclass, jlong address_j, jbyteArray da
         return JNI_FALSE;
     }
 
-    std::vector<jbyte> buffer(static_cast<std::size_t>(length));
-    env->GetByteArrayRegion(data_j, 0, length, buffer.data());
-    if (env->ExceptionCheck()) {
-        env->ExceptionClear();
-        mprotect(reinterpret_cast<void *>(aligned_start), aligned_len, orig_prot);
-        return JNI_FALSE;
-    }
     std::memcpy(reinterpret_cast<void *>(address), buffer.data(), static_cast<std::size_t>(length));
+
+    if ((orig_prot & PROT_EXEC) != 0) {
+        __builtin___clear_cache(reinterpret_cast<char *>(address),
+                                 reinterpret_cast<char *>(address + length));
+    }
 
     if (mprotect(reinterpret_cast<void *>(aligned_start), aligned_len, orig_prot) != 0) {
         NU_LOGW("mprotect(restore) failed at %p len=%zu",
@@ -366,10 +365,6 @@ jboolean native_write_memory(JNIEnv *env, jclass, jlong address_j, jbyteArray da
         return JNI_FALSE;
     }
 
-    if ((orig_prot & PROT_EXEC) != 0) {
-        __builtin___clear_cache(reinterpret_cast<char *>(address),
-                                 reinterpret_cast<char *>(address + length));
-    }
     return JNI_TRUE;
 }
 
@@ -389,7 +384,12 @@ jlongArray native_find_string_xrefs(JNIEnv *env, jclass, jstring lib_j, jlong st
     std::size_t max_results = max_results_j > 0
             ? std::min<std::size_t>(static_cast<std::size_t>(max_results_j), 4096)
             : 16;
-    auto xrefs = find_adrp_add_xrefs(info.text_start, info.text_end, target_va, max_results);
+    std::vector<uintptr_t> xrefs;
+    for (const auto& range : info.ranges) {
+        if (!range.readable || !range.executable || xrefs.size() >= max_results) continue;
+        auto hits = find_adrp_add_xrefs(range.begin, range.end, target_va, max_results - xrefs.size());
+        xrefs.insert(xrefs.end(), hits.begin(), hits.end());
+    }
 
     jlongArray out = env->NewLongArray(static_cast<jsize>(xrefs.size()));
     if (out == nullptr) return nullptr;
@@ -403,6 +403,14 @@ jlongArray native_find_string_xrefs(JNIEnv *env, jclass, jstring lib_j, jlong st
 }
 
 }  // namespace
+
+std::vector<MemoryRange> process_ranges() {
+    std::vector<MemoryRange> out;
+    for (const auto& mapping : read_maps())
+        out.push_back({mapping.start, mapping.end, mapping.perms[0] == 'r',
+                       mapping.perms[1] == 'w', mapping.perms[2] == 'x'});
+    return out;
+}
 
 ModuleInfo find_module_info(const char *library_name) {
     ModuleInfo info;
@@ -419,6 +427,13 @@ ModuleInfo find_module_info(const char *library_name) {
         if (name == nullptr || *name == '\0') return 0;
         std::string path(name);
         if (!library_matches(path, arg->needle)) return 0;
+        if (arg->found) {
+            if (arg->out->base != pinfo->dlpi_addr) arg->out->ambiguous = true;
+            return 0;
+        }
+        arg->found = true;
+        arg->out->base = pinfo->dlpi_addr;
+        arg->out->path = path;
 
         // Derive segment bounds from program headers instead of hardcoding section offsets.
         // Modern Android ELFs commonly put .rodata in a separate R-- LOAD rather than RX.
@@ -433,6 +448,9 @@ ModuleInfo find_module_info(const char *library_name) {
             uintptr_t lo = base + ph.p_vaddr;
             if (ph.p_memsz > UINTPTR_MAX - lo) continue;
             uintptr_t hi = lo + ph.p_memsz;
+            arg->out->ranges.push_back({lo, hi, bool(ph.p_flags & PF_R),
+                    bool(ph.p_flags & PF_W), bool(ph.p_flags & PF_X)});
+            arg->out->end = std::max(arg->out->end, hi);
             if (ph.p_flags & PF_X) {
                 if (rx_lo == 0 || lo < rx_lo) rx_lo = lo;
                 if (hi > rx_hi) rx_hi = hi;
@@ -448,20 +466,24 @@ ModuleInfo find_module_info(const char *library_name) {
                 }
             }
         }
-        if (rx_hi == 0) return 0;  // no executable segment -> not the lib we want
-
         arg->out->base = base;
+        arg->out->path = path;
         arg->out->text_start = rx_lo;
         arg->out->text_end = rx_hi;
         arg->out->rodata_start = ro_lo != 0 ? ro_lo : rx_lo;
         arg->out->rodata_end = ro_hi != 0 ? ro_hi : rx_hi;
         arg->out->data_start = rw_lo;
         arg->out->data_end = rw_hi;
-        arg->out->end = std::max({rx_hi, ro_hi, rw_hi});
-        arg->out->valid = true;
+        arg->out->valid = !arg->out->ranges.empty();
         arg->found = true;
-        return 1;
+        return 0; // Continue to reject duplicate basenames in different loader namespaces.
     }, &iarg);
+
+    if (info.ambiguous) {
+        info.valid = false;
+        info.ranges.clear();
+        return info;
+    }
 
     if (iarg.found) {
         NU_LOGI("module %s: base=%p text=[%p,%p] rodata=[%p,%p]",
@@ -475,91 +497,22 @@ ModuleInfo find_module_info(const char *library_name) {
 }
 
 uintptr_t resolve_export(uintptr_t module_base, const char *symbol_name) {
-    if (module_base == 0 || symbol_name == nullptr || *symbol_name == '\0') return 0;
-
-    const auto *ehdr = reinterpret_cast<const ElfW(Ehdr) *>(module_base);
-    if (memcmp(ehdr->e_ident, ELFMAG, SELFMAG) != 0) return 0;
-    const auto *phdr = reinterpret_cast<const ElfW(Phdr) *>(module_base + ehdr->e_phoff);
-
-    const ElfW(Dyn) *dyn = nullptr;
-    for (int i = 0; i < ehdr->e_phnum; ++i) {
-        if (phdr[i].p_type == PT_DYNAMIC) {
-            dyn = reinterpret_cast<const ElfW(Dyn) *>(module_base + phdr[i].p_vaddr);
-            break;
-        }
-    }
-    if (dyn == nullptr) return 0;
-
-    // Some linkers pre-relocate DT_* pointers to absolute addresses; others leave them as vaddrs.
-    // Normalise: a value below the load base is a vaddr and needs the base added.
-    auto fix = [module_base](uintptr_t p) -> uintptr_t { return p < module_base ? module_base + p : p; };
-
-    const char *strtab = nullptr;
-    const ElfW(Sym) *symtab = nullptr;
-    size_t syment = sizeof(ElfW(Sym));
-    size_t strsz = 0;
-    const uint32_t *sysv_hash = nullptr;
-    const uint32_t *gnu_hash = nullptr;
-    for (const ElfW(Dyn) *d = dyn; d->d_tag != DT_NULL; ++d) {
-        switch (d->d_tag) {
-            case DT_STRTAB: strtab = reinterpret_cast<const char *>(fix(d->d_un.d_ptr)); break;
-            case DT_SYMTAB: symtab = reinterpret_cast<const ElfW(Sym) *>(fix(d->d_un.d_ptr)); break;
-            case DT_SYMENT: syment = d->d_un.d_val; break;
-            case DT_STRSZ: strsz = d->d_un.d_val; break;
-            case DT_HASH: sysv_hash = reinterpret_cast<const uint32_t *>(fix(d->d_un.d_ptr)); break;
-            case DT_GNU_HASH: gnu_hash = reinterpret_cast<const uint32_t *>(fix(d->d_un.d_ptr)); break;
-            default: break;
-        }
-    }
-    if (strtab == nullptr || symtab == nullptr || syment != sizeof(ElfW(Sym)) || strsz == 0) return 0;
-
-    constexpr size_t kMaxSymbols = 5000000;
-    size_t nsyms = 0;
-    if (sysv_hash != nullptr) {
-        // DT_HASH: nbucket, nchain, buckets..., chains...; nchain is the dynsym count.
-        nsyms = sysv_hash[1];
-    } else if (gnu_hash != nullptr) {
-        // DT_GNU_HASH does not store the count directly. Find the greatest bucket, then walk its
-        // chain to the terminating low bit. Word size affects only the bloom-filter span.
-        const uint32_t nbuckets = gnu_hash[0];
-        const uint32_t symoffset = gnu_hash[1];
-        const uint32_t bloom_size = gnu_hash[2];
-        if (nbuckets == 0 || bloom_size > kMaxSymbols) return 0;
-        const auto *bloom = reinterpret_cast<const ElfW(Addr) *>(gnu_hash + 4);
-        const uint32_t *buckets = reinterpret_cast<const uint32_t *>(bloom + bloom_size);
-        const uint32_t *chains = buckets + nbuckets;
-        uint32_t greatest = 0;
-        for (uint32_t i = 0; i < nbuckets; ++i) greatest = std::max(greatest, buckets[i]);
-        if (greatest < symoffset) {
-            nsyms = symoffset;
-        } else {
-            size_t index = greatest;
-            while (index < kMaxSymbols && (chains[index - symoffset] & 1U) == 0) ++index;
-            if (index >= kMaxSymbols) return 0;
-            nsyms = index + 1;
-        }
-    } else {
-        // Conservative fallback for unusual hash-less ELFs whose dynstr follows dynsym.
-        uintptr_t sym_addr = reinterpret_cast<uintptr_t>(symtab);
-        uintptr_t str_addr = reinterpret_cast<uintptr_t>(strtab);
-        if (str_addr <= sym_addr) return 0;
-        nsyms = (str_addr - sym_addr) / syment;
-    }
-    if (nsyms == 0 || nsyms > kMaxSymbols) return 0;
-
-    for (size_t i = 0; i < nsyms; ++i) {
-        const ElfW(Sym) &sym = symtab[i];
-        if (sym.st_value == 0 || sym.st_name == 0 || sym.st_name >= strsz
-                || sym.st_shndx == SHN_UNDEF) continue;
-        const char *name = strtab + sym.st_name;
-        size_t remaining = strsz - sym.st_name;
-        if (std::memchr(name, '\0', remaining) == nullptr) continue;
-        if (std::strcmp(name, symbol_name) == 0) {
-            if (sym.st_shndx == SHN_ABS) return sym.st_value;
-            return sym.st_value <= UINTPTR_MAX - module_base ? module_base + sym.st_value : 0;
-        }
-    }
-    return 0;
+    if (!module_base || !symbol_name || !*symbol_name) return 0;
+    struct Lookup { uintptr_t base; std::string path; } lookup{module_base, {}};
+    dl_iterate_phdr([](dl_phdr_info* info, size_t, void* data) {
+        auto* value = static_cast<Lookup*>(data);
+        if (info->dlpi_addr != value->base || !info->dlpi_name || !*info->dlpi_name) return 0;
+        value->path = info->dlpi_name;
+        return 1;
+    }, &lookup);
+    if (lookup.path.empty()) return 0;
+    // ShadowHook uses xDL's loaded-image lookup (not XDL_TRY_FORCE_LOAD). Its close
+    // releases the symbol-query wrapper; it does not dlclose the target library.
+    void* image = shadowhook_dlopen(lookup.path.c_str());
+    if (!image) return 0;
+    void* symbol = shadowhook_dlsym_dynsym(image, symbol_name);
+    shadowhook_dlclose(image);
+    return reinterpret_cast<uintptr_t>(symbol);
 }
 
 std::vector<uintptr_t> find_adrp_add_xrefs(uintptr_t text_start, uintptr_t text_end,
@@ -603,7 +556,7 @@ std::vector<uintptr_t> find_adrp_add_xrefs(uintptr_t text_start, uintptr_t text_
 }
 
 uintptr_t find_function_start(uintptr_t addr_in_func, std::size_t scan_back_limit) {
-    if (addr_in_func % alignof(uint32_t) != 0) return addr_in_func;
+    if (addr_in_func % alignof(uint32_t) != 0) return 0;
     uintptr_t scan = addr_in_func;
     uintptr_t limit = addr_in_func > scan_back_limit ? addr_in_func - scan_back_limit : 0;
     while (scan - limit >= sizeof(uint32_t)) {
@@ -611,7 +564,7 @@ uintptr_t find_function_start(uintptr_t addr_in_func, std::size_t scan_back_limi
         uint32_t insn = *reinterpret_cast<const uint32_t *>(scan);
         if (is_function_prologue(insn)) return scan;
     }
-    return addr_in_func;
+    return 0;
 }
 
 uintptr_t find_string_va(uintptr_t rodata_start, uintptr_t rodata_end, const char *needle) {
@@ -620,7 +573,8 @@ uintptr_t find_string_va(uintptr_t rodata_start, uintptr_t rodata_end, const cha
     if (needle_len == 0) return 0;
     const char *base = reinterpret_cast<const char *>(rodata_start);
     std::size_t size = rodata_end - rodata_start;
-    for (std::size_t i = 0; i + needle_len <= size; ++i) {
+    if (needle_len > size) return 0;
+    for (std::size_t i = 0; i <= size - needle_len; ++i) {
         if (std::memcmp(base + i, needle, needle_len) == 0) {
             return rodata_start + i;
         }
@@ -631,8 +585,10 @@ uintptr_t find_string_va(uintptr_t rodata_start, uintptr_t rodata_end, const cha
 uintptr_t find_ptr_in_range(uintptr_t start, uintptr_t end, uintptr_t value) {
     if (start == 0 || end <= start) return 0;
     constexpr uintptr_t alignment = alignof(uintptr_t);
+    if (start > UINTPTR_MAX - (alignment - 1)) return 0;
     start = (start + alignment - 1) & ~(alignment - 1);
-    for (uintptr_t p = start; p + sizeof(uintptr_t) <= end; p += sizeof(uintptr_t)) {
+    if (end < start || end - start < sizeof(uintptr_t)) return 0;
+    for (uintptr_t p = start; p <= end - sizeof(uintptr_t); p += sizeof(uintptr_t)) {
         if (*reinterpret_cast<const uintptr_t *>(p) == value) return p;
     }
     return 0;
@@ -650,17 +606,17 @@ bool register_natives(JNIEnv *env) {
     if (cls == nullptr) return false;
     static JNINativeMethod methods[] = {
             {"nativeFindModule", "(Ljava/lang/String;)[J",
-             reinterpret_cast<void *>(native_find_module)},
+             reinterpret_cast<void *>(JniBoundary<native_find_module>::call)},
             {"nativePatternScan", "(JJLjava/lang/String;)J",
-             reinterpret_cast<void *>(native_pattern_scan)},
+             reinterpret_cast<void *>(JniBoundary<native_pattern_scan>::call)},
             {"nativeResolveSymbol", "(Ljava/lang/String;Ljava/lang/String;)J",
-             reinterpret_cast<void *>(native_resolve_symbol)},
+             reinterpret_cast<void *>(JniBoundary<native_resolve_symbol>::call)},
             {"nativeReadMemory", "(JI)[B",
-             reinterpret_cast<void *>(native_read_memory)},
+             reinterpret_cast<void *>(JniBoundary<native_read_memory>::call)},
             {"nativeWriteMemory", "(J[B)Z",
-             reinterpret_cast<void *>(native_write_memory)},
+             reinterpret_cast<void *>(JniBoundary<native_write_memory>::call)},
             {"nativeFindStringXRefs", "(Ljava/lang/String;JI)[J",
-             reinterpret_cast<void *>(native_find_string_xrefs)},
+             reinterpret_cast<void *>(JniBoundary<native_find_string_xrefs>::call)},
     };
     return env->RegisterNatives(cls, methods, sizeof(methods) / sizeof(methods[0])) == JNI_OK;
 }

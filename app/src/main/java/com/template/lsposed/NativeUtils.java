@@ -13,8 +13,8 @@ public final class NativeUtils {
     private NativeUtils() {}
 
     /**
-     * @return {@code [base, size]} where {@code base} is the load address of the first mapping
-     * of {@code libraryName} found in {@code /proc/self/maps}, or {@code [0, 0]} when not loaded.
+     * @return {@code [loadBias, imageSpan]} from ELF program headers, or {@code [0, 0]} when absent.
+     * The span may contain unmapped gaps; patternScan checks readable mappings individually.
      */
     public static long[] findModule(String libraryName) {
         if (!NativeBridge.loadTemplateNative()) return new long[]{0L, 0L};
@@ -40,7 +40,7 @@ public final class NativeUtils {
         }
     }
 
-    /** Resolves a symbol with {@code dlopen(..., RTLD_NOLOAD)} plus {@code dlsym}. */
+    /** Queries the loaded image's dynamic exports through ShadowHook, without loading an ELF. */
     public static long resolveSymbol(String libraryName, String symbolName) {
         if (libraryName == null || symbolName == null || libraryName.isEmpty() || symbolName.isEmpty()) return 0L;
         if (!NativeBridge.loadTemplateNative()) return 0L;
@@ -70,6 +70,7 @@ public final class NativeUtils {
      * the original execute bit. Restores the original permissions and flushes the instruction
      * cache for executable memory. Returns false on failure; a failed permission restore can occur
      * after bytes were written, so false does not imply that memory is unchanged.
+     * This is not an atomic patcher: callers must own the range and quiesce concurrent access.
      */
     public static boolean writeMemory(long address, byte[] data) {
         if (address == 0 || data == null || data.length == 0 || data.length > (8 * 1024 * 1024)) {

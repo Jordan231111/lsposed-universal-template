@@ -36,7 +36,7 @@ public final class TemplateConfig {
             ":msfcore", ":msf", ":mini",
             ":crashpad_handler", ":crash_handler", ":bugly", ":sentry",
             ":gameservice", ":anticheat", ":ac",
-            ":sandboxed_process", ":isolated_process",
+            ":sandboxed_process*", ":isolated_process*",
             ":privilege", ":stub"
     };
 
@@ -49,6 +49,10 @@ public final class TemplateConfig {
 
     /** Loads app/src/main/cpp and initializes ByteDance ShadowHook. Requires arm/arm64 process. */
     public static final boolean ENABLE_NATIVE_SHADOWHOOK = true;
+
+    /** Opt in for an IL2CPP target. No metadata APIs run until managed initialization is observed. */
+    public static final boolean ENABLE_IL2CPP_RUNTIME = false;
+    public static final String IL2CPP_LIBRARY_NAME = "libil2cpp.so";
 
     /** Pulled from BuildConfig so release builds strip verbose logs automatically. */
     public static final boolean VERBOSE_LOGS = BuildConfig.VERBOSE_LOGS;
@@ -75,7 +79,7 @@ public final class TemplateConfig {
     public static final String NATIVE_LIBRARY_NAME = "template_native";
 
     /** Best-effort runtime toggle state filename under the target app's files directory. */
-    public static final String FEATURE_STATE_FILE_NAME = ".rt_state";
+    public static final String FEATURE_STATE_FILE_NAME = "." + BuildConfig.APPLICATION_ID + ".settings.json";
 
     public static boolean shouldHook(String packageName) {
         if (packageName == null) return false;
@@ -91,11 +95,15 @@ public final class TemplateConfig {
      * (e.g. {@code "com.example.target"}, {@code "com.example.target:push"}).
      */
     public static boolean shouldHookProcess(String packageName, String processName) {
-        if (!shouldHook(packageName)) return false;
+        if (!shouldHook(packageName) || processName == null || processName.isEmpty()) return false;
         String suffix = processSuffix(packageName, processName);
 
         List<String> skip = Arrays.asList(SKIP_PROCESS_SUFFIXES);
-        if (skip.contains(suffix)) return false;
+        for (String excluded : skip) {
+            if (excluded == null) continue;
+            if (excluded.endsWith("*") ? suffix.startsWith(excluded.substring(0, excluded.length() - 1))
+                    : excluded.equals(suffix)) return false;
+        }
 
         List<String> allow = TARGET_PROCESS_SUFFIXES == null
                 ? Collections.emptyList()

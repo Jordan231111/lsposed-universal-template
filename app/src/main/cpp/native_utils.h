@@ -2,6 +2,7 @@
 
 #include <jni.h>
 #include <cstdint>
+#include <string>
 #include <vector>
 
 namespace native_utils {
@@ -11,6 +12,17 @@ namespace native_utils {
  * Called from template_native.cpp's JNI_OnLoad. Returns true on success.
  */
 bool register_natives(JNIEnv *env);
+
+struct MemoryRange {
+    uintptr_t begin{0}, end{0};
+    bool readable{false}, writable{false}, executable{false};
+    bool contains(uintptr_t address, std::size_t size) const {
+        return address >= begin && address < end && size <= end - address;
+    }
+};
+
+// A snapshot, not a lifetime lock. Keep the owning mapping alive while using its addresses.
+std::vector<MemoryRange> process_ranges();
 
 struct ModuleInfo {
     uintptr_t base{0};
@@ -22,16 +34,17 @@ struct ModuleInfo {
     uintptr_t data_start{0};   // writable/relro LOAD segments — vtables & typeinfo live here
     uintptr_t data_end{0};
     bool valid{false};
+    bool ambiguous{false};
+    std::string path;
+    std::vector<MemoryRange> ranges;
 };
 
 ModuleInfo find_module_info(const char *library_name);
 
 /**
- * Resolve an exported symbol by NAME from a mapped module's dynamic symbol table (.dynsym), parsing
- * the ELF image in memory. This is the namespace-proof, version-tolerant way to get the `il2cpp_*`
- * C API: it does not need dlopen/dlsym (which the LSPatch / LSPosed linker namespace can hide) and
- * it matches by symbol name rather than a per-version offset. `module_base` is ModuleInfo::base.
- * Returns the symbol's runtime address, or 0 if not found. Supports both DT_HASH and DT_GNU_HASH.
+ * Resolve an exported symbol from an already-loaded ELF through ShadowHook's namespace-aware
+ * symbol API. No target library is loaded or unloaded. The caller retains the mapping lifetime.
+ * `module_base` is ModuleInfo::base, not the first APK mapping or a file offset.
  */
 uintptr_t resolve_export(uintptr_t module_base, const char *symbol_name);
 
@@ -39,10 +52,8 @@ uintptr_t resolve_export(uintptr_t module_base, const char *symbol_name);
  * Scan [start,end) for a naturally aligned pointer-sized word equal to `value`.
  * Returns the address of the first match, or 0.
  *
- * RELATIVE relocations are already applied in the mapped image, so a vtable slot that points to
- * function F literally holds F's runtime address, and a typeinfo's name pointer holds the string's
- * runtime address. That lets us walk vtables/RTTI purely by value — no ELF reloc parsing needed,
- * which is what makes symbol resolution survive version/offset shifts.
+ * The caller supplies one readable live range. A matching word is analysis evidence, not proof
+ * of a vtable, object type or uniquely identified symbol.
  */
 uintptr_t find_ptr_in_range(uintptr_t start, uintptr_t end, uintptr_t value);
 
@@ -56,9 +67,9 @@ std::vector<uintptr_t> find_adrp_add_xrefs(uintptr_t text_start, uintptr_t text_
                                             uintptr_t target_va, std::size_t max_results);
 
 /**
- * Walks backwards from addr_in_func to find a function prologue.
+ * Diagnostic heuristic only: walk backwards to find a possible prologue.
  * Looks for STP X29, X30 / SUB SP, SP / PACIASP signatures.
- * Returns the function start address, or addr_in_func if not found within limit.
+ * Returns a candidate address or 0. Never use this alone as proof of a hook target.
  */
 uintptr_t find_function_start(uintptr_t addr_in_func, std::size_t scan_back_limit);
 
@@ -70,9 +81,8 @@ uintptr_t find_string_va(uintptr_t rodata_start, uintptr_t rodata_end, const cha
 
 /**
  * AOB (array-of-bytes) pattern scan over [start,end). Pattern is space-separated hex with `??`
- * wildcards, e.g. "1F 20 03 D5 ?? ?? 40 F9". Returns the first match address, or 0. The last-resort
- * resolution rung (version-keyed signature) when there is no string/RTTI/export anchor — used by the
- * IL2CPP/Godot/Lua/Cocos strategies and for stripped native code.
+ * wildcards, e.g. "1F 20 03 D5 ?? ?? 40 F9". Returns the first match address, or 0. Supply one readable
+ * live range; a first match alone does not establish uniqueness or a safe hook target.
  */
 uintptr_t pattern_scan(uintptr_t start, uintptr_t end, const char *aob);
 

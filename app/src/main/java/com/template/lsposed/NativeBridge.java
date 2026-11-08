@@ -56,6 +56,7 @@ public final class NativeBridge {
 
     public static synchronized boolean loadTemplateNative() {
         if (libraryLoadTried) return libraryLoaded;
+        if (!isArmProcess() || initShadowHook() != 0) return false;
         libraryLoadTried = true;
         try {
             System.loadLibrary(TemplateConfig.NATIVE_LIBRARY_NAME);
@@ -75,6 +76,7 @@ public final class NativeBridge {
     public static synchronized int installNativeHooks(Context context, String packageName) {
         FeatureState.bumpNativeInstallAttempts();
         if (!TemplateConfig.ENABLE_NATIVE_SHADOWHOOK) return -10;
+        if (context == null || !TemplateConfig.shouldHook(context.getPackageName())) return -14;
         if (!isArmProcess()) {
             FeatureState.setLastMessage("Native hooks skipped: ShadowHook supports arm/arm64 only");
             return -11;
@@ -91,8 +93,10 @@ public final class NativeBridge {
         try {
             String dataDir = context != null && context.getApplicationInfo() != null
                     ? context.getApplicationInfo().dataDir : "";
-            int result = nativeInstallHooks(packageName != null ? packageName : "", dataDir);
-            FeatureState.setLastMessage(result == 0 ? "Native scaffold installed" : "Native install returned " + result);
+            int result = nativeInstallHooks(packageName != null ? packageName : "", dataDir,
+                    TemplateConfig.ENABLE_IL2CPP_RUNTIME, TemplateConfig.IL2CPP_LIBRARY_NAME);
+            FeatureState.setLastMessage(result == 0 ? "Native startup accepted; see Status for readiness"
+                    : "Native install returned " + result);
             return result;
         } catch (Throwable t) {
             if (TemplateConfig.VERBOSE_LOGS) Log.e(TemplateConfig.LOG_TAG, "nativeInstallHooks failed", t);
@@ -103,7 +107,7 @@ public final class NativeBridge {
 
     public static synchronized String getNativeRecords() {
         try {
-            if (!libraryLoaded && !loadTemplateNative()) return "Native library not loaded";
+            if (!libraryLoaded) return "Native helpers have not started";
             String records = nativeGetShadowHookRecords();
             return records == null || records.isEmpty() ? "No ShadowHook records yet" : records;
         } catch (Throwable t) {
@@ -113,6 +117,7 @@ public final class NativeBridge {
 
     // Registered in C++ via JNI_OnLoad / RegisterNatives. Do not rename without updating the
     // method table in app/src/main/cpp/template_native.cpp.
-    private static native int nativeInstallHooks(String packageName, String dataDir);
+    private static native int nativeInstallHooks(String packageName, String dataDir,
+                                                boolean il2cppEnabled, String il2cppLibrary);
     private static native String nativeGetShadowHookRecords();
 }

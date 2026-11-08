@@ -11,6 +11,9 @@ find_package(shadowhook REQUIRED CONFIG)
 add_library(template_native SHARED
         template_native.cpp
         native_utils.cpp
+        library_observer.cpp
+        il2cpp_runtime.cpp
+        il2cpp_observer.cpp
 )
 
 if(NOT DEFINED TEMPLATE_VERBOSE_LOGS)
@@ -24,7 +27,7 @@ target_compile_definitions(template_native PRIVATE
 target_compile_options(template_native PRIVATE
         -Wall -Wextra -Wno-unused-parameter
         -ffunction-sections -fdata-sections
-        -fno-rtti -fno-exceptions
+        -fno-rtti -fexceptions
 )
 
 target_link_options(template_native PRIVATE

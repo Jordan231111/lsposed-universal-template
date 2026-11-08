@@ -1,7 +1,7 @@
 # Template tools
 
 Host configuration, download and analysis tools for authorized Android testing.
-`memtool.c` is a separate root-only device tool.
+Device fixtures and the read-only Frida agent stay separate from release source sets.
 
 ## LSPatch download (host)
 
@@ -66,29 +66,23 @@ be 1–4096. Relocation commands do not decode RELR, Android packed or symbol-ba
 An absent RELATIVE entry is reported explicitly and does not prove that the runtime pointer is zero.
 Xrefs/prologues are heuristics: verify candidates against disassembly and the target ABI.
 
-## Live memory (device, root) — `memtool.c`
+## Dynamic inspection
 
-Build once with the NDK and push:
-```
-$NDK/.../aarch64-linux-android28-clang -O2 memtool.c -o memtool
-adb push memtool /data/local/tmp/ && adb shell chmod 755 /data/local/tmp/memtool
-```
-Run as root: `adb shell su -c "/data/local/tmp/memtool <cmd> <pid> …"`.
+Use the matching Frida client/server/bridge workflow in
+[FRIDA_EMULATOR_QUICKSTART.md](../docs/FRIDA_EMULATOR_QUICKSTART.md). IDA/Hex-Rays is the
+primary native-analysis workflow; JEB Pro is preferred for heavily obfuscated DEX, with JADX
+for a clean first pass. For IL2CPP, use il2cpp-dumper-rs first, InspectorRedux for a cross-check,
+and ILSpy on generated DummyDll assemblies. Runtime analysis complements these tools when
+metadata is only available after initialization.
 
-| command | purpose |
-|---|---|
-| `read <pid> <addr> <len>` · `ptrs <pid> <addr> <n>` | hexdump / dump qwords |
-| `w32/w64/write <pid> <addr> <hex>` | poke a word / qword / raw bytes |
-| `scan <pid> <hexval64> [max]` · `scanr … <lo> <hi>` · `scan32 <pid> <hexval32>` | value scans (find objects/vtables) |
-| `sscan <pid> <string>` · `scanm <pid> <val> <mask>` | string / masked scans |
-| `snap <pid> <file>` + `hunt <pid> <snap> <old> <new>` | cheat-engine old→new diff |
-| `modiff <pid> <vtableAddr> <sec>` | **decrement detector**: snapshot every `MonitoredObfuscated`-style guard, play, report which value dropped (finds *the* counter without knowing its value) |
-| `freeze <pid> <addr> <floor> <iters> <us>` | hold a plain-int value |
-| `mofreeze <pid> <addr> <val> <iters> <us>` | hold an obfuscated `shadow0^shadow1` value (keeps shadows consistent) |
+The old process-memory writer has been removed: its unchecked arguments and app-specific
+obfuscated-value layout were unsuitable for a reusable template. Do not treat a successful raw
+memory write as proof of instruction-cache coherence, thread safety or feature correctness.
 
-**Live-test a byte-patch before shipping:** write the instruction to `base+rva` over `/proc/pid/mem`
-(COW copies the page; the game keeps running), watch the effect, then bake it into a `CodeFeature`.
-Use the library's ELF load bias plus a validated ELF VA. An APK executable mapping start is
-not necessarily the load bias; do not copy a mapping offset from another target.
+## Verified non-root bundles
 
-See `../docs/NATIVE_MODDING_PLAYBOOK.md` for the end-to-end workflow.
+`python3 tools/package-lspatch.py --help` describes the maintained packaging command. It accepts
+one module plus original base/splits, checks scope and identity, verifies the embedded module,
+alignment and signer, and atomically publishes a SAI-compatible archive. Signing passwords stay
+in environment variables. Production signing requires a pinned certificate; local test signing
+must be explicitly selected. See [LSPATCH_NONROOT.md](../docs/LSPATCH_NONROOT.md).

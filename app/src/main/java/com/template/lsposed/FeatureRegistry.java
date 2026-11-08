@@ -9,10 +9,13 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.regex.Pattern;
 
 /**
  * Runtime feature registry. Each feature declares a key, a human label, a type, and a default
@@ -41,9 +44,17 @@ public final class FeatureRegistry {
         public final float min;
         public final float max;
         public final boolean defaultBool;
+        public final float step;
 
         private Feature(String key, String label, Type type,
-                        boolean defaultBool, float defaultFloat, float min, float max) {
+                        boolean defaultBool, float defaultFloat, float min, float max, float step) {
+            if (key == null || !key.matches("[A-Za-z0-9_.-]{1,96}") || label == null || label.isBlank())
+                throw new IllegalArgumentException("Feature key/label is invalid");
+            if (type == Type.FLOAT && (!Float.isFinite(defaultFloat) || !Float.isFinite(min)
+                    || !Float.isFinite(max) || !Float.isFinite(max - min) || min >= max
+                    || defaultFloat < min || defaultFloat > max || !Float.isFinite(step) || step < 0
+                    || (step > 0 && Math.ceil(((double) max - min) / step) > 10000)))
+                throw new IllegalArgumentException("Invalid numeric bounds, default or step");
             this.key = key;
             this.label = label;
             this.type = type;
@@ -51,14 +62,32 @@ public final class FeatureRegistry {
             this.defaultFloat = defaultFloat;
             this.min = min;
             this.max = max;
+            this.step = step;
         }
 
         public static Feature bool(String key, String label, boolean def) {
-            return new Feature(key, label, Type.BOOL, def, 0f, 0f, 0f);
+            return new Feature(key, label, Type.BOOL, def, 0f, 0f, 0f, 0f);
         }
 
         public static Feature number(String key, String label, float def, float min, float max) {
-            return new Feature(key, label, Type.FLOAT, false, def, min, max);
+            return number(key, label, def, min, max, 0f);
+        }
+
+        public static Feature number(String key, String label, float def, float min, float max, float step) {
+            return new Feature(key, label, Type.FLOAT, false, def, min, max, step);
+        }
+
+        public static Feature integer(String key, String label, int def, int min, int max) {
+            if (min < -16_777_216 || max > 16_777_216)
+                throw new IllegalArgumentException("Integer controls must fit the exact float integer range");
+            return number(key, label, def, min, max, 1f);
+        }
+
+        private float normalize(float value) {
+            float bounded = Math.max(min, Math.min(max, value));
+            if (step == 0 || bounded == min || bounded == max) return bounded;
+            double snapped = min + Math.round(((double) bounded - min) / step) * (double) step;
+            return Math.max(min, Math.min(max, (float) snapped));
         }
     }
 
@@ -71,6 +100,9 @@ public final class FeatureRegistry {
     private static final Map<String, Boolean> BOOLS = new ConcurrentHashMap<>();
     private static final Map<String, Float> FLOATS = new ConcurrentHashMap<>();
     private static final List<Listener> LISTENERS = new CopyOnWriteArrayList<>();
+    private static final Map<String, String> LOADED_VALUES = new ConcurrentHashMap<>();
+    private static final AtomicLong revision = new AtomicLong();
+    private static long savedRevision;
     private static volatile File storage;
     private static volatile boolean initialized;
 
@@ -78,15 +110,15 @@ public final class FeatureRegistry {
 
     /** Called once per process before the overlay is attached or any hook reads a value. */
     public static synchronized void initialize(Context ctx) {
-        if (initialized) return;
-        initialized = true;
-
-        register(Feature.bool(KEY_ENABLED, "Module enabled", true));
-        register(Feature.bool(KEY_NATIVE_HOOKS, "Native ShadowHook scaffold",
-                TemplateConfig.ENABLE_NATIVE_SHADOWHOOK));
-        register(Feature.number(KEY_MULTIPLIER, "Multiplier", 1f, 1f, 30f));
-
-        if (ctx != null) {
+        if (!initialized) {
+            register(Feature.bool(KEY_ENABLED, "Module enabled", true));
+            register(Feature.bool(KEY_NATIVE_HOOKS, "Native helpers at startup",
+                    TemplateConfig.ENABLE_NATIVE_SHADOWHOOK));
+            register(Feature.number(KEY_MULTIPLIER, "Example multiplier", 1f, 1f, 30f, 0.1f));
+            initialized = true;
+        }
+        // An early context-free lookup must not permanently prevent persistence initialization.
+        if (ctx != null && storage == null) {
             try {
                 storage = new File(ctx.getFilesDir(), FILE_NAME);
                 load();
@@ -100,14 +132,19 @@ public final class FeatureRegistry {
 
     public static synchronized void register(Feature feature) {
         if (feature == null || feature.key == null) return;
+        Feature previous = FEATURES.get(feature.key);
+        if (previous != null && previous.type != feature.type)
+            throw new IllegalArgumentException("A registered feature cannot change its value type");
         FEATURES.put(feature.key, feature);
         ORDER.addIfAbsent(feature.key);
         if (feature.type == Type.BOOL && !BOOLS.containsKey(feature.key)) {
             BOOLS.put(feature.key, feature.defaultBool);
         }
         if (feature.type == Type.FLOAT && !FLOATS.containsKey(feature.key)) {
-            FLOATS.put(feature.key, feature.defaultFloat);
+            FLOATS.put(feature.key, feature.normalize(feature.defaultFloat));
         }
+        String loaded = LOADED_VALUES.get(feature.key);
+        if (previous == null && loaded != null) applyRaw(feature.key, loaded);
     }
 
     public static List<Feature> features() {
@@ -131,9 +168,10 @@ public final class FeatureRegistry {
         if (f == null || f.type != Type.BOOL) return;
         Boolean prev = BOOLS.put(key, value);
         if (prev == null || prev != value) {
-            save();
+            revision.incrementAndGet();
             notifyChanged(key);
         }
+        commit();
     }
 
     public static float getFloat(String key) {
@@ -144,23 +182,34 @@ public final class FeatureRegistry {
     }
 
     public static void setFloat(String key, float value) {
+        updateFloat(key, value, true);
+    }
+
+    /** Live slider preview; commit once when dragging ends or the panel closes. */
+    public static void previewFloat(String key, float value) {
+        updateFloat(key, value, false);
+    }
+
+    private static void updateFloat(String key, float value, boolean persist) {
         Feature f = FEATURES.get(key);
         if (f == null || f.type != Type.FLOAT || !Float.isFinite(value)) return;
-        float clamped = Math.max(f.min, Math.min(f.max, value));
+        float clamped = f.normalize(value);
         Float prev = FLOATS.put(key, clamped);
         if (prev == null || prev != clamped) {
-            save();
+            revision.incrementAndGet();
             notifyChanged(key);
         }
+        if (persist) commit();
     }
 
     public static void resetToDefaults() {
         for (Feature f : features()) {
             if (f.type == Type.BOOL) BOOLS.put(f.key, f.defaultBool);
-            else FLOATS.put(f.key, f.defaultFloat);
-            notifyChanged(f.key);
+            else FLOATS.put(f.key, f.normalize(f.defaultFloat));
         }
-        save();
+        revision.incrementAndGet();
+        commit();
+        for (Feature f : features()) notifyChanged(f.key);
     }
 
     public static void addListener(Listener listener) {
@@ -183,29 +232,31 @@ public final class FeatureRegistry {
         }
     }
 
-    private static synchronized void save() {
+    public static synchronized void commit() {
+        long current = revision.get();
+        if (current != savedRevision && save()) savedRevision = current;
+    }
+
+    private static boolean save() {
         File file = storage;
-        if (file == null) return;
+        if (file == null) return false;
         StringBuilder sb = new StringBuilder(256);
         sb.append("{");
         boolean first = true;
-        for (Map.Entry<String, Boolean> e : BOOLS.entrySet()) {
+        Map<String, String> values = new HashMap<>(LOADED_VALUES);
+        for (Map.Entry<String, Boolean> e : BOOLS.entrySet()) values.put(e.getKey(), Boolean.toString(e.getValue()));
+        for (Map.Entry<String, Float> e : FLOATS.entrySet()) values.put(e.getKey(), Float.toString(e.getValue()));
+        for (Map.Entry<String, String> e : values.entrySet()) {
             if (!first) sb.append(',');
             first = false;
             sb.append('"').append(escape(e.getKey())).append("\":")
-                    .append(Boolean.TRUE.equals(e.getValue()) ? "true" : "false");
-        }
-        for (Map.Entry<String, Float> e : FLOATS.entrySet()) {
-            if (!first) sb.append(',');
-            first = false;
-            Float value = e.getValue();
-            sb.append('"').append(escape(e.getKey())).append("\":")
-                    .append(Float.toString(value == null ? 0f : value));
+                    .append(e.getValue());
         }
         sb.append('}');
 
         File tmp = new File(file.getParentFile(), file.getName() + ".tmp");
         byte[] bytes = sb.toString().getBytes(StandardCharsets.UTF_8);
+        if (bytes.length > MAX_STATE_BYTES) return false;
         try (FileOutputStream out = new FileOutputStream(tmp)) {
             out.write(bytes);
             out.getFD().sync();
@@ -213,15 +264,10 @@ public final class FeatureRegistry {
             if (TemplateConfig.VERBOSE_LOGS) {
                 Log.w(TemplateConfig.LOG_TAG, "FeatureRegistry save failed", t);
             }
-            return;
+            return false;
         }
-        if (!tmp.renameTo(file)) {
-            // best-effort; fall back to an in-place write
-            try (FileOutputStream out = new FileOutputStream(file)) {
-                out.write(bytes);
-            } catch (Throwable ignored) {
-            }
-        }
+        // Preserve the last complete settings file if atomic replacement fails.
+        return tmp.renameTo(file);
     }
 
     private static synchronized void load() {
@@ -243,33 +289,27 @@ public final class FeatureRegistry {
         parseAndApply(new String(buf.toByteArray(), StandardCharsets.UTF_8));
     }
 
+    private static final Pattern ENTRY = Pattern.compile(
+            "\\s*\"([A-Za-z0-9_.-]{1,96})\"\\s*:\\s*"
+            + "(true|false|-?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?(?:[eE][+-]?[0-9]+)?)\\s*(,|$)");
+
     private static void parseAndApply(String json) {
         if (json == null) return;
-        String body = json.trim();
-        if (body.length() < 2 || body.charAt(0) != '{' || body.charAt(body.length() - 1) != '}') return;
-        body = body.substring(1, body.length() - 1).trim();
-        if (body.isEmpty()) return;
-
-        int i = 0;
-        while (i < body.length()) {
-            while (i < body.length() && Character.isWhitespace(body.charAt(i))) i++;
-            if (i >= body.length() || body.charAt(i) != '"') return;
-            int keyStart = ++i;
-            while (i < body.length() && body.charAt(i) != '"') i++;
-            if (i >= body.length()) return;
-            String key = body.substring(keyStart, i);
-            i++;
-            while (i < body.length() && body.charAt(i) != ':') i++;
-            if (i >= body.length()) return;
-            i++;
-            while (i < body.length() && Character.isWhitespace(body.charAt(i))) i++;
-            if (i >= body.length()) return;
-            int valStart = i;
-            while (i < body.length() && body.charAt(i) != ',') i++;
-            String raw = body.substring(valStart, i).trim();
-            applyRaw(key, raw);
-            if (i < body.length() && body.charAt(i) == ',') i++;
+        String text = json.trim();
+        if (text.length() < 2 || text.charAt(0) != '{' || text.charAt(text.length() - 1) != '}') return;
+        String body = text.substring(1, text.length() - 1).trim();
+        Map<String, String> values = new HashMap<>();
+        var matcher = ENTRY.matcher(body);
+        int position = 0;
+        while (position < body.length()) {
+            matcher.region(position, body.length());
+            if (!matcher.lookingAt() || values.putIfAbsent(matcher.group(1), matcher.group(2)) != null) return;
+            position = matcher.end();
+            if (",".equals(matcher.group(3)) && position == body.length()) return;
         }
+        // Validate the entire flat settings document before applying any values.
+        LOADED_VALUES.putAll(values);
+        for (Map.Entry<String, String> entry : values.entrySet()) applyRaw(entry.getKey(), entry.getValue());
     }
 
     private static void applyRaw(String key, String raw) {
@@ -281,7 +321,7 @@ public final class FeatureRegistry {
                 else if ("false".equals(raw)) BOOLS.put(key, false);
             } else {
                 float v = Float.parseFloat(raw);
-                if (Float.isFinite(v)) FLOATS.put(key, Math.max(f.min, Math.min(f.max, v)));
+                if (Float.isFinite(v)) FLOATS.put(key, f.normalize(v));
             }
         } catch (Throwable ignored) {
         }

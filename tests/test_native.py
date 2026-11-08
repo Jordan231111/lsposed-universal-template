@@ -19,6 +19,7 @@ class NativeScannerTests(unittest.TestCase):
         cls.addClassCleanup(cls.temp.cleanup)
         cls.executable = Path(cls.temp.name) / "scanner-checks"
         code = (ROOT / "app/src/main/cpp/native_utils.cpp").read_text()
+        boundary = code[code.index("template<auto Function> struct JniBoundary;"):code.index("struct Mapping {")]
         decoders = code[code.index("struct AdrpDecode {"):code.index("std::vector<Mapping> read_maps()")]
         scanners = code[code.index("std::vector<uintptr_t> find_adrp_add_xrefs("):
                         code.index("uintptr_t find_string_va(")]
@@ -33,9 +34,18 @@ class NativeScannerTests(unittest.TestCase):
 #include <iostream>
 #include <cstdlib>
 #include <string>
-'''+ decoders + scanners + patterns + r'''
+#include <stdexcept>
+struct JNIEnv {};
+using jclass = void*;
+'''+ boundary + decoders + scanners + patterns + r'''
+int throwing_jni(JNIEnv*, jclass, int) { throw std::runtime_error("native allocation/resolver failure"); }
+int returning_jni(JNIEnv*, jclass, int value) { return value; }
 int main(int argc, char** argv) {
     std::string test = argv[1];
+    if (test == "jni_boundary") {
+        return JniBoundary<throwing_jni>::call(nullptr, nullptr, 7) == 0 &&
+               JniBoundary<returning_jni>::call(nullptr, nullptr, 7) == 7 ? 0 : 1;
+    }
     if (test == "partial_instruction") {
         auto bytes = std::make_unique<uint8_t[]>(5);
         uint32_t adrp = 0x90000000;
@@ -56,7 +66,7 @@ int main(int argc, char** argv) {
         uintptr_t address = reinterpret_cast<uintptr_t>(&words[1]);
         uintptr_t result = find_function_start(address, 1);
         std::cout << "lookback=1 returned_delta=" << (address - result) << '\n';
-        return result == address ? 0 : 1;
+        return result == 0 ? 0 : 1;
     }
     if (test == "complete_pair") {
         alignas(4096) uint32_t words[] = {0x90000000, 0x91004000};
@@ -92,7 +102,7 @@ int main(int argc, char** argv) {
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
 
-for case in ("partial_instruction", "adjacent_adrp", "backward_bound", "complete_pair", "patterns"):
+for case in ("partial_instruction", "adjacent_adrp", "backward_bound", "complete_pair", "patterns", "jni_boundary"):
     setattr(NativeScannerTests, "test_" + case, lambda self, case=case: self.run_case(case))
 
 

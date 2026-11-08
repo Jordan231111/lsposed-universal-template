@@ -29,7 +29,7 @@ jobs:
             platforms;android-37.0
             build-tools;37.0.0
             cmake;4.1.2
-            ndk;29.0.14206865
+            ndk;30.0.16248370
 
       - name: Make Gradle executable
         run: chmod +x ./gradlew
@@ -40,5 +40,6 @@ jobs:
       - name: Build debug and release
         run: |
           ./gradlew \
-            :app:assembleDebug :app:assembleRelease :app:lintDebug \
+            :app:assembleDebug :app:assembleRelease :app:lintDebug :app:lintRelease \
+            -Ptemplate.localTestSigning=true \
             --stacktrace --warning-mode all

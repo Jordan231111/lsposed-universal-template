@@ -1,102 +1,85 @@
 'use strict';
 
-function log(message) {
-  console.log('[recon] ' + message);
-}
-
-log('pid=' + Process.id + ' arch=' + Process.arch + ' platform=' + Process.platform);
-
-function hookNativeLoaders() {
-  const names = ['android_dlopen_ext', 'dlopen'];
-  names.forEach(function (name) {
-    const addr = Module.findExportByName(null, name);
-    if (!addr) {
-      log('native loader not found: ' + name);
-      return;
+// Read-only by default. Frida's CLI supplies Java; custom agents must bundle the Java bridge.
+// Use recon.modules(), recon.exports('libname.so'), recon.classes('regex') from the CLI REPL.
+// Loader observation is explicit: recon.watchLoads(); recon.stopWatchingLoads().
+globalThis.recon = (() => {
+  const listeners = [];
+  const moduleRows = () => Process.enumerateModules().map(m => ({
+    name: m.name, base: m.base.toString(), size: m.size, path: m.path
+  }));
+  function findExport(name) {
+    for (const module of Process.enumerateModules()) {
+      const address = module.findExportByName(name);
+      if (address !== null) return address;
     }
-    Interceptor.attach(addr, {
-      onEnter(args) {
-        this.path = args[0].isNull() ? '<null>' : args[0].readCString();
-      },
-      onLeave(retval) {
-        log(name + '(' + this.path + ') -> ' + retval);
-      }
-    });
-    log('hooked native loader ' + name + ' at ' + addr);
-  });
-}
-
-function listInterestingModules() {
-  const modules = Process.enumerateModules();
-  log('module count=' + modules.length);
-  modules.forEach(function (m) {
-    const n = m.name.toLowerCase();
-    if (n.indexOf('il2cpp') >= 0 || n.indexOf('unity') >= 0 || n.indexOf('art') >= 0 || n.indexOf('libc.so') >= 0) {
-      log('module ' + m.name + ' base=' + m.base + ' size=' + m.size + ' path=' + m.path);
-    }
-  });
-}
-
-function javaRecon() {
-  if (!Java.available) {
-    log('Java runtime unavailable');
-    return;
+    return null;
   }
-
-  Java.perform(function () {
-    try {
-      const ActivityThread = Java.use('android.app.ActivityThread');
-      const app = ActivityThread.currentApplication();
-      if (app) {
-        const ctx = app.getApplicationContext();
-        log('package=' + ctx.getPackageName());
-        log('dataDir=' + ctx.getApplicationInfo().dataDir.value);
-        log('nativeLibraryDir=' + ctx.getApplicationInfo().nativeLibraryDir.value);
-      }
-    } catch (e) {
-      log('ActivityThread info failed: ' + e);
+  function stopWatchingLoads() {
+    let failure;
+    for (let index = listeners.length - 1; index >= 0; --index) {
+      try { listeners[index].detach(); listeners.splice(index, 1); }
+      catch (error) { failure = error; }
     }
+    if (failure) throw failure; // Keep ownership of any listener that could not be detached.
+  }
+  return {
+    modules: moduleRows,
+    exports(name) {
+      const module = Process.findModuleByName(name);
+      if (!module) throw Error('Module is not loaded: ' + name);
+      return module.enumerateExports().map(e => ({
+        type: e.type, name: e.name, address: e.address.toString()
+      }));
+    },
+    classes(pattern, limit = 100) {
+      if (typeof Java === 'undefined' || !Java.available)
+        return Promise.reject(Error('Java bridge unavailable; use the Frida CLI or bundle frida-java-bridge'));
+      const regex = new RegExp(pattern, 'i');
+      const cap = Math.max(1, Math.min(1000, Math.trunc(Number(limit)) || 100));
+      return new Promise((resolve, reject) => Java.perform(() => {
+        try {
+          const matches = [];
+          let count = 0;
+          Java.enumerateLoadedClasses({
+            onMatch(name) {
+              if (!regex.test(name)) return;
+              ++count;
+              if (matches.length < cap) matches.push(name);
+            },
+            onComplete() { resolve({matches, total: count, truncated: count > matches.length}); }
+          });
+        } catch (error) { reject(error); }
+      }));
+    },
+    watchLoads() {
+      if (listeners.length) return listeners.length;
+      const seen = new Set();
+      try {
+        for (const name of ['android_dlopen_ext', 'dlopen']) {
+          const address = findExport(name);
+          if (address === null || seen.has(address.toString())) continue;
+          seen.add(address.toString());
+          listeners.push(Interceptor.attach(address, {
+            onEnter(args) {
+              try { this.path = args[0].isNull() ? null : args[0].readCString(); }
+              catch (_) { this.path = '<unreadable>'; }
+            },
+            onLeave(result) { send({kind: 'library-load', loader: name, path: this.path, loaded: !result.isNull()}); }
+          }));
+        }
+      } catch (error) { stopWatchingLoads(); throw error; }
+      return listeners.length;
+    },
+    stopWatchingLoads,
+  };
+})();
 
-    try {
-      const Activity = Java.use('android.app.Activity');
-      Activity.onResume.implementation = function () {
-        log('Activity.onResume ' + this.getClass().getName());
-        return this.onResume();
-      };
-      log('hooked Activity.onResume');
-    } catch (e) {
-      log('Activity.onResume hook failed: ' + e);
-    }
-
-    try {
-      const Runtime = Java.use('java.lang.Runtime');
-      Runtime.loadLibrary0.overloads.forEach(function (overload) {
-        overload.implementation = function () {
-          const args = Array.prototype.slice.call(arguments);
-          const name = args.length > 0 ? args[args.length - 1] : '<unknown>';
-          log('Runtime.loadLibrary0 ' + name);
-          return overload.apply(this, arguments);
-        };
-      });
-      log('hooked Runtime.loadLibrary0 overloads=' + Runtime.loadLibrary0.overloads.length);
-    } catch (e) {
-      log('Runtime.loadLibrary0 hook failed: ' + e);
-    }
-
-    try {
-      const System = Java.use('java.lang.System');
-      System.load.overload('java.lang.String').implementation = function (path) {
-        log('System.load ' + path);
-        return this.load(path);
-      };
-      log('hooked System.load');
-    } catch (e) {
-      log('System.load hook failed: ' + e);
-    }
-  });
-}
-
-hookNativeLoaders();
-javaRecon();
-setTimeout(listInterestingModules, 1500);
-setTimeout(listInterestingModules, 5000);
+rpc.exports = {
+  modules: recon.modules,
+  exports: recon.exports,
+  classes: recon.classes,
+  watchloads: recon.watchLoads,
+  stopwatchingloads: recon.stopWatchingLoads,
+};
+console.log('[recon] pid=' + Process.id + ' arch=' + Process.arch + '; no hooks installed');
