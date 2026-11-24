@@ -6,7 +6,7 @@
 
 ## Validation
 
-- [ ] `./gradlew :app:assembleDebug :app:assembleRelease`
+- [ ] Ran the host tests, both Android builds and both lint variants as described in `tests/README.md`
 - [ ] Checked target process filtering still defaults to main process only
 - [ ] Confirmed release logging remains quiet
 

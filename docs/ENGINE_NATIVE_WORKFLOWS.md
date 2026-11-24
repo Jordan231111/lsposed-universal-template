@@ -11,14 +11,11 @@ selects a game hook, modifies a VM, or authorizes calling an API.
    already-loaded and delayed libraries without a periodic startup poll. Its load callback runs on
    a worker. Its retirement callback must only invalidate/signal; never call the linker or engine.
 3. Use the real function prototype, thread affinity, object lifetime and error convention.
-4. Resolve uniquely. Exports, strings, RTTI and instruction patterns are evidence to validate,
-   not permission to select the first hit or infer an unknown private layout.
+4. Validate that exports, strings, RTTI or instruction patterns identify a unique match.
 5. Publish a feature only when its complete required binding group succeeds. Keep originals,
    handle failed installation/teardown, and test toggles and restarts in the actual lifecycle.
 
-No universal constant-return patcher or RTTI-slot guesser is supplied. Native code edits require
-an app-specific concurrency, ownership, rollback and instruction-cache design. The generic
-helpers cannot infer whether a matching function is safe to replace.
+Native code edits require an app-specific concurrency, ownership, rollback and instruction-cache design.
 
 ## Java/Kotlin and JNI
 
@@ -65,8 +62,7 @@ Calling the wrong shape is not a version detector. Numeric widths can also be co
 
 A Lua state belongs to its owner thread. Preserve the stack top, use the correct protected-call
 API, retain objects through registry references and invalidate the state on close/recreation.
-No universal global-state finder or loadbuffer injection snippet is shipped. See the
-[Lua 5.4 C API](https://www.lua.org/manual/5.4/manual.html#4), and select the target's own version.
+Use the reference for the target's version. [Lua 5.4 C API](https://www.lua.org/manual/5.4/manual.html#4)
 
 ## Godot
 
@@ -77,7 +73,6 @@ precision options and object lifetime must match. A C++ mangled name does not es
 
 See [GDExtension](https://docs.godotengine.org/en/stable/engine_details/engine_api/gdextension/what_is_gdextension.html)
 and the [versioned C example](https://docs.godotengine.org/en/4.6/tutorials/scripting/gdextension/gdextension_c_example.html).
-The old guessed JNI step-hook and approximate Variant wrappers were removed.
 
 ## Unreal, Flutter and JavaScript runtimes
 
@@ -90,17 +85,6 @@ The old guessed JNI step-hook and approximate Variant wrappers were removed.
 - Hermes/JSC libraries alone do not prove React Native. Their C/C++/JSI interfaces and garbage
   collection contracts are version-specific. Use the owning runtime's supported integration.
 
-These engines deliberately have no speculative drop-in adapters in the template. Add a small
-adapter only when its ABI and lifecycle can be verified on representative targets.
+These runtimes require an application-specific adapter with a verified ABI and lifecycle.
 
-## Evidence and tools
-
-The reference-module review covered standard IL2CPP, protected/custom API tables, native C++ and
-Cocos/Lua implementations. Reusable lessons included exact signatures, independent calibration,
-separate mapped ranges, complete installation groups, and notification-driven startup. No game
-features or target-specific protection code were imported.
-
-Host ELF tools accept ELF virtual addresses, not file offsets. `deep.py va` converts offsets;
-`find_str_xref.py` and `fstart.py` report analysis candidates only. They do not establish a safe
-function boundary or hook ABI. Use IDA/JEB/runtime traces as independent evidence, preserve the
-current input identities, and keep generated APKs/dumps/databases outside source sets.
+For offline ELF inspection and address conversion, see the [host tools](../tools/README.md#static-analysis-host).

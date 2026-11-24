@@ -35,7 +35,7 @@ public final class Bootstrap {
 
         detectEngine(app, ENGINE_DETECTION_RETRIES);
 
-        // Mirror the enable/native toggles into the native worker so users can flip them live.
+        // Either toggle can trigger the one-time native startup when both are enabled.
         FeatureRegistry.addListener(key -> {
             if (FeatureRegistry.KEY_ENABLED.equals(key) || FeatureRegistry.KEY_NATIVE_HOOKS.equals(key)) {
                 maybeStartNative(app);

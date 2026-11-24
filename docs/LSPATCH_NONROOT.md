@@ -1,76 +1,61 @@
-# Verified nonroot bundle workflow
+# Release signing and LSPatch bundles
 
-Use the same modern API-102 module for Vector 2.2 and JingMatrix LSPatch 1.2 build 487. The patcher
-is pinned by SHA-256 in `tools/download-lspatch.sh`. Embedded mode needs no module manager or root
-after installation. Android 9/API 28 is the minimum; target-app requirements still apply.
+Vector loads the installed module APK. JingMatrix LSPatch embeds the same signed API-102
+module in the target for rootless installation. The packaging tool retrieves the
+[checksum-pinned patcher](../tools/download-lspatch.sh).
+
+Run the commands from the repository root with Python 3.11+, JDK 21 (`java` and `keytool`),
+Android SDK Build Tools 37.0.0 (`aapt2`, `apksigner` and `zipalign`), `curl` and `shasum`
+on PATH. Configure the module for the target package before building.
+[Module setup](../README.md#configure-and-build)
 
 ## Signing
 
-A production module and every patched split must use the deliberately selected existing identity.
-Configure `TEMPLATE_KS_PATH`, `TEMPLATE_KS_PASS`, `TEMPLATE_KEY_ALIAS`, `TEMPLATE_KEY_PASS` and
-`TEMPLATE_CERT_SHA256` in the environment. The certificate fingerprint is public; passwords and
-private keys must not enter Git. Missing/partial configuration fails instead of changing keys.
+For a production release, set the following environment variables. Gradle signs the module.
+The packager verifies its certificate and signs the patched target APKs with the same identity.
+
+| Variable | Value |
+| --- | --- |
+| `TEMPLATE_KS_PATH` | Absolute path to an existing keystore |
+| `TEMPLATE_KS_PASS` | Keystore password |
+| `TEMPLATE_KEY_ALIAS` | Alias of the private key |
+| `TEMPLATE_KEY_PASS` | Key password |
+| `TEMPLATE_CERT_SHA256` | Expected SHA-256 fingerprint of the signing certificate |
 
 ```sh
 ./gradlew :app:assembleRelease
-python3 tools/package-lspatch.py \
-  --module app/build/outputs/apk/release/app-release.apk \
-  --output target-lspatched.apks --receipt artifacts/package-receipt.json \
-  /absolute/original/base.apk /absolute/original/split_config.arm64_v8a.apk
 ```
 
-For local QA only, explicitly select the existing Android test key in both steps:
+For local QA, leave all five variables unset and select test signing explicitly.
 
 ```sh
 ./gradlew :app:assembleRelease -Ptemplate.localTestSigning=true
-python3 tools/package-lspatch.py --local-test-signing \
-  --module app/build/outputs/apk/release/app-release.apk \
-  --output target-lspatched.apks /absolute/original/base.apk
 ```
 
-Do not combine local-test mode with release-signing variables. Local-test mode uses the existing
-`~/.android/debug.keystore`, alias `androiddebugkey`; it does not silently generate another key.
-A new machine's different key cannot update an older installation. A test-signed optimized build
-is still a test identity, not a production distribution certificate.
+Gradle can create the default debug keystore during the build. The packager's test mode
+requires `~/.android/debug.keystore` to exist with the standard Android debug alias and passwords.
+Preserve the keystore for updates signed with the same identity.
 
-## Input and output contracts
+## Package and install
 
-Use original unpatched base/splits from one package, versionCode and required device configuration.
-The module's scope must include that target, and original base/splits must share one verified signer.
-The tool rejects already-patched inputs, duplicate
-splits, mixed versions/packages, signing mismatches and output paths that would overwrite inputs.
-It normalizes filenames from manifest split identities and orders the base first.
+Supply the original base APK and every split required by the device. They must share a package,
+version code and original signer. The module's scope must include that package.
 
-The tool then:
+```sh
+python3 tools/package-lspatch.py \
+  --module app/build/outputs/apk/release/app-release.apk \
+  --output target-lspatched.apks \
+  /absolute/original/base.apk /absolute/original/split_config.arm64_v8a.apk
+```
 
-1. Verifies modern metadata, the module's signer, and the configured keystore certificate.
-2. Uses the integrity-pinned patcher, embedded module mode and explicit signature level 2.
-3. Checks that the exact package/version/split composition is preserved.
-4. Verifies the embedded module's SHA-256 against the supplied module APK.
-5. Aligns uncompressed native ZIP entries for 16 KiB pages when needed, re-signs with alignment
-   preserved, and verifies every final signer and alignment.
-6. Checks the archive CRC and atomically replaces the requested bundle only after validation.
+For the QA build, add `--local-test-signing` to that packaging command. To save the verified
+hashes, signer and split identities, add `--receipt PATH`.
 
-Passwords are passed through the environment to a short-lived Java launcher/signing tools, not
-placed in the patcher's command line or generated source. Temporary staging inputs are deleted.
-The optional receipt records module/bundle hashes, identities, signer, patcher and alignment.
+The tool verifies the embedded module bytes, package and split identities, signer, ZIP alignment
+and archive CRC before replacing the output. ZIP alignment covers uncompressed native entries.
+ELF segment alignment inside each library also needs to support the device's page size.
 
-The `.apks` is an SAI ZIP bundle containing only the patched target base/splits. It is **not** a
-bundletool APK set. Do not add the standalone module APK at archive top level; it is embedded
-inside the target base. Install all required splits together using SAI, with SAI re-signing off.
-No separate module installation is needed for embedded mode.
-
-## Runtime verification
-
-Package verification does not establish application compatibility. Verify the actual candidate:
-cold startup, scoped Java/native loading, overlay controls, persisted values, background/resume,
-rotation, runtime retirement and relevant feature behavior. Keep separate Vector injection out of
-the same target during an embedded-module test.
-
-ZIP alignment does not repair ELF segment alignment inside an old target library. Validate the
-actual native libraries and intended Android page size as well. Updating the manager or standalone
-module cannot replace an already embedded runtime; repatch from originals after changes.
-
-Signature handling cannot satisfy arbitrary server-side attestation. This workflow provides a
-reproducible, verified artifact, not a universal compatibility guarantee. See
-[the validation record](VALIDATION.md) and [upstream LSPatch](https://github.com/JingMatrix/LSPatch/releases/tag/v1.2).
+Install the `.apks` archive with SAI and turn SAI re-signing off. It contains the patched target
+APKs with the module embedded in the base. Rebuild from the originals when the module or patcher
+changes. Test startup and overlay behavior on the intended device with only the embedded module
+active for that target.

@@ -1,8 +1,7 @@
 # ShadowHook integration
 
-The template pins ShadowHook 2.0.1 through Maven Prefab and links `shadowhook::shadowhook`.
-The supported native process ABIs are ARM32 and ARM64. API 102/Vector/LSPatch versions are separate
-from the module's ShadowHook version. No demonstration hooks or byte patches are installed.
+The native module links `shadowhook::shadowhook` through Maven Prefab for ARM32 and ARM64.
+The [version catalog](../gradle/libs.versions.toml) pins the dependency.
 
 ## Mode, ownership and lifetime
 
@@ -30,16 +29,11 @@ into a permanent failure. Loader callbacks only notify/invalidate; resolution ru
 The observer covers one image lifetime and must be stopped from its owner, not its callbacks.
 
 `native_utils::resolve_export` uses ShadowHook/xDL's loaded-image dynamic-symbol API. A query handle
-is released after lookup; this does not unload the target. There is no unbounded custom ELF hash
-walker. Keep the target mapped while using returned addresses. Duplicate basenames require an
+is released after lookup. Keep the target mapped while using returned addresses. Duplicate basenames require an
 exact library path. Scan separate mapped ranges rather than a bounding span containing gaps.
 
 ## Scope and diagnosis
 
-The optional IL2CPP observer installs only readiness/lifetime observers; it does not hook game
-methods. Runtime acceptance, waiting and metadata readiness are distinct status states. Release
-logging and operation recording are disabled by default; diagnostics remain available through
-Status. No test counters, Frida agent, dump or disassembler database is embedded in the module.
-
-The native startup setting does not unload native code. A consuming module must implement its own
-feature gates and teardown. `autoHotReload=false` remains appropriate until that teardown exists.
+The overlay's Status button shows native startup and readiness. Verbose logging and ShadowHook
+operation recording are disabled in release builds. For IL2CPP readiness and retirement, see the
+[runtime contracts](ENGINE_IL2CPP.md#initialization-and-lifetime).

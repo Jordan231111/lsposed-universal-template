@@ -8,12 +8,8 @@ Contributions are welcome when they improve the template for authorized research
 - Preserve fail-closed behavior in target processes.
 - Keep release logging quiet by default.
 - Do not add secrets, private app code, or proprietary offsets/signatures.
-- Run `python3 -m unittest discover -s tests -v` for configure, ELF tool, Java contract,
-  native scanner and documentation checks. See `tests/README.md` for requirements.
-- Run `./gradlew :app:assembleDebug :app:assembleRelease :app:lintDebug :app:lintRelease
-  -Ptemplate.localTestSigning=true` for local QA, without production signing variables.
-- Keep real engine/ABI compatibility claims tied to device evidence; fixture success is not proof
-  that an arbitrary protected or stripped runtime supports the same contracts.
+- Run the [host tests, Android builds and lint checks](tests/README.md#host-contracts).
+- Include device evidence for changes that claim support for a new engine or ABI.
 
 ## License note
 

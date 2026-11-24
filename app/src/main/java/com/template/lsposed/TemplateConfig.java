@@ -5,10 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Change these constants first when creating a new module.
- *
- * <p>The helper script in {@code tools/configure-template.py} rewrites the package name,
- * app name, module metadata, and static scope files for you.</p>
+ * Run {@code tools/configure-template.py} to set the package, module metadata and static scope.
+ * Customize process selection and optional features here.
  */
 public final class TemplateConfig {
     private TemplateConfig() {}
@@ -21,7 +19,7 @@ public final class TemplateConfig {
     /**
      * Optional allow-list of process suffixes to hook. Empty string = the main process
      * (bare package name). Example: {@code {"", ":game"}} hooks both {@code com.example.target}
-     * and {@code com.example.target:game}. Use {@code {"*"}} to hook every process.
+     * and {@code com.example.target:game}. The wildcard {@code {"*"}} still respects {@link #SKIP_PROCESS_SUFFIXES}.
      */
     public static final String[] TARGET_PROCESS_SUFFIXES = {""};
 
@@ -73,8 +71,8 @@ public final class TemplateConfig {
     public static final String WORKER_THREAD_NAME = "AppRuntimeWorker";
 
     /**
-     * Name of the native library loaded by {@link NativeBridge}. The tooling script can rename
-     * this plus the CMake target and {@code System.loadLibrary} call with {@code --native-lib}.
+     * Name passed to {@code System.loadLibrary} by {@link NativeBridge}. The configure tool
+     * updates this constant and the CMake target together with {@code --native-lib}.
      */
     public static final String NATIVE_LIBRARY_NAME = "template_native";
 

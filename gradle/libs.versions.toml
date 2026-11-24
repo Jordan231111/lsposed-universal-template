@@ -8,9 +8,9 @@ androidxAnnotation = "1.11.0"
 android-application = { id = "com.android.application", version.ref = "agp" }
 
 [libraries]
-# Latest stable libxposed API artifact on Maven Central. Use compileOnly; the framework supplies it at runtime.
+# The framework supplies the libxposed API at runtime.
 libxposed-api = { group = "io.github.libxposed", name = "api", version.ref = "libxposedApi" }
 
-# ByteDance ShadowHook from android-inline-hook. Stable 2.0.1 verified 2026-11-07; supports arm/arm64.
+# ShadowHook supplies the native Prefab package for ARM32 and ARM64.
 shadowhook = { group = "com.bytedance.android", name = "shadowhook", version.ref = "shadowhook" }
 androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "androidxAnnotation" }

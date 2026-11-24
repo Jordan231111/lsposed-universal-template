@@ -1,28 +1,20 @@
 # Regression and device checks
 
-Tests, doubles, QA libraries and captures are outside the Android source sets. Nothing in this
-directory is linked into the release module. No real game features are installed by these tests.
+The tests and device fixtures live outside the Android module source sets. Run the commands
+below from the repository root.
 
 ## Host contracts
 
-Run `python3 -m unittest discover -s tests -v` from the repository root. Requirements: Python 3.11+,
-JDK 21, Node.js and Clang++ with AddressSanitizer/UndefinedBehaviorSanitizer. No emulator or Frida
-server is needed. Set `TEMPLATE_TEST_ROOT` to a configured copy to exercise its renamed sources.
-
-The tests compile production Java implementations against small framework doubles and the actual
-C++ IL2CPP core against an opaque synthetic runtime. Scanner function bodies are extracted
-verbatim for portable sanitizer checks. Other checks exercise public configure/ELF/packaging
-commands, Frida agent ownership and current APIs, and compiled documentation examples/local links.
-These contracts complement real Android tests; doubles do not establish device compatibility.
-
-Build both native ABIs and run both lint variants:
+Use Python 3.11+, JDK 21, Node.js and Clang++ with AddressSanitizer and UndefinedBehaviorSanitizer.
+The unit suite runs entirely on the host. Set `TEMPLATE_TEST_ROOT` to a configured copy to test
+renamed sources. For the Android build and lint checks, install the [SDK packages used in CI](../.github/workflows/android.yml)
+and leave the five production signing variables unset.
 
 ```sh
+python3 -m unittest discover -s tests -v
 ./gradlew :app:assembleDebug :app:assembleRelease :app:lintDebug :app:lintRelease \
   -Ptemplate.localTestSigning=true
 ```
-
-Local test signing must not be mixed with production signing environment variables.
 
 ## Owned native fixtures
 
@@ -35,11 +27,9 @@ python3 tests/device/audit_native.py --device DEVICE_SERIAL --il2cpp-observer \
   --output artifacts/observer.json
 ```
 
-The first executable loads an owned library, resolves exports, performs 100 shared proxy calls,
-unhooks and verifies restoration/retirement. The second exports an opaque synthetic IL2CPP API
-and tests the production observer's readiness gate and two shutdown/restart lifetimes. Both use
-unique device directories and remove them afterward. `--abi armeabi-v7a` requires a device that
-can execute 32-bit ARM binaries; an ARM64-only emulator cannot establish that coverage.
+The first fixture checks delayed loading and restoration after unhooking. The second checks
+observer readiness and retirement across restarts. The default ABI is `arm64-v8a`.
+Use `--abi armeabi-v7a` on a device that runs 32-bit ARM binaries.
 
 ## Live IL2CPP compatibility
 
@@ -51,14 +41,14 @@ python3 tests/device/audit_il2cpp.py --device DEVICE_SERIAL --package com.exampl
   --output artifacts/il2cpp-runtime.json
 ```
 
-The external C++ library compiles the production core unchanged. It tests framework-only primitive
-and reference invocations, exact Int64 handling, caught managed exceptions, readonly preservation
-and delegate-based address calibration. It installs no gameplay hooks and launches/stops no app.
-`--bind-only` checks exported API binding. The runner needs root to stage/remove its uniquely named
-library in the target's code cache. It unloads the QA library before detaching. Keep the target's
-lifetime stable during instrumentation; a debugger is not a crash isolation boundary.
+The runner uses root to stage and remove its QA library in the target's code cache. It exercises
+framework calls, fields, exceptions and address calibration. Use `--bind-only` to limit the check
+to exported API binding. Keep the app running through detachment.
 
 ## Embedded APK integration
+
+Run the local QA build first so the standard Android debug keystore exists. Choose a new output
+directory for the fixture.
 
 ```sh
 python3 tests/device/build_embedded_fixture.py --output artifacts/owned-qa
@@ -67,13 +57,7 @@ python3 tests/device/check_embedded_fixture.py --device DEVICE_SERIAL \
   --fixture artifacts/owned-qa/fixture.json
 ```
 
-The builder creates a random package identity, an owned Java host plus a configuration split, and
-an isolated configured module copy with an additional integer control. It exercises the same
-verified packager used for delivery. The UI checker accepts only that generated package format;
-it changes only fixture settings. It checks exact entry, independent controls, persistence,
-Activity recreation, both orientations and background/resume. Root is used only to read the
-fixture's settings file; the embedded module loads through LSPatch without a root injector.
-
-Uninstall the generated host when finished and remove its ignored build directory. Never install
-an unconfigured template over an unrelated module that happens to use the same package name.
-See [the measured validation record](../docs/VALIDATION.md) for coverage and limitations.
+The builder packages an owned host, a split and a configured module under a fresh identity.
+The UI checker exercises controls, persistence, rotation, recreation and resume. Reading the
+fixture settings file requires root. Uninstall the generated host and remove the output directory
+when finished.

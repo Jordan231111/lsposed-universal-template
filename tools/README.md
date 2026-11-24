@@ -1,34 +1,24 @@
 # Template tools
 
-Host configuration, download and analysis tools for authorized Android testing.
-Device fixtures and the read-only Frida agent stay separate from release source sets.
+Run the tools from the repository root.
 
 ## LSPatch download (host)
-
-From the repository root:
 
 ```sh
 LSPATCH_JAR="$(./tools/download-lspatch.sh)"
 java -jar "$LSPATCH_JAR" --help
 ```
 
-The downloader pins LSPatch **v1.2 build 487**, verifies SHA-256 before publishing the download,
-and re-verifies cached JARs. It prints only the absolute JAR path to stdout; diagnostics go to
-stderr. Downloads stay in ignored `artifacts/lspatch/`. Use `--debug` for the matching debug JAR,
-or pass an output directory after the optional flag. A checksum mismatch stops with an error;
-remove the corrupt cached file explicitly before retrying.
-
-For an upgrade, review the official stable release, update the asset pins and hashes in
-`download-lspatch.sh` together with `docs/LSPATCH_NONROOT.md`, and run the guide against an owned
-test APK. The complete embedded-module, signing and SAI workflow is in
-[`docs/LSPATCH_NONROOT.md`](../docs/LSPATCH_NONROOT.md).
+The downloader verifies fresh and cached JARs by SHA-256 and prints the absolute path to stdout.
+The default cache is `artifacts/lspatch/`. Use `--debug` for the debug JAR or pass an output
+directory after the optional flag. Remove a cached JAR that fails verification before retrying.
+The [bundle packager](../docs/LSPATCH_NONROOT.md) calls the downloader automatically.
 
 ## Configure a module
 
-Run `python3 tools/configure-template.py --help` from the repository root. The script edits module
-sources, metadata and package references in documentation; it does not rewrite itself, other tools,
-tests or generated artifacts. Invalid options and conflicting source destinations are rejected
-before any writes. An I/O failure during the write phase can still require restoring your checkout.
+The [configure command](../README.md#configure-and-build) updates module sources, metadata and
+package references in the README and guides. It checks inputs and destination paths before writing.
+An I/O failure during the write phase can still require restoring your checkout.
 
 `--name` and `--author` must be nonempty single-line text. Names are escaped separately for Java,
 Android XML and module metadata; Gradle's internal project name uses the Java package, so display
@@ -39,10 +29,10 @@ file named `template_native.cpp`.
 
 ## Static analysis (host)
 
-Requires Python 3.10+. **Only disassembly requires Capstone**:
+Use Python 3.10+ for the ELF tools. Only `deep.py dis` requires the Capstone Python package.
+Set `RE_SO` to the input file.
 
 ```sh
-python3 -m pip install capstone
 export RE_SO="/path/to/lib/arm64-v8a/libtarget.so"
 ```
 
@@ -66,23 +56,4 @@ be 1–4096. Relocation commands do not decode RELR, Android packed or symbol-ba
 An absent RELATIVE entry is reported explicitly and does not prove that the runtime pointer is zero.
 Xrefs/prologues are heuristics: verify candidates against disassembly and the target ABI.
 
-## Dynamic inspection
-
-Use the matching Frida client/server/bridge workflow in
-[FRIDA_EMULATOR_QUICKSTART.md](../docs/FRIDA_EMULATOR_QUICKSTART.md). IDA/Hex-Rays is the
-primary native-analysis workflow; JEB Pro is preferred for heavily obfuscated DEX, with JADX
-for a clean first pass. For IL2CPP, use il2cpp-dumper-rs first, InspectorRedux for a cross-check,
-and ILSpy on generated DummyDll assemblies. Runtime analysis complements these tools when
-metadata is only available after initialization.
-
-The old process-memory writer has been removed: its unchecked arguments and app-specific
-obfuscated-value layout were unsuitable for a reusable template. Do not treat a successful raw
-memory write as proof of instruction-cache coherence, thread safety or feature correctness.
-
-## Verified non-root bundles
-
-`python3 tools/package-lspatch.py --help` describes the maintained packaging command. It accepts
-one module plus original base/splits, checks scope and identity, verifies the embedded module,
-alignment and signer, and atomically publishes a SAI-compatible archive. Signing passwords stay
-in environment variables. Production signing requires a pinned certificate; local test signing
-must be explicitly selected. See [LSPATCH_NONROOT.md](../docs/LSPATCH_NONROOT.md).
+For a running test app, see the [Frida agent guide](../docs/FRIDA_EMULATOR_QUICKSTART.md).

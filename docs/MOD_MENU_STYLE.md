@@ -1,6 +1,6 @@
 # Mod menu style
 
-The template menu mirrors the existing Nyx-style panel:
+The default Nyx panel uses the following styles.
 
 - dark translucent panel: `#E00E0E14`
 - lavender border/accent: `#B89AFF` and `#6B5BFF`
@@ -16,6 +16,4 @@ Behavior:
 - rectangular panel is draggable when opened by dragging the title/subtitle header
 - overlay is added as a child of the target Activity decor view rather than as a top-level `TYPE_APPLICATION_OVERLAY` window, so it does not rely on `SYSTEM_ALERT_WINDOW` in the target process
 
-Main implementation:
-
-- `app/src/main/java/com/template/lsposed/ui/OverlayController.java`
+The theme and gestures are defined in [OverlayController.java](../app/src/main/java/com/template/lsposed/ui/OverlayController.java).

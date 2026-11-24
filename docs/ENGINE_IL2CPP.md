@@ -1,7 +1,6 @@
 # IL2CPP runtime contracts
 
-The maintained implementation is `app/src/main/cpp/il2cpp_runtime.{h,cpp}`. The former copy/paste
-bridge and RVA fallback examples have been removed. The module is engine-neutral by default.
+The optional IL2CPP helper exposes the contracts in [il2cpp_runtime.h](../app/src/main/cpp/il2cpp_runtime.h).
 
 ## Initialization and lifetime
 
@@ -13,8 +12,7 @@ when several namespaces load different images with the same name.
 
 Mapping a library and finding exports are not VM readiness. The observer waits until a real
 `il2cpp_runtime_invoke` returns, validates core metadata on an attached worker, and removes that
-transient hook. It deliberately does not guess `il2cpp_init`'s return ABI, which differs between
-older and newer Unity APIs. The remaining shutdown/lifetime observers invalidate old bindings.
+transient hook. Shutdown and lifetime observers invalidate bindings when the runtime retires.
 The status distinguishes waiting for the library, waiting for managed initialization, ready,
 unavailable and retired.
 
@@ -27,7 +25,6 @@ identity and cannot be reused after invalidation. Delayed readiness cannot resur
 A custom integration can bind a `Runtime` to its own reviewed `Environment` (export lookup,
 executable-address validation and bounded pointer reads). `bind` performs no metadata calls.
 `confirm_initialized` requires actual initialization evidence; it is not a probe to try repeatedly.
-No private API table, protected-app decoder, version whitelist or guessed symbol fallback is shipped.
 
 ## Metadata and fields
 
@@ -78,7 +75,7 @@ Use `unbox<T>` only for an exact primitive ABI. `string` and `string_value` pres
 
 A thread attachment does not move work to Unity's main thread. Metadata and suitable framework
 operations can run on an attached worker. Unity/scene APIs require an application-validated
-main-thread callback/dispatcher. No guessed universal frame hook or dispatcher is provided.
+main-thread callback/dispatcher.
 `ThreadScope` detaches only attachments it owns. Release handles before the runtime is retired.
 
 Native addresses are a separate capability. `calibrate_method_pointer` uses two independent
@@ -93,23 +90,16 @@ is a separate path. A resolved address does not validate the consuming proxy's C
 virtual-dispatch choice, hidden arguments, exception unwinding or application semantics.
 Keep the metadata argument when the reviewed native ABI requires it.
 
-Use ShadowHook shared-mode proxies consistently: one `SHADOWHOOK_STACK_SCOPE()` at entry and
-`SHADOWHOOK_CALL_PREV` to call through. Do not mix an already-initialized shared engine with a
-unique-mode example. Foreign C++ exception runtimes can need an app-specific unwind adapter;
-a successful primitive hook does not establish that exception path.
+For shared proxies, call-through and exception handling, see [ShadowHook integration](SHADOWHOOK_NOTES.md).
 
-## Portability and verification
+## Portability
 
 The code supports the public exported C API and ARM calling conventions. Older unsigned 32-bit
 GC handles are zero-extended in the pointer-sized ARM slot; newer pointer-sized handles are retained
-without truncation. This is not a claim about arbitrary desktop ABIs or customized API tables.
+without truncation.
 
 A renamed member, removed export, missing AOT implementation, changed struct representation or
-protected/custom runtime can require a new adapter. Metadata identity is evidence, not a promise
-that an arbitrary future application behaves the same way. Runtime-invoke expects a callable
-implementation; choose concrete methods and validate their presence before invoking app code.
+protected/custom runtime can require a new adapter. Runtime-invoke requires a callable
+implementation. Verify that the intended concrete method is present before invoking it.
 
-Host sanitizer fixtures cover late registration, changed layouts/signatures, ambiguous resolution,
-primitive/reference fields, exceptions, thread/root ownership and stale lifetimes. External device
-checks compile this same implementation and invoke framework-only operations. See
-[validation](VALIDATION.md) and [test commands](../tests/README.md) for actual coverage.
+Run the [device compatibility check](../tests/README.md#live-il2cpp-compatibility) against the intended runtime.

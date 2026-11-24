@@ -1,7 +1,6 @@
 """Compile the actual portable scanner functions with ASan, without an Android runtime.
 
-Source extraction keeps the JNI/linker implementation out of the host build. The scanner function
-bodies are compiled verbatim, including when TEMPLATE_TEST_ROOT points to the before snapshot.
+Source extraction compiles the scanner functions verbatim without their Android JNI/linker dependencies.
 """
 import os
 from pathlib import Path

@@ -72,8 +72,7 @@ android {
         versionCode = 2
         versionName = "0.2.0"
 
-        // ShadowHook supports arm32 and arm64 only. Use an arm64 emulator/device for native hooks.
-        // A Java-only fork must also remove the native build/dependency and ABI filters.
+        // ShadowHook supports these two process ABIs. Native startup settings do not change the APK.
         ndk {
             abiFilters += listOf("arm64-v8a", "armeabi-v7a")
         }
@@ -155,7 +154,7 @@ android {
     }
 
     lint {
-        // ShadowHook intentionally supports ARM/ARM64 only; Java-only users can disable native loading.
+        // The native dependency limits the APK to the ARM ABIs above.
         disable += "ChromeOsAbiSupport"
     }
 

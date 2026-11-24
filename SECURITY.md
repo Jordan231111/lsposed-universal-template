@@ -7,7 +7,7 @@ Use this template only on apps, devices, and systems you own or are explicitly a
 If you find a build, safety, or stability issue in the template, open a GitHub issue with:
 
 - Android version and ABI
-- Framework and version (for example, Vector 2.2 or LSPatch 1.0 build 455)
+- Framework name, version and build number
 - Gradle command used
 - Relevant logs with private package names redacted
 - Steps to reproduce
