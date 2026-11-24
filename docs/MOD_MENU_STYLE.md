@@ -11,9 +11,14 @@ The default Nyx panel uses the following styles.
 
 Behavior:
 
-- bubble is draggable
-- tap bubble opens/closes the rectangular panel
-- rectangular panel is draggable when opened by dragging the title/subtitle header
+- Drag the bubble to move it. Tap it to open or close the panel. Drag the panel by its header.
+- **X** closes the panel and leaves the bubble visible. The bottom-left **hide** text conceals both.
+  Tap the bubble's last location once to show the bubble and reopen the panel at the same scroll position.
+- Swipe up or down to see more features. On a long menu, drag the scrollbar to jump through the list.
+  Narrow windows show one feature per row. Wider windows show two when they fit at the current text size.
+- Change a numeric value with its horizontal slider or step buttons. Tap its label to enter an exact number.
+- The optional tab example in `buildPanelView()` groups controls into All, Toggles and Numbers.
+  It is commented out by default.
 - overlay is added as a child of the target Activity decor view rather than as a top-level `TYPE_APPLICATION_OVERLAY` window, so it does not rely on `SYSTEM_ALERT_WINDOW` in the target process
 
-The theme and gestures are defined in [OverlayController.java](../app/src/main/java/com/template/lsposed/ui/OverlayController.java).
+[Panel layout](../app/src/main/java/com/template/lsposed/ui/OverlayController.java) · [Gestures](../app/src/main/java/com/template/lsposed/ui/OverlayDrag.java) · [Feature rows](../app/src/main/java/com/template/lsposed/ui/OverlayFeatures.java)

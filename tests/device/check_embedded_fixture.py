@@ -34,6 +34,10 @@ def main():
 
     def find(root, text):
         matches = [n for n in root.iter("node") if n.get("text") == text]
+        if not matches:
+            # Android themes can expose either the button label or its all-caps transformation.
+            matches = [n for n in root.iter("node") if n.get("class") == "android.widget.Button"
+                       and n.get("text", "").casefold() == text.casefold()]
         assert len(matches) == 1, (text, [n.get("text") for n in root.iter("node") if n.get("text")])
         return matches[0]
 
@@ -58,8 +62,14 @@ def main():
         raise AssertionError(label)
 
     def values():
-        command = f"cat /data/user/0/{host}/files/.{module}.settings.json"
-        return json.loads(adb("shell", "su", "-c", shlex.quote(command)))
+        path = f"/data/user/0/{host}/files/.{module}.settings.json"
+        try:
+            text = adb("shell", "su", "-c", shlex.quote("cat " + path))
+        except subprocess.CalledProcessError as error:
+            if "invalid uid/gid" not in (error.stdout or "") + (error.stderr or ""):
+                raise
+            text = adb("shell", "su", "0", "cat", path)  # AOSP userdebug emulator syntax
+        return json.loads(text)
 
     def enter(value):
         edit = next(n for n in tree().iter("node") if n.get("class") == "android.widget.EditText")
@@ -75,7 +85,15 @@ def main():
 
     try:
         adb("shell", "am", "force-stop", host)
-        start(); open_panel(); click("Reset"); click("Status")
+        start()
+        bubble = find(tree(), "Nyx")
+        tap(bubble)
+        click("hide")
+        assert not any(n.get("text") == "Template QA" for n in tree().iter("node"))
+        tap(bubble)
+        find(tree(), "Template QA")
+        checks.append("hide conceals the panel and one tap at the last bubble position reopens it")
+        click("Reset"); click("Status")
         assert any("Native helpers: available" in n.get("text", "") for n in tree().iter("node"))
         checks.append("API102 embedded bootstrap and native JNI status")
         click("Example multiplier: 1.0")
