@@ -9,7 +9,7 @@ Contributions are welcome when they improve the template for authorized research
 - Keep release logging quiet by default.
 - Do not add secrets, private app code, or proprietary offsets/signatures.
 - Run the [host tests, Android builds and lint checks](tests/README.md#host-contracts).
-- Include device evidence for changes that claim support for a new engine or ABI.
+- Keep engine and ABI compatibility claims tied to the configurations tested on a device.
 
 ## License note
 

@@ -5,10 +5,11 @@ below from the repository root.
 
 ## Host contracts
 
-Use Python 3.11+, JDK 21, Node.js and Clang++ with AddressSanitizer and UndefinedBehaviorSanitizer.
-The unit suite runs entirely on the host. Set `TEMPLATE_TEST_ROOT` to a configured copy to test
-renamed sources. For the Android build and lint checks, install the [SDK packages used in CI](../.github/workflows/android.yml)
-and leave the five production signing variables unset.
+The Python host suite calls `javac --release 17`, `java`, `node` and a C++20 `clang++` with
+AddressSanitizer and UndefinedBehaviorSanitizer. It uses this checkout by default. Set
+`TEMPLATE_TEST_ROOT` to test a different configured copy. For the Android build and lint,
+CI uses JDK 21 and the [SDK packages listed in the workflow](../.github/workflows/android.yml).
+The Gradle command below selects local test signing, so leave production signing variables unset for it.
 
 ```sh
 python3 -m unittest discover -s tests -v
@@ -47,8 +48,8 @@ to exported API binding. Keep the app running through detachment.
 
 ## Embedded APK integration
 
-Run the local QA build first so the standard Android debug keystore exists. Choose a new output
-directory for the fixture.
+The fixture builder reads the standard Android debug keystore and creates a new output directory.
+If the keystore is missing, see [debug signing setup](../docs/LSPATCH_NONROOT.md#signing).
 
 ```sh
 python3 tests/device/build_embedded_fixture.py --output artifacts/owned-qa

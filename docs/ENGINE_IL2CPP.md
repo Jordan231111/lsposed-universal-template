@@ -102,4 +102,4 @@ A renamed member, removed export, missing AOT implementation, changed struct rep
 protected/custom runtime can require a new adapter. Runtime-invoke requires a callable
 implementation. Verify that the intended concrete method is present before invoking it.
 
-Run the [device compatibility check](../tests/README.md#live-il2cpp-compatibility) against the intended runtime.
+The [device compatibility check](../tests/README.md#live-il2cpp-compatibility) exercises the helper on a selected runtime.

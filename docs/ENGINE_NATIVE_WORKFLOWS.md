@@ -11,11 +11,9 @@ selects a game hook, modifies a VM, or authorizes calling an API.
    already-loaded and delayed libraries without a periodic startup poll. Its load callback runs on
    a worker. Its retirement callback must only invalidate/signal; never call the linker or engine.
 3. Use the real function prototype, thread affinity, object lifetime and error convention.
-4. Validate that exports, strings, RTTI or instruction patterns identify a unique match.
+4. When a binding expects one target, check for a unique match.
 5. Publish a feature only when its complete required binding group succeeds. Keep originals,
    handle failed installation/teardown, and test toggles and restarts in the actual lifecycle.
-
-Native code edits require an app-specific concurrency, ownership, rollback and instruction-cache design.
 
 ## Java/Kotlin and JNI
 
@@ -45,6 +43,9 @@ are stronger than a prologue heuristic. A Cocos library can be named `libapp.so`
 statically; neither its name nor a string constant establishes a usable engine interface.
 Run scene work on the owning engine thread. Invalidate nodes/callbacks when scenes are replaced.
 Do not keep a raw object solely because its address remains readable.
+
+For runtime edits to executable instructions, account for concurrent execution, rollback and
+instruction-cache coherence.
 
 ## Unity
 
@@ -85,6 +86,7 @@ and the [versioned C example](https://docs.godotengine.org/en/4.6/tutorials/scri
 - Hermes/JSC libraries alone do not prove React Native. Their C/C++/JSI interfaces and garbage
   collection contracts are version-specific. Use the owning runtime's supported integration.
 
-These runtimes require an application-specific adapter with a verified ABI and lifecycle.
+The overlay and settings work independently of engine detection. For engine-specific calls, use
+the API and lifecycle of the runtime you integrate with.
 
 For offline ELF inspection and address conversion, see the [host tools](../tools/README.md#static-analysis-host).

@@ -7,7 +7,7 @@ Use this template only on apps, devices, and systems you own or are explicitly a
 If you find a build, safety, or stability issue in the template, open a GitHub issue with:
 
 - Android version and ABI
-- Framework name, version and build number
+- Framework name and version (build number if available)
 - Gradle command used
 - Relevant logs with private package names redacted
 - Steps to reproduce

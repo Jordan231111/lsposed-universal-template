@@ -5,8 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Run {@code tools/configure-template.py} to set the package, module metadata and static scope.
- * Customize process selection and optional features here.
+ * Runtime scope and optional features for the module.
+ *
+ * <p>{@code tools/configure-template.py} updates the Java package, module metadata
+ * and static package scope together.</p>
  */
 public final class TemplateConfig {
     private TemplateConfig() {}

@@ -7,7 +7,7 @@ multiplier changes the displayed value until your module supplies the correspond
 
 ## Build toolchain
 
-Use JDK 21 and the checked-in Gradle wrapper. Java sources target 17. The app uses SDK 37,
+CI builds with JDK 21 and the checked-in Gradle wrapper. Java sources target 17. The app uses SDK 37,
 NDK `30.0.16248370` and Android SDK CMake `4.1.2`. The default APK ships `armeabi-v7a` and
 `arm64-v8a` libraries.
 
@@ -25,7 +25,9 @@ python3 tools/configure-template.py \
 ./gradlew :app:assembleDebug
 ```
 
-Set process suffixes and optional IL2CPP initialization in `TemplateConfig.java`.
+To change only the target packages by hand, update `TemplateConfig.TARGET_PACKAGES` and
+`META-INF/xposed/scope.list` together. Set process suffixes and optional IL2CPP initialization
+in `TemplateConfig.java`.
 For Vector, install the module APK, enable it for the configured target and restart that app.
 For LSPatch, embed the signed module and install the patched target with its required splits.
 [Release signing and LSPatch packaging](docs/LSPATCH_NONROOT.md#signing)
@@ -47,9 +49,8 @@ Slider changes take effect live and commit on drag completion or panel close. Se
 atomically in `.<module applicationId>.settings.json` in the target app's files directory.
 The default scope has one writer. Multiple writing processes need coordination or separate files.
 
-Each feature must check its setting and the module enable flag. The native startup switch can
-start the helpers once per process. Hot reload is disabled until a consuming module implements
-teardown.
+To make a hook follow the menu, read its setting and the module enable flag when it runs.
+The native helpers start at most once per process. The template sets `autoHotReload=false`.
 
 ## Guides
 

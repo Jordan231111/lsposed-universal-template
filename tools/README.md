@@ -24,12 +24,12 @@ An I/O failure during the write phase can still require restoring your checkout.
 Android XML and module metadata; Gradle's internal project name uses the Java package, so display
 punctuation does not make an invalid build identifier. On subsequent runs, the current namespace
 and native library name are detected from the source. `--old-package` explicitly checks the expected namespace;
-`--native-lib` renames the CMake target and Java library constant together. Keep the implementation
-file named `template_native.cpp`.
+`--native-lib` renames the CMake target and Java library constant together. The source file keeps
+its name, `template_native.cpp`.
 
 ## Static analysis (host)
 
-Use Python 3.10+ for the ELF tools. Only `deep.py dis` requires the Capstone Python package.
+Only `deep.py dis` requires the Capstone Python package.
 Set `RE_SO` to the input file.
 
 ```sh

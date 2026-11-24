@@ -1,8 +1,8 @@
 # Frida reconnaissance
 
-Use a Frida 17 client and matching Android server on an authorized test device. The server
-must be running and the target app open. For a TCP emulator, connect ADB to its current
-address before selecting the device. MuMu can assign a new ADB port after a restart.
+This example attaches to a running app on an authorized test device using Frida 17 and a
+matching Android server. For a TCP emulator, connect ADB to the current address before
+selecting the device. MuMu can assign a new ADB port after a restart.
 
 From the repository root, select the Frida device ID and the running app's package identifier.
 

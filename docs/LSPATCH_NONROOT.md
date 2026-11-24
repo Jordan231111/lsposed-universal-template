@@ -4,9 +4,10 @@ Vector loads the installed module APK. JingMatrix LSPatch embeds the same signed
 module in the target for rootless installation. The packaging tool retrieves the
 [checksum-pinned patcher](../tools/download-lspatch.sh).
 
-Run the commands from the repository root with Python 3.11+, JDK 21 (`java` and `keytool`),
-Android SDK Build Tools 37.0.0 (`aapt2`, `apksigner` and `zipalign`), `curl` and `shasum`
-on PATH. Configure the module for the target package before building.
+The examples assume the repository root. The Python packager uses `hashlib.file_digest`
+(Python 3.11+), and the pinned patcher uses Java 21 class files. For packaging, put `java`,
+`keytool`, `aapt2`, `apksigner` and `zipalign` on PATH. CI installs Android SDK Build Tools
+37.0.0. The downloader uses `shasum` to verify the JAR and `curl` on a cache miss.
 [Module setup](../README.md#configure-and-build)
 
 ## Signing
@@ -55,7 +56,7 @@ The tool verifies the embedded module bytes, package and split identities, signe
 and archive CRC before replacing the output. ZIP alignment covers uncompressed native entries.
 ELF segment alignment inside each library also needs to support the device's page size.
 
-Install the `.apks` archive with SAI and turn SAI re-signing off. It contains the patched target
-APKs with the module embedded in the base. Rebuild from the originals when the module or patcher
-changes. Test startup and overlay behavior on the intended device with only the embedded module
-active for that target.
+The `.apks` archive contains the patched target APKs with the module embedded in the base.
+Install it using SAI with re-signing off, or extract the APKs and install the complete set with
+`adb install-multiple`. Rebuild from the originals when the module or patcher changes. To test
+the embedded module in isolation, disable any separately installed Vector copy for that target.
