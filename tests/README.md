@@ -18,11 +18,10 @@ These contracts complement real Android tests; doubles do not establish device c
 Build both native ABIs and run both lint variants:
 
 ```sh
-./gradlew :app:assembleDebug :app:assembleRelease :app:lintDebug :app:lintRelease \
-  -Ptemplate.localTestSigning=true
+./gradlew :app:assembleDebug :app:assembleRelease :app:lintDebug :app:lintRelease
 ```
 
-Local test signing must not be mixed with production signing environment variables.
+Builds use the shared identity in [SIGNING.md](../SIGNING.md).
 
 ## Owned native fixtures
 
@@ -76,4 +75,4 @@ fixture's settings file; the embedded module loads through LSPatch without a roo
 
 Uninstall the generated host when finished and remove its ignored build directory. Never install
 an unconfigured template over an unrelated module that happens to use the same package name.
-See [the measured validation record](../docs/VALIDATION.md) for coverage and limitations.
+See [verification procedures](../docs/VALIDATION.md) for coverage and limitations.

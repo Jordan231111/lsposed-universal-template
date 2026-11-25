@@ -1,0 +1,85 @@
+import groovy.json.JsonSlurper
+import java.security.KeyStore
+import java.security.MessageDigest
+
+// One explicit identity for distributable APKs. Secrets stay outside the checkout.
+// Local builds use the owner-only profile; CI supplies the same values as secrets.
+def names = ['TEMPLATE_KS_PATH', 'TEMPLATE_KS_PASS', 'TEMPLATE_KEY_ALIAS',
+             'TEMPLATE_KEY_PASS', 'TEMPLATE_CERT_SHA256']
+def values = names.collectEntries { name -> [(name): providers.environmentVariable(name).orNull] }
+def testSigning = providers.gradleProperty('template.localTestSigning').orNull == 'true'
+if (testSigning && values.values().any { it }) {
+    throw new GradleException('Do not mix shared signing credentials with local test signing')
+}
+if (!testSigning && !values.values().any { it }) {
+    def profilePath = providers.environmentVariable('ANDROID_SIGNING_PROFILE').orNull ?:
+        "${System.getProperty('user.home')}/.android/signing/jordan-modules.json"
+    def profileFile = file(profilePath)
+    if (profileFile.isFile()) {
+        def profile = new JsonSlurper().parseText(providers.fileContents(layout.file(provider { profileFile })).asText.get())
+        if (profile.schema != 1 || profile.storeType != 'PKCS12') {
+            throw new GradleException('Unsupported Android signing profile')
+        }
+        def passwordFile = file(profile.passwordFile)
+        def password = providers.fileContents(layout.file(provider { passwordFile })).asText.get().trim()
+        values = [TEMPLATE_KS_PATH: profile.keystore, TEMPLATE_KS_PASS: password,
+                  TEMPLATE_KEY_ALIAS: profile.alias, TEMPLATE_KEY_PASS: password,
+                  TEMPLATE_CERT_SHA256: profile.certificateSha256]
+    }
+}
+if (!testSigning) {
+    def missing = values.findAll { key, value -> !value }.keySet()
+    if (missing) throw new GradleException("Configure the shared Android signing profile or all signing variables: ${missing}")
+    def keyFile = file(values.TEMPLATE_KS_PATH)
+    def keys = KeyStore.getInstance(keyFile, values.TEMPLATE_KS_PASS.toCharArray())
+    if (!(keys.getKey(values.TEMPLATE_KEY_ALIAS, values.TEMPLATE_KEY_PASS.toCharArray()) instanceof java.security.PrivateKey)) {
+        throw new GradleException('The shared signing alias has no private key')
+    }
+    def certificate = keys.getCertificate(values.TEMPLATE_KEY_ALIAS)
+    def actual = MessageDigest.getInstance('SHA-256').digest(certificate.encoded).encodeHex().toString()
+    if (actual != values.TEMPLATE_CERT_SHA256.toLowerCase(Locale.ROOT).replace(':', '')) {
+        throw new GradleException('The shared signing certificate differs from its configured identity')
+    }
+    certificate.checkValidity()
+}
+ext.sharedAndroidSigning = values.findAll { key, value -> value != null }.asImmutable()
+
+def testKey = layout.buildDirectory.file('test-signing/identity.p12')
+def createTestIdentity = testSigning ? tasks.register('createTestSigningIdentity', Exec) {
+    outputs.file(testKey)
+    onlyIf { !testKey.get().asFile.isFile() }
+    doFirst { testKey.get().asFile.parentFile.mkdirs() }
+    commandLine "${System.getProperty('java.home')}/bin/keytool", '-genkeypair', '-noprompt',
+        '-keystore', testKey.get().asFile, '-storetype', 'PKCS12', '-alias', 'fixture',
+        '-storepass', 'fixture-only', '-keypass', 'fixture-only', '-keyalg', 'RSA',
+        '-keysize', '2048', '-validity', '1', '-dname', 'CN=Temporary CI Fixture'
+} : null
+
+allprojects { project ->
+    project.pluginManager.withPlugin('com.android.application') {
+        if (testSigning) {
+            def android = project.extensions.getByName('android')
+            def testIdentity = android.signingConfigs.getByName('debug')
+            testIdentity.storeFile = testKey.get().asFile
+            testIdentity.storeType = 'PKCS12'
+            testIdentity.storePassword = 'fixture-only'
+            testIdentity.keyAlias = 'fixture'
+            testIdentity.keyPassword = 'fixture-only'
+            project.tasks.matching { it.name.startsWith('validateSigning') }.configureEach {
+                dependsOn(createTestIdentity)
+            }
+            android.buildTypes.configureEach { type -> type.signingConfig = testIdentity }
+        } else {
+            def android = project.extensions.getByName('android')
+            android.signingConfigs.configureEach { config ->
+                config.storeFile = rootProject.file(values.TEMPLATE_KS_PATH)
+                config.storeType = 'PKCS12'
+                config.storePassword = values.TEMPLATE_KS_PASS
+                config.keyAlias = values.TEMPLATE_KEY_ALIAS
+                config.keyPassword = values.TEMPLATE_KEY_PASS
+            }
+            def shared = android.signingConfigs.maybeCreate('sharedIdentity')
+            android.buildTypes.configureEach { type -> type.signingConfig = shared }
+        }
+    }
+}

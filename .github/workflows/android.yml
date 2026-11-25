@@ -31,6 +31,16 @@ jobs:
             cmake;4.1.2
             ndk;30.0.16248370
 
+      - name: Load shared Android signing identity
+        if: github.event_name != 'pull_request'
+        env:
+          TEMPLATE_KS_BASE64: ${{ secrets.TEMPLATE_KS_BASE64 }}
+          TEMPLATE_KS_PASS: ${{ secrets.TEMPLATE_KS_PASS }}
+          TEMPLATE_KEY_ALIAS: ${{ secrets.TEMPLATE_KEY_ALIAS }}
+          TEMPLATE_KEY_PASS: ${{ secrets.TEMPLATE_KEY_PASS }}
+          TEMPLATE_CERT_SHA256: ${{ vars.TEMPLATE_CERT_SHA256 }}
+        run: python3 tools/setup_shared_signing.py
+
       - name: Make Gradle executable
         run: chmod +x ./gradlew
 
@@ -39,7 +49,10 @@ jobs:
 
       - name: Build debug and release
         run: |
-          ./gradlew \
+          ./gradlew ${{ github.event_name == 'pull_request' && '-Ptemplate.localTestSigning=true' || '' }} \
             :app:assembleDebug :app:assembleRelease :app:lintDebug :app:lintRelease \
-            -Ptemplate.localTestSigning=true \
             --stacktrace --warning-mode all
+
+      - name: Remove staged signing key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/shared-android-signing.p12"

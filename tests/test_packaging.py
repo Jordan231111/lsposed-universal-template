@@ -24,15 +24,24 @@ class PackagingTests(unittest.TestCase):
                 PACKAGING.validate_identities(invalid)
         PACKAGING.validate_identities([base, ("com.example.target", "1", "config.arm64_v8a")])
 
+    def test_source_stamp_is_not_an_apk_signer(self):
+        from unittest.mock import patch
+        expected = "a" * 64
+        with patch.object(PACKAGING, "run", return_value=(
+                "V2 Signer: certificate SHA-256 digest: " + expected + "\n"
+                "Source Stamp Signer certificate SHA-256 digest: " + "b" * 64 + "\n")):
+            self.assertEqual(PACKAGING.signer("source.apk"), expected)
+
     def test_signing_errors_preserve_existing_output(self):
         env = {key: value for key, value in os.environ.items() if not key.startswith("TEMPLATE_")}
+        env["ANDROID_SIGNING_PROFILE"] = "/nonexistent-signing-test-profile.json"
         with tempfile.TemporaryDirectory() as folder:
             output = Path(folder) / "existing.apks"
             output.write_bytes(b"previous verified bundle")
             for variables, flags, expected in (
                     ({}, [], "requires all five"),
                     ({"TEMPLATE_KS_PATH": "/missing"}, [], "requires all five"),
-                    ({"TEMPLATE_KEY_ALIAS": "alias"}, ["--local-test-signing"], "Do not combine")):
+                    ({"TEMPLATE_KEY_ALIAS": "alias"}, [], "requires all five")):
                 with self.subTest(variables=variables):
                     result = subprocess.run([sys.executable, str(ROOT / "tools/package-lspatch.py"),
                         "--module", "/missing-module.apk", "--output", str(output), *flags, "/missing-base.apk"],

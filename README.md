@@ -19,9 +19,9 @@ Activity hooks. The example menu value has no effect until a consuming module im
 engine API. A protected runtime with replaced exports, a changed native ABI, or a stripped member
 can require an explicit adapter. No template can infer every application's semantics.
 See [IL2CPP contracts](docs/ENGINE_IL2CPP.md), [other engines](docs/ENGINE_NATIVE_WORKFLOWS.md),
-and [validation](docs/VALIDATION.md) for the implemented boundaries and measured coverage.
+and [validation](docs/VALIDATION.md) for the supported contracts and verification procedure.
 
-## Toolchain, checked 2026-11-07
+## Toolchain
 
 | Component | Pin |
 | --- | --- |
@@ -53,28 +53,15 @@ Edit `TemplateConfig.java` for target processes and optional IL2CPP initializati
 command keeps Java packages, JNI registration, module metadata and native library names aligned.
 Do not include a second XposedBridge/API-93 module flavor.
 
-A production release requires the existing signing identity explicitly:
+Local debug and release builds load the shared identity from
+`/Users/jordan/.android/signing/jordan-modules.json`. See [SIGNING.md](SIGNING.md)
+for the key path, certificate and CI configuration.
 
 ```sh
-# Set these through your local secret manager or CI environment:
-# TEMPLATE_KS_PATH       absolute existing keystore path
-# TEMPLATE_KS_PASS       store password
-# TEMPLATE_KEY_ALIAS     alias with a private key
-# TEMPLATE_KEY_PASS      key password
-# TEMPLATE_CERT_SHA256   expected public certificate SHA-256
 ./gradlew :app:assembleRelease
 ```
 
-Missing or partial configuration fails; it never silently switches certificates. For local QA
-only, explicitly select the existing Android test key:
-
-```sh
-./gradlew :app:assembleRelease -Ptemplate.localTestSigning=true
-```
-
-Do not mix that option with release-signing variables. Keep the same identity for updates.
-No private keystore belongs in Git. For rootless delivery, use the
-[verified bundle workflow](docs/LSPATCH_NONROOT.md).
+For rootless delivery, use the [bundle workflow](docs/LSPATCH_NONROOT.md).
 
 ## Adding a feature
 
@@ -108,8 +95,7 @@ controls initial setup; it does not unload a library or undo downstream hooks.
 
 ```sh
 python3 -m unittest discover -s tests -v
-./gradlew :app:assembleDebug :app:assembleRelease :app:lintDebug :app:lintRelease \
-  -Ptemplate.localTestSigning=true
+./gradlew :app:assembleDebug :app:assembleRelease :app:lintDebug :app:lintRelease
 ```
 
 [Tests](tests/README.md) compile production implementations and exercise negative contracts.

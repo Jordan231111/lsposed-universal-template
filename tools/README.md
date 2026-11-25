@@ -84,5 +84,5 @@ memory write as proof of instruction-cache coherence, thread safety or feature c
 `python3 tools/package-lspatch.py --help` describes the maintained packaging command. It accepts
 one module plus original base/splits, checks scope and identity, verifies the embedded module,
 alignment and signer, and atomically publishes a SAI-compatible archive. Signing passwords stay
-in environment variables. Production signing requires a pinned certificate; local test signing
-must be explicitly selected. See [LSPATCH_NONROOT.md](../docs/LSPATCH_NONROOT.md).
+in environment variables. Builds load the shared certificate profile described in
+[SIGNING.md](../SIGNING.md). See [LSPATCH_NONROOT.md](../docs/LSPATCH_NONROOT.md).

@@ -6,10 +6,8 @@ after installation. Android 9/API 28 is the minimum; target-app requirements sti
 
 ## Signing
 
-A production module and every patched split must use the deliberately selected existing identity.
-Configure `TEMPLATE_KS_PATH`, `TEMPLATE_KS_PASS`, `TEMPLATE_KEY_ALIAS`, `TEMPLATE_KEY_PASS` and
-`TEMPLATE_CERT_SHA256` in the environment. The certificate fingerprint is public; passwords and
-private keys must not enter Git. Missing/partial configuration fails instead of changing keys.
+Local builds load the shared identity described in [SIGNING.md](../SIGNING.md).
+The standalone module, embedded module and every patched split use that identity.
 
 ```sh
 ./gradlew :app:assembleRelease
@@ -19,19 +17,7 @@ python3 tools/package-lspatch.py \
   /absolute/original/base.apk /absolute/original/split_config.arm64_v8a.apk
 ```
 
-For local QA only, explicitly select the existing Android test key in both steps:
-
-```sh
-./gradlew :app:assembleRelease -Ptemplate.localTestSigning=true
-python3 tools/package-lspatch.py --local-test-signing \
-  --module app/build/outputs/apk/release/app-release.apk \
-  --output target-lspatched.apks /absolute/original/base.apk
-```
-
-Do not combine local-test mode with release-signing variables. Local-test mode uses the existing
-`~/.android/debug.keystore`, alias `androiddebugkey`; it does not silently generate another key.
-A new machine's different key cannot update an older installation. A test-signed optimized build
-is still a test identity, not a production distribution certificate.
+Missing or partial signing configuration fails before an output is replaced.
 
 ## Input and output contracts
 
@@ -73,4 +59,4 @@ module cannot replace an already embedded runtime; repatch from originals after 
 
 Signature handling cannot satisfy arbitrary server-side attestation. This workflow provides a
 reproducible, verified artifact, not a universal compatibility guarantee. See
-[the validation record](VALIDATION.md) and [upstream LSPatch](https://github.com/JingMatrix/LSPatch/releases/tag/v1.2).
+[verification procedures](VALIDATION.md) and [upstream LSPatch](https://github.com/JingMatrix/LSPatch/releases/tag/v1.2).

@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """Verify a modern module and produce a signed, aligned SAI split bundle atomically."""
 import argparse
+import sys
 import hashlib
 import json
 import os
 from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from shared_signing import signing_environment
 import re
 import shutil
 import subprocess
@@ -12,32 +15,6 @@ import tempfile
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-
-# Keep signing passwords in the environment, not Java's command line or generated source.
-PATCH_RUNNER = r'''
-import java.net.*;
-import java.nio.file.*;
-import java.util.*;
-import java.util.jar.*;
-class PrivatePatcher {
-  public static void main(String[] args) throws Exception {
-    var jar = Path.of(args[0]);
-    var options = new ArrayList<String>();
-    options.addAll(List.of("-k", System.getenv("TEMPLATE_KS_PATH"),
-      System.getenv("TEMPLATE_KS_PASS"), System.getenv("TEMPLATE_KEY_ALIAS"),
-      System.getenv("TEMPLATE_KEY_PASS")));
-    options.addAll(Arrays.asList(args).subList(1, args.length));
-    String main;
-    try (var file = new JarFile(jar.toFile())) {
-      main = file.getManifest().getMainAttributes().getValue("Main-Class");
-    }
-    try (var loader = new URLClassLoader(new URL[]{jar.toUri().toURL()}, ClassLoader.getPlatformClassLoader())) {
-      Thread.currentThread().setContextClassLoader(loader);
-      loader.loadClass(main).getMethod("main", String[].class).invoke(null, (Object) options.toArray(String[]::new));
-    }
-  }
-}
-'''
 
 
 def digest(path):
@@ -59,7 +36,7 @@ def run(*arguments, env=None):
 
 def signer(path):
     output = run("apksigner", "verify", "--min-sdk-version", "28", "--verbose", "--print-certs", path)
-    certificates = set(re.findall(r"certificate SHA-256 digest: ([0-9a-f]{64})", output))
+    certificates = set(re.findall(r"^(?!Source Stamp).*certificate SHA-256 digest: ([0-9a-f]{64})$", output, re.M))
     if len(certificates) != 1:
         raise ValueError(f"Expected one signing certificate: {Path(path).name}")
     return certificates.pop()
@@ -87,20 +64,11 @@ def main():
     parser.add_argument("--module", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--receipt", type=Path)
-    parser.add_argument("--local-test-signing", action="store_true", help="Explicitly use the existing local Android test key")
     parser.add_argument("apks", nargs="+", type=Path, help="Original unpatched base and every required split")
     args = parser.parse_args()
     module, output = args.module.resolve(), args.output.resolve()
     inputs = [path.resolve() for path in args.apks]
-    env = os.environ.copy()
-    signing_keys = ("TEMPLATE_KS_PATH", "TEMPLATE_KS_PASS", "TEMPLATE_KEY_ALIAS", "TEMPLATE_KEY_PASS", "TEMPLATE_CERT_SHA256")
-    if args.local_test_signing:
-        if any(env.get(key) for key in signing_keys):
-            raise ValueError("Do not combine local test signing with release-signing variables")
-        env.update(TEMPLATE_KS_PATH=str(Path.home() / ".android/debug.keystore"),
-                   TEMPLATE_KS_PASS="android", TEMPLATE_KEY_ALIAS="androiddebugkey", TEMPLATE_KEY_PASS="android")
-    elif any(not env.get(key) for key in signing_keys):
-        raise ValueError("Production packaging requires all five TEMPLATE_* signing variables; see docs/LSPATCH_NONROOT.md")
+    env = signing_environment()
     key = Path(env["TEMPLATE_KS_PATH"])
     if not key.is_absolute():
         raise ValueError("TEMPLATE_KS_PATH must be absolute")
@@ -151,10 +119,8 @@ def main():
             destination = prepared / ("split_" + split + ".apk" if split else "base.apk")
             shutil.copyfile(path, destination)
             originals[split] = destination
-        helper = stage / "PrivatePatcher.java"
-        helper.write_text(PATCH_RUNNER)
         ordered = [originals[""]] + [originals[split] for split in sorted(originals) if split]
-        run("java", helper, jar, "-m", module, "-o", stage, "-l", "2", *ordered, env=env)
+        run("java", "-cp", jar, ROOT / "tools/RunLspatch.java", jar, key, "-m", module, "-o", stage, "-l", "2", *ordered, env=env)
         patched = sorted(stage.glob("*.apk"))
         if len(patched) != len(identities) or set(map(apk_identity, patched)) != set(identities):
             raise ValueError("Patching changed the package/version/split composition")
@@ -186,7 +152,7 @@ def main():
             if archive.testzip():
                 raise ValueError("Bundle CRC validation failed")
         receipt = {"module_sha256": digest(module), "bundle_sha256": digest(bundle),
-                   "certificate_sha256": expected, "local_test_signing": args.local_test_signing,
+                   "certificate_sha256": expected,
                    "identities": identities, "patcher": "LSPatch 1.2 build 487", "signature_level": 2,
                    "zip_alignment": 16384}
         bundle.replace(output)
