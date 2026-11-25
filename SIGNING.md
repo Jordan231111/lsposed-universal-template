@@ -28,3 +28,6 @@ configuration fails. Passwords pass through environment variables and stay out o
 Use the module's documented Gradle task for the release APK. Original publisher certificates are
 derived or verified separately when preparing game hosts. Install every patched split together.
 APK ZIP alignment and native ELF segment alignment require independent verification.
+
+Every APK signing build rechecks the live private key, certificate pin and validity, including
+builds that reuse Gradle's configuration cache.

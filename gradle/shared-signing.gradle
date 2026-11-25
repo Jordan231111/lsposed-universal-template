@@ -1,6 +1,33 @@
 import groovy.json.JsonSlurper
 import java.security.KeyStore
 import java.security.MessageDigest
+import org.gradle.api.provider.MapProperty
+import org.gradle.api.tasks.Internal
+import org.gradle.api.tasks.TaskAction
+import org.gradle.work.DisableCachingByDefault
+
+@DisableCachingByDefault(because = 'The live signing key and certificate validity must be checked on every signing build')
+abstract class VerifySharedAndroidIdentity extends DefaultTask {
+    @Internal abstract MapProperty<String, String> getCredentials()
+
+    @TaskAction void verifyIdentity() {
+        def values = credentials.get()
+        def keyFile = new File(values.TEMPLATE_KS_PATH)
+        if (!keyFile.isAbsolute() || !keyFile.isFile()) {
+            throw new GradleException('The shared keystore must be an existing absolute path')
+        }
+        def keys = KeyStore.getInstance(keyFile, values.TEMPLATE_KS_PASS.toCharArray())
+        if (!(keys.getKey(values.TEMPLATE_KEY_ALIAS, values.TEMPLATE_KEY_PASS.toCharArray()) instanceof java.security.PrivateKey)) {
+            throw new GradleException('The shared signing alias has no private key')
+        }
+        def certificate = keys.getCertificate(values.TEMPLATE_KEY_ALIAS)
+        def actual = MessageDigest.getInstance('SHA-256').digest(certificate.encoded).encodeHex().toString()
+        if (actual != values.TEMPLATE_CERT_SHA256.toLowerCase(Locale.ROOT).replace(':', '')) {
+            throw new GradleException('The shared signing certificate differs from its configured identity')
+        }
+        certificate.checkValidity()
+    }
+}
 
 // One explicit identity for distributable APKs. Secrets stay outside the checkout.
 // Local builds use the owner-only profile; CI supplies the same values as secrets.
@@ -30,19 +57,15 @@ if (!testSigning && !values.values().any { it }) {
 if (!testSigning) {
     def missing = values.findAll { key, value -> !value }.keySet()
     if (missing) throw new GradleException("Configure the shared Android signing profile or all signing variables: ${missing}")
-    def keyFile = file(values.TEMPLATE_KS_PATH)
-    def keys = KeyStore.getInstance(keyFile, values.TEMPLATE_KS_PASS.toCharArray())
-    if (!(keys.getKey(values.TEMPLATE_KEY_ALIAS, values.TEMPLATE_KEY_PASS.toCharArray()) instanceof java.security.PrivateKey)) {
-        throw new GradleException('The shared signing alias has no private key')
-    }
-    def certificate = keys.getCertificate(values.TEMPLATE_KEY_ALIAS)
-    def actual = MessageDigest.getInstance('SHA-256').digest(certificate.encoded).encodeHex().toString()
-    if (actual != values.TEMPLATE_CERT_SHA256.toLowerCase(Locale.ROOT).replace(':', '')) {
-        throw new GradleException('The shared signing certificate differs from its configured identity')
-    }
-    certificate.checkValidity()
+
 }
 ext.sharedAndroidSigning = values.findAll { key, value -> value != null }.asImmutable()
+
+def verifySharedIdentity = testSigning ? null : tasks.register('verifySharedAndroidSigning', VerifySharedAndroidIdentity) {
+    group = 'verification'
+    description = 'Check the live shared signing certificate before producing any APK'
+    credentials.set(values)
+}
 
 def testKey = layout.buildDirectory.file('test-signing/identity.p12')
 def createTestIdentity = testSigning ? tasks.register('createTestSigningIdentity', Exec) {
@@ -70,6 +93,9 @@ allprojects { project ->
             }
             android.buildTypes.configureEach { type -> type.signingConfig = testIdentity }
         } else {
+            project.tasks.matching { it.name.startsWith('validateSigning') }.configureEach {
+                dependsOn(verifySharedIdentity)
+            }
             def android = project.extensions.getByName('android')
             android.signingConfigs.configureEach { config ->
                 config.storeFile = rootProject.file(values.TEMPLATE_KS_PATH)
