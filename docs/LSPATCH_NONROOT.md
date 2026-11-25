@@ -12,30 +12,14 @@ The examples assume the repository root. The Python packager uses `hashlib.file_
 
 ## Signing
 
-For a production release, set the following environment variables. Gradle signs the module.
-The packager verifies its certificate and signs the patched target APKs with the same identity.
-
-| Variable | Value |
-| --- | --- |
-| `TEMPLATE_KS_PATH` | Absolute path to an existing keystore |
-| `TEMPLATE_KS_PASS` | Keystore password |
-| `TEMPLATE_KEY_ALIAS` | Alias of the private key |
-| `TEMPLATE_KEY_PASS` | Key password |
-| `TEMPLATE_CERT_SHA256` | Expected SHA-256 fingerprint of the signing certificate |
+Local builds load the shared identity from `/Users/jordan/.android/signing/jordan-modules.json`.
+See [SIGNING.md](../SIGNING.md) for the keystore, alias, certificate and CI configuration.
+The module, embedded module and patched splits use the same signer. Missing or partial
+configuration fails before an output is replaced.
 
 ```sh
 ./gradlew :app:assembleRelease
 ```
-
-For local QA, leave all five variables unset and select test signing explicitly.
-
-```sh
-./gradlew :app:assembleRelease -Ptemplate.localTestSigning=true
-```
-
-Gradle can create the default debug keystore during the build. The packager's test mode
-requires `~/.android/debug.keystore` to exist with the standard Android debug alias and passwords.
-Preserve the keystore for updates signed with the same identity.
 
 ## Package and install
 
@@ -49,8 +33,7 @@ python3 tools/package-lspatch.py \
   /absolute/original/base.apk /absolute/original/split_config.arm64_v8a.apk
 ```
 
-For the QA build, add `--local-test-signing` to that packaging command. To save the verified
-hashes, signer and split identities, add `--receipt PATH`.
+To save the verified hashes, signer and split identities, add `--receipt PATH`.
 
 The tool verifies the embedded module bytes, package and split identities, signer, ZIP alignment
 and archive CRC before replacing the output. ZIP alignment covers uncompressed native entries.

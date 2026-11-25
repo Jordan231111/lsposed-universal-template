@@ -13,8 +13,7 @@ The Gradle command below selects local test signing, so leave production signing
 
 ```sh
 python3 -m unittest discover -s tests -v
-./gradlew :app:assembleDebug :app:assembleRelease :app:lintDebug :app:lintRelease \
-  -Ptemplate.localTestSigning=true
+./gradlew :app:assembleDebug :app:assembleRelease :app:lintDebug :app:lintRelease
 ```
 
 ## Owned native fixtures
@@ -48,8 +47,7 @@ to exported API binding. Keep the app running through detachment.
 
 ## Embedded APK integration
 
-The fixture builder reads the standard Android debug keystore and creates a new output directory.
-If the keystore is missing, see [debug signing setup](../docs/LSPATCH_NONROOT.md#signing).
+The fixture builder reads the [shared signing profile](../SIGNING.md) and creates a new output directory.
 
 ```sh
 python3 tests/device/build_embedded_fixture.py --output artifacts/owned-qa

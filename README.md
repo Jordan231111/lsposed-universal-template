@@ -30,7 +30,8 @@ To change only the target packages by hand, update `TemplateConfig.TARGET_PACKAG
 in `TemplateConfig.java`.
 For Vector, install the module APK, enable it for the configured target and restart that app.
 For LSPatch, embed the signed module and install the patched target with its required splits.
-[Release signing and LSPatch packaging](docs/LSPATCH_NONROOT.md#signing)
+Local debug and release builds use `/Users/jordan/.android/signing/jordan-modules.json`.
+[Shared signing identity](SIGNING.md) · [LSPatch packaging](docs/LSPATCH_NONROOT.md#signing)
 
 ## Adding a feature
 

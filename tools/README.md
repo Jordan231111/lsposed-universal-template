@@ -57,3 +57,5 @@ An absent RELATIVE entry is reported explicitly and does not prove that the runt
 Xrefs/prologues are heuristics: verify candidates against disassembly and the target ABI.
 
 For a running test app, see the [Frida agent guide](../docs/FRIDA_EMULATOR_QUICKSTART.md).
+
+Packaging tools read the [shared Android signing profile](../SIGNING.md).

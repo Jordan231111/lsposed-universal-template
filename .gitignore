@@ -17,3 +17,6 @@ artifacts/
 .env
 __pycache__/
 *.py[cod]
+*.p12
+*.pfx
+*.password

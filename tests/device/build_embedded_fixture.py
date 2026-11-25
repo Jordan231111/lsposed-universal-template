@@ -12,12 +12,15 @@ import uuid
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "tools"))
+from shared_signing import signing_environment
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", required=True, type=Path, help="New directory for this isolated QA build")
     args = parser.parse_args()
+    signing = signing_environment()
     work = args.output.resolve()
     work.mkdir(parents=True, exist_ok=False)
     run_id = uuid.uuid4().hex[:12]
@@ -30,7 +33,7 @@ def main():
 
     def run(*parts, cwd=None):
         with log.open("a") as stream:
-            subprocess.run(list(map(str, parts)), cwd=cwd, stdout=stream, stderr=subprocess.STDOUT, check=True)
+            subprocess.run(list(map(str, parts)), cwd=cwd, stdout=stream, stderr=subprocess.STDOUT, check=True, env=signing)
 
     fixture = work / "host"
     fixture.mkdir()
@@ -76,8 +79,8 @@ public final class MainActivity extends Activity {
             with zipfile.ZipFile(unsigned, "a") as archive:
                 archive.write(dex / "classes.dex", "classes.dex")
         run(tools / "zipalign", "-P", "16", "4", unsigned, aligned)
-        run(tools / "apksigner", "sign", "--ks", Path.home() / ".android/debug.keystore", "--ks-pass", "pass:android",
-            "--key-pass", "pass:android", "--out", signed, aligned)
+        run(tools / "apksigner", "sign", "--ks", signing["TEMPLATE_KS_PATH"], "--ks-pass", "env:TEMPLATE_KS_PASS",
+            "--ks-key-alias", signing["TEMPLATE_KEY_ALIAS"], "--key-pass", "env:TEMPLATE_KEY_PASS", "--out", signed, aligned)
         apks.append(signed)
     copy = work / "module"
     shutil.copytree(ROOT, copy, ignore=shutil.ignore_patterns(".git", ".gradle", "build", ".cxx", "artifacts", "__pycache__"))
@@ -86,9 +89,9 @@ public final class MainActivity extends Activity {
     registry = copy / "app/src/main/java" / module.replace(".", "/") / "FeatureRegistry.java"
     registry.write_text(registry.read_text().replace('            initialized = true;',
         '            register(Feature.integer("qa_integer", "QA integer", 3, 1, 100));\n            initialized = true;'))
-    run(copy / "gradlew", ":app:assembleRelease", "-Ptemplate.localTestSigning=true", cwd=copy)
+    run(copy / "gradlew", ":app:assembleRelease", cwd=copy)
     release = copy / "app/build/outputs/apk/release/app-release.apk"
-    run(sys.executable, ROOT / "tools/package-lspatch.py", "--module", release, "--local-test-signing",
+    run(sys.executable, ROOT / "tools/package-lspatch.py", "--module", release,
         "--output", work / "fixture.apks", "--receipt", work / "bundle.json", *apks)
     receipt = {"host_package": host, "module_package": module, "activity": "org.template.audit.host.MainActivity",
                "bundle": str(work / "fixture.apks"), "module": str(release), "originals": list(map(str, apks))}
