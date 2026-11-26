@@ -2,14 +2,14 @@
 
 Use a matching host/server/bridge set on an owned or authorized test process. Do not upgrade the
 host with an unbounded pip command while leaving an older server or locally patched emulator kit.
-The local default is the patched undetected-frida 17.25.0 server/gadget/inject kit with matching
-17.25.0 Python/client and frida-tools 14.11.0. A newer upstream release does not replace this
+The local default is the patched undetected-frida 17.26.3 server/gadget/inject kit with matching
+17.26.3 Python/client and frida-tools 14.13.1. A newer upstream release does not replace this
 validated pairing automatically. Updating the kit requires revalidating its local patches.
 
 Discover the device instead of retaining a previous emulator port:
 
 ```sh
-"/Applications/MuMuPlayer Pro.app/Contents/MacOS/mumu-cli" info 0
+"/Applications/MuMuPlayer Pro.app/Contents/MacOS/mumutool" info 0
 adb devices -l
 frida --version
 # Select that device explicitly for all following commands.
